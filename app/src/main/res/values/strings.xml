@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">One</string>
+
+    <string name="project_description">project</string>
+    <string name="project_name">ONE</string>
+    <string name="project_git">https://github.com/maoqiqi/One</string>
+    <string name="scan_code_description">scan_code</string>
+    <string name="project_introduction">项目介绍</string>
+    <string name="update_description">更新说明</string>
+    <string name="scan_code">扫码下载</string>
+    <string name="problem_feedback">问题反馈</string>
+    <string name="about">关于我们</string>
+    <string name="donate">捐赠开发者</string>
+    <string name="setting">设置</string>
+    <string name="mode_night">夜间</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="home">首页</string>
+    <string name="news">新闻</string>
+    <string name="music">音乐</string>
+    <string name="book">图书</string>
+    <string name="movie">影视</string>
 </resources>

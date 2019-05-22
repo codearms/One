@@ -1,9 +1,32 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
     </style>
 
+    <!-- 首页底部样式 -->
+    <style name="TabMainStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:paddingTop">@dimen/four</item>
+        <item name="android:paddingBottom">@dimen/four</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_smaller</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--android.support.design.widget.NavigationView-->
+    <style name="navigation_view" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <!--ToolBar popupTheme-->
+    <style name="tool_bar_popup_theme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/color_primary</item>
+    </style>
 </resources>
