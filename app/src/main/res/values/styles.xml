@@ -7,7 +7,7 @@
     </style>
 
     <!-- 首页底部样式 -->
-    <style name="TabMainStyle">
+    <style name="tab_main_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
@@ -26,7 +26,27 @@
     </style>
 
     <!--ToolBar popupTheme-->
-    <style name="tool_bar_popup_theme" parent="ThemeOverlay.AppCompat.Light">
+    <style name="toolbar_popup_theme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColorPrimary">@color/color_primary</item>
+    </style>
+
+    <style name="home_popup_theme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/color_home</item>
+    </style>
+
+    <style name="news_popup_theme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/color_news</item>
+    </style>
+
+    <style name="book_popup_theme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/color_book</item>
+    </style>
+
+    <style name="music_popup_theme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/color_music</item>
+    </style>
+
+    <style name="movie_popup_theme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/color_movie</item>
     </style>
 </resources>

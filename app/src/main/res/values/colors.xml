@@ -19,10 +19,10 @@
 
     <color name="color_text_title">#FFFFFF</color>
 
-    <color name="colorHome">#FF9800</color>
-    <color name="colorNews">#0F88EB</color>
-    <color name="colorBook">#009688</color>
-    <color name="colorMusic">#ffce3d3a</color>
-    <color name="colorMovie">#1e1e1e</color>
-    <color name="colorNavigation">#4CAF50</color>
+    <color name="color_home">#FF9800</color>
+    <color name="color_news">#0F88EB</color>
+    <color name="color_book">#009688</color>
+    <color name="color_music">#ffce3d3a</color>
+    <color name="color_movie">#1e1e1e</color>
+    <color name="color_navigation">#4CAF50</color>
 </resources>

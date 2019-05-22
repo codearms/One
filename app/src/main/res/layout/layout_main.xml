@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <!-- 内容 -->
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+    <FrameLayout
+        android:id="@+id/flContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="1" />
 
     <!-- 底部TAB -->
     <RadioGroup
@@ -22,44 +20,41 @@
         android:layout_height="wrap_content"
         android:background="@color/color_text_title"
         android:elevation="10dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_pager">
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/rbHome"
-            style="@style/TabMainStyle"
+            style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_home"
             android:text="@string/home"
-            android:textColor="@color/color_home_selector" />
+            android:textColor="@color/text_color_home" />
 
         <RadioButton
             android:id="@+id/rbNews"
-            style="@style/TabMainStyle"
+            style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_news"
             android:text="@string/news"
-            android:textColor="@color/color_news_selector" />
+            android:textColor="@color/text_color_news" />
 
         <RadioButton
             android:id="@+id/rbBook"
-            style="@style/TabMainStyle"
+            style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_book"
             android:text="@string/book"
-            android:textColor="@color/color_book_selector" />
+            android:textColor="@color/text_color_book" />
 
         <RadioButton
             android:id="@+id/rbMusic"
-            style="@style/TabMainStyle"
+            style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_music"
             android:text="@string/music"
-            android:textColor="@color/color_music_selector" />
+            android:textColor="@color/text_color_music" />
 
         <RadioButton
             android:id="@+id/rbMovie"
-            style="@style/TabMainStyle"
+            style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_movie"
             android:text="@string/movie"
-            android:textColor="@color/color_movie_selector" />
+            android:textColor="@color/text_color_movie" />
     </RadioGroup>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
