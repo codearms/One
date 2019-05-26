@@ -4,18 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <!-- 内容 -->
     <FrameLayout
-        android:id="@+id/flContent"
+        android:id="@+id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
     <!-- 底部TAB -->
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_text_title"
@@ -23,35 +23,35 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/rbHome"
+            android:id="@+id/rb_home"
             style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_home"
             android:text="@string/home"
             android:textColor="@color/text_color_home" />
 
         <RadioButton
-            android:id="@+id/rbNews"
+            android:id="@+id/rb_news"
             style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_news"
             android:text="@string/news"
             android:textColor="@color/text_color_news" />
 
         <RadioButton
-            android:id="@+id/rbBook"
+            android:id="@+id/rb_book"
             style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_book"
             android:text="@string/book"
             android:textColor="@color/text_color_book" />
 
         <RadioButton
-            android:id="@+id/rbMusic"
+            android:id="@+id/rb_music"
             style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_music"
             android:text="@string/music"
             android:textColor="@color/text_color_music" />
 
         <RadioButton
-            android:id="@+id/rbMovie"
+            android:id="@+id/rb_movie"
             style="@style/tab_main_style"
             android:drawableTop="@drawable/ic_tab_movie"
             android:text="@string/movie"

@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <!--<color name="colorAccent">#D81B60</color>-->
 
     <color name="color_primary">#5F7C8A</color>
     <color name="color_primary_dark">#5F7C8A</color>
     <color name="color_accent">#FF4081</color>
 
-    <color name="transparent">#00FFFFFF</color>
+    <color name="color_home">#FF9800</color>
+    <color name="color_news">#0F88EB</color>
+    <color name="color_book">#009688</color>
+    <color name="color_music">#ffce3d3a</color>
+    <color name="color_movie">#1e1e1e</color>
+    <color name="color_navigation">#4CAF50</color>
 
+    <color name="transparent">#00FFFFFF</color>
     <color name="bg">#f8f8f8</color>
 
     <color name="color_text_main">#333333</color>
@@ -18,11 +24,6 @@
     <color name="color_divider">#1a000000</color>
 
     <color name="color_text_title">#FFFFFF</color>
+    <color name="color_mask">#33333333</color>
 
-    <color name="color_home">#FF9800</color>
-    <color name="color_news">#0F88EB</color>
-    <color name="color_book">#009688</color>
-    <color name="color_music">#ffce3d3a</color>
-    <color name="color_movie">#1e1e1e</color>
-    <color name="color_navigation">#4CAF50</color>
 </resources>

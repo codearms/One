@@ -1,25 +1,25 @@
-package com.codearms.maoqiqi.one;
+package com.codearms.maoqiqi.one.utils;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
-
 public abstract class FragmentCheckedChangeListener implements RadioGroup.OnCheckedChangeListener {
 
-    private int[] buttonIds;
+    private final int[] buttonIds;
+    private final int resId;
     private final String[] tags;
     private final Fragment[] fragments;
 
     private int position;
     private Fragment previousFragment;
 
-    public FragmentCheckedChangeListener(int[] buttonIds) {
+    public FragmentCheckedChangeListener(int[] buttonIds, int resId) {
         this.buttonIds = buttonIds;
+        this.resId = resId;
         tags = new String[buttonIds.length];
-        fragments = new LazyLoadFragment[buttonIds.length];
+        fragments = new Fragment[buttonIds.length];
         for (int i = 0; i < buttonIds.length; i++) {
             tags[i] = "TAG_" + i;
         }
@@ -59,7 +59,7 @@ public abstract class FragmentCheckedChangeListener implements RadioGroup.OnChec
 
             if (!to.isAdded()) {
                 // 没有被添加,添加to
-                ft.add(R.id.flContent, to, tags[position]).commit();
+                ft.add(resId, to, tags[position]).commit();
             } else {
                 // 已经被添加,显示to
                 ft.show(to).commit();

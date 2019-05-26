@@ -18,7 +18,7 @@
             android:layout_marginTop="@dimen/twelve"
             android:layout_marginBottom="@dimen/twelve"
             android:contentDescription="@string/project_description"
-            android:src="@drawable/ic_project" />
+            android:src="@drawable/ic_logo" />
 
         <TextView
             android:layout_width="match_parent"

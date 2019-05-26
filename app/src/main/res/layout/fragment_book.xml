@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -8,8 +9,38 @@
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_primary_dark" />
+        android:background="@color/color_book" />
 
-    <include layout="@layout/layout_title" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_book"
+        android:theme="@style/toolbar_theme"
+        app:popupTheme="@style/book_popup_theme"
+        app:contentInsetStartWithNavigation="0dp">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.flyco.tablayout.SegmentTabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_centerInParent="true"
+                app:tl_bar_color="@color/color_book"
+                app:tl_indicator_color="@color/color_text_title"
+                app:tl_tab_padding="@dimen/sixteen"
+                app:tl_textBold="BOTH"
+                app:tl_textSelectColor="@color/color_book"
+                app:tl_textsize="@dimen/text_size_smaller" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg" />
 </LinearLayout>

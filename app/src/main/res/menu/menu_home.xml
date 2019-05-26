@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_navigation"
+        android:icon="@drawable/ic_navigation"
+        android:orderInCategory="2"
+        android:title="@string/navigation"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_we_chat_number"
+        android:icon="@drawable/ic_we_chat_number"
+        android:orderInCategory="3"
+        android:title="@string/we_chat_number"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_knowledge"
+        android:icon="@drawable/ic_knowledge"
+        android:orderInCategory="4"
+        android:title="@string/knowledge"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_project"
+        android:icon="@drawable/ic_project"
+        android:orderInCategory="5"
+        android:title="@string/project"
+        app:showAsAction="never" />
+</menu>

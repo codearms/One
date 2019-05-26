@@ -1,9 +1,49 @@
 <resources>
 
+    <!--Activity动画-->
+    <style name="Animation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/close_exit</item>
+    </style>
+
+    <!-- ActionBarDrawerToggle图标颜色 -->
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <!-- ActionBar溢出菜单样式 -->
+    <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <!-- 是否覆盖锚点,默认为true,即盖住Toolbar -->
+        <item name="overlapAnchor">false</item>
+        <!-- 弹出层垂直方向上的偏移,即在竖直方向上距离Toolbar的距离,值为负则会盖住Toolbar -->
+        <item name="android:dropDownVerticalOffset">4dp</item>
+        <!-- 弹出层水平方向上的偏移,即距离屏幕左边的距离,负值会导致右边出现空隙 -->
+        <item name="android:dropDownHorizontalOffset">0dp</item>
+        <item name="android:popupBackground">@android:color/white</item>
+        <item name="android:textColor">@color/color_text_main</item>
+    </style>
+
+    <!-- ActionBar三个小点图标设置 -->
+    <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_menu_more</item>
+    </style>
+
+    <!--主题-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
+        <item name="android:windowAnimationStyle">@style/Animation</item>
+        <!--去除顶部下拉时的半月形阴影和上下滑动顶部和底部的虚化-->
+        <item name="android:overScrollMode">never</item>
+        <!--已经在代码中设置-->
+        <!--<item name="drawerArrowStyle">@style/DrawerArrowStyle</item>-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <!--已经在代码中设置-->
+        <!--<item name="actionOverflowButtonStyle">@style/OverflowButtonStyle</item>-->
     </style>
 
     <!-- 首页底部样式 -->
@@ -25,7 +65,10 @@
         <item name="android:textSize">@dimen/text_size_normal</item>
     </style>
 
-    <!--ToolBar popupTheme-->
+    <!--ToolBar主题-->
+    <style name="toolbar_theme" parent="ThemeOverlay.AppCompat.Dark" />
+
+    <!--ToolBar菜单主题-->
     <style name="toolbar_popup_theme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColorPrimary">@color/color_primary</item>
     </style>
@@ -48,5 +91,17 @@
 
     <style name="movie_popup_theme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColorPrimary">@color/color_movie</item>
+    </style>
+
+    <style name="navigation_popup_theme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/color_navigation</item>
+    </style>
+
+    <style name="chip_text_appearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">@dimen/text_size_smaller</item>
+    </style>
+
+    <style name="tab_text_appearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
     </style>
 </resources>
