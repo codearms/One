@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.WebViewActivity"
+            android:name=".WebViewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -32,10 +32,12 @@
                 <data android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.NavigationActivity" />
-        <activity android:name=".activity.WeChatActivity" />
-        <activity android:name=".activity.KnowledgeActivity" />
-        <activity android:name=".activity.ProjectActivity" />
+        <!--home-->
+        <activity android:name=".home.activity.NavigationActivity" />
+        <activity android:name=".home.activity.WeChatActivity" />
+        <activity android:name=".home.activity.KnowledgeActivity" />
+        <activity android:name=".home.activity.ProjectActivity" />
+        <activity android:name=".home.activity.ClassifyActivity" />
     </application>
 
 </manifest>

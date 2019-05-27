@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.codearms.maoqiqi.one.view.StatusBarView
+    <com.codearms.maoqiqi.one.home.view.StatusBarView
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:navigationIcon="@drawable/ic_back"
                 app:popupTheme="@style/home_popup_theme"
-                app:title="@string/we_chat_number"
+                app:title="@string/we_chat"
                 app:titleTextColor="@color/color_text_title" />
 
             <android.support.design.widget.TabLayout

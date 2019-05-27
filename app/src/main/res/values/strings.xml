@@ -39,7 +39,7 @@
     <string name="preference">偏好设置</string>
     <string name="news_category_description">news_category_description</string>
     <string name="navigation">导航</string>
-    <string name="we_chat_number">公众号</string>
+    <string name="we_chat">公众号</string>
     <string name="knowledge">知识体系</string>
 
     <string-array name="news_titles">
