@@ -1,8 +1,10 @@
 package com.codearms.maoqiqi.one.data.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
-public class WeChatBean {
+public class ParentClassifyBean {
 
     private int id;
     private int courseId;
@@ -11,7 +13,8 @@ public class WeChatBean {
     private int order;
     private boolean userControlSetTop;
     private int visible;
-    private List<String> children;
+    @SerializedName("children")
+    private List<ChildClassifyBean> childClassifyBeanList;
 
     public int getId() {
         return id;
@@ -69,11 +72,11 @@ public class WeChatBean {
         this.visible = visible;
     }
 
-    public List<String> getChildren() {
-        return children;
+    public List<ChildClassifyBean> getChildClassifyBeanList() {
+        return childClassifyBeanList;
     }
 
-    public void setChildren(List<String> children) {
-        this.children = children;
+    public void setChildClassifyBeanList(List<ChildClassifyBean> childClassifyBeanList) {
+        this.childClassifyBeanList = childClassifyBeanList;
     }
 }

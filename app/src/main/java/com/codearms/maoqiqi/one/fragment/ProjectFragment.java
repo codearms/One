@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.activity.ProjectActivity;
-import com.codearms.maoqiqi.one.data.bean.WeChatBean;
+import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.presenter.contract.ProjectContract;
 import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 
@@ -71,13 +71,13 @@ public class ProjectFragment extends LazyLoadFragment implements ProjectContract
     }
 
     @Override
-    public void setProject(List<WeChatBean> weChatBeans) {
+    public void setProject(List<ChildClassifyBean> childClassifyBeans) {
         List<String> fragmentTitles = new ArrayList<>();
-        for (int i = 0; i < weChatBeans.size(); i++) {
-            fragmentTitles.add(weChatBeans.get(i).getName());
+        for (int i = 0; i < childClassifyBeans.size(); i++) {
+            fragmentTitles.add(childClassifyBeans.get(i).getName());
         }
 
-        viewPager.setAdapter(new MyPagerAdapter(fragmentTitles, weChatBeans, getChildFragmentManager()));
+        viewPager.setAdapter(new MyPagerAdapter(fragmentTitles, childClassifyBeans, getChildFragmentManager()));
         viewPager.setOffscreenPageLimit(1);
         viewPager.setCurrentItem(0);
 
@@ -86,16 +86,16 @@ public class ProjectFragment extends LazyLoadFragment implements ProjectContract
 
     private final class MyPagerAdapter extends SectionsPagerAdapter {
 
-        private List<WeChatBean> weChatBeans;
+        private List<ChildClassifyBean> childClassifyBeans;
 
-        MyPagerAdapter(List<String> fragmentTitles, List<WeChatBean> weChatBeans, FragmentManager fm) {
+        MyPagerAdapter(List<String> fragmentTitles, List<ChildClassifyBean> childClassifyBeans, FragmentManager fm) {
             super(fragmentTitles, fm);
-            this.weChatBeans = weChatBeans;
+            this.childClassifyBeans = childClassifyBeans;
         }
 
         @Override
         public Fragment getItem(int i) {
-            return ArticlesFragment.newInstance(ArticlesFragment.FROM_PROJECT, weChatBeans.get(i).getId());
+            return ArticlesFragment.newInstance(ArticlesFragment.FROM_PROJECT, childClassifyBeans.get(i).getId());
         }
     }
 }

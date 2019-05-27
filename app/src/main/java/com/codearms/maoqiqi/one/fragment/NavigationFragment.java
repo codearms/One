@@ -141,13 +141,13 @@ public class NavigationFragment extends LazyLoadFragment implements NavigationCo
 
         @Override
         public void onBindViewHolder(@NonNull ContentViewHolder viewHolder, int i) {
-            final NavigationBean navigationBean = navigationBeans.get(i);
-            viewHolder.tvName.setText(navigationBean.getName());
+            final NavigationBean bean = navigationBeans.get(i);
+            viewHolder.tvName.setText(bean.getName());
 
-            for (int j = 0; j < navigationBean.getList().size(); j++) {
+            for (int j = 0; j < bean.getArticleBeanList().size(); j++) {
                 chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_item_navigation_content, null);
-                chip.setText(navigationBean.getList().get(j).getTitle());
-                final String url = navigationBean.getList().get(j).getLink();
+                chip.setText(bean.getArticleBeanList().get(j).getTitle());
+                final String url = bean.getArticleBeanList().get(j).getLink();
                 chip.setOnClickListener(v -> WebViewActivity.start(context, url, 0));
                 viewHolder.chipGroup.addView(chip);
             }

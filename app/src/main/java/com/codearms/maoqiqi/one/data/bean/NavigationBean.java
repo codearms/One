@@ -9,7 +9,7 @@ public class NavigationBean {
     private int cid;
     private String name;
     @SerializedName("articles")
-    private List<ArticleBeans.ItemArticleBean> list;
+    private List<ArticleBean> articleBeanList;
 
     public int getCid() {
         return cid;
@@ -27,11 +27,11 @@ public class NavigationBean {
         this.name = name;
     }
 
-    public List<ArticleBeans.ItemArticleBean> getList() {
-        return list;
+    public List<ArticleBean> getArticleBeanList() {
+        return articleBeanList;
     }
 
-    public void setList(List<ArticleBeans.ItemArticleBean> list) {
-        this.list = list;
+    public void setArticleBeanList(List<ArticleBean> articleBeanList) {
+        this.articleBeanList = articleBeanList;
     }
 }

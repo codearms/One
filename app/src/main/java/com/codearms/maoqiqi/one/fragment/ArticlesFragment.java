@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.activity.WebViewActivity;
+import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.presenter.ArticlesPresenter;
 import com.codearms.maoqiqi.one.presenter.contract.ArticlesContract;
@@ -111,10 +112,10 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
     }
 
     @Override
-    public void setHomeArticles(List<ArticleBeans.ItemArticleBean> topArticleBeans, ArticleBeans articleBeans) {
-        List<ArticleBeans.ItemArticleBean> list = new ArrayList<>();
+    public void setHomeArticles(List<ArticleBean> topArticleBeans, ArticleBeans articleBeans) {
+        List<ArticleBean> list = new ArrayList<>();
         list.addAll(topArticleBeans);
-        list.addAll(articleBeans.getList());
+        list.addAll(articleBeans.getArticleBeanList());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -127,22 +128,22 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(new RecyclerViewAdapter(0, articleBeans.getList()));
+        recyclerView.setAdapter(new RecyclerViewAdapter(0, articleBeans.getArticleBeanList()));
     }
 
     private final class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         private int topArticles;
         @NonNull
-        private List<ArticleBeans.ItemArticleBean> itemArticleBeanList;
+        private List<ArticleBean> ArticleBeanList;
         private final String openProject;
         private final String minute;
         private final String hour;
         private final String oneDay;
 
-        RecyclerViewAdapter(int topArticles, @NonNull List<ArticleBeans.ItemArticleBean> itemArticleBeanList) {
+        RecyclerViewAdapter(int topArticles, @NonNull List<ArticleBean> ArticleBeanList) {
             this.topArticles = topArticles;
-            this.itemArticleBeanList = itemArticleBeanList;
+            this.ArticleBeanList = ArticleBeanList;
             openProject = context.getString(R.string.open_project);
             minute = context.getString(R.string.minute);
             hour = context.getString(R.string.hour);
@@ -157,15 +158,15 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            final ArticleBeans.ItemArticleBean itemArticleBean = itemArticleBeanList.get(i);
-            String superChapterName = itemArticleBean.getSuperChapterName();
+            final ArticleBean ArticleBean = ArticleBeanList.get(i);
+            String superChapterName = ArticleBean.getSuperChapterName();
 
             viewHolder.ivTop.setVisibility(i < topArticles ? View.VISIBLE : View.GONE);
-            viewHolder.tvTitle.setText(itemArticleBean.getTitle());
+            viewHolder.tvTitle.setText(ArticleBean.getTitle());
 
-            if (itemArticleBean.getNiceDate().contains(minute)
-                    || itemArticleBean.getNiceDate().contains(hour)
-                    || itemArticleBean.getNiceDate().contains(oneDay)) {
+            if (ArticleBean.getNiceDate().contains(minute)
+                    || ArticleBean.getNiceDate().contains(hour)
+                    || ArticleBean.getNiceDate().contains(oneDay)) {
                 viewHolder.tvNew.setVisibility(View.VISIBLE);
             } else {
                 viewHolder.tvNew.setVisibility(View.GONE);
@@ -177,20 +178,20 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
                 viewHolder.tvProject.setVisibility(superChapterName.contains(openProject) ? View.VISIBLE : View.GONE);
             }
 
-            viewHolder.tvClassify.setText(String.format("%s/%s", superChapterName, itemArticleBean.getChapterName()));
-            viewHolder.tvAuthor.setText(itemArticleBean.getAuthor());
-            viewHolder.tvDate.setText(itemArticleBean.getNiceDate());
+            viewHolder.tvClassify.setText(String.format("%s/%s", superChapterName, ArticleBean.getChapterName()));
+            viewHolder.tvAuthor.setText(ArticleBean.getAuthor());
+            viewHolder.tvDate.setText(ArticleBean.getNiceDate());
 
-            if (i == itemArticleBeanList.size() - 1) {
+            if (i == ArticleBeanList.size() - 1) {
                 RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) viewHolder.cardView.getLayoutParams();
                 params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
             }
-            viewHolder.cardView.setOnClickListener(v -> WebViewActivity.start(context, itemArticleBean.getLink()));
+            viewHolder.cardView.setOnClickListener(v -> WebViewActivity.start(context, ArticleBean.getLink()));
         }
 
         @Override
         public int getItemCount() {
-            return itemArticleBeanList.size();
+            return ArticleBeanList.size();
         }
     }
 

@@ -1,7 +1,7 @@
 package com.codearms.maoqiqi.one.presenter;
 
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.data.bean.WeChatBean;
+import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.presenter.contract.WeChatContract;
 
@@ -38,9 +38,9 @@ public class WeChatPresenter implements WeChatContract.Presenter {
         compositeDisposable.add(RetrofitManager.getInstance().getServerApi().getWxList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean<List<WeChatBean>>>() {
+                .subscribeWith(new DisposableObserver<CommonBean<List<ChildClassifyBean>>>() {
                     @Override
-                    public void onNext(CommonBean<List<WeChatBean>> commonBean) {
+                    public void onNext(CommonBean<List<ChildClassifyBean>> commonBean) {
                         if (!weChatView.isActive()) return;
 
                         weChatView.setWxList(commonBean.getData());

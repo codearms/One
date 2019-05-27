@@ -1,12 +1,13 @@
 package com.codearms.maoqiqi.one.data.net;
 
+import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
+import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.data.bean.KnowledgeBean;
 import com.codearms.maoqiqi.one.data.bean.LoginBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
-import com.codearms.maoqiqi.one.data.bean.WeChatBean;
+import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public interface ServerApi {
      * @return 置顶文章数据
      */
     @GET("article/top/json")
-    Observable<CommonBean<List<ArticleBeans.ItemArticleBean>>> getTopArticles();
+    Observable<CommonBean<List<ArticleBean>>> getTopArticles();
 
     /**
      * 首页文章列表(https://www.wanandroid.com/article/list/0/json)
@@ -70,7 +71,7 @@ public interface ServerApi {
      * @return 公众号列表数据
      */
     @GET("wxarticle/chapters/json")
-    Observable<CommonBean<List<WeChatBean>>> getWxList();
+    Observable<CommonBean<List<ChildClassifyBean>>> getWxList();
 
     /**
      * 查看某个公众号历史数据(https://wanandroid.com/wxarticle/list/408/1/json)
@@ -99,7 +100,7 @@ public interface ServerApi {
      * @return 知识体系数据
      */
     @GET("tree/json")
-    Observable<CommonBean<List<KnowledgeBean>>> getKnowledge();
+    Observable<CommonBean<List<ParentClassifyBean>>> getKnowledge();
 
     /**
      * 知识体系下的文章(https://www.wanandroid.com/article/list/0/json?cid=60)
@@ -117,7 +118,7 @@ public interface ServerApi {
      * @return 项目分类数据
      */
     @GET("project/tree/json")
-    Observable<CommonBean<List<WeChatBean>>> getProject();
+    Observable<CommonBean<List<ChildClassifyBean>>> getProject();
 
     /**
      * 项目列表数据(https://www.wanandroid.com/project/list/1/json?cid=294)

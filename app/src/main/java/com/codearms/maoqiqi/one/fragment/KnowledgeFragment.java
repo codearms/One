@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.data.bean.KnowledgeBean;
+import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.presenter.contract.KnowledgeContract;
 
 import java.util.List;
@@ -64,20 +64,20 @@ public class KnowledgeFragment extends LazyLoadFragment implements KnowledgeCont
     }
 
     @Override
-    public void setKnowledge(List<KnowledgeBean> knowledgeBeans) {
+    public void setKnowledge(List<ParentClassifyBean> parentClassifyBeans) {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(new RecyclerViewAdapter(knowledgeBeans));
+        recyclerView.setAdapter(new RecyclerViewAdapter(parentClassifyBeans));
     }
 
     private final class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-        private List<KnowledgeBean> knowledgeBeans;
+        private List<ParentClassifyBean> parentClassifyBeans;
         private Chip chip;
 
-        RecyclerViewAdapter(List<KnowledgeBean> knowledgeBeans) {
-            this.knowledgeBeans = knowledgeBeans;
+        RecyclerViewAdapter(List<ParentClassifyBean> parentClassifyBeans) {
+            this.parentClassifyBeans = parentClassifyBeans;
         }
 
         @NonNull
@@ -88,16 +88,16 @@ public class KnowledgeFragment extends LazyLoadFragment implements KnowledgeCont
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            final KnowledgeBean knowledgeBean = knowledgeBeans.get(i);
-            viewHolder.tvName.setText(knowledgeBean.getName());
+            final ParentClassifyBean bean = parentClassifyBeans.get(i);
+            viewHolder.tvName.setText(bean.getName());
 
-            for (int j = 0; j < knowledgeBean.getChildren().size(); j++) {
+            for (int j = 0; j < bean.getChildClassifyBeanList().size(); j++) {
                 chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_item_knowledge_content, null);
-                chip.setText(knowledgeBean.getChildren().get(j).getName());
+                chip.setText(bean.getChildClassifyBeanList().get(j).getName());
                 viewHolder.chipGroup.addView(chip);
             }
 
-            if (i == knowledgeBeans.size() - 1) {
+            if (i == parentClassifyBeans.size() - 1) {
                 ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewHolder.chipGroup.getLayoutParams();
                 params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
             }
@@ -105,7 +105,7 @@ public class KnowledgeFragment extends LazyLoadFragment implements KnowledgeCont
 
         @Override
         public int getItemCount() {
-            return knowledgeBeans.size();
+            return parentClassifyBeans.size();
         }
     }
 

@@ -1,5 +1,6 @@
 package com.codearms.maoqiqi.one.presenter;
 
+import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
@@ -36,7 +37,7 @@ public class ArticlesPresenter implements ArticlesContract.Presenter {
 
     @Override
     public void getHomeArticles() {
-        Observable<CommonBean<List<ArticleBeans.ItemArticleBean>>> topArticleObservable = RetrofitManager.getInstance().getServerApi().getTopArticles();
+        Observable<CommonBean<List<ArticleBean>>> topArticleObservable = RetrofitManager.getInstance().getServerApi().getTopArticles();
         Observable<CommonBean<ArticleBeans>> articleObservable = RetrofitManager.getInstance().getServerApi().getArticles(0);
         compositeDisposable.add(Observable.zip(topArticleObservable, articleObservable, Data::new)
                 .subscribeOn(Schedulers.io())
@@ -87,15 +88,15 @@ public class ArticlesPresenter implements ArticlesContract.Presenter {
     }
 
     private final class Data {
-        private CommonBean<List<ArticleBeans.ItemArticleBean>> topArticleBeans;
+        private CommonBean<List<ArticleBean>> topArticleBeans;
         private CommonBean<ArticleBeans> articleBeans;
 
-        Data(CommonBean<List<ArticleBeans.ItemArticleBean>> topArticleBeans, CommonBean<ArticleBeans> articleBeans) {
+        Data(CommonBean<List<ArticleBean>> topArticleBeans, CommonBean<ArticleBeans> articleBeans) {
             this.topArticleBeans = topArticleBeans;
             this.articleBeans = articleBeans;
         }
 
-        CommonBean<List<ArticleBeans.ItemArticleBean>> getTopArticleBeans() {
+        CommonBean<List<ArticleBean>> getTopArticleBeans() {
             return topArticleBeans;
         }
 

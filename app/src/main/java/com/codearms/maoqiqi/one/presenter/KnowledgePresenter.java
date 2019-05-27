@@ -1,7 +1,7 @@
 package com.codearms.maoqiqi.one.presenter;
 
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.data.bean.KnowledgeBean;
+import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.presenter.contract.KnowledgeContract;
 
@@ -38,9 +38,9 @@ public class KnowledgePresenter implements KnowledgeContract.Presenter {
         compositeDisposable.add(RetrofitManager.getInstance().getServerApi().getKnowledge()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean<List<KnowledgeBean>>>() {
+                .subscribeWith(new DisposableObserver<CommonBean<List<ParentClassifyBean>>>() {
                     @Override
-                    public void onNext(CommonBean<List<KnowledgeBean>> commonBean) {
+                    public void onNext(CommonBean<List<ParentClassifyBean>> commonBean) {
                         if (!knowledgeView.isActive()) return;
 
                         knowledgeView.setKnowledge(commonBean.getData());
