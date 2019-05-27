@@ -6,7 +6,7 @@ import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 
 import java.util.List;
 
-public interface KnowledgeContract {
+public interface FlowLayoutContract {
 
     interface Presenter extends BasePresenter {
 

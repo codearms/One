@@ -3,9 +3,6 @@ package com.codearms.maoqiqi.one.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.chip.Chip;
-import android.support.design.chip.ChipGroup;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +13,6 @@ import android.widget.TextView;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.presenter.contract.NavigationContract;
 
@@ -24,10 +20,11 @@ import java.util.List;
 
 public class NavigationFragment extends LazyLoadFragment implements NavigationContract.View {
 
+    private static final String TAG = "com.codearms.maoqiqi.one.FlowLayoutFragment";
+
     private NavigationContract.Presenter presenter;
 
     private RecyclerView recyclerView;
-    private RecyclerView recyclerViewContent;
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
@@ -57,7 +54,6 @@ public class NavigationFragment extends LazyLoadFragment implements NavigationCo
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
         recyclerView = rootView.findViewById(R.id.recycler_view);
-        recyclerViewContent = rootView.findViewById(R.id.recycler_view_content);
     }
 
     @Override
@@ -73,10 +69,12 @@ public class NavigationFragment extends LazyLoadFragment implements NavigationCo
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(new RecyclerViewAdapter(navigationBeans));
 
-        recyclerViewContent.setLayoutManager(new LinearLayoutManager(context));
-        recyclerViewContent.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewContent.setNestedScrollingEnabled(false);
-        recyclerViewContent.setAdapter(new ContentRecyclerViewAdapter(navigationBeans));
+        FlowLayoutFragment fragment = (FlowLayoutFragment) getChildFragmentManager().findFragmentByTag(TAG);
+        if (fragment == null) {
+            fragment = FlowLayoutFragment.newInstance(FlowLayoutFragment.FROM_NAVIGATION);
+            fragment.setNavigationBeans(navigationBeans);
+            getChildFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
+        }
     }
 
     private final class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -121,58 +119,6 @@ public class NavigationFragment extends LazyLoadFragment implements NavigationCo
             super(itemView);
             view = itemView.findViewById(R.id.view);
             tvName = itemView.findViewById(R.id.tv_name);
-        }
-    }
-
-    private final class ContentRecyclerViewAdapter extends RecyclerView.Adapter<ContentViewHolder> {
-
-        private List<NavigationBean> navigationBeans;
-        private Chip chip;
-
-        ContentRecyclerViewAdapter(List<NavigationBean> navigationBeans) {
-            this.navigationBeans = navigationBeans;
-        }
-
-        @NonNull
-        @Override
-        public ContentViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            return new ContentViewHolder(LayoutInflater.from(context).inflate(R.layout.item_navigation_content, viewGroup, false));
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ContentViewHolder viewHolder, int i) {
-            final NavigationBean bean = navigationBeans.get(i);
-            viewHolder.tvName.setText(bean.getName());
-
-            for (int j = 0; j < bean.getArticleBeanList().size(); j++) {
-                chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_item_navigation_content, null);
-                chip.setText(bean.getArticleBeanList().get(j).getTitle());
-                final String url = bean.getArticleBeanList().get(j).getLink();
-                chip.setOnClickListener(v -> WebViewActivity.start(context, url, 0));
-                viewHolder.chipGroup.addView(chip);
-            }
-
-            if (i == navigationBeans.size() - 1) {
-                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewHolder.chipGroup.getLayoutParams();
-                params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return navigationBeans.size();
-        }
-    }
-
-    private final class ContentViewHolder extends RecyclerView.ViewHolder {
-
-        TextView tvName;
-        ChipGroup chipGroup;
-
-        ContentViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvName = itemView.findViewById(R.id.tv_name);
-            chipGroup = itemView.findViewById(R.id.chip_group);
         }
     }
 }

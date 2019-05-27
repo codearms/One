@@ -8,14 +8,14 @@ import android.view.MenuItem;
 
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.fragment.KnowledgeFragment;
-import com.codearms.maoqiqi.one.presenter.KnowledgePresenter;
+import com.codearms.maoqiqi.one.fragment.FlowLayoutFragment;
+import com.codearms.maoqiqi.one.presenter.FlowLayoutPresenter;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.utils.Toasty;
 
 public class KnowledgeActivity extends BaseActivity {
 
-    private static final String TAG = "com.codearms.maoqiqi.one.KnowledgeFragment";
+    private static final String TAG = "com.codearms.maoqiqi.one.FlowLayoutFragment";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,13 +27,13 @@ public class KnowledgeActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        KnowledgeFragment fragment = (KnowledgeFragment) getSupportFragmentManager().findFragmentByTag(TAG);
+        FlowLayoutFragment fragment = (FlowLayoutFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = KnowledgeFragment.newInstance();
+            fragment = FlowLayoutFragment.newInstance(FlowLayoutFragment.FROM_KNOWLEDGE);
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
 
-        new KnowledgePresenter(fragment);
+        new FlowLayoutPresenter(fragment);
     }
 
     @Override

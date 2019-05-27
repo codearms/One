@@ -3,7 +3,7 @@ package com.codearms.maoqiqi.one.presenter;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
-import com.codearms.maoqiqi.one.presenter.contract.KnowledgeContract;
+import com.codearms.maoqiqi.one.presenter.contract.FlowLayoutContract;
 
 import java.util.List;
 
@@ -12,15 +12,15 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class KnowledgePresenter implements KnowledgeContract.Presenter {
+public class FlowLayoutPresenter implements FlowLayoutContract.Presenter {
 
-    private KnowledgeContract.View knowledgeView;
+    private FlowLayoutContract.View flowLayoutView;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public KnowledgePresenter(KnowledgeContract.View knowledgeView) {
-        this.knowledgeView = knowledgeView;
-        knowledgeView.setPresenter(this);
+    public FlowLayoutPresenter(FlowLayoutContract.View flowLayoutView) {
+        this.flowLayoutView = flowLayoutView;
+        flowLayoutView.setPresenter(this);
     }
 
     @Override
@@ -41,9 +41,9 @@ public class KnowledgePresenter implements KnowledgeContract.Presenter {
                 .subscribeWith(new DisposableObserver<CommonBean<List<ParentClassifyBean>>>() {
                     @Override
                     public void onNext(CommonBean<List<ParentClassifyBean>> commonBean) {
-                        if (!knowledgeView.isActive()) return;
+                        if (!flowLayoutView.isActive()) return;
 
-                        knowledgeView.setKnowledge(commonBean.getData());
+                        flowLayoutView.setKnowledge(commonBean.getData());
                     }
 
                     @Override

@@ -86,7 +86,7 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
         recyclerView = rootView.findViewById(R.id.recycler_view);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            from = bundle.getString("from", "home");
+            from = bundle.getString("from", FROM_HOME);
             id = bundle.getInt("id");
         }
     }
@@ -186,7 +186,7 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
                 RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) viewHolder.cardView.getLayoutParams();
                 params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
             }
-            viewHolder.cardView.setOnClickListener(v -> WebViewActivity.start(context, ArticleBean.getLink()));
+            viewHolder.cardView.setOnClickListener(v -> WebViewActivity.start(context, ArticleBean.getLink(), 0));
         }
 
         @Override
