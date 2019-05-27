@@ -22,23 +22,28 @@ import retrofit2.http.Query;
 public interface ServerApi {
 
     /**
-     * 登录(https://www.wanandroid.com/user/login)
-     *
-     * @param username 用户名
-     * @param password 密码
-     * @return 登录数据
-     */
-    @POST("user/login")
-    @FormUrlEncoded
-    Observable<CommonBean<LoginBean>> login(@Field("username") String username, @Field("password") String password);
-
-    /**
      * 首页Banner(https://www.wanandroid.com/banner/json)
      *
      * @return Banner数据
      */
     @GET("banner/json")
     Observable<CommonBean<List<BannerBean>>> getBanner();
+
+    /**
+     * 常用网站(https://www.wanandroid.com/friend/json)
+     *
+     * @return 常用网站数据
+     */
+    @GET("friend/json")
+    Observable<CommonBean> getCommon();
+
+    /**
+     * 热词(https://www.wanandroid.com/hotkey/json)
+     *
+     * @return 热词数据
+     */
+    @GET("hotkey/json")
+    Observable<CommonBean> getHotKey();
 
     /**
      * 置顶文章(https://www.wanandroid.com/article/top/json)
@@ -92,7 +97,7 @@ public interface ServerApi {
      * @return 指定搜索内容, 搜索当前公众号的某页的此类数据
      */
     @GET("wxarticle/list/{id}/{page}/json")
-    Observable<CommonBean> getWxNumberSearchData(@Path("id") int id, @Path("page") int page, @Query("k") String k);
+    Observable<CommonBean> getWxSearchArticles(@Path("id") int id, @Path("page") int page, @Query("k") String k);
 
     /**
      * 知识体系(https://www.wanandroid.com/tree/json)
@@ -129,4 +134,58 @@ public interface ServerApi {
      */
     @GET("project/list/{page}/json")
     Observable<CommonBean<ArticleBeans>> getProjectArticles(@Path("page") int page, @Query("cid") int cid);
+
+    /**
+     * 登录(https://www.wanandroid.com/user/login)
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 登录
+     */
+    @POST("user/login")
+    @FormUrlEncoded
+    Observable<CommonBean<LoginBean>> login(@Field("username") String username, @Field("password") String password);
+
+    /**
+     * 注册(https://www.wanandroid.com/user/register)
+     *
+     * @param username   用户名
+     * @param password   密码
+     * @param repassword 确认密码
+     * @return 注册
+     */
+    Observable<CommonBean> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+
+    /**
+     * 退出(https://www.wanandroid.com/user/logout/json)
+     *
+     * @return 退出
+     */
+    Observable<CommonBean> logout();
+
+    /**
+     * 收藏文章列表(https://www.wanandroid.com/lg/collect/list/0/json)
+     *
+     * @param page 页码,拼接在链接上,从0开始
+     * @return 收藏文章列表数据
+     */
+    Observable<CommonBean> getCollect(@Path("page") int page);
+
+    /**
+     * 收藏站内文章(https://www.wanandroid.com/lg/collect/1165/json)
+     *
+     * @param id 文章id,拼接在链接上
+     * @return 收藏站内文章
+     */
+    Observable<CommonBean> collect(@Path("id") int id);
+
+    /**
+     * 收藏站外文章(https://www.wanandroid.com/lg/collect/add/json)
+     *
+     * @param title  标题
+     * @param author 作者
+     * @param link   链接
+     * @return 收藏站外文章
+     */
+    Observable<CommonBean> collect(@Field("title") String title, @Field("author") String author, @Field("link") String link);
 }
