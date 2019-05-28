@@ -2,17 +2,17 @@ package com.codearms.maoqiqi.one;
 
 import android.app.Application;
 
-import com.codearms.maoqiqi.one.home.data.bean.UserBean;
+import com.codearms.maoqiqi.one.data.bean.UserBean;
 
 public class App extends Application {
 
     private static App INSTANCE = null;
 
+    private UserBean userBean;
+
     public static synchronized App getInstance() {
         return INSTANCE;
     }
-
-    private UserBean userBean;
 
     @Override
     public void onCreate() {
@@ -21,7 +21,6 @@ public class App extends Application {
     }
 
     public UserBean getUserBean() {
-
         return userBean;
     }
 

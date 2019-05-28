@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.home.utils;
+package com.codearms.maoqiqi.one.utils;
 
 import android.app.Activity;
 import android.content.Context;

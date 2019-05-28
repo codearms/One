@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.home.utils;
+package com.codearms.maoqiqi.one.utils;
 
 import android.content.Context;
 import android.widget.ImageView;

@@ -1,8 +1,8 @@
 package com.codearms.maoqiqi.one.navigation.presenter.contract;
 
+import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.home.BasePresenter;
 import com.codearms.maoqiqi.one.home.BaseView;
-import com.codearms.maoqiqi.one.home.data.bean.UserBean;
 
 public interface RegisterContract {
 

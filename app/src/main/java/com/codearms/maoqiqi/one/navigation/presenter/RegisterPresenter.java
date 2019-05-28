@@ -1,8 +1,8 @@
 package com.codearms.maoqiqi.one.navigation.presenter;
 
-import com.codearms.maoqiqi.one.home.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.home.data.bean.UserBean;
-import com.codearms.maoqiqi.one.home.data.net.RetrofitManager;
+import com.codearms.maoqiqi.one.data.bean.CommonBean;
+import com.codearms.maoqiqi.one.data.bean.UserBean;
+import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.RegisterContract;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;

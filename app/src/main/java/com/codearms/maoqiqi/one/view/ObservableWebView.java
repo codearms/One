@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.home.view;
+package com.codearms.maoqiqi.one.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

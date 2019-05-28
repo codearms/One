@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.home.data.bean;
+package com.codearms.maoqiqi.one.data.bean;
 
 import java.util.List;
 

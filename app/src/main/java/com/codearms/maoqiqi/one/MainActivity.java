@@ -23,10 +23,6 @@ import android.widget.TextView;
 
 import com.codearms.maoqiqi.one.book.fragment.BookFragment;
 import com.codearms.maoqiqi.one.home.fragment.HomeFragment;
-import com.codearms.maoqiqi.one.home.utils.ActivityUtils;
-import com.codearms.maoqiqi.one.home.utils.FragmentCheckedChangeListener;
-import com.codearms.maoqiqi.one.home.utils.StatusBarUtils;
-import com.codearms.maoqiqi.one.home.utils.Toasty;
 import com.codearms.maoqiqi.one.movie.fragment.MovieFragment;
 import com.codearms.maoqiqi.one.music.fragment.MusicFragment;
 import com.codearms.maoqiqi.one.navigation.activity.AboutActivity;
@@ -38,6 +34,10 @@ import com.codearms.maoqiqi.one.navigation.activity.ScanCodeActivity;
 import com.codearms.maoqiqi.one.navigation.activity.UpdateDescriptionActivity;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.news.fragment.NewsFragment;
+import com.codearms.maoqiqi.one.utils.ActivityUtils;
+import com.codearms.maoqiqi.one.utils.FragmentCheckedChangeListener;
+import com.codearms.maoqiqi.one.utils.StatusBarUtils;
+import com.codearms.maoqiqi.one.utils.Toasty;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener,
         NavigationView.OnNavigationItemSelectedListener {

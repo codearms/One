@@ -9,8 +9,8 @@ import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.WeChatFragment;
 import com.codearms.maoqiqi.one.home.presenter.WeChatPresenter;
-import com.codearms.maoqiqi.one.home.utils.StatusBarUtils;
-import com.codearms.maoqiqi.one.home.utils.Toasty;
+import com.codearms.maoqiqi.one.utils.StatusBarUtils;
+import com.codearms.maoqiqi.one.utils.Toasty;
 
 public class WeChatActivity extends BaseActivity {
 

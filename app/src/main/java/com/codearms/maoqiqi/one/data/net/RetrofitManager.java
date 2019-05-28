@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.home.data.net;
+package com.codearms.maoqiqi.one.data.net;
 
 import com.codearms.maoqiqi.one.BuildConfig;
 

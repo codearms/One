@@ -19,9 +19,10 @@ import android.widget.ProgressBar;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.view.ObservableWebView;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.WebViewContract;
+import com.codearms.maoqiqi.one.utils.Toasty;
+import com.codearms.maoqiqi.one.view.ObservableWebView;
 
 public class WebViewFragment extends LazyLoadFragment implements WebViewContract.View {
 
@@ -124,6 +125,11 @@ public class WebViewFragment extends LazyLoadFragment implements WebViewContract
 
     public WebView getWebView() {
         return webView;
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        Toasty.show(context, message);
     }
 
     private final class MyWebViewClient extends WebViewClient {

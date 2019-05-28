@@ -16,23 +16,23 @@ import android.view.MenuItem;
 
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.utils.StatusBarUtils;
-import com.codearms.maoqiqi.one.home.view.StatusBarView;
 import com.codearms.maoqiqi.one.navigation.fragment.WebViewFragment;
 import com.codearms.maoqiqi.one.navigation.presenter.WebViewPresenter;
+import com.codearms.maoqiqi.one.utils.StatusBarUtils;
+import com.codearms.maoqiqi.one.view.StatusBarView;
 
 import java.lang.reflect.Method;
 
 public class WebViewActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.WebViewFragment";
+    private static final int DEFAULT_POSITION = 5;
 
     private final int[] bgResIds = {R.color.color_home, R.color.color_news, R.color.color_book,
             R.color.color_music, R.color.color_movie, R.color.color_navigation};
     private final int[] themeIds = {R.style.home_popup_theme, R.style.news_popup_theme,
             R.style.book_popup_theme, R.style.music_popup_theme,
             R.style.movie_popup_theme, R.style.navigation_popup_theme};
-    private static final int DEFAULT_POSITION = 5;
 
     private Toolbar toolbar;
 

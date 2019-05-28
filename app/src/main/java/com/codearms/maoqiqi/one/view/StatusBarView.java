@@ -1,11 +1,11 @@
-package com.codearms.maoqiqi.one.home.view;
+package com.codearms.maoqiqi.one.view;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.codearms.maoqiqi.one.home.utils.StatusBarUtils;
+import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
 /**
  * StatusBarView 适配状态栏

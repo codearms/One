@@ -10,11 +10,11 @@ import android.view.MenuItem;
 
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
 import com.codearms.maoqiqi.one.home.presenter.ClassifyPresenter;
-import com.codearms.maoqiqi.one.home.utils.StatusBarUtils;
-import com.codearms.maoqiqi.one.home.utils.Toasty;
+import com.codearms.maoqiqi.one.utils.StatusBarUtils;
+import com.codearms.maoqiqi.one.utils.Toasty;
 
 public class ClassifyActivity extends BaseActivity {
 

@@ -1,7 +1,7 @@
 package com.codearms.maoqiqi.one.navigation.presenter;
 
-import com.codearms.maoqiqi.one.home.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.home.data.net.RetrofitManager;
+import com.codearms.maoqiqi.one.data.bean.CommonBean;
+import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.WebViewContract;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -39,7 +39,13 @@ public class WebViewPresenter implements WebViewContract.Presenter {
                 .subscribeWith(new DisposableObserver<CommonBean>() {
                     @Override
                     public void onNext(CommonBean commonBean) {
+                        if (!webViewView.isActive()) return;
 
+                        if (commonBean.getErrorCode() == 0) {
+
+                        } else {
+                            webViewView.showErrorMessage(commonBean.getErrorMsg());
+                        }
                     }
 
                     @Override
@@ -62,7 +68,13 @@ public class WebViewPresenter implements WebViewContract.Presenter {
                 .subscribeWith(new DisposableObserver<CommonBean>() {
                     @Override
                     public void onNext(CommonBean commonBean) {
+                        if (!webViewView.isActive()) return;
 
+                        if (commonBean.getErrorCode() == 0) {
+
+                        } else {
+                            webViewView.showErrorMessage(commonBean.getErrorMsg());
+                        }
                     }
 
                     @Override

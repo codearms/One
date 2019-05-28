@@ -1,8 +1,8 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
-import com.codearms.maoqiqi.one.home.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.home.data.bean.ParentClassifyBean;
-import com.codearms.maoqiqi.one.home.data.net.RetrofitManager;
+import com.codearms.maoqiqi.one.data.bean.CommonBean;
+import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.home.presenter.contract.FlowLayoutContract;
 
 import java.util.List;

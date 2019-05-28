@@ -14,10 +14,10 @@ import android.view.ViewGroup;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.home.activity.WeChatActivity;
-import com.codearms.maoqiqi.one.home.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.home.presenter.contract.WeChatContract;
-import com.codearms.maoqiqi.one.home.utils.SectionsPagerAdapter;
+import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

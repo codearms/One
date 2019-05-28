@@ -18,7 +18,7 @@ import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.HomeFragment;
-import com.codearms.maoqiqi.one.home.utils.SectionsPagerAdapter;
+import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 
 import java.util.Arrays;
 import java.util.List;

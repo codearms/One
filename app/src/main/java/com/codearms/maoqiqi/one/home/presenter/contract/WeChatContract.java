@@ -1,8 +1,8 @@
 package com.codearms.maoqiqi.one.home.presenter.contract;
 
+import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.home.BasePresenter;
 import com.codearms.maoqiqi.one.home.BaseView;
-import com.codearms.maoqiqi.one.home.data.bean.ChildClassifyBean;
 
 import java.util.List;
 

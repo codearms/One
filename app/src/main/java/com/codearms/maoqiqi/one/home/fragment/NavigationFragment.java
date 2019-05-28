@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.data.bean.NavigationBean;
+import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.home.presenter.contract.NavigationContract;
 
 import java.util.List;

@@ -16,11 +16,11 @@ import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.data.bean.UserBean;
-import com.codearms.maoqiqi.one.home.utils.ActivityUtils;
-import com.codearms.maoqiqi.one.home.utils.Toasty;
+import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.navigation.activity.RegisterActivity;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.LoginContract;
+import com.codearms.maoqiqi.one.utils.ActivityUtils;
+import com.codearms.maoqiqi.one.utils.Toasty;
 
 public class LoginFragment extends LazyLoadFragment implements LoginContract.View, View.OnClickListener {
 

@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.home.utils;
+package com.codearms.maoqiqi.one.utils;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

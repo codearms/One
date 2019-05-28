@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.home.data.bean;
+package com.codearms.maoqiqi.one.data.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ParentClassifyBean implements Parcelable {
+public class ChildClassifyBean implements Parcelable {
 
     private int id;
     private int courseId;
@@ -17,9 +17,9 @@ public class ParentClassifyBean implements Parcelable {
     private boolean userControlSetTop;
     private int visible;
     @SerializedName("children")
-    private List<ChildClassifyBean> childClassifyBeanList;
+    private List<String> children;
 
-    private ParentClassifyBean(Parcel in) {
+    private ChildClassifyBean(Parcel in) {
         id = in.readInt();
         courseId = in.readInt();
         parentChapterId = in.readInt();
@@ -27,7 +27,7 @@ public class ParentClassifyBean implements Parcelable {
         order = in.readInt();
         userControlSetTop = in.readByte() != 0;
         visible = in.readInt();
-        childClassifyBeanList = in.createTypedArrayList(ChildClassifyBean.CREATOR);
+        children = in.createStringArrayList();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ParentClassifyBean implements Parcelable {
         dest.writeInt(order);
         dest.writeByte((byte) (userControlSetTop ? 1 : 0));
         dest.writeInt(visible);
-        dest.writeTypedList(childClassifyBeanList);
+        dest.writeStringList(children);
     }
 
     @Override
@@ -47,15 +47,15 @@ public class ParentClassifyBean implements Parcelable {
         return 0;
     }
 
-    public static final Creator<ParentClassifyBean> CREATOR = new Creator<ParentClassifyBean>() {
+    public static final Creator<ChildClassifyBean> CREATOR = new Creator<ChildClassifyBean>() {
         @Override
-        public ParentClassifyBean createFromParcel(Parcel in) {
-            return new ParentClassifyBean(in);
+        public ChildClassifyBean createFromParcel(Parcel in) {
+            return new ChildClassifyBean(in);
         }
 
         @Override
-        public ParentClassifyBean[] newArray(int size) {
-            return new ParentClassifyBean[size];
+        public ChildClassifyBean[] newArray(int size) {
+            return new ChildClassifyBean[size];
         }
     };
 
@@ -115,17 +115,17 @@ public class ParentClassifyBean implements Parcelable {
         this.visible = visible;
     }
 
-    public List<ChildClassifyBean> getChildClassifyBeanList() {
-        return childClassifyBeanList;
+    public List<String> getChildren() {
+        return children;
     }
 
-    public void setChildClassifyBeanList(List<ChildClassifyBean> childClassifyBeanList) {
-        this.childClassifyBeanList = childClassifyBeanList;
+    public void setChildren(List<String> children) {
+        this.children = children;
     }
 
     @Override
     public String toString() {
-        return "ParentClassifyBean{" +
+        return "ChildClassifyBean{" +
                 "id=" + id +
                 ", courseId=" + courseId +
                 ", parentChapterId=" + parentChapterId +
@@ -133,7 +133,7 @@ public class ParentClassifyBean implements Parcelable {
                 ", order=" + order +
                 ", userControlSetTop=" + userControlSetTop +
                 ", visible=" + visible +
-                ", childClassifyBeanList=" + childClassifyBeanList +
+                ", children=" + children +
                 '}';
     }
 }

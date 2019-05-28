@@ -1,13 +1,13 @@
-package com.codearms.maoqiqi.one.home.data.net;
+package com.codearms.maoqiqi.one.data.net;
 
-import com.codearms.maoqiqi.one.home.data.bean.ArticleBean;
-import com.codearms.maoqiqi.one.home.data.bean.ArticleBeans;
-import com.codearms.maoqiqi.one.home.data.bean.BannerBean;
-import com.codearms.maoqiqi.one.home.data.bean.ChildClassifyBean;
-import com.codearms.maoqiqi.one.home.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.home.data.bean.NavigationBean;
-import com.codearms.maoqiqi.one.home.data.bean.ParentClassifyBean;
-import com.codearms.maoqiqi.one.home.data.bean.UserBean;
+import com.codearms.maoqiqi.one.data.bean.ArticleBean;
+import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
+import com.codearms.maoqiqi.one.data.bean.BannerBean;
+import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
+import com.codearms.maoqiqi.one.data.bean.CommonBean;
+import com.codearms.maoqiqi.one.data.bean.NavigationBean;
+import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.data.bean.UserBean;
 
 import java.util.List;
 

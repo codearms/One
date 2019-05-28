@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.utils.StatusBarUtils;
+import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
 public class ProjectIntroductionActivity extends BaseActivity {
 

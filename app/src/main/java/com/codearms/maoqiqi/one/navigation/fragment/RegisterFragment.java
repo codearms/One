@@ -15,9 +15,9 @@ import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.data.bean.UserBean;
-import com.codearms.maoqiqi.one.home.utils.Toasty;
+import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.RegisterContract;
+import com.codearms.maoqiqi.one.utils.Toasty;
 
 public class RegisterFragment extends LazyLoadFragment implements RegisterContract.View {
 
