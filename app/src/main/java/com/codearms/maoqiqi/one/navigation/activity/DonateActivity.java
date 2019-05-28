@@ -3,6 +3,8 @@ package com.codearms.maoqiqi.one.navigation.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
@@ -17,8 +19,18 @@ public class DonateActivity extends BaseActivity {
         setContentView(R.layout.activity_donate);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        RadioGroup radioGroup = findViewById(R.id.radio_group);
+        ImageView ivPay = findViewById(R.id.iv_pay);
 
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
+
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.rb_alipay) {
+                ivPay.setImageResource(R.drawable.ic_alipay);
+            } else {
+                ivPay.setImageResource(R.drawable.ic_wxpay);
+            }
+        });
     }
 }

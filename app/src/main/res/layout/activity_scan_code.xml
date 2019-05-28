@@ -23,8 +23,42 @@
         app:title="@string/scan_code"
         app:titleTextColor="@color/color_text_title" />
 
-    <FrameLayout
-        android:id="@+id/fl_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/sixteen"
+            android:background="@drawable/bg_hint"
+            android:lineSpacingExtra="2dp"
+            android:padding="@dimen/sixteen"
+            android:text="@string/download_content"
+            android:textColor="@color/color_text_general"
+            android:textSize="@dimen/text_size_small" />
+
+        <ImageView
+            android:id="@+id/iv_code"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/thirty_two"
+            android:background="@color/color_text_title"
+            android:contentDescription="@string/code_description"
+            android:padding="@dimen/eight"
+            android:src="@drawable/ic_code" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/thirty_two"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="2dp"
+            android:padding="@dimen/sixteen"
+            android:text="@string/star_content"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_small" />
+    </LinearLayout>
 </LinearLayout>

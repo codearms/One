@@ -23,8 +23,51 @@
         app:title="@string/donate"
         app:titleTextColor="@color/color_text_title" />
 
-    <FrameLayout
-        android:id="@+id/fl_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/color_text_title"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/thirty_two"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_alipay"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:background="@drawable/bg_alipay"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="@string/alipay"
+                android:textColor="@color/text_color_pay"
+                android:textSize="@dimen/text_size_normal" />
+
+            <RadioButton
+                android:id="@+id/rb_wxpay"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:background="@drawable/bg_wxpay"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/wxpay"
+                android:textColor="@color/text_color_pay"
+                android:textSize="@dimen/text_size_normal" />
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/iv_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:layout_marginTop="@dimen/sixteen"
+            android:contentDescription="@string/pay_description"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_alipay" />
+    </LinearLayout>
 </LinearLayout>

@@ -52,6 +52,27 @@
     <string name="register">注册</string>
     <string name="registration_agreement">《<u>点击“注册”按钮即表示同意注册协议</u>》</string>
 
+    <string name="download_content">喜欢就推荐给你的小伙伴吧，扫描二维码直接下载，或者点击右上角分享链接地址。</string>
+    <string name="code_description">code</string>
+    <string name="star_content">喜欢的朋友请Star，欢迎一起学习讨论。你的支持将是我最大的动力与褒奖~ O(∩_∩)O ~</string>
+
+    <string name="problem_feedback_content">您好，很希望得到您的意见，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我 ~ </string>
+    <string name="issues">Issues</string>
+    <string name="faq_name">常见问题</string>
+    <string name="contact_me">联系我</string>
+    <string name="qq">QQ</string>
+    <string name="email">Email</string>
+
+    <string name="launcher_description">launcher</string>
+    <string name="current_version">当前版本 V%1$s</string>
+    <string name="function_introduction">功能介绍</string>
+    <string name="check_update">检查更新</string>
+    <string name="give_a_star">给个Star吧</string>
+
+    <string name="alipay">支付宝</string>
+    <string name="wxpay">微信</string>
+    <string name="pay_description">pay</string>
+
     <string-array name="news_titles">
         <item>推荐</item>
         <item>热点</item>

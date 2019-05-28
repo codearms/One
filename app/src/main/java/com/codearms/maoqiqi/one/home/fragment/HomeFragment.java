@@ -94,7 +94,7 @@ public class HomeFragment extends LazyLoadFragment implements HomeContract.View 
         super.loadData();
         if (context instanceof MainActivity)
             ((MainActivity) context).associateDrawerLayout(toolbar);
-        presenter.subscribe();
+//        presenter.subscribe();
     }
 
     @Override

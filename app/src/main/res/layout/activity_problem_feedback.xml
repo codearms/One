@@ -23,8 +23,137 @@
         app:title="@string/problem_feedback"
         app:titleTextColor="@color/color_text_title" />
 
-    <FrameLayout
-        android:id="@+id/fl_content"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/sixteen"
+        android:background="@drawable/bg_hint"
+        android:lineSpacingExtra="2dp"
+        android:padding="@dimen/sixteen"
+        android:text="@string/problem_feedback_content"
+        android:textColor="@color/color_text_general"
+        android:textSize="@dimen/text_size_small" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_text_title"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/sixteen"
+            android:layout_marginRight="@dimen/sixteen"
+            android:paddingTop="@dimen/eight"
+            android:paddingBottom="@dimen/eight"
+            android:text="@string/issues"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:id="@+id/tv_issues"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navigation_item"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingLeft="@dimen/sixteen"
+            android:paddingRight="@dimen/sixteen"
+            android:text="@string/app_name"
+            android:textColor="@color/color_text_main"
+            android:textSize="@dimen/text_size_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_marginStart="@dimen/sixteen"
+            android:layout_marginLeft="@dimen/sixteen"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:id="@+id/tv_problems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navigation_item"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingLeft="@dimen/sixteen"
+            android:paddingRight="@dimen/sixteen"
+            android:text="@string/faq_name"
+            android:textColor="@color/color_text_main"
+            android:textSize="@dimen/text_size_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/color_divider" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sixteen"
+        android:background="@color/color_text_title"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/sixteen"
+            android:paddingTop="@dimen/eight"
+            android:paddingRight="@dimen/sixteen"
+            android:paddingBottom="@dimen/eight"
+            android:text="@string/contact_me"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_small" />
+
+        <TextView
+            android:id="@+id/tv_qq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navigation_item"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingLeft="@dimen/sixteen"
+            android:paddingRight="@dimen/sixteen"
+            android:text="@string/qq"
+            android:textColor="@color/color_text_main"
+            android:textSize="@dimen/text_size_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_marginStart="@dimen/sixteen"
+            android:layout_marginLeft="@dimen/sixteen"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navigation_item"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingLeft="@dimen/sixteen"
+            android:paddingRight="@dimen/sixteen"
+            android:text="@string/email"
+            android:textColor="@color/color_text_main"
+            android:textSize="@dimen/text_size_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/color_divider" />
+    </LinearLayout>
 </LinearLayout>

@@ -23,8 +23,122 @@
         app:title="@string/about"
         app:titleTextColor="@color/color_text_title" />
 
-    <FrameLayout
-        android:id="@+id/fl_content"
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/thirty_two"
+        android:contentDescription="@string/launcher_description"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_version_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/current_version"
+        android:textColor="@color/text_color_gray"
+        android:textSize="@dimen/text_size_smaller" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/thirty_two"
+        android:background="@color/color_text_title"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:id="@+id/tv_function_introduction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navigation_item"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingStart="@dimen/sixteen"
+            android:paddingEnd="@dimen/sixteen"
+            android:text="@string/function_introduction"
+            android:textColor="@color/color_text_main"
+            android:textSize="@dimen/text_size_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_marginStart="@dimen/sixteen"
+            android:layout_marginLeft="@dimen/sixteen"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:id="@+id/tv_check_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navigation_item"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingStart="@dimen/sixteen"
+            android:paddingEnd="@dimen/sixteen"
+            android:text="@string/check_update"
+            android:textColor="@color/color_text_main"
+            android:textSize="@dimen/text_size_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_marginStart="@dimen/sixteen"
+            android:layout_marginLeft="@dimen/sixteen"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:id="@+id/tv_update_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navigation_item"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingStart="@dimen/sixteen"
+            android:paddingEnd="@dimen/sixteen"
+            android:text="@string/update_description"
+            android:textColor="@color/color_text_main"
+            android:textSize="@dimen/text_size_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_marginStart="@dimen/sixteen"
+            android:layout_marginLeft="@dimen/sixteen"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:id="@+id/tv_star"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_navigation_item"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingStart="@dimen/sixteen"
+            android:paddingEnd="@dimen/sixteen"
+            android:text="@string/give_a_star"
+            android:textColor="@color/color_text_main"
+            android:textSize="@dimen/text_size_normal" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/color_divider" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sixteen"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="2dp"
+        android:padding="@dimen/sixteen"
+        android:text="@string/star_content"
+        android:textColor="@color/text_color_gray"
+        android:textSize="@dimen/text_size_small" />
 </LinearLayout>
