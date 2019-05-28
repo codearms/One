@@ -104,4 +104,16 @@
     <style name="tab_text_appearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
+
+    <style name="btn" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <!--android.support.design.widget.TextInputLayout 提示字体样式-->
+    <style name="text_input_layout_hint" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/color_navigation</item>
+        <item name="android:textSize">@dimen/text_size_smaller</item>
+    </style>
 </resources>

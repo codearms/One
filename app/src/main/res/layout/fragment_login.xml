@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/sixteen">
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_input"
+        android:drawableStart="@drawable/ic_user_name"
+        android:drawableLeft="@drawable/ic_user_name"
+        android:drawablePadding="@dimen/four"
+        android:hint="@string/user_name"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:paddingTop="@dimen/eight"
+        android:paddingBottom="@dimen/eight"
+        android:singleLine="true"
+        android:textColor="@color/color_text_main"
+        android:textColorHighlight="@color/color_input_highlight"
+        android:textColorHint="@color/color_text_secondary"
+        android:textCursorDrawable="@drawable/text_cursor_drawable"
+        android:textSize="@dimen/text_size_normal" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sixteen"
+        android:background="@drawable/bg_input"
+        android:drawableStart="@drawable/ic_password"
+        android:drawableLeft="@drawable/ic_password"
+        android:drawablePadding="@dimen/four"
+        android:hint="@string/password"
+        android:imeActionLabel="@string/login"
+        android:imeOptions="actionNext"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:maxLines="1"
+        android:paddingTop="@dimen/eight"
+        android:paddingBottom="@dimen/eight"
+        android:singleLine="true"
+        android:textColor="@color/color_text_main"
+        android:textColorHighlight="@color/color_input_highlight"
+        android:textColorHint="@color/color_text_secondary"
+        android:textCursorDrawable="@drawable/text_cursor_drawable"
+        android:textSize="@dimen/text_size_normal" />
+
+    <Button
+        android:id="@+id/btn_login"
+        style="?android:buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/thirty_two"
+        android:background="@drawable/bg_btn"
+        android:enabled="false"
+        android:minHeight="40dp"
+        android:text="@string/login"
+        android:textColor="@color/color_text_title"
+        android:textSize="@dimen/text_size_normal"
+        android:textStyle="bold" />
+
+    <!--style="?android:buttonBarButtonStyle":去除Button默认阴影效果-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sixteen">
+
+        <Button
+            style="@style/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forget_password"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_small" />
+
+        <Button
+            android:id="@+id/btn_new_user_register"
+            style="@style/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/new_user_register"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_small" />
+    </FrameLayout>
+</LinearLayout>

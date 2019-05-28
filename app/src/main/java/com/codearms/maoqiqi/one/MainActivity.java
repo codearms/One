@@ -21,11 +21,19 @@ import android.widget.TextView;
 
 import com.codearms.maoqiqi.one.book.fragment.BookFragment;
 import com.codearms.maoqiqi.one.home.fragment.HomeFragment;
+import com.codearms.maoqiqi.one.home.utils.ActivityUtils;
 import com.codearms.maoqiqi.one.home.utils.FragmentCheckedChangeListener;
 import com.codearms.maoqiqi.one.home.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.home.utils.Toasty;
 import com.codearms.maoqiqi.one.movie.fragment.MovieFragment;
 import com.codearms.maoqiqi.one.music.fragment.MusicFragment;
+import com.codearms.maoqiqi.one.navigation.activity.AboutActivity;
+import com.codearms.maoqiqi.one.navigation.activity.DonateActivity;
+import com.codearms.maoqiqi.one.navigation.activity.LoginActivity;
+import com.codearms.maoqiqi.one.navigation.activity.ProblemFeedbackActivity;
+import com.codearms.maoqiqi.one.navigation.activity.ProjectIntroductionActivity;
+import com.codearms.maoqiqi.one.navigation.activity.ScanCodeActivity;
+import com.codearms.maoqiqi.one.navigation.activity.UpdateDescriptionActivity;
 import com.codearms.maoqiqi.one.news.fragment.NewsFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener,
@@ -52,6 +60,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         View navigationHeader = navigationView.getHeaderView(0);
         navigationHeader.findViewById(R.id.iv_scan_code).setOnClickListener(this);
         navigationHeader.findViewById(R.id.iv_project).setOnClickListener(this);
+        navigationHeader.findViewById(R.id.tv_name).setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
         tvSetting.setOnClickListener(this);
         tvMode.setOnClickListener(this);
@@ -99,9 +108,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_scan_code:
-//                ActivityUtils.startActivity(this, ScanCodeToDownloadActivity.class);
+                ActivityUtils.startActivity(this, ScanCodeActivity.class);
                 break;
             case R.id.iv_project:
+                ActivityUtils.startActivity(this, LoginActivity.class);
+                break;
+            case R.id.tv_name:
                 WebViewActivity.start(this, getString(R.string.project_git));
                 break;
             case R.id.tv_setting:
@@ -117,19 +129,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_project_introduction:
-//                ActivityUtils.startActivity(this, ProjectIntroductionActivity.class);
+                ActivityUtils.startActivity(this, ProjectIntroductionActivity.class);
                 return true;
             case R.id.nav_update_description:
-//                ActivityUtils.startActivity(this, UpdateDescriptionActivity.class);
+                ActivityUtils.startActivity(this, UpdateDescriptionActivity.class);
                 return true;
             case R.id.nav_scan_code:
-//                ActivityUtils.startActivity(this, ScanCodeToDownloadActivity.class);
+                ActivityUtils.startActivity(this, ScanCodeActivity.class);
                 return true;
             case R.id.nav_problem_feedback:
-//                ActivityUtils.startActivity(this, ProblemFeedbackActivity.class);
+                ActivityUtils.startActivity(this, ProblemFeedbackActivity.class);
                 return true;
             case R.id.nav_about:
-//                ActivityUtils.startActivity(this, AboutActivity.class);
+                ActivityUtils.startActivity(this, AboutActivity.class);
+                return true;
+            case R.id.nav_donate:
+                ActivityUtils.startActivity(this, DonateActivity.class);
                 return true;
         }
         return false;

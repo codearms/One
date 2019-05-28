@@ -42,6 +42,15 @@
     <string name="we_chat">公众号</string>
     <string name="knowledge">知识体系</string>
 
+    <string name="login">登录</string>
+    <string name="user_name">用户名</string>
+    <string name="password">密码</string>
+    <string name="forget_password">忘记密码?</string>
+    <string name="new_user_register">新用户注册</string>
+
+    <string name="register">注册</string>
+    <string name="registration_agreement">《<u>点击“注册”按钮即表示同意注册协议</u>》</string>
+
     <string-array name="news_titles">
         <item>推荐</item>
         <item>热点</item>

@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,6 +41,18 @@
         <activity android:name=".home.activity.KnowledgeActivity" />
         <activity android:name=".home.activity.ProjectActivity" />
         <activity android:name=".home.activity.ClassifyActivity" />
+        <!--navigation-->
+        <activity
+            android:name=".navigation.activity.LoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".navigation.activity.RegisterActivity" />
+        <activity android:name=".navigation.activity.ProjectIntroductionActivity" />
+        <activity android:name=".navigation.activity.UpdateDescriptionActivity" />
+        <activity android:name=".navigation.activity.ScanCodeActivity" />
+        <activity android:name=".navigation.activity.ProblemFeedbackActivity" />
+        <activity android:name=".navigation.activity.AboutActivity" />
+        <activity android:name=".navigation.activity.DonateActivity" />
     </application>
 
 </manifest>
