@@ -5,9 +5,9 @@ import com.codearms.maoqiqi.one.home.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.home.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.home.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.home.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.home.data.bean.UserBean;
 import com.codearms.maoqiqi.one.home.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.home.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.home.data.bean.UserBean;
 
 import java.util.List;
 
@@ -179,6 +179,7 @@ public interface ServerApi {
      * @param id 文章id,拼接在链接上
      * @return 收藏站内文章
      */
+    @POST("lg/collect/{id}/json")
     Observable<CommonBean> collect(@Path("id") int id);
 
     /**
@@ -189,5 +190,7 @@ public interface ServerApi {
      * @param link   链接
      * @return 收藏站外文章
      */
+    @POST("lg/collect/add/json")
+    @FormUrlEncoded
     Observable<CommonBean> collect(@Field("title") String title, @Field("author") String author, @Field("link") String link);
 }

@@ -23,37 +23,8 @@
         app:title="@string/loading"
         app:titleTextColor="@color/color_text_title" />
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/fl_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.codearms.maoqiqi.one.home.view.ObservableWebView
-            android:id="@+id/web_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbarSize="3dp" />
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_alignParentTop="true"
-            android:max="100"
-            android:progress="0"
-            android:progressDrawable="@drawable/bg_web_view_progress"
-            android:visibility="gone" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_collection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_collection_2"
-            android:visibility="gone"
-            app:backgroundTint="@color/color_navigation"
-            app:fabSize="normal" />
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 </LinearLayout>

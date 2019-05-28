@@ -1,5 +1,7 @@
 package com.codearms.maoqiqi.one;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -34,6 +36,7 @@ import com.codearms.maoqiqi.one.navigation.activity.ProblemFeedbackActivity;
 import com.codearms.maoqiqi.one.navigation.activity.ProjectIntroductionActivity;
 import com.codearms.maoqiqi.one.navigation.activity.ScanCodeActivity;
 import com.codearms.maoqiqi.one.navigation.activity.UpdateDescriptionActivity;
+import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.news.fragment.NewsFragment;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener,
@@ -42,8 +45,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     private final int[] buttonIds = {R.id.rb_home, R.id.rb_news, R.id.rb_book, R.id.rb_music, R.id.rb_movie};
 
     private DrawerLayout drawerLayout;
+    private TextView tvUserName;
 
     private MyOnCheckedChangeListener checkedChangeListener;
+
+    public static void start(@NonNull Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,10 +68,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         TextView tvMode = findViewById(R.id.tv_mode);
 
         View navigationHeader = navigationView.getHeaderView(0);
+        tvUserName = navigationHeader.findViewById(R.id.tv_user_name);
         navigationHeader.findViewById(R.id.iv_scan_code).setOnClickListener(this);
-        navigationHeader.findViewById(R.id.tv_user_name).setOnClickListener(this);
+        tvUserName.setOnClickListener(this);
         navigationHeader.findViewById(R.id.tv_project).setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
+
         tvSetting.setOnClickListener(this);
         tvMode.setOnClickListener(this);
 
@@ -77,6 +89,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         radioGroup.setOnCheckedChangeListener(checkedChangeListener);
         // 设置默认选项
         ((RadioButton) radioGroup.getChildAt(position)).setChecked(true);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (App.getInstance().getUserBean() != null) {
+            tvUserName.setText(App.getInstance().getUserBean().getUserName());
+            tvUserName.setClickable(false);
+        }
+    }
+
+    // 更新用户信息
+    public void setUserInfo() {
+        tvUserName.setText(App.getInstance().getUserBean().getUserName());
+        tvUserName.setClickable(false);
     }
 
     // 将Toolbar 与 DrawerLayout 关联

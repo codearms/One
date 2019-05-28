@@ -16,18 +16,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.WebViewActivity;
 import com.codearms.maoqiqi.one.home.activity.KnowledgeActivity;
 import com.codearms.maoqiqi.one.home.activity.NavigationActivity;
 import com.codearms.maoqiqi.one.home.activity.ProjectActivity;
 import com.codearms.maoqiqi.one.home.activity.WeChatActivity;
 import com.codearms.maoqiqi.one.home.data.bean.BannerBean;
+import com.codearms.maoqiqi.one.home.data.bean.UserBean;
 import com.codearms.maoqiqi.one.home.presenter.HomePresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.HomeContract;
 import com.codearms.maoqiqi.one.home.utils.ActivityUtils;
 import com.codearms.maoqiqi.one.home.utils.GlideImageLoader;
+import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -93,6 +95,12 @@ public class HomeFragment extends LazyLoadFragment implements HomeContract.View 
         if (context instanceof MainActivity)
             ((MainActivity) context).associateDrawerLayout(toolbar);
         presenter.subscribe();
+    }
+
+    @Override
+    public void userInfo(UserBean userBean) {
+        App.getInstance().setUserBean(userBean);
+        ((MainActivity) context).setUserInfo();
     }
 
     @Override

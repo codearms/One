@@ -14,26 +14,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".WebViewActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <!-- 打开http或https开头的网页 -->
-                <data android:scheme="https" />
-                <data android:scheme="http" />
             </intent-filter>
         </activity>
         <!--home-->
@@ -54,6 +40,20 @@
         <activity android:name=".navigation.activity.ProblemFeedbackActivity" />
         <activity android:name=".navigation.activity.AboutActivity" />
         <activity android:name=".navigation.activity.DonateActivity" />
+        <activity
+            android:name=".navigation.activity.WebViewActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- 打开http或https开头的网页 -->
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

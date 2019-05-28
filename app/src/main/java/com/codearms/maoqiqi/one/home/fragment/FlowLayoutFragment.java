@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.WebViewActivity;
+import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.home.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.home.data.bean.ParentClassifyBean;

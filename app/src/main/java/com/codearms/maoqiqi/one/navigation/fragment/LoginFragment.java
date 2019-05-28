@@ -85,7 +85,7 @@ public class LoginFragment extends LazyLoadFragment implements LoginContract.Vie
     @Override
     public void userInfo(UserBean userBean) {
         App.getInstance().setUserBean(userBean);
-        ActivityUtils.startActivity(context, MainActivity.class);
+        MainActivity.start(context);
     }
 
     @Override

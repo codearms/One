@@ -47,8 +47,12 @@ public class HomePresenter implements HomeContract.Presenter {
                     public void onNext(Data data) {
                         if (!homeView.isActive()) return;
 
-                        // data.getLoginBean();
-                        homeView.setBanner(data.getBannerBeans().getData());
+                        if (data.getUserData().getErrorCode() == 0) {
+                            homeView.userInfo(data.getUserData().getData());
+                        }
+                        if (data.getBannerData().getErrorCode() == 0) {
+                            homeView.setBanner(data.getBannerData().getData());
+                        }
                     }
 
                     @Override
@@ -64,20 +68,20 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     private final class Data {
-        private CommonBean<UserBean> loginBean;
-        private CommonBean<List<BannerBean>> bannerBeans;
+        private CommonBean<UserBean> userData;
+        private CommonBean<List<BannerBean>> bannerData;
 
-        Data(CommonBean<UserBean> loginBean, CommonBean<List<BannerBean>> bannerBeans) {
-            this.loginBean = loginBean;
-            this.bannerBeans = bannerBeans;
+        Data(CommonBean<UserBean> userData, CommonBean<List<BannerBean>> bannerData) {
+            this.userData = userData;
+            this.bannerData = bannerData;
         }
 
-        CommonBean<UserBean> getLoginBean() {
-            return loginBean;
+        CommonBean<UserBean> getUserData() {
+            return userData;
         }
 
-        CommonBean<List<BannerBean>> getBannerBeans() {
-            return bannerBeans;
+        CommonBean<List<BannerBean>> getBannerData() {
+            return bannerData;
         }
     }
 }

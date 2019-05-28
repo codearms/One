@@ -16,7 +16,6 @@ import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.data.bean.UserBean;
-import com.codearms.maoqiqi.one.home.utils.ActivityUtils;
 import com.codearms.maoqiqi.one.home.utils.Toasty;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.RegisterContract;
 
@@ -73,7 +72,7 @@ public class RegisterFragment extends LazyLoadFragment implements RegisterContra
     @Override
     public void userInfo(UserBean userBean) {
         App.getInstance().setUserBean(userBean);
-        ActivityUtils.startActivity(context, MainActivity.class);
+        MainActivity.start(context);
     }
 
     @Override
