@@ -42,7 +42,7 @@ public class WebViewPresenter implements WebViewContract.Presenter {
                         if (!webViewView.isActive()) return;
 
                         if (commonBean.getErrorCode() == 0) {
-
+                            webViewView.collectSuccess();
                         } else {
                             webViewView.showErrorMessage(commonBean.getErrorMsg());
                         }
@@ -71,7 +71,7 @@ public class WebViewPresenter implements WebViewContract.Presenter {
                         if (!webViewView.isActive()) return;
 
                         if (commonBean.getErrorCode() == 0) {
-
+                            webViewView.collectSuccess();
                         } else {
                             webViewView.showErrorMessage(commonBean.getErrorMsg());
                         }

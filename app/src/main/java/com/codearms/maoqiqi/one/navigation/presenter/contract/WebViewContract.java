@@ -14,6 +14,8 @@ public interface WebViewContract {
 
     interface View extends BaseView<Presenter> {
 
+        void collectSuccess();
+
         void showErrorMessage(String message);
     }
 }

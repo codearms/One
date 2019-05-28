@@ -128,6 +128,11 @@ public class WebViewFragment extends LazyLoadFragment implements WebViewContract
     }
 
     @Override
+    public void collectSuccess() {
+        Toasty.show(context, "收藏成功");
+    }
+
+    @Override
     public void showErrorMessage(String message) {
         Toasty.show(context, message);
     }

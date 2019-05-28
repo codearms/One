@@ -1,6 +1,10 @@
 package com.codearms.maoqiqi.one.data.net;
 
+import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.BuildConfig;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,8 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitManager {
 
-    public static final String BASE_URL = "https://www.wanandroid.com/";
-    public static final int DEFAULT_TIMEOUT = 15;
+    private static final String BASE_URL = "https://www.wanandroid.com/";
+    private static final int DEFAULT_TIMEOUT = 15;
 
     private static RetrofitManager instance;
 
@@ -45,9 +49,11 @@ public class RetrofitManager {
             builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
             builder.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
             builder.writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-
             // 错误重连
             builder.retryOnConnectionFailure(true);
+            // cookie认证
+            builder.cookieJar(new PersistentCookieJar(new SetCookieCache(),
+                    new SharedPrefsCookiePersistor(App.getInstance())));
             okHttpClient = builder.build();
         }
     }
