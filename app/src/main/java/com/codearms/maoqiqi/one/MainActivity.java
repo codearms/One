@@ -59,8 +59,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
         View navigationHeader = navigationView.getHeaderView(0);
         navigationHeader.findViewById(R.id.iv_scan_code).setOnClickListener(this);
-        navigationHeader.findViewById(R.id.iv_project).setOnClickListener(this);
-        navigationHeader.findViewById(R.id.tv_name).setOnClickListener(this);
+        navigationHeader.findViewById(R.id.tv_user_name).setOnClickListener(this);
+        navigationHeader.findViewById(R.id.tv_project).setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
         tvSetting.setOnClickListener(this);
         tvMode.setOnClickListener(this);
@@ -110,10 +110,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
             case R.id.iv_scan_code:
                 ActivityUtils.startActivity(this, ScanCodeActivity.class);
                 break;
-            case R.id.iv_project:
+            case R.id.tv_user_name:
                 ActivityUtils.startActivity(this, LoginActivity.class);
                 break;
-            case R.id.tv_name:
+            case R.id.tv_project:
                 WebViewActivity.start(this, getString(R.string.project_git));
                 break;
             case R.id.tv_setting:

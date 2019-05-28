@@ -48,6 +48,7 @@
     <string name="forget_password">忘记密码?</string>
     <string name="new_user_register">新用户注册</string>
 
+    <string name="confirm_password">确认密码</string>
     <string name="register">注册</string>
     <string name="registration_agreement">《<u>点击“注册”按钮即表示同意注册协议</u>》</string>
 

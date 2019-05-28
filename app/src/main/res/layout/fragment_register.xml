@@ -14,7 +14,7 @@
         app:hintTextAppearance="@style/text_input_layout_hint">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_email"
+            android:id="@+id/et_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_input"
@@ -39,6 +39,34 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sixteen"
+            android:background="@drawable/bg_input"
+            android:imeActionLabel="@string/login"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:maxLines="1"
+            android:paddingTop="@dimen/eight"
+            android:paddingBottom="@dimen/eight"
+            android:singleLine="true"
+            android:textColor="@color/color_text_main"
+            android:textColorHighlight="@color/color_input_highlight"
+            android:textCursorDrawable="@drawable/text_cursor_drawable"
+            android:textSize="@dimen/text_size_normal" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/sixteen"
+        android:hint="@string/confirm_password"
+        android:textColorHint="@color/color_text_secondary"
+        app:hintTextAppearance="@style/text_input_layout_hint">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/sixteen"

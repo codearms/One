@@ -5,7 +5,7 @@ import com.codearms.maoqiqi.one.home.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.home.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.home.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.home.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.home.data.bean.LoginBean;
+import com.codearms.maoqiqi.one.home.data.bean.UserBean;
 import com.codearms.maoqiqi.one.home.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.home.data.bean.ParentClassifyBean;
 
@@ -144,7 +144,7 @@ public interface ServerApi {
      */
     @POST("user/login")
     @FormUrlEncoded
-    Observable<CommonBean<LoginBean>> login(@Field("username") String username, @Field("password") String password);
+    Observable<CommonBean<UserBean>> login(@Field("username") String username, @Field("password") String password);
 
     /**
      * 注册(https://www.wanandroid.com/user/register)
@@ -154,7 +154,9 @@ public interface ServerApi {
      * @param repassword 确认密码
      * @return 注册
      */
-    Observable<CommonBean> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+    @POST("user/register")
+    @FormUrlEncoded
+    Observable<CommonBean<UserBean>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
 
     /**
      * 退出(https://www.wanandroid.com/user/logout/json)

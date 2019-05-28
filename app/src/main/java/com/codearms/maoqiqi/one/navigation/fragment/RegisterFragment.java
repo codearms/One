@@ -12,12 +12,21 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.one.App;
+import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.home.data.bean.UserBean;
+import com.codearms.maoqiqi.one.home.utils.ActivityUtils;
+import com.codearms.maoqiqi.one.home.utils.Toasty;
+import com.codearms.maoqiqi.one.navigation.presenter.contract.RegisterContract;
 
-public class RegisterFragment extends LazyLoadFragment {
+public class RegisterFragment extends LazyLoadFragment implements RegisterContract.View {
 
-    private EditText etEmail;
+    private RegisterContract.Presenter presenter;
+
+    private EditText etUserName;
     private EditText etPassword;
+    private EditText etConfirmPassword;
     private Button btnRegister;
 
     /**
@@ -30,6 +39,16 @@ public class RegisterFragment extends LazyLoadFragment {
     }
 
     @Override
+    public void setPresenter(RegisterContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
+    }
+
+    @Override
     protected View createView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.fragment_register, container, false);
     }
@@ -37,13 +56,29 @@ public class RegisterFragment extends LazyLoadFragment {
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        etEmail = rootView.findViewById(R.id.et_email);
+        etUserName = rootView.findViewById(R.id.et_user_name);
         etPassword = rootView.findViewById(R.id.et_password);
+        etConfirmPassword = rootView.findViewById(R.id.et_confirm_password);
         btnRegister = rootView.findViewById(R.id.btn_register);
 
         MyTextWatcher textWatcher = new MyTextWatcher();
-        etEmail.addTextChangedListener(textWatcher);
+        etUserName.addTextChangedListener(textWatcher);
         etPassword.addTextChangedListener(textWatcher);
+        etConfirmPassword.addTextChangedListener(textWatcher);
+
+        btnRegister.setOnClickListener(v -> presenter.register(etUserName.getText().toString(),
+                etPassword.getText().toString(), etConfirmPassword.getText().toString()));
+    }
+
+    @Override
+    public void userInfo(UserBean userBean) {
+        App.getInstance().setUserBean(userBean);
+        ActivityUtils.startActivity(context, MainActivity.class);
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        Toasty.show(context, message);
     }
 
     private final class MyTextWatcher implements TextWatcher {
@@ -60,7 +95,9 @@ public class RegisterFragment extends LazyLoadFragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            btnRegister.setEnabled(etEmail.getText().length() != 0 && etPassword.getText().length() != 0);
+            btnRegister.setEnabled(etUserName.getText().length() != 0
+                    && etPassword.getText().length() != 0
+                    && etConfirmPassword.getText().length() != 0);
         }
     }
 }

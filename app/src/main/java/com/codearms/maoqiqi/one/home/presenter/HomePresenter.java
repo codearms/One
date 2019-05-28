@@ -2,7 +2,7 @@ package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.one.home.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.home.data.bean.CommonBean;
-import com.codearms.maoqiqi.one.home.data.bean.LoginBean;
+import com.codearms.maoqiqi.one.home.data.bean.UserBean;
 import com.codearms.maoqiqi.one.home.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.home.presenter.contract.HomeContract;
 
@@ -37,7 +37,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void getData() {
-        Observable<CommonBean<LoginBean>> loginObservable = RetrofitManager.getInstance().getServerApi().login("123", "123");
+        Observable<CommonBean<UserBean>> loginObservable = RetrofitManager.getInstance().getServerApi().login("123", "123");
         Observable<CommonBean<List<BannerBean>>> bannerObservable = RetrofitManager.getInstance().getServerApi().getBanner();
         compositeDisposable.add(Observable.zip(loginObservable, bannerObservable, Data::new)
                 .subscribeOn(Schedulers.io())
@@ -64,15 +64,15 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     private final class Data {
-        private CommonBean<LoginBean> loginBean;
+        private CommonBean<UserBean> loginBean;
         private CommonBean<List<BannerBean>> bannerBeans;
 
-        Data(CommonBean<LoginBean> loginBean, CommonBean<List<BannerBean>> bannerBeans) {
+        Data(CommonBean<UserBean> loginBean, CommonBean<List<BannerBean>> bannerBeans) {
             this.loginBean = loginBean;
             this.bannerBeans = bannerBeans;
         }
 
-        CommonBean<LoginBean> getLoginBean() {
+        CommonBean<UserBean> getLoginBean() {
             return loginBean;
         }
 

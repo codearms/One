@@ -19,19 +19,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_project"
+        android:id="@+id/iv_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/sixteen"
         android:layout_marginLeft="@dimen/sixteen"
         android:contentDescription="@string/project_description"
-        android:src="@drawable/ic_logo"
+        android:src="@drawable/ic_avatar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_scan_code" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_user_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/eight"
@@ -40,18 +40,18 @@
         android:layout_marginRight="@dimen/sixteen"
         android:maxLines="1"
         android:singleLine="true"
-        android:text="@string/project_name"
+        android:text="@string/login"
         android:textColor="@color/text_color_white"
         android:textSize="@dimen/text_size_small"
         android:typeface="serif"
-        app:layout_constraintBottom_toTopOf="@id/tv_des"
+        app:layout_constraintBottom_toTopOf="@id/tv_project"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_project"
+        app:layout_constraintStart_toEndOf="@id/iv_avatar"
         app:layout_constraintTop_toBottomOf="@id/iv_scan_code"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/tv_des"
+        android:id="@+id/tv_project"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/eight"
@@ -67,6 +67,6 @@
         android:typeface="serif"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_project"
-        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+        app:layout_constraintStart_toEndOf="@id/iv_avatar"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
 </android.support.constraint.ConstraintLayout>

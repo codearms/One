@@ -13,13 +13,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.one.App;
+import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.home.data.bean.UserBean;
 import com.codearms.maoqiqi.one.home.utils.ActivityUtils;
+import com.codearms.maoqiqi.one.home.utils.Toasty;
 import com.codearms.maoqiqi.one.navigation.activity.RegisterActivity;
+import com.codearms.maoqiqi.one.navigation.presenter.contract.LoginContract;
 
-public class LoginFragment extends LazyLoadFragment implements View.OnClickListener {
+public class LoginFragment extends LazyLoadFragment implements LoginContract.View, View.OnClickListener {
 
-    private EditText etEmail;
+    private LoginContract.Presenter presenter;
+
+    private EditText etUserName;
     private EditText etPassword;
     private Button btnLogin;
 
@@ -33,6 +40,16 @@ public class LoginFragment extends LazyLoadFragment implements View.OnClickListe
     }
 
     @Override
+    public void setPresenter(LoginContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
+    }
+
+    @Override
     protected View createView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
@@ -40,13 +57,13 @@ public class LoginFragment extends LazyLoadFragment implements View.OnClickListe
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        etEmail = rootView.findViewById(R.id.et_email);
+        etUserName = rootView.findViewById(R.id.et_user_name);
         etPassword = rootView.findViewById(R.id.et_password);
         btnLogin = rootView.findViewById(R.id.btn_login);
         TextView btnNewUserRegister = rootView.findViewById(R.id.btn_new_user_register);
 
         MyTextWatcher textWatcher = new MyTextWatcher();
-        etEmail.addTextChangedListener(textWatcher);
+        etUserName.addTextChangedListener(textWatcher);
         etPassword.addTextChangedListener(textWatcher);
 
         btnLogin.setOnClickListener(this);
@@ -57,11 +74,23 @@ public class LoginFragment extends LazyLoadFragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
+                presenter.login(etUserName.getText().toString(), etPassword.getText().toString());
                 break;
             case R.id.btn_new_user_register:
                 ActivityUtils.startActivity(context, RegisterActivity.class);
                 break;
         }
+    }
+
+    @Override
+    public void userInfo(UserBean userBean) {
+        App.getInstance().setUserBean(userBean);
+        ActivityUtils.startActivity(context, MainActivity.class);
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+        Toasty.show(context, message);
     }
 
     private final class MyTextWatcher implements TextWatcher {
@@ -78,7 +107,7 @@ public class LoginFragment extends LazyLoadFragment implements View.OnClickListe
 
         @Override
         public void afterTextChanged(Editable s) {
-            btnLogin.setEnabled(etEmail.getText().length() != 0 && etPassword.getText().length() != 0);
+            btnLogin.setEnabled(etUserName.getText().length() != 0 && etPassword.getText().length() != 0);
         }
     }
 }

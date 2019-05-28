@@ -8,6 +8,7 @@ import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.navigation.fragment.RegisterFragment;
+import com.codearms.maoqiqi.one.navigation.presenter.RegisterPresenter;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -30,6 +31,6 @@ public class RegisterActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
 
-        // new FlowLayoutPresenter(fragment);
+        new RegisterPresenter(fragment);
     }
 }
