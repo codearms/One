@@ -26,10 +26,11 @@ import java.util.List;
 
 public class ArticlesFragment extends LazyLoadFragment implements ArticlesContract.View {
 
-    private static final String FROM_HOME = "FROM_HOME";
+    public static final String FROM_HOME = "FROM_HOME";
     public static final String FROM_WE_CHAT = "FROM_WE_CHAT";
     public static final String FROM_PROJECT = "FROM_PROJECT";
     public static final String FROM_CLASSIFY = "FROM_CLASSIFY";
+    public static final String FROM_COLLECT = "FROM_COLLECT";
 
     private ArticlesContract.Presenter presenter;
 
@@ -43,9 +44,9 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
      *
      * @return A new instance of fragment ArticlesFragment.
      */
-    public static ArticlesFragment newInstance() {
+    public static ArticlesFragment newInstance(String from) {
         Bundle bundle = new Bundle();
-        bundle.putString("from", FROM_HOME);
+        bundle.putString("from", from);
         ArticlesFragment fragment = new ArticlesFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -108,11 +109,10 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
             case FROM_CLASSIFY:
                 presenter.getKnowledgeArticles(0, id);
                 break;
+            case FROM_COLLECT:
+                presenter.getCollect(0);
+                break;
         }
-    }
-
-    private boolean isProject() {
-        return from.equals(FROM_PROJECT);
     }
 
     @Override
@@ -139,15 +139,15 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
 
         private int topArticles;
         @NonNull
-        private List<ArticleBean> ArticleBeanList;
+        private List<ArticleBean> articleBeanList;
         private final String openProject;
         private final String minute;
         private final String hour;
         private final String oneDay;
 
-        RecyclerViewAdapter(int topArticles, @NonNull List<ArticleBean> ArticleBeanList) {
+        RecyclerViewAdapter(int topArticles, @NonNull List<ArticleBean> articleBeanList) {
             this.topArticles = topArticles;
-            this.ArticleBeanList = ArticleBeanList;
+            this.articleBeanList = articleBeanList;
             openProject = context.getString(R.string.open_project);
             minute = context.getString(R.string.minute);
             hour = context.getString(R.string.hour);
@@ -162,40 +162,43 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            final ArticleBean ArticleBean = ArticleBeanList.get(i);
-            String superChapterName = ArticleBean.getSuperChapterName();
+            final ArticleBean articleBean = articleBeanList.get(i);
 
             viewHolder.ivTop.setVisibility(i < topArticles ? View.VISIBLE : View.GONE);
-            viewHolder.tvTitle.setText(ArticleBean.getTitle());
+            viewHolder.tvTitle.setText(articleBean.getTitle());
 
-            if (ArticleBean.getNiceDate().contains(minute)
-                    || ArticleBean.getNiceDate().contains(hour)
-                    || ArticleBean.getNiceDate().contains(oneDay)) {
+            if (articleBean.getNiceDate().contains(minute)
+                    || articleBean.getNiceDate().contains(hour)
+                    || articleBean.getNiceDate().contains(oneDay)) {
                 viewHolder.tvNew.setVisibility(View.VISIBLE);
             } else {
                 viewHolder.tvNew.setVisibility(View.GONE);
             }
 
-            if (isProject()) {
+            if (from.equals(FROM_PROJECT) || from.equals(FROM_COLLECT)) {
                 viewHolder.tvProject.setVisibility(View.GONE);
             } else {
-                viewHolder.tvProject.setVisibility(superChapterName.contains(openProject) ? View.VISIBLE : View.GONE);
+                viewHolder.tvProject.setVisibility(articleBean.getSuperChapterName().contains(openProject) ? View.VISIBLE : View.GONE);
             }
 
-            viewHolder.tvClassify.setText(String.format("%s/%s", superChapterName, ArticleBean.getChapterName()));
-            viewHolder.tvAuthor.setText(ArticleBean.getAuthor());
-            viewHolder.tvDate.setText(ArticleBean.getNiceDate());
+            if (from.equals(FROM_COLLECT)) {
+                viewHolder.tvClassify.setText(articleBean.getChapterName());
+            } else {
+                viewHolder.tvClassify.setText(String.format("%s/%s", articleBean.getSuperChapterName(), articleBean.getChapterName()));
+            }
+            viewHolder.tvAuthor.setText(articleBean.getAuthor());
+            viewHolder.tvDate.setText(articleBean.getNiceDate());
 
-            if (i == ArticleBeanList.size() - 1) {
+            if (i == articleBeanList.size() - 1) {
                 RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) viewHolder.cardView.getLayoutParams();
                 params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
             }
-            viewHolder.cardView.setOnClickListener(v -> WebViewActivity.start(context, ArticleBean.getLink(), 0));
+            viewHolder.cardView.setOnClickListener(v -> WebViewActivity.start(context, articleBean.getLink(), 0));
         }
 
         @Override
         public int getItemCount() {
-            return ArticleBeanList.size();
+            return articleBeanList.size();
         }
     }
 

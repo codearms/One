@@ -33,6 +33,9 @@
             android:name=".navigation.activity.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".navigation.activity.CollectActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".navigation.activity.RegisterActivity" />
         <activity android:name=".navigation.activity.ProjectIntroductionActivity" />
         <activity android:name=".navigation.activity.UpdateDescriptionActivity" />

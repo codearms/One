@@ -26,6 +26,7 @@ import com.codearms.maoqiqi.one.home.fragment.HomeFragment;
 import com.codearms.maoqiqi.one.movie.fragment.MovieFragment;
 import com.codearms.maoqiqi.one.music.fragment.MusicFragment;
 import com.codearms.maoqiqi.one.navigation.activity.AboutActivity;
+import com.codearms.maoqiqi.one.navigation.activity.CollectActivity;
 import com.codearms.maoqiqi.one.navigation.activity.DonateActivity;
 import com.codearms.maoqiqi.one.navigation.activity.LoginActivity;
 import com.codearms.maoqiqi.one.navigation.activity.ProblemFeedbackActivity;
@@ -96,14 +97,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         super.onNewIntent(intent);
         if (App.getInstance().getUserBean() != null) {
             tvUserName.setText(App.getInstance().getUserBean().getUserName());
-            tvUserName.setClickable(false);
         }
     }
 
     // 更新用户信息
     public void setUserInfo() {
         tvUserName.setText(App.getInstance().getUserBean().getUserName());
-        tvUserName.setClickable(false);
     }
 
     // 将Toolbar 与 DrawerLayout 关联
@@ -138,7 +137,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 ActivityUtils.startActivity(this, ScanCodeActivity.class);
                 break;
             case R.id.tv_user_name:
-                ActivityUtils.startActivity(this, LoginActivity.class);
+                if (App.getInstance().getUserBean() == null) {
+                    ActivityUtils.startActivity(this, LoginActivity.class);
+                } else {
+                    ActivityUtils.startActivity(this, CollectActivity.class);
+                }
                 break;
             case R.id.tv_project:
                 WebViewActivity.start(this, getString(R.string.project_git));

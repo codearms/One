@@ -18,6 +18,8 @@ public interface ArticlesContract {
         void getKnowledgeArticles(int page, int cid);
 
         void getProjectArticles(int page, int cid);
+
+        void getCollect(int page);
     }
 
     interface View extends BaseView<Presenter> {

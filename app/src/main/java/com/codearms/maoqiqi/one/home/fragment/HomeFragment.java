@@ -84,7 +84,7 @@ public class HomeFragment extends LazyLoadFragment implements HomeContract.View 
 
         ArticlesFragment fragment = (ArticlesFragment) getChildFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = ArticlesFragment.newInstance();
+            fragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_HOME);
             getChildFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
     }
@@ -94,7 +94,7 @@ public class HomeFragment extends LazyLoadFragment implements HomeContract.View 
         super.loadData();
         if (context instanceof MainActivity)
             ((MainActivity) context).associateDrawerLayout(toolbar);
-//        presenter.subscribe();
+        presenter.subscribe();
     }
 
     @Override

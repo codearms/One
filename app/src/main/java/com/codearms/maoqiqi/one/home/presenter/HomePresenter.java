@@ -37,7 +37,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void getData() {
-        Observable<CommonBean<UserBean>> loginObservable = RetrofitManager.getInstance().getServerApi().login("123", "123");
+        Observable<CommonBean<UserBean>> loginObservable = RetrofitManager.getInstance().getServerApi().login("maoqiqi", "123456");
         Observable<CommonBean<List<BannerBean>>> bannerObservable = RetrofitManager.getInstance().getServerApi().getBanner();
         compositeDisposable.add(Observable.zip(loginObservable, bannerObservable, Data::new)
                 .subscribeOn(Schedulers.io())

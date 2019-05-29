@@ -73,6 +73,8 @@
     <string name="wxpay">微信</string>
     <string name="pay_description">pay</string>
 
+    <string name="collect">收藏</string>
+
     <string-array name="news_titles">
         <item>推荐</item>
         <item>热点</item>

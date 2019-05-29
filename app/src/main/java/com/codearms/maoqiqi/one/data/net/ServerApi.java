@@ -171,7 +171,8 @@ public interface ServerApi {
      * @param page 页码,拼接在链接上,从0开始
      * @return 收藏文章列表数据
      */
-    Observable<CommonBean> getCollect(@Path("page") int page);
+    @GET("lg/collect/list/{page}/json")
+    Observable<CommonBean<ArticleBeans>> getCollect(@Path("page") int page);
 
     /**
      * 收藏站内文章(https://www.wanandroid.com/lg/collect/1165/json)

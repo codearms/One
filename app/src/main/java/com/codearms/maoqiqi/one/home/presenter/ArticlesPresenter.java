@@ -137,6 +137,31 @@ public class ArticlesPresenter implements ArticlesContract.Presenter {
                 }));
     }
 
+    @Override
+    public void getCollect(int page) {
+        compositeDisposable.add(RetrofitManager.getInstance().getServerApi().getCollect(page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<CommonBean<ArticleBeans>>() {
+                    @Override
+                    public void onNext(CommonBean<ArticleBeans> commonBean) {
+                        if (!articlesView.isActive()) return;
+
+                        articlesView.setArticles(commonBean.getData());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
     private final class Data {
         private CommonBean<List<ArticleBean>> topArticleBeans;
         private CommonBean<ArticleBeans> articleBeans;

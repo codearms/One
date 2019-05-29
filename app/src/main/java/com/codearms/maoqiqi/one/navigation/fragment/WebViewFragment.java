@@ -120,7 +120,7 @@ public class WebViewFragment extends LazyLoadFragment implements WebViewContract
         });
 
         fabCollection.setBackgroundTintList(ContextCompat.getColorStateList(context, bgResId));
-        fabCollection.setOnClickListener(v -> presenter.collect(8499));
+        fabCollection.setOnClickListener(v -> presenter.collect(1848));
     }
 
     public WebView getWebView() {
