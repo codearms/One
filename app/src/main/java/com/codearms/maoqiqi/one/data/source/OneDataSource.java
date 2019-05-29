@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.data.net;
+package com.codearms.maoqiqi.one.data.source;
 
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
@@ -12,21 +12,14 @@ import com.codearms.maoqiqi.one.data.bean.UserBean;
 import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
-public interface ServerApi {
+public interface OneDataSource {
 
     /**
      * 首页Banner(https://www.wanandroid.com/banner/json)
      *
      * @return Banner数据
      */
-    @GET("banner/json")
     Observable<CommonBean<List<BannerBean>>> getBanner();
 
     /**
@@ -34,7 +27,6 @@ public interface ServerApi {
      *
      * @return 常用网站数据
      */
-    @GET("friend/json")
     Observable<CommonBean> getCommon();
 
     /**
@@ -42,7 +34,6 @@ public interface ServerApi {
      *
      * @return 热词数据
      */
-    @GET("hotkey/json")
     Observable<CommonBean> getHotKey();
 
     /**
@@ -50,7 +41,6 @@ public interface ServerApi {
      *
      * @return 置顶文章数据
      */
-    @GET("article/top/json")
     Observable<CommonBean<List<ArticleBean>>> getTopArticles();
 
     /**
@@ -59,15 +49,13 @@ public interface ServerApi {
      * @param page 页码,拼接在链接上,从0开始
      * @return 文章列表数据
      */
-    @GET("article/list/{page}/json")
-    Observable<CommonBean<ArticleBeans>> getArticles(@Path("page") int page);
+    Observable<CommonBean<ArticleBeans>> getArticles(int page);
 
     /**
      * 导航数据(https://www.wanandroid.com/navi/json)
      *
      * @return 导航数据
      */
-    @GET("navi/json")
     Observable<CommonBean<List<NavigationBean>>> getNavigation();
 
     /**
@@ -75,7 +63,6 @@ public interface ServerApi {
      *
      * @return 公众号列表数据
      */
-    @GET("wxarticle/chapters/json")
     Observable<CommonBean<List<ChildClassifyBean>>> getWxList();
 
     /**
@@ -85,8 +72,7 @@ public interface ServerApi {
      * @param page 公众号页码,拼接在链接上,eg:1
      * @return 查看某个公众号历史数据
      */
-    @GET("wxarticle/list/{id}/{page}/json")
-    Observable<CommonBean<ArticleBeans>> getWxArticles(@Path("id") int id, @Path("page") int page);
+    Observable<CommonBean<ArticleBeans>> getWxArticles(int id, int page);
 
     /**
      * 在某个公众号中搜索历史文章(https://wanandroid.com/wxarticle/list/405/1/json?k=Java)
@@ -96,15 +82,13 @@ public interface ServerApi {
      * @param k    搜索内容,eg:Java
      * @return 指定搜索内容, 搜索当前公众号的某页的此类数据
      */
-    @GET("wxarticle/list/{id}/{page}/json")
-    Observable<CommonBean> getWxSearchArticles(@Path("id") int id, @Path("page") int page, @Query("k") String k);
+    Observable<CommonBean> getWxSearchArticles(int id, int page, String k);
 
     /**
      * 知识体系(https://www.wanandroid.com/tree/json)
      *
      * @return 知识体系数据
      */
-    @GET("tree/json")
     Observable<CommonBean<List<ParentClassifyBean>>> getKnowledge();
 
     /**
@@ -114,15 +98,13 @@ public interface ServerApi {
      * @param cid  分类的id,二级目录的id
      * @return 知识体系下的文章数据
      */
-    @GET("article/list/{page}/json")
-    Observable<CommonBean<ArticleBeans>> getKnowledgeArticles(@Path("page") int page, @Query("cid") int cid);
+    Observable<CommonBean<ArticleBeans>> getKnowledgeArticles(int page, int cid);
 
     /**
      * 项目分类(https://www.wanandroid.com/project/tree/json)
      *
      * @return 项目分类数据
      */
-    @GET("project/tree/json")
     Observable<CommonBean<List<ChildClassifyBean>>> getProject();
 
     /**
@@ -132,8 +114,7 @@ public interface ServerApi {
      * @param cid  分类的id,上面项目分类接口
      * @return 项目类别数据
      */
-    @GET("project/list/{page}/json")
-    Observable<CommonBean<ArticleBeans>> getProjectArticles(@Path("page") int page, @Query("cid") int cid);
+    Observable<CommonBean<ArticleBeans>> getProjectArticles(int page, int cid);
 
     /**
      * 登录(https://www.wanandroid.com/user/login)
@@ -142,9 +123,7 @@ public interface ServerApi {
      * @param password 密码
      * @return 登录
      */
-    @POST("user/login")
-    @FormUrlEncoded
-    Observable<CommonBean<UserBean>> login(@Field("username") String username, @Field("password") String password);
+    Observable<CommonBean<UserBean>> login(String username, String password);
 
     /**
      * 注册(https://www.wanandroid.com/user/register)
@@ -154,9 +133,7 @@ public interface ServerApi {
      * @param repassword 确认密码
      * @return 注册
      */
-    @POST("user/register")
-    @FormUrlEncoded
-    Observable<CommonBean<UserBean>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+    Observable<CommonBean<UserBean>> register(String username, String password, String repassword);
 
     /**
      * 退出(https://www.wanandroid.com/user/logout/json)
@@ -171,8 +148,7 @@ public interface ServerApi {
      * @param page 页码,拼接在链接上,从0开始
      * @return 收藏文章列表数据
      */
-    @GET("lg/collect/list/{page}/json")
-    Observable<CommonBean<ArticleBeans>> getCollect(@Path("page") int page);
+    Observable<CommonBean<ArticleBeans>> getCollect(int page);
 
     /**
      * 收藏站内文章(https://www.wanandroid.com/lg/collect/1165/json)
@@ -180,8 +156,7 @@ public interface ServerApi {
      * @param id 文章id,拼接在链接上
      * @return 收藏站内文章
      */
-    @POST("lg/collect/{id}/json")
-    Observable<CommonBean<String>> collect(@Path("id") int id);
+    Observable<CommonBean<String>> collect(int id);
 
     /**
      * 收藏站外文章(https://www.wanandroid.com/lg/collect/add/json)
@@ -191,9 +166,7 @@ public interface ServerApi {
      * @param link   链接
      * @return 收藏站外文章
      */
-    @POST("lg/collect/add/json")
-    @FormUrlEncoded
-    Observable<CommonBean<String>> collect(@Field("title") String title, @Field("author") String author, @Field("link") String link);
+    Observable<CommonBean<String>> collect(String title, String author, String link);
 
     /**
      * 取消收藏[文章列表](https://www.wanandroid.com/lg/uncollect_originId/2333/json)
@@ -201,8 +174,7 @@ public interface ServerApi {
      * @param id 文章id,拼接在链接上
      * @return 取消收藏
      */
-    @POST("lg/uncollect_originId/{id}/json")
-    Observable<CommonBean<String>> unCollect(@Path("id") int id);
+    Observable<CommonBean<String>> unCollect(int id);
 
     /**
      * 取消收藏[我的收藏页面](https://www.wanandroid.com/lg/uncollect/2805/json)
@@ -211,16 +183,13 @@ public interface ServerApi {
      * @param originId 源id
      * @return 取消收藏
      */
-    @POST("lg/uncollect/{id}/json")
-    @FormUrlEncoded
-    Observable<CommonBean<String>> unCollect(@Path("id") int id, @Field("originId") int originId);
+    Observable<CommonBean<String>> unCollect(int id, int originId);
 
     /**
      * 收藏网站列表(https://www.wanandroid.com/lg/collect/usertools/json)
      *
      * @return 收藏网站列表数据
      */
-    @GET("lg/collect/usertools/json")
     Observable<CommonBean> getCollectUrl();
 
     /**
@@ -230,9 +199,7 @@ public interface ServerApi {
      * @param link link
      * @return 收藏网址
      */
-    @POST("lg/collect/addtool/json")
-    @FormUrlEncoded
-    Observable<CommonBean> collectUrl(@Field("name") String name, @Field("link") String link);
+    Observable<CommonBean> collectUrl(String name, String link);
 
     /**
      * 编辑收藏网站(https://www.wanandroid.com/lg/collect/updatetool/json)
@@ -242,9 +209,7 @@ public interface ServerApi {
      * @param link link
      * @return 编辑收藏网站
      */
-    @POST("lg/collect/updatetool/json")
-    @FormUrlEncoded
-    Observable<CommonBean> collectUrl(@Field("id") int id, @Field("name") String name, @Field("link") String link);
+    Observable<CommonBean> collectUrl(int id, String name, String link);
 
     /**
      * 删除收藏网站(https://www.wanandroid.com/lg/collect/deletetool/json)
@@ -252,9 +217,7 @@ public interface ServerApi {
      * @param id id
      * @return 删除收藏网站
      */
-    @POST("lg/collect/deletetool/json")
-    @FormUrlEncoded
-    Observable<CommonBean> unCollectUrl(@Field("id") int id);
+    Observable<CommonBean> unCollectUrl(int id);
 
     /**
      * 搜索(https://www.wanandroid.com/article/query/0/json)
@@ -263,7 +226,5 @@ public interface ServerApi {
      * @param k    搜索关键词
      * @return 搜索数据
      */
-    @POST("article/query/0/json")
-    @FormUrlEncoded
-    Observable<CommonBean> query(@Field("page") int page, @Field("k") String k);
+    Observable<CommonBean> query(int page, String k);
 }

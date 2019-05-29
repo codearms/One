@@ -5,13 +5,13 @@ import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.home.presenter.contract.HomeContract;
+import com.codearms.maoqiqi.one.utils.BaseObserver;
 
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class HomePresenter implements HomeContract.Presenter {
@@ -42,7 +42,7 @@ public class HomePresenter implements HomeContract.Presenter {
         compositeDisposable.add(Observable.zip(loginObservable, bannerObservable, Data::new)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<Data>() {
+                .subscribeWith(new BaseObserver<Data>() {
                     @Override
                     public void onNext(Data data) {
                         if (!homeView.isActive()) return;
@@ -53,16 +53,6 @@ public class HomePresenter implements HomeContract.Presenter {
                         if (data.getBannerData().getErrorCode() == 0) {
                             homeView.setBanner(data.getBannerData().getData());
                         }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 }));
     }
