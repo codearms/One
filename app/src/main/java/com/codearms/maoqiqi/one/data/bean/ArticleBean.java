@@ -5,6 +5,8 @@ import java.util.List;
 public class ArticleBean {
 
     private int id;
+    // 收藏文章列表独有
+    private int originId;
     private int type;
     private String title;
     private int userId;
@@ -64,6 +66,14 @@ public class ArticleBean {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getOriginId() {
+        return originId;
+    }
+
+    public void setOriginId(int originId) {
+        this.originId = originId;
     }
 
     public int getType() {
@@ -254,6 +264,7 @@ public class ArticleBean {
     public String toString() {
         return "ArticleBean{" +
                 "id=" + id +
+                ", originId=" + originId +
                 ", type=" + type +
                 ", title='" + title + '\'' +
                 ", userId=" + userId +

@@ -181,7 +181,7 @@ public interface ServerApi {
      * @return 收藏站内文章
      */
     @POST("lg/collect/{id}/json")
-    Observable<CommonBean> collect(@Path("id") int id);
+    Observable<CommonBean<String>> collect(@Path("id") int id);
 
     /**
      * 收藏站外文章(https://www.wanandroid.com/lg/collect/add/json)
@@ -193,5 +193,33 @@ public interface ServerApi {
      */
     @POST("lg/collect/add/json")
     @FormUrlEncoded
-    Observable<CommonBean> collect(@Field("title") String title, @Field("author") String author, @Field("link") String link);
+    Observable<CommonBean<String>> collect(@Field("title") String title, @Field("author") String author, @Field("link") String link);
+
+    /**
+     * 取消收藏[文章列表](https://www.wanandroid.com/lg/uncollect_originId/2333/json)
+     *
+     * @param id 文章id,拼接在链接上
+     * @return 取消收藏
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<CommonBean<String>> unCollect(@Path("id") int id);
+
+    /**
+     * 取消收藏[我的收藏页面](https://www.wanandroid.com/lg/uncollect/2805/json)
+     *
+     * @param id       文章id,拼接在链接上
+     * @param originId 源id
+     * @return 取消收藏
+     */
+    @POST("lg/uncollect/{id}/json")
+    @FormUrlEncoded
+    Observable<CommonBean<String>> unCollect(@Path("id") int id, @Field("originId") int originId);
+
+    // 收藏网址
+
+    // 编辑收藏网站
+
+    // 删除收藏网站
+
+    // 搜索
 }
