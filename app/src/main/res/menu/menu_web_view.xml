@@ -21,4 +21,11 @@
         android:orderInCategory="3"
         android:title="@string/browser_open"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_collect"
+        android:icon="@drawable/ic_menu_web_collect"
+        android:orderInCategory="3"
+        android:title="@string/collect"
+        app:showAsAction="never" />
 </menu>

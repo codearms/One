@@ -193,7 +193,7 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
                 RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) viewHolder.cardView.getLayoutParams();
                 params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
             }
-            viewHolder.cardView.setOnClickListener(v -> WebViewActivity.start(context, articleBean.getLink(), 0));
+            viewHolder.cardView.setOnClickListener(v -> WebViewActivity.start(context, articleBean.getId(), articleBean.getLink()));
         }
 
         @Override

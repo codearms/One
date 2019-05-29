@@ -146,8 +146,9 @@ public class FlowLayoutFragment extends LazyLoadFragment implements FlowLayoutCo
             for (int j = 0; j < bean.getArticleBeanList().size(); j++) {
                 chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_item_flow_layout, null);
                 chip.setText(bean.getArticleBeanList().get(j).getTitle());
+                final int id = bean.getArticleBeanList().get(j).getId();
                 final String url = bean.getArticleBeanList().get(j).getLink();
-                chip.setOnClickListener(v -> WebViewActivity.start(context, url, 0));
+                chip.setOnClickListener(v -> WebViewActivity.start(context, id, url));
                 viewHolder.chipGroup.addView(chip);
             }
 

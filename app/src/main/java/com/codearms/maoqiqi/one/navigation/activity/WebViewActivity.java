@@ -14,11 +14,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.navigation.fragment.WebViewFragment;
 import com.codearms.maoqiqi.one.navigation.presenter.WebViewPresenter;
+import com.codearms.maoqiqi.one.utils.ActivityUtils;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
+import com.codearms.maoqiqi.one.utils.Toasty;
 import com.codearms.maoqiqi.one.view.StatusBarView;
 
 import java.lang.reflect.Method;
@@ -41,22 +44,19 @@ public class WebViewActivity extends BaseActivity {
     private WebViewFragment fragment;
 
     public static void start(@NonNull Context context, @NonNull String url) {
-        start(context, url, DEFAULT_POSITION);
+        start(context, 0, url);
     }
 
-    public static void start(@NonNull Context context, @NonNull String url, int position) {
-        start(context, url, "", position);
+    public static void start(@NonNull Context context, int id, @NonNull String url) {
+        start(context, DEFAULT_POSITION, id, "", url);
     }
 
-    public static void start(@NonNull Context context, @NonNull String url, @Nullable String title) {
-        start(context, url, title, DEFAULT_POSITION);
-    }
-
-    public static void start(@NonNull Context context, @NonNull String url, @Nullable String title, int position) {
+    public static void start(@NonNull Context context, int position, int id, @Nullable String title, @NonNull String url) {
         Bundle bundle = new Bundle();
-        bundle.putString("url", url);
-        bundle.putString("title", title);
         bundle.putInt("position", position);
+        bundle.putInt("id", id);
+        bundle.putString("title", title);
+        bundle.putString("url", url);
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
@@ -74,22 +74,22 @@ public class WebViewActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) return;
 
+        position = bundle.getInt("position", DEFAULT_POSITION);
+        int id = bundle.getInt("id");
         String title = bundle.getString("title", "");
         String url = bundle.getString("url", "");
-        position = bundle.getInt("position", DEFAULT_POSITION);
 
         statusBarView.setBackgroundResource(bgResIds[position]);
         toolbar.setBackgroundResource(bgResIds[position]);
         toolbar.setPopupTheme(themeIds[position]);
         if (!title.equals("")) toolbar.setTitle(title);
-
         toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu_more));
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         fragment = (WebViewFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = WebViewFragment.newInstance(url, bgResIds[position]);
+            fragment = WebViewFragment.newInstance(bgResIds[position], id, title, url);
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
 
@@ -143,6 +143,14 @@ public class WebViewActivity extends BaseActivity {
             case R.id.menu_browser_open:
                 // 浏览器打开
                 return true;
+            case R.id.menu_collect:
+                // 收藏列表
+                if (App.getInstance().getUserBean() == null) {
+                    Toasty.show(this, getString(R.string.please_login));
+                } else {
+                    ActivityUtils.startActivity(this, CollectActivity.class);
+                }
+                break;
         }
         return false;
     }

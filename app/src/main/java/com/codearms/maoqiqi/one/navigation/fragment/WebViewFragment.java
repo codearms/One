@@ -18,6 +18,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.WebViewContract;
@@ -32,15 +33,20 @@ public class WebViewFragment extends LazyLoadFragment implements WebViewContract
     private ProgressBar progressBar;
     private FloatingActionButton fabCollection;
 
+    private String titleText;
+    private String url;
+
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
      *
      * @return A new instance of fragment WebViewFragment.
      */
-    public static WebViewFragment newInstance(@NonNull String url, int bgResId) {
+    public static WebViewFragment newInstance(int bgResId, int id, String title, @NonNull String url) {
         Bundle bundle = new Bundle();
-        bundle.putString("url", url);
         bundle.putInt("bgResId", bgResId);
+        bundle.putInt("id", id);
+        bundle.putString("title", title);
+        bundle.putString("url", url);
         WebViewFragment fragment = new WebViewFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -105,10 +111,11 @@ public class WebViewFragment extends LazyLoadFragment implements WebViewContract
         Bundle bundle = getArguments();
         if (bundle == null) return;
 
-        String url = bundle.getString("url", getString(R.string.project_git));
-        url = url.replace("http://www.wanandroid.com", "https://www.wanandroid.com");
-        url = url.replace("http://www.github.com", "https://www.github.com");
         int bgResId = bundle.getInt("bgResId", R.color.color_navigation);
+        int id = bundle.getInt("id");
+        titleText = bundle.getString("title");
+        url = bundle.getString("url", getString(R.string.project_git));
+        if (id != 0) url = url.replaceAll("http://", "https://");
 
         webView.loadUrl(url);
         webView.setOnScrollChangeListener((l, t, oldl, oldt) -> {
@@ -120,7 +127,17 @@ public class WebViewFragment extends LazyLoadFragment implements WebViewContract
         });
 
         fabCollection.setBackgroundTintList(ContextCompat.getColorStateList(context, bgResId));
-        fabCollection.setOnClickListener(v -> presenter.collect(1848));
+        fabCollection.setOnClickListener(v -> {
+            if (App.getInstance().getUserBean() == null) {
+                Toasty.show(context, getString(R.string.please_login));
+                return;
+            }
+            if (id == 0) {
+                presenter.collect(titleText, App.getInstance().getUserBean().getUserName(), url);
+            } else {
+                presenter.collect(id);
+            }
+        });
     }
 
     public WebView getWebView() {
@@ -162,6 +179,9 @@ public class WebViewFragment extends LazyLoadFragment implements WebViewContract
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
+            if (!titleText.equals("")) return;
+
+            titleText = title;
             if (context instanceof WebViewActivity) {
                 Toolbar toolbar = ((WebViewActivity) context).getToolbar();
                 if (toolbar != null) toolbar.setTitle(title);
