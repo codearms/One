@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.navigation.fragment.RegisterFragment;
-import com.codearms.maoqiqi.one.navigation.presenter.RegisterPresenter;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
 public class RegisterActivity extends BaseActivity {
@@ -30,7 +29,5 @@ public class RegisterActivity extends BaseActivity {
             fragment = RegisterFragment.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
-
-        new RegisterPresenter(fragment);
     }
 }

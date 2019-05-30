@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.HomeFragment;
@@ -22,7 +22,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import java.util.Arrays;
 import java.util.List;
 
-public class BookFragment extends LazyLoadFragment {
+public class BookFragment extends BaseFragment {
 
     private Toolbar toolbar;
     private SegmentTabLayout tabLayout;

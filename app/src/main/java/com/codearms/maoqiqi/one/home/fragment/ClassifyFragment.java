@@ -13,19 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.home.presenter.ClassifyPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.ClassifyContract;
 import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassifyFragment extends LazyLoadFragment implements ClassifyContract.View {
-
-    private ClassifyContract.Presenter presenter;
+public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> implements ClassifyContract.View {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -56,13 +55,9 @@ public class ClassifyFragment extends LazyLoadFragment implements ClassifyContra
     }
 
     @Override
-    public void setPresenter(ClassifyContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new ClassifyPresenter(this);
     }
 
     @Override
@@ -101,7 +96,7 @@ public class ClassifyFragment extends LazyLoadFragment implements ClassifyContra
         super.loadData();
         switch (from) {
             case ArticlesFragment.FROM_PROJECT:
-                presenter.subscribe();
+                presenter.getProject();
                 break;
             case ArticlesFragment.FROM_CLASSIFY:
                 setProject(parentClassifyBean.getChildClassifyBeanList());

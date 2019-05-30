@@ -1,5 +1,6 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
+import com.codearms.maoqiqi.base.RxPresenterImpl;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
@@ -9,43 +10,28 @@ import com.codearms.maoqiqi.one.utils.BaseObserver;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class NavigationPresenter implements NavigationContract.Presenter {
+public class NavigationPresenter extends RxPresenterImpl<NavigationContract.View> implements NavigationContract.Presenter {
 
-    private NavigationContract.View navigationView;
     private OneRepository repository;
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-    public NavigationPresenter(NavigationContract.View navigationView) {
-        this.navigationView = navigationView;
+    public NavigationPresenter(NavigationContract.View view) {
+        super(view);
         this.repository = OneRepository.getInstance();
-        navigationView.setPresenter(this);
-    }
-
-    @Override
-    public void subscribe() {
-        getNavigation();
-    }
-
-    @Override
-    public void unsubscribe() {
-        compositeDisposable.clear();
     }
 
     @Override
     public void getNavigation() {
-        compositeDisposable.add(repository.getNavigation()
+        addSubscribe(repository.getNavigation()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<CommonBean<List<NavigationBean>>>() {
                     @Override
                     public void onNext(CommonBean<List<NavigationBean>> commonBean) {
-                        if (!navigationView.isActive()) return;
+                        if (!view.isActive()) return;
 
-                        navigationView.setNavigation(commonBean.getData());
+                        view.setNavigation(commonBean.getData());
                     }
                 }));
     }

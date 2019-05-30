@@ -1,5 +1,6 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
+import com.codearms.maoqiqi.base.RxPresenterImpl;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
@@ -11,123 +12,108 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class ArticlesPresenter implements ArticlesContract.Presenter {
+public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> implements ArticlesContract.Presenter {
 
-    private ArticlesContract.View articlesView;
     private OneRepository repository;
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-    public ArticlesPresenter(ArticlesContract.View articlesView) {
-        this.articlesView = articlesView;
+    public ArticlesPresenter(ArticlesContract.View view) {
+        super(view);
         this.repository = OneRepository.getInstance();
-        articlesView.setPresenter(this);
-    }
-
-    @Override
-    public void subscribe() {
-        getHomeArticles();
-    }
-
-    @Override
-    public void unsubscribe() {
-        compositeDisposable.clear();
     }
 
     @Override
     public void getHomeArticles() {
         Observable<CommonBean<List<ArticleBean>>> topArticleObservable = repository.getTopArticles();
         Observable<CommonBean<ArticleBeans>> articleObservable = repository.getArticles(0);
-        compositeDisposable.add(Observable.zip(topArticleObservable, articleObservable, Data::new)
+        addSubscribe(Observable.zip(topArticleObservable, articleObservable, Data::new)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<Data>() {
                     @Override
                     public void onNext(Data data) {
-                        if (!articlesView.isActive()) return;
+                        if (!view.isActive()) return;
 
-                        articlesView.setHomeArticles(data.getTopArticleBeans().getData(), data.getArticleBeans().getData());
+                        view.setHomeArticles(data.getTopArticleBeans().getData(), data.getArticleBeans().getData());
                     }
                 }));
     }
 
     @Override
     public void getWxArticles(int id, int page) {
-        compositeDisposable.add(repository.getWxArticles(id, page)
+        addSubscribe(repository.getWxArticles(id, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>() {
                     @Override
                     public void onNext(CommonBean<ArticleBeans> commonBean) {
-                        if (!articlesView.isActive()) return;
+                        if (!view.isActive()) return;
 
-                        articlesView.setArticles(commonBean.getData());
+                        view.setArticles(commonBean.getData());
                     }
                 }));
     }
 
     @Override
     public void getKnowledgeArticles(int page, int cid) {
-        compositeDisposable.add(repository.getKnowledgeArticles(page, cid)
+        addSubscribe(repository.getKnowledgeArticles(page, cid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>() {
                     @Override
                     public void onNext(CommonBean<ArticleBeans> commonBean) {
-                        if (!articlesView.isActive()) return;
+                        if (!view.isActive()) return;
 
-                        articlesView.setArticles(commonBean.getData());
+                        view.setArticles(commonBean.getData());
                     }
                 }));
     }
 
     @Override
     public void getProjectArticles(int page, int cid) {
-        compositeDisposable.add(repository.getProjectArticles(page, cid)
+        addSubscribe(repository.getProjectArticles(page, cid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>() {
                     @Override
                     public void onNext(CommonBean<ArticleBeans> commonBean) {
-                        if (!articlesView.isActive()) return;
+                        if (!view.isActive()) return;
 
-                        articlesView.setArticles(commonBean.getData());
+                        view.setArticles(commonBean.getData());
                     }
                 }));
     }
 
     @Override
     public void getCollect(int page) {
-        compositeDisposable.add(repository.getCollect(page)
+        addSubscribe(repository.getCollect(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>() {
                     @Override
                     public void onNext(CommonBean<ArticleBeans> commonBean) {
-                        if (!articlesView.isActive()) return;
+                        if (!view.isActive()) return;
 
-                        articlesView.setArticles(commonBean.getData());
+                        view.setArticles(commonBean.getData());
                     }
                 }));
     }
 
     @Override
     public void collect(int id) {
-        compositeDisposable.add(repository.collect(id)
+        addSubscribe(repository.collect(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<CommonBean<String>>() {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
-                        if (!articlesView.isActive()) return;
+                        if (!view.isActive()) return;
 
                         if (commonBean.getErrorCode() == 0) {
-                            articlesView.collectSuccess();
+                            view.collectSuccess();
                         } else {
-                            articlesView.showErrorMessage(commonBean.getErrorMsg());
+                            view.showErrorMsg(commonBean.getErrorMsg());
                         }
                     }
                 }));
@@ -135,13 +121,13 @@ public class ArticlesPresenter implements ArticlesContract.Presenter {
 
     @Override
     public void unCollect(int id) {
-        compositeDisposable.add(repository.unCollect(id)
+        addSubscribe(repository.unCollect(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<CommonBean<String>>() {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
-                        if (!articlesView.isActive()) return;
+                        if (!view.isActive()) return;
 
                     }
                 }));
@@ -149,13 +135,13 @@ public class ArticlesPresenter implements ArticlesContract.Presenter {
 
     @Override
     public void unCollect(int id, int originId) {
-        compositeDisposable.add(repository.unCollect(id, originId)
+        addSubscribe(repository.unCollect(id, originId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<CommonBean<String>>() {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
-                        if (!articlesView.isActive()) return;
+                        if (!view.isActive()) return;
 
                     }
                 }));

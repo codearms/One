@@ -17,15 +17,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
+import com.codearms.maoqiqi.one.navigation.presenter.WebViewPresenter;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.WebViewContract;
 import com.codearms.maoqiqi.one.utils.Toasty;
 import com.codearms.maoqiqi.one.view.ObservableWebView;
 
-public class WebViewFragment extends LazyLoadFragment implements WebViewContract.View {
+public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> implements WebViewContract.View {
 
     private WebViewContract.Presenter presenter;
 
@@ -53,13 +54,9 @@ public class WebViewFragment extends LazyLoadFragment implements WebViewContract
     }
 
     @Override
-    public void setPresenter(WebViewContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new WebViewPresenter(this);
     }
 
     @Override
@@ -147,11 +144,6 @@ public class WebViewFragment extends LazyLoadFragment implements WebViewContract
     @Override
     public void collectSuccess() {
         Toasty.show(context, "收藏成功");
-    }
-
-    @Override
-    public void showErrorMessage(String message) {
-        Toasty.show(context, message);
     }
 
     private final class MyWebViewClient extends WebViewClient {

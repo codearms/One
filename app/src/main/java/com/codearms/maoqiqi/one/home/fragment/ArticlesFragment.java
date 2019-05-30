@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
@@ -26,15 +26,13 @@ import com.codearms.maoqiqi.one.utils.Toasty;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticlesFragment extends LazyLoadFragment implements ArticlesContract.View {
+public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> implements ArticlesContract.View {
 
     public static final String FROM_HOME = "FROM_HOME";
     public static final String FROM_WE_CHAT = "FROM_WE_CHAT";
     public static final String FROM_PROJECT = "FROM_PROJECT";
     public static final String FROM_CLASSIFY = "FROM_CLASSIFY";
     public static final String FROM_COLLECT = "FROM_COLLECT";
-
-    private ArticlesContract.Presenter presenter;
 
     private RecyclerView recyclerView;
 
@@ -67,19 +65,9 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
     }
 
     @Override
-    public void setPresenter(ArticlesContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
-    }
-
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new ArticlesPresenter(this);
+        presenter = new ArticlesPresenter(this);
     }
 
     @Override
@@ -103,7 +91,7 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
         super.loadData();
         switch (from) {
             case FROM_HOME:
-                presenter.subscribe();
+                presenter.getHomeArticles();
                 break;
             case FROM_WE_CHAT:
                 presenter.getWxArticles(id, 0);
@@ -142,11 +130,6 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
 
     @Override
     public void collectSuccess() {
-
-    }
-
-    @Override
-    public void showErrorMessage(String message) {
 
     }
 
@@ -212,7 +195,11 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
             viewHolder.cardView.setOnClickListener(v -> {
                 // 记录操作索引
                 operationId = i;
-                WebViewActivity.start(context, articleBean.getId(), articleBean.getLink());
+                if (from.equals(FROM_COLLECT)) {
+                    WebViewActivity.start(context, articleBean.getId(), articleBean.getLink());
+                } else {
+                    WebViewActivity.start(context, 0, articleBean.getId(), articleBean.getLink());
+                }
             });
             viewHolder.ivCollect.setOnClickListener(v -> {
                 operationId = i;

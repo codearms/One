@@ -12,17 +12,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.navigation.activity.RegisterActivity;
+import com.codearms.maoqiqi.one.navigation.presenter.LoginPresenter;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.LoginContract;
 import com.codearms.maoqiqi.one.utils.ActivityUtils;
-import com.codearms.maoqiqi.one.utils.Toasty;
 
-public class LoginFragment extends LazyLoadFragment implements LoginContract.View, View.OnClickListener {
+public class LoginFragment extends BaseFragment<LoginContract.Presenter> implements LoginContract.View, View.OnClickListener {
 
     private LoginContract.Presenter presenter;
 
@@ -40,13 +40,9 @@ public class LoginFragment extends LazyLoadFragment implements LoginContract.Vie
     }
 
     @Override
-    public void setPresenter(LoginContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new LoginPresenter(this);
     }
 
     @Override
@@ -86,11 +82,6 @@ public class LoginFragment extends LazyLoadFragment implements LoginContract.Vie
     public void userInfo(UserBean userBean) {
         App.getInstance().setUserBean(userBean);
         MainActivity.start(context);
-    }
-
-    @Override
-    public void showErrorMessage(String message) {
-        Toasty.show(context, message);
     }
 
     private final class MyTextWatcher implements TextWatcher {

@@ -14,22 +14,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
+import com.codearms.maoqiqi.one.home.presenter.FlowLayoutPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.FlowLayoutContract;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 
 import java.util.List;
 
-public class FlowLayoutFragment extends LazyLoadFragment implements FlowLayoutContract.View {
+public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presenter> implements FlowLayoutContract.View {
 
     public static final String FROM_NAVIGATION = "FROM_NAVIGATION";
     public static final String FROM_KNOWLEDGE = "FROM_KNOWLEDGE";
-
-    private FlowLayoutContract.Presenter presenter;
 
     private RecyclerView recyclerView;
 
@@ -54,13 +53,9 @@ public class FlowLayoutFragment extends LazyLoadFragment implements FlowLayoutCo
     }
 
     @Override
-    public void setPresenter(FlowLayoutContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new FlowLayoutPresenter(this);
     }
 
     @Override
@@ -89,7 +84,7 @@ public class FlowLayoutFragment extends LazyLoadFragment implements FlowLayoutCo
                 recyclerView.setAdapter(new RecyclerViewAdapter(FROM_NAVIGATION, navigationBeans, null));
                 break;
             case FROM_KNOWLEDGE:
-                presenter.subscribe();
+                presenter.getKnowledge();
                 break;
         }
     }

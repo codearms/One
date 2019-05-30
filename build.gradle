@@ -25,3 +25,21 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    android = [
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 14,
+            targetSdkVersion : 28
+    ]
+    version = [
+            androidSupportSdkVersion: "28.0.0"
+    ]
+    bintray = [
+            userOrg : "maoqiqi",
+            repoName: 'LazyLoad',
+            groupId : 'com.codearms.maoqiqi',
+            website : 'https://github.com/maoqiqi/LazyLoad'
+    ]
+}

@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.WeChatFragment;
-import com.codearms.maoqiqi.one.home.presenter.WeChatPresenter;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.utils.Toasty;
 
@@ -27,8 +26,6 @@ public class WeChatActivity extends BaseActivity {
             fragment = WeChatFragment.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
-
-        new WeChatPresenter(fragment);
     }
 
     @Override

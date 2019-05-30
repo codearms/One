@@ -1,11 +1,11 @@
 package com.codearms.maoqiqi.one.navigation.presenter.contract;
 
-import com.codearms.maoqiqi.one.home.BasePresenter;
-import com.codearms.maoqiqi.one.home.BaseView;
+import com.codearms.maoqiqi.base.BasePresenter;
+import com.codearms.maoqiqi.base.BaseView;
 
 public interface WebViewContract {
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BasePresenter<View> {
 
         void collect(int id);
 
@@ -25,7 +25,5 @@ public interface WebViewContract {
     interface View extends BaseView<Presenter> {
 
         void collectSuccess();
-
-        void showErrorMessage(String message);
     }
 }

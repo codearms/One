@@ -11,18 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
+import com.codearms.maoqiqi.one.home.presenter.NavigationPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.NavigationContract;
 
 import java.util.List;
 
-public class NavigationFragment extends LazyLoadFragment implements NavigationContract.View {
+public class NavigationFragment extends BaseFragment<NavigationContract.Presenter> implements NavigationContract.View {
 
     private static final String TAG = "com.codearms.maoqiqi.one.FlowLayoutFragment";
-
-    private NavigationContract.Presenter presenter;
 
     private RecyclerView recyclerView;
 
@@ -36,13 +35,9 @@ public class NavigationFragment extends LazyLoadFragment implements NavigationCo
     }
 
     @Override
-    public void setPresenter(NavigationContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new NavigationPresenter(this);
     }
 
     @Override
@@ -59,7 +54,7 @@ public class NavigationFragment extends LazyLoadFragment implements NavigationCo
     @Override
     protected void loadData() {
         super.loadData();
-        presenter.subscribe();
+        presenter.getNavigation();
     }
 
     @Override

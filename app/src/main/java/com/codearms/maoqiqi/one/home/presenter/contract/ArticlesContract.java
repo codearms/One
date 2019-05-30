@@ -1,15 +1,15 @@
 package com.codearms.maoqiqi.one.home.presenter.contract;
 
+import com.codearms.maoqiqi.base.BasePresenter;
+import com.codearms.maoqiqi.base.BaseView;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
-import com.codearms.maoqiqi.one.home.BasePresenter;
-import com.codearms.maoqiqi.one.home.BaseView;
 
 import java.util.List;
 
 public interface ArticlesContract {
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BasePresenter<View> {
 
         void getHomeArticles();
 
@@ -38,7 +38,5 @@ public interface ArticlesContract {
         void setArticles(ArticleBeans articleBeans);
 
         void collectSuccess();
-
-        void showErrorMessage(String message);
     }
 }

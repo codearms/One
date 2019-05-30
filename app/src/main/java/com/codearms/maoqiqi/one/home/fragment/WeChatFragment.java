@@ -12,19 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.home.activity.WeChatActivity;
+import com.codearms.maoqiqi.one.home.presenter.WeChatPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.WeChatContract;
 import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeChatFragment extends LazyLoadFragment implements WeChatContract.View {
-
-    private WeChatContract.Presenter presenter;
+public class WeChatFragment extends BaseFragment<WeChatContract.Presenter> implements WeChatContract.View {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -39,13 +38,9 @@ public class WeChatFragment extends LazyLoadFragment implements WeChatContract.V
     }
 
     @Override
-    public void setPresenter(WeChatContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new WeChatPresenter(this);
     }
 
     @Override
@@ -67,7 +62,7 @@ public class WeChatFragment extends LazyLoadFragment implements WeChatContract.V
     @Override
     protected void loadData() {
         super.loadData();
-        presenter.subscribe();
+        presenter.getWxList();
     }
 
     @Override

@@ -18,7 +18,6 @@ import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.navigation.fragment.WebViewFragment;
-import com.codearms.maoqiqi.one.navigation.presenter.WebViewPresenter;
 import com.codearms.maoqiqi.one.utils.ActivityUtils;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.utils.Toasty;
@@ -48,7 +47,11 @@ public class WebViewActivity extends BaseActivity {
     }
 
     public static void start(@NonNull Context context, int id, @NonNull String url) {
-        start(context, DEFAULT_POSITION, id, "", url);
+        start(context, DEFAULT_POSITION, id, url);
+    }
+
+    public static void start(@NonNull Context context, int position, int id, @NonNull String url) {
+        start(context, position, id, "", url);
     }
 
     public static void start(@NonNull Context context, int position, int id, @Nullable String title, @NonNull String url) {
@@ -92,8 +95,6 @@ public class WebViewActivity extends BaseActivity {
             fragment = WebViewFragment.newInstance(bgResIds[position], id, title, url);
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
-
-        new WebViewPresenter(fragment);
     }
 
     public Toolbar getToolbar() {

@@ -1,5 +1,6 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
+import com.codearms.maoqiqi.base.RxPresenterImpl;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
@@ -11,49 +12,34 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class HomePresenter implements HomeContract.Presenter {
+public class HomePresenter extends RxPresenterImpl<HomeContract.View> implements HomeContract.Presenter {
 
-    private HomeContract.View homeView;
     private OneRepository repository;
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-    public HomePresenter(HomeContract.View homeView) {
-        this.homeView = homeView;
+    public HomePresenter(HomeContract.View view) {
+        super(view);
         this.repository = OneRepository.getInstance();
-        homeView.setPresenter(this);
-    }
-
-    @Override
-    public void subscribe() {
-        getData();
-    }
-
-    @Override
-    public void unsubscribe() {
-        compositeDisposable.clear();
     }
 
     @Override
     public void getData() {
         Observable<CommonBean<UserBean>> loginObservable = repository.login("maoqiqi", "123456");
         Observable<CommonBean<List<BannerBean>>> bannerObservable = repository.getBanner();
-        compositeDisposable.add(Observable.zip(loginObservable, bannerObservable, Data::new)
+        addSubscribe(Observable.zip(loginObservable, bannerObservable, Data::new)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<Data>() {
                     @Override
                     public void onNext(Data data) {
-                        if (!homeView.isActive()) return;
+                        if (!view.isActive()) return;
 
                         if (data.getUserData().getErrorCode() == 0) {
-                            homeView.userInfo(data.getUserData().getData());
+                            view.userInfo(data.getUserData().getData());
                         }
                         if (data.getBannerData().getErrorCode() == 0) {
-                            homeView.setBanner(data.getBannerData().getData());
+                            view.setBanner(data.getBannerData().getData());
                         }
                     }
                 }));

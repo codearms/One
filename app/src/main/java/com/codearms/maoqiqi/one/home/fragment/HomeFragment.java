@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
@@ -37,11 +37,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends LazyLoadFragment implements HomeContract.View {
+public class HomeFragment extends BaseFragment<HomeContract.Presenter> implements HomeContract.View {
 
     private static final String TAG = "com.codearms.maoqiqi.one.ArticlesFragment";
 
-    private HomeContract.Presenter presenter;
     private Toolbar toolbar;
     private Banner banner;
 
@@ -55,20 +54,10 @@ public class HomeFragment extends LazyLoadFragment implements HomeContract.View 
     }
 
     @Override
-    public void setPresenter(HomeContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
-    }
-
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        new HomePresenter(this);
+        presenter = new HomePresenter(this);
     }
 
     @Override
@@ -94,7 +83,7 @@ public class HomeFragment extends LazyLoadFragment implements HomeContract.View 
         super.loadData();
         if (context instanceof MainActivity)
             ((MainActivity) context).associateDrawerLayout(toolbar);
-        presenter.subscribe();
+        presenter.getData();
     }
 
     @Override

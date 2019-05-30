@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
+import com.codearms.maoqiqi.one.navigation.presenter.RegisterPresenter;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.RegisterContract;
-import com.codearms.maoqiqi.one.utils.Toasty;
 
-public class RegisterFragment extends LazyLoadFragment implements RegisterContract.View {
+public class RegisterFragment extends BaseFragment<RegisterContract.Presenter> implements RegisterContract.View {
 
     private RegisterContract.Presenter presenter;
 
@@ -38,13 +38,9 @@ public class RegisterFragment extends LazyLoadFragment implements RegisterContra
     }
 
     @Override
-    public void setPresenter(RegisterContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new RegisterPresenter(this);
     }
 
     @Override
@@ -73,11 +69,6 @@ public class RegisterFragment extends LazyLoadFragment implements RegisterContra
     public void userInfo(UserBean userBean) {
         App.getInstance().setUserBean(userBean);
         MainActivity.start(context);
-    }
-
-    @Override
-    public void showErrorMessage(String message) {
-        Toasty.show(context, message);
     }
 
     private final class MyTextWatcher implements TextWatcher {

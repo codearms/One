@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
-import com.codearms.maoqiqi.one.home.presenter.ClassifyPresenter;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.utils.Toasty;
 
@@ -27,8 +26,6 @@ public class ProjectActivity extends BaseActivity {
             fragment = ClassifyFragment.newInstance();
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
-
-        new ClassifyPresenter(fragment);
     }
 
     @Override
