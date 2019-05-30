@@ -20,6 +20,15 @@ public interface ArticlesContract {
         void getProjectArticles(int page, int cid);
 
         void getCollect(int page);
+
+        // 收藏
+        void collect(int id);
+
+        // 取消收藏
+        void unCollect(int id);
+
+        // 取消收藏
+        void unCollect(int id, int originId);
     }
 
     interface View extends BaseView<Presenter> {
@@ -27,5 +36,9 @@ public interface ArticlesContract {
         void setHomeArticles(List<ArticleBean> topArticleBeans, ArticleBeans articleBeans);
 
         void setArticles(ArticleBeans articleBeans);
+
+        void collectSuccess();
+
+        void showErrorMessage(String message);
     }
 }

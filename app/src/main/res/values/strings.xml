@@ -75,6 +75,7 @@
     <string name="pay_description">pay</string>
 
     <string name="please_login">请先登录</string>
+    <string name="image_description">image description</string>
 
     <string-array name="news_titles">
         <item>推荐</item>

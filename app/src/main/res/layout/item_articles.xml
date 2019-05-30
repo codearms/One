@@ -30,12 +30,30 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/sixteen"
+            android:layout_marginStart="@dimen/sixteen"
+            android:layout_marginLeft="@dimen/sixteen"
+            android:layout_marginTop="@dimen/sixteen"
+            android:layout_marginBottom="@dimen/sixteen"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="@color/color_text_main"
             android:textSize="@dimen/text_size_normal"
+            app:layout_constraintEnd_toStartOf="@id/iv_collect"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_description"
+            android:padding="@dimen/twelve"
+            android:src="@drawable/ic_un_collect"
+            android:tint="@color/text_color_collect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_title"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout

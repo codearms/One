@@ -2,22 +2,24 @@ package com.codearms.maoqiqi.one.navigation.presenter;
 
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
-import com.codearms.maoqiqi.one.data.net.RetrofitManager;
+import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.LoginContract;
+import com.codearms.maoqiqi.one.utils.BaseObserver;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.View loginView;
+    private OneRepository repository;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public LoginPresenter(LoginContract.View loginView) {
         this.loginView = loginView;
+        this.repository = OneRepository.getInstance();
         loginView.setPresenter(this);
     }
 
@@ -33,10 +35,10 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void login(String userName, String password) {
-        compositeDisposable.add(RetrofitManager.getInstance().getServerApi().login(userName, password)
+        compositeDisposable.add(repository.login(userName, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean<UserBean>>() {
+                .subscribeWith(new BaseObserver<CommonBean<UserBean>>() {
                     @Override
                     public void onNext(CommonBean<UserBean> commonBean) {
                         if (commonBean.getErrorCode() == 0) {
@@ -44,16 +46,6 @@ public class LoginPresenter implements LoginContract.Presenter {
                         } else {
                             loginView.showErrorMessage(commonBean.getErrorMsg());
                         }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 }));
     }

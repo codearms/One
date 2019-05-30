@@ -3,10 +3,10 @@ package com.codearms.maoqiqi.one.navigation.presenter;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.WebViewContract;
+import com.codearms.maoqiqi.one.utils.BaseObserver;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class WebViewPresenter implements WebViewContract.Presenter {
@@ -38,7 +38,7 @@ public class WebViewPresenter implements WebViewContract.Presenter {
         compositeDisposable.add(repository.collect(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean<String>>() {
+                .subscribeWith(new BaseObserver<CommonBean<String>>() {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
                         if (!webViewView.isActive()) return;
@@ -48,16 +48,6 @@ public class WebViewPresenter implements WebViewContract.Presenter {
                         } else {
                             webViewView.showErrorMessage(commonBean.getErrorMsg());
                         }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 }));
     }
@@ -67,7 +57,7 @@ public class WebViewPresenter implements WebViewContract.Presenter {
         compositeDisposable.add(repository.collect(title, author, link)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean<String>>() {
+                .subscribeWith(new BaseObserver<CommonBean<String>>() {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
                         if (!webViewView.isActive()) return;
@@ -78,16 +68,6 @@ public class WebViewPresenter implements WebViewContract.Presenter {
                             webViewView.showErrorMessage(commonBean.getErrorMsg());
                         }
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
                 }));
     }
 
@@ -96,20 +76,10 @@ public class WebViewPresenter implements WebViewContract.Presenter {
         compositeDisposable.add(repository.unCollect(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean<String>>() {
+                .subscribeWith(new BaseObserver<CommonBean<String>>() {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
                         if (!webViewView.isActive()) return;
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
 
                     }
                 }));
@@ -120,20 +90,10 @@ public class WebViewPresenter implements WebViewContract.Presenter {
         compositeDisposable.add(repository.unCollect(id, originId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean<String>>() {
+                .subscribeWith(new BaseObserver<CommonBean<String>>() {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
                         if (!webViewView.isActive()) return;
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
 
                     }
                 }));
@@ -144,20 +104,10 @@ public class WebViewPresenter implements WebViewContract.Presenter {
         compositeDisposable.add(repository.collectUrl(name, link)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean>() {
+                .subscribeWith(new BaseObserver<CommonBean>() {
                     @Override
                     public void onNext(CommonBean commonBean) {
                         if (!webViewView.isActive()) return;
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
 
                     }
                 }));
@@ -169,20 +119,10 @@ public class WebViewPresenter implements WebViewContract.Presenter {
         compositeDisposable.add(repository.collectUrl(id, name, link)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean>() {
+                .subscribeWith(new BaseObserver<CommonBean>() {
                     @Override
                     public void onNext(CommonBean commonBean) {
                         if (!webViewView.isActive()) return;
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
 
                     }
                 }));
@@ -193,20 +133,10 @@ public class WebViewPresenter implements WebViewContract.Presenter {
         compositeDisposable.add(repository.unCollectUrl(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<CommonBean>() {
+                .subscribeWith(new BaseObserver<CommonBean>() {
                     @Override
                     public void onNext(CommonBean commonBean) {
                         if (!webViewView.isActive()) return;
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
 
                     }
                 }));

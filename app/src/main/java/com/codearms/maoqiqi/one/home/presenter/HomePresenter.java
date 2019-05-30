@@ -3,7 +3,7 @@ package com.codearms.maoqiqi.one.home.presenter;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
-import com.codearms.maoqiqi.one.data.net.RetrofitManager;
+import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.home.presenter.contract.HomeContract;
 import com.codearms.maoqiqi.one.utils.BaseObserver;
 
@@ -17,11 +17,13 @@ import io.reactivex.schedulers.Schedulers;
 public class HomePresenter implements HomeContract.Presenter {
 
     private HomeContract.View homeView;
+    private OneRepository repository;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public HomePresenter(HomeContract.View homeView) {
         this.homeView = homeView;
+        this.repository = OneRepository.getInstance();
         homeView.setPresenter(this);
     }
 
@@ -37,8 +39,8 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void getData() {
-        Observable<CommonBean<UserBean>> loginObservable = RetrofitManager.getInstance().getServerApi().login("maoqiqi", "123456");
-        Observable<CommonBean<List<BannerBean>>> bannerObservable = RetrofitManager.getInstance().getServerApi().getBanner();
+        Observable<CommonBean<UserBean>> loginObservable = repository.login("maoqiqi", "123456");
+        Observable<CommonBean<List<BannerBean>>> bannerObservable = repository.getBanner();
         compositeDisposable.add(Observable.zip(loginObservable, bannerObservable, Data::new)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

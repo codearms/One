@@ -14,12 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codearms.maoqiqi.lazyload.LazyLoadFragment;
+import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.home.presenter.ArticlesPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.ArticlesContract;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
+import com.codearms.maoqiqi.one.utils.Toasty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,9 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
 
     private String from;
     private int id;
+
+    // 对列表哪一项有操作,记录索引,刷新数据
+    private int operationId = -1;
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
@@ -135,6 +140,16 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
         recyclerView.setAdapter(new RecyclerViewAdapter(0, articleBeans.getArticleBeanList()));
     }
 
+    @Override
+    public void collectSuccess() {
+
+    }
+
+    @Override
+    public void showErrorMessage(String message) {
+
+    }
+
     private final class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         private int topArticles;
@@ -157,7 +172,7 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_home, viewGroup, false));
+            return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_articles, viewGroup, false));
         }
 
         @Override
@@ -166,6 +181,7 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
 
             viewHolder.ivTop.setVisibility(i < topArticles ? View.VISIBLE : View.GONE);
             viewHolder.tvTitle.setText(articleBean.getTitle());
+            viewHolder.ivCollect.setImageResource(articleBean.isCollect() ? R.drawable.ic_collect : R.drawable.ic_un_collect);
 
             if (articleBean.getNiceDate().contains(minute)
                     || articleBean.getNiceDate().contains(hour)
@@ -193,7 +209,30 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
                 RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) viewHolder.cardView.getLayoutParams();
                 params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
             }
-            viewHolder.cardView.setOnClickListener(v -> WebViewActivity.start(context, articleBean.getId(), articleBean.getLink()));
+            viewHolder.cardView.setOnClickListener(v -> {
+                // 记录操作索引
+                operationId = i;
+                WebViewActivity.start(context, articleBean.getId(), articleBean.getLink());
+            });
+            viewHolder.ivCollect.setOnClickListener(v -> {
+                operationId = i;
+                if (articleBean.isCollect()) {
+                    // 已经收藏,取消收藏
+                    if (from.equals(FROM_COLLECT)) {
+                        // 来自收藏页面
+                        presenter.unCollect(articleBean.getId(), articleBean.getOriginId());
+                    } else {
+                        presenter.unCollect(articleBean.getId());
+                    }
+                } else {
+                    // 收藏,判断是否登录
+                    if (App.getInstance().getUserBean() == null) {
+                        Toasty.show(context, getString(R.string.please_login));
+                        return;
+                    }
+                    presenter.collect(articleBean.getId());
+                }
+            });
         }
 
         @Override
@@ -207,6 +246,7 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
         CardView cardView;
         ImageView ivTop;
         TextView tvTitle;
+        ImageView ivCollect;
         TextView tvNew;
         TextView tvProject;
         TextView tvClassify;
@@ -218,6 +258,7 @@ public class ArticlesFragment extends LazyLoadFragment implements ArticlesContra
             cardView = itemView.findViewById(R.id.card_view);
             ivTop = itemView.findViewById(R.id.iv_top);
             tvTitle = itemView.findViewById(R.id.tv_title);
+            ivCollect = itemView.findViewById(R.id.iv_collect);
             tvNew = itemView.findViewById(R.id.tv_new);
             tvClassify = itemView.findViewById(R.id.tv_classify);
             tvProject = itemView.findViewById(R.id.tv_project);
