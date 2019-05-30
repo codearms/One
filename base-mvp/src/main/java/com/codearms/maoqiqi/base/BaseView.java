@@ -22,6 +22,11 @@ public interface BaseView<T extends BasePresenter> {
     void showLoading();
 
     /**
+     * 刷新
+     */
+    void refresh();
+
+    /**
      * 显示错误信息
      *
      * @param errorMsg 错误信息

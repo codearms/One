@@ -125,6 +125,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new RecyclerViewAdapter(0, articleBeans.getArticleBeanList()));
     }
 
