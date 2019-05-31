@@ -40,6 +40,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends LazyLoadFrag
     }
 
     @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
     public void refresh() {
 
     }

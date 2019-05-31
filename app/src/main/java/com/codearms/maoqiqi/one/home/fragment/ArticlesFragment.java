@@ -34,12 +34,12 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
     public static final String FROM_CLASSIFY = "FROM_CLASSIFY";
     public static final String FROM_COLLECT = "FROM_COLLECT";
 
-    private RecyclerView recyclerView;
+    private RecyclerViewAdapter adapter;
 
     private String from;
     private int id;
 
-    // 对列表哪一项有操作,记录索引,刷新数据
+    // 记录点击的文章位置,便于在文章内点击收藏返回到此界面时能展示正确的收藏状态
     private int operationId = -1;
 
     /**
@@ -78,12 +78,19 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        recyclerView = rootView.findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
         Bundle bundle = getArguments();
         if (bundle != null) {
             from = bundle.getString("from", FROM_HOME);
             id = bundle.getInt("id");
         }
+
+        adapter = new RecyclerViewAdapter(0, new ArrayList<>());
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -114,19 +121,17 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
         list.addAll(topArticleBeans);
         list.addAll(articleBeans.getArticleBeanList());
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(new RecyclerViewAdapter(topArticleBeans.size(), list));
+        adapter.setTopArticles(topArticleBeans.size());
+        adapter.replaceData(list);
     }
 
     @Override
-    public void setArticles(ArticleBeans articleBeans) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new RecyclerViewAdapter(0, articleBeans.getArticleBeanList()));
+    public void setArticles(ArticleBeans articleBeans, boolean isRefresh) {
+        if (isRefresh) {
+            adapter.replaceData(articleBeans.getArticleBeanList());
+        } else {
+            adapter.addData(articleBeans.getArticleBeanList());
+        }
     }
 
     @Override
@@ -164,6 +169,12 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
             final ArticleBean articleBean = articleBeanList.get(i);
 
             viewHolder.ivTop.setVisibility(i < topArticles ? View.VISIBLE : View.GONE);
+
+            //  GlideApp.with(context).load(url).diskCacheStrategy(DiskCacheStrategy.DATA).into(iv);
+            // articleBean.getEnvelopePic();
+
+            // articleBean.getDesc();
+
             viewHolder.tvTitle.setText(articleBean.getTitle());
             viewHolder.ivCollect.setImageResource(articleBean.isCollect() ? R.drawable.ic_collect : R.drawable.ic_un_collect);
 
@@ -193,6 +204,10 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
                 RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) viewHolder.cardView.getLayoutParams();
                 params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
             }
+/*            mAdapter.getData().get(position).getId(),
+                    mAdapter.getData().get(position).getTitle(),
+                    mAdapter.getData().get(position).getLink(),
+                    mAdapter.getData().get(position).isCollect(),*/
             viewHolder.cardView.setOnClickListener(v -> {
                 // 记录操作索引
                 operationId = i;
@@ -203,6 +218,12 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
                 }
             });
             viewHolder.ivCollect.setOnClickListener(v -> {
+                // 判断是否登录
+                if (App.getInstance().getUserBean() == null) {
+                    showErrorMsg( getString(R.string.please_login));
+                    return;
+                }
+
                 operationId = i;
                 if (articleBean.isCollect()) {
                     // 已经收藏,取消收藏
@@ -213,19 +234,43 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
                         presenter.unCollect(articleBean.getId());
                     }
                 } else {
-                    // 收藏,判断是否登录
-                    if (App.getInstance().getUserBean() == null) {
-                        Toasty.show(context, getString(R.string.please_login));
-                        return;
-                    }
                     presenter.collect(articleBean.getId());
                 }
             });
+            viewHolder.tvClassify.setOnClickListener(v -> Toasty.show(context, "aaa"));
+            /*JudgeUtils.startKnowledgeHierarchyDetailActivity(_mActivity,
+                    true,
+                    mAdapter.getData().get(position).getSuperChapterName(),
+                    mAdapter.getData().get(position).getChapterName(),
+                    mAdapter.getData().get(position).getChapterId());*/
         }
 
         @Override
         public int getItemCount() {
             return articleBeanList.size();
+        }
+
+        void setTopArticles(int topArticles) {
+            this.topArticles = topArticles;
+        }
+
+        void replaceData(@NonNull List<ArticleBean> data) {
+            // 不是同一个引用才清空列表
+            if (data != articleBeanList) {
+                articleBeanList.clear();
+                articleBeanList.addAll(data);
+            }
+            notifyDataSetChanged();
+        }
+
+        void addData(List<ArticleBean> newData) {
+            articleBeanList.addAll(newData);
+            notifyItemRangeInserted(articleBeanList.size() - newData.size(), newData.size());
+        }
+
+        void setData(int index, @NonNull ArticleBean data) {
+            articleBeanList.set(index, data);
+            notifyItemChanged(index);
         }
     }
 

@@ -35,7 +35,7 @@ public interface ArticlesContract {
 
         void setHomeArticles(List<ArticleBean> topArticleBeans, ArticleBeans articleBeans);
 
-        void setArticles(ArticleBeans articleBeans);
+        void setArticles(ArticleBeans articleBeans, boolean isRefresh);
 
         void collectSuccess();
     }

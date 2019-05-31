@@ -11,8 +11,6 @@ import com.codearms.maoqiqi.one.utils.BaseObserver;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 public class HomePresenter extends RxPresenterImpl<HomeContract.View> implements HomeContract.Presenter {
 
@@ -24,12 +22,25 @@ public class HomePresenter extends RxPresenterImpl<HomeContract.View> implements
     }
 
     @Override
+    public void getBanner() {
+        addSubscribe(repository.getBanner().subscribeWith(
+                new BaseObserver<CommonBean<List<BannerBean>>>(view) {
+                    @Override
+                    public void onNext(CommonBean<List<BannerBean>> commonBean) {
+                        if (!view.isActive()) return;
+
+                        if (commonBean.getErrorCode() == 0) {
+                            view.setBanner(commonBean.getData());
+                        }
+                    }
+                }));
+    }
+
+    @Override
     public void getData() {
         Observable<CommonBean<UserBean>> loginObservable = repository.login("maoqiqi", "123456");
         Observable<CommonBean<List<BannerBean>>> bannerObservable = repository.getBanner();
         addSubscribe(Observable.zip(loginObservable, bannerObservable, Data::new)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new BaseObserver<Data>() {
                     @Override
                     public void onNext(Data data) {

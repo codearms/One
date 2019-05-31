@@ -57,6 +57,11 @@
                 <data android:scheme="http" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".navigation.activity.SearchActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible" />
     </application>
 
 </manifest>

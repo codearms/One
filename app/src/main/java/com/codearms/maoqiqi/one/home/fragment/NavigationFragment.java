@@ -19,11 +19,18 @@ import com.codearms.maoqiqi.one.home.presenter.contract.NavigationContract;
 
 import java.util.List;
 
-public class NavigationFragment extends BaseFragment<NavigationContract.Presenter> implements NavigationContract.View {
+public class NavigationFragment extends BaseFragment<NavigationContract.Presenter> implements
+        NavigationContract.View, FlowLayoutFragment.SmoothScrollListener {
 
     private static final String TAG = "com.codearms.maoqiqi.one.FlowLayoutFragment";
 
     private RecyclerView recyclerView;
+    private LinearLayoutManager manager;
+    private RecyclerViewAdapter adapter;
+
+    private FlowLayoutFragment fragment;
+    // 当前选中项
+    private int position;
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
@@ -49,6 +56,11 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
         recyclerView = rootView.findViewById(R.id.recycler_view);
+
+        manager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -59,16 +71,30 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
 
     @Override
     public void setNavigation(List<NavigationBean> navigationBeans) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(new RecyclerViewAdapter(navigationBeans));
+        adapter = new RecyclerViewAdapter(navigationBeans);
+        recyclerView.setAdapter(adapter);
 
-        FlowLayoutFragment fragment = (FlowLayoutFragment) getChildFragmentManager().findFragmentByTag(TAG);
+        fragment = (FlowLayoutFragment) getChildFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
             fragment = FlowLayoutFragment.newInstance(FlowLayoutFragment.FROM_NAVIGATION);
             fragment.setNavigationBeans(navigationBeans);
+            fragment.setSmoothScrollListener(this);
             getChildFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
+        }
+    }
+
+    @Override
+    public void onSmoothScrollToPosition(int i) {
+        if (position != i) {
+            position = i;
+            adapter.notifyDataSetChanged();
+
+            // 如果选中项不可见
+            int firstPosition = manager.findFirstVisibleItemPosition();
+            int lastPosition = manager.findLastVisibleItemPosition();
+            if (position < firstPosition || position > lastPosition) {
+                recyclerView.smoothScrollToPosition(position);
+            }
         }
     }
 
@@ -88,14 +114,17 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            if (i == 0) {
+            if (i == position) {
                 viewHolder.view.setBackgroundResource(R.drawable.bg_item_navigation);
             } else {
                 viewHolder.view.setBackgroundResource(R.color.color_divider);
             }
             viewHolder.tvName.setText(navigationBeans.get(i).getName());
+            viewHolder.tvName.setTag(i);
             viewHolder.tvName.setOnClickListener(v -> {
-
+                position = (int) v.getTag();
+                if (fragment != null) fragment.smoothScrollToPosition(position);
+                notifyDataSetChanged();
             });
         }
 

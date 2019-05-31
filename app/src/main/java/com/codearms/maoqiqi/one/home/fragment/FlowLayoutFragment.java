@@ -1,5 +1,6 @@
 package com.codearms.maoqiqi.one.home.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.codearms.maoqiqi.one.home.presenter.contract.FlowLayoutContract;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 
 import java.util.List;
+import java.util.Random;
 
 public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presenter> implements FlowLayoutContract.View {
 
@@ -31,9 +33,16 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
     public static final String FROM_KNOWLEDGE = "FROM_KNOWLEDGE";
 
     private RecyclerView recyclerView;
+    private LinearLayoutManager manager;
 
     private String from;
     private List<NavigationBean> navigationBeans;
+
+    private boolean isClick;
+    // 记录需要滚动的位置
+    private int position;
+    private boolean needScroll;
+    private SmoothScrollListener listener;
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
@@ -71,6 +80,11 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
         if (bundle != null) {
             from = bundle.getString("from", FROM_NAVIGATION);
         }
+
+        manager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -78,10 +92,28 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
         super.loadData();
         switch (from) {
             case FROM_NAVIGATION:
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setNestedScrollingEnabled(false);
-                recyclerView.setAdapter(new RecyclerViewAdapter(FROM_NAVIGATION, navigationBeans, null));
+                recyclerView.setAdapter(new RecyclerViewAdapter(navigationBeans, null));
+                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            if (needScroll) {
+                                scrollRecyclerView();
+                            } else {
+                                isClick = false;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+                        if (!isClick && listener != null) {
+                            listener.onSmoothScrollToPosition(manager.findFirstVisibleItemPosition());
+                        }
+                    }
+                });
                 break;
             case FROM_KNOWLEDGE:
                 presenter.getKnowledge();
@@ -91,21 +123,52 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
 
     @Override
     public void setKnowledge(List<ParentClassifyBean> parentClassifyBeans) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setAdapter(new RecyclerViewAdapter(FROM_KNOWLEDGE, null, parentClassifyBeans));
+        recyclerView.setAdapter(new RecyclerViewAdapter(null, parentClassifyBeans));
+    }
+
+    // 滚动到顶部
+    public void smoothScrollToPosition(int position) {
+        this.isClick = true;
+        this.position = position;
+
+        int firstPosition = manager.findFirstVisibleItemPosition();
+        int lastPosition = manager.findLastVisibleItemPosition();
+
+        recyclerView.stopScroll();
+        if (position <= firstPosition) {
+            // 第一种可能:跳转位置在第一个可见位置之前
+            recyclerView.smoothScrollToPosition(position);
+        } else if (position <= lastPosition) {
+            // 第二种可能:跳转位置在第一个可见位置之后
+            int movePosition = position - firstPosition;
+            if (movePosition >= 0 && movePosition < recyclerView.getChildCount()) {
+                int top = recyclerView.getChildAt(movePosition).getTop();
+                recyclerView.smoothScrollBy(0, top);
+            }
+        } else {
+            // 第三种可能:跳转位置在最后可见项之后
+            recyclerView.smoothScrollToPosition(position);
+            needScroll = true;
+        }
+    }
+
+    // 在第三种可能下继续滚动
+    private void scrollRecyclerView() {
+        needScroll = false;
+        int indexDistance = position - manager.findFirstVisibleItemPosition();
+        if (indexDistance >= 0 && indexDistance < recyclerView.getChildCount()) {
+            int top = recyclerView.getChildAt(indexDistance).getTop();
+            recyclerView.smoothScrollBy(0, top);
+        }
     }
 
     private final class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
-        private String from;
         private List<NavigationBean> navigationBeans;
         private List<ParentClassifyBean> parentClassifyBeans;
         private Chip chip;
 
-        RecyclerViewAdapter(String from, List<NavigationBean> navigationBeans, List<ParentClassifyBean> parentClassifyBeans) {
-            this.from = from;
+        RecyclerViewAdapter(List<NavigationBean> navigationBeans, List<ParentClassifyBean> parentClassifyBeans) {
             this.navigationBeans = navigationBeans;
             this.parentClassifyBeans = parentClassifyBeans;
         }
@@ -141,6 +204,7 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
             for (int j = 0; j < bean.getArticleBeanList().size(); j++) {
                 chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_item_flow_layout, null);
                 chip.setText(bean.getArticleBeanList().get(j).getTitle());
+                chip.setTextColor(randomColor());
                 final int id = bean.getArticleBeanList().get(j).getId();
                 final String url = bean.getArticleBeanList().get(j).getLink();
                 chip.setOnClickListener(v -> WebViewActivity.start(context, id, url));
@@ -161,6 +225,7 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
             for (int j = 0; j < bean.getChildClassifyBeanList().size(); j++) {
                 chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_item_flow_layout, null);
                 chip.setText(bean.getChildClassifyBeanList().get(j).getName());
+                chip.setTextColor(randomColor());
                 chip.setOnClickListener(v -> ClassifyActivity.start(context, bean));
                 viewHolder.chipGroup.addView(chip);
             }
@@ -169,6 +234,19 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
                 ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewHolder.chipGroup.getLayoutParams();
                 params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
             }
+        }
+
+        /**
+         * 获取随机rgb颜色值
+         */
+        private int randomColor() {
+            Random random = new Random();
+            // 0-190,如果颜色值过大,就越接近白色,就看不清了,所以需要限定范围
+            int red = random.nextInt(150);
+            int green = random.nextInt(150);
+            int blue = random.nextInt(150);
+            // 使用rgb混合生成一种新的颜色,Color.rgb生成的是一个int数
+            return Color.rgb(red, green, blue);
         }
     }
 
@@ -182,5 +260,14 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
             tvName = itemView.findViewById(R.id.tv_name);
             chipGroup = itemView.findViewById(R.id.chip_group);
         }
+    }
+
+    public interface SmoothScrollListener {
+
+        void onSmoothScrollToPosition(int position);
+    }
+
+    public void setSmoothScrollListener(SmoothScrollListener smoothScrollListener) {
+        this.listener = smoothScrollListener;
     }
 }

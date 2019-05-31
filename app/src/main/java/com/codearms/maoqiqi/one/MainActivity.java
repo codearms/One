@@ -32,6 +32,7 @@ import com.codearms.maoqiqi.one.navigation.activity.LoginActivity;
 import com.codearms.maoqiqi.one.navigation.activity.ProblemFeedbackActivity;
 import com.codearms.maoqiqi.one.navigation.activity.ProjectIntroductionActivity;
 import com.codearms.maoqiqi.one.navigation.activity.ScanCodeActivity;
+import com.codearms.maoqiqi.one.navigation.activity.SearchActivity;
 import com.codearms.maoqiqi.one.navigation.activity.UpdateDescriptionActivity;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.news.fragment.NewsFragment;
@@ -190,7 +191,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.menu_search) {
-            Toasty.show(this, "search");
+            SearchActivity.start(this, checkedChangeListener.getPosition());
             return true;
         }
         return false;

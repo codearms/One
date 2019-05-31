@@ -22,6 +22,11 @@ public interface BaseView<T extends BasePresenter> {
     void showLoading();
 
     /**
+     * 隐藏加载视图
+     */
+    void hideLoading();
+
+    /**
      * 刷新
      */
     void refresh();

@@ -1,5 +1,6 @@
 package com.codearms.maoqiqi.one.navigation.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -64,6 +66,12 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
 
         btnLogin.setOnClickListener(this);
         btnNewUserRegister.setOnClickListener(this);
+
+       /* InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null) {
+            mAccountEdit.requestFocus();
+            inputMethodManager.showSoftInput(mAccountEdit, 0);
+        }*/
     }
 
     @Override

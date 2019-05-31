@@ -11,6 +11,8 @@ public interface HomeContract {
 
     interface Presenter extends BasePresenter<View> {
 
+        void getBanner();
+
         void getData();
     }
 

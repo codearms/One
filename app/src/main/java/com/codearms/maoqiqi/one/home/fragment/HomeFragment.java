@@ -83,7 +83,8 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
         super.loadData();
         if (context instanceof MainActivity)
             ((MainActivity) context).associateDrawerLayout(toolbar);
-        presenter.getData();
+        //presenter.getData();
+        presenter.getBanner();
     }
 
     @Override
