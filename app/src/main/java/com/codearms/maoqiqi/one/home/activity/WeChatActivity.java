@@ -7,13 +7,13 @@ import android.view.MenuItem;
 
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.fragment.WeChatFragment;
+import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.utils.Toasty;
 
 public class WeChatActivity extends BaseActivity {
 
-    private static final String TAG = "com.codearms.maoqiqi.one.WeChatFragment";
+    private static final String TAG = "com.codearms.maoqiqi.one.ClassifyFragment";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,9 +21,9 @@ public class WeChatActivity extends BaseActivity {
         StatusBarUtils.setFullScreen(this);
         setContentView(R.layout.activity_we_chat);
 
-        WeChatFragment fragment = (WeChatFragment) getSupportFragmentManager().findFragmentByTag(TAG);
+        ClassifyFragment fragment = (ClassifyFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = WeChatFragment.newInstance();
+            fragment = ClassifyFragment.newInstance(ClassifyFragment.FROM_WE_CHAT);
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
     }

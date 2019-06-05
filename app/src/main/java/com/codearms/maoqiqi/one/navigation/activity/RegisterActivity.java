@@ -20,9 +20,7 @@ public class RegisterActivity extends BaseActivity {
         setContentView(R.layout.activity_register);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         RegisterFragment fragment = (RegisterFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {

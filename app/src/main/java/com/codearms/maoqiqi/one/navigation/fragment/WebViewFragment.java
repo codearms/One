@@ -133,7 +133,6 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
             articleBean = bundle.getParcelable("articleBean");
             assert articleBean != null;
             url = articleBean.getLink();
-            url = url.replaceAll("http://", "https://");
             isCollect = from.equals(ArticlesFragment.FROM_COLLECT) || articleBean.isCollect();
         }
 

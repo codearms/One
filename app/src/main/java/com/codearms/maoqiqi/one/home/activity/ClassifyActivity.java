@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.navigation.activity;
+package com.codearms.maoqiqi.one.home.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.utils.Toasty;
 
@@ -19,17 +20,21 @@ public class ClassifyActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.ClassifyFragment";
 
-    public static void start(@NonNull Context context, ArticleBean articleBean) {
+    // 从知识体系跳转过来
+    public static void start(@NonNull Context context, @NonNull ParentClassifyBean parentClassifyBean, int position) {
         Bundle bundle = new Bundle();
+        bundle.putParcelable("parentClassifyBean", parentClassifyBean);
+        bundle.putInt("position", position);
         Intent intent = new Intent(context, ClassifyActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
 
-    // 从知识体系跳转过来
-    public static void start(@NonNull Context context, @NonNull ParentClassifyBean parentClassifyBean) {
+    // 从文章列表跳转
+    public static void start(@NonNull Context context, @NonNull String from, @NonNull ArticleBean articleBean) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable("parentClassifyBean", parentClassifyBean);
+        bundle.putString("from", from);
+        bundle.putParcelable("articleBean", articleBean);
         Intent intent = new Intent(context, ClassifyActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
@@ -43,14 +48,21 @@ public class ClassifyActivity extends BaseActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            int chapterId = bundle.getInt("chapterId");
             ParentClassifyBean parentClassifyBean = bundle.getParcelable("parentClassifyBean");
+            int position = bundle.getInt("position");
 
-//            ClassifyFragment fragment = (ClassifyFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-//            if (fragment == null) {
-//                fragment = ClassifyFragment.newInstance(ArticlesFragment.FROM_CLASSIFY, parentClassifyBean);
-//                getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
-//            }
+            String from = bundle.getString("from");
+            ArticleBean articleBean = bundle.getParcelable("articleBean");
+
+            ClassifyFragment fragment = (ClassifyFragment) getSupportFragmentManager().findFragmentByTag(TAG);
+            if (fragment == null) {
+                if (parentClassifyBean != null) {
+                    fragment = ClassifyFragment.newInstance(parentClassifyBean, position);
+                } else {
+                    fragment = ClassifyFragment.newInstance(from, articleBean);
+                }
+                getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
+            }
         }
     }
 

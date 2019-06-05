@@ -20,9 +20,7 @@ public class CollectActivity extends BaseActivity {
         setContentView(R.layout.activity_collect);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         ArticlesFragment fragment = (ArticlesFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {

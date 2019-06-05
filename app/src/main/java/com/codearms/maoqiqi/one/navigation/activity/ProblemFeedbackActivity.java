@@ -25,7 +25,6 @@ public class ProblemFeedbackActivity extends BaseActivity implements View.OnClic
         TextView tvEmail = findViewById(R.id.tv_email);
 
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         tvIssues.setOnClickListener(this);
         tvProblems.setOnClickListener(this);

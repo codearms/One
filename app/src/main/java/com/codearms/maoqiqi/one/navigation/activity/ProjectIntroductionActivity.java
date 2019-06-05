@@ -17,8 +17,6 @@ public class ProjectIntroductionActivity extends BaseActivity {
         setContentView(R.layout.activity_project_introduction);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 }

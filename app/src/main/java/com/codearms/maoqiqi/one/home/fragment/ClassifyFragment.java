@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.home.presenter.ClassifyPresenter;
@@ -26,11 +27,17 @@ import java.util.List;
 
 public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> implements ClassifyContract.View {
 
+    public static final String FROM_WE_CHAT = "FROM_WE_CHAT";
+    public static final String FROM_PROJECT = "FROM_PROJECT";
+    public static final String FROM_CLASSIFY = "FROM_CLASSIFY";
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private String from;
     private ParentClassifyBean parentClassifyBean;
+    private int position;
+    private String from;
+    private ArticleBean articleBean;
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
@@ -45,18 +52,20 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
         return fragment;
     }
 
-    public static ClassifyFragment newInstance() {
+    public static ClassifyFragment newInstance(ParentClassifyBean parentClassifyBean, int position) {
         Bundle bundle = new Bundle();
-        bundle.putString("from", ArticlesFragment.FROM_PROJECT);
+        bundle.putString("from", FROM_CLASSIFY);
+        bundle.putParcelable("parentClassifyBean", parentClassifyBean);
+        bundle.putInt("position", position);
         ClassifyFragment fragment = new ClassifyFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public static ClassifyFragment newInstance(String from, ParentClassifyBean parentClassifyBean) {
+    public static ClassifyFragment newInstance(String from, ArticleBean articleBean) {
         Bundle bundle = new Bundle();
         bundle.putString("from", from);
-        bundle.putParcelable("parentClassifyBean", parentClassifyBean);
+        bundle.putParcelable("articleBean", articleBean);
         ClassifyFragment fragment = new ClassifyFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -82,17 +91,25 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            from = bundle.getString("from", ArticlesFragment.FROM_PROJECT);
             parentClassifyBean = bundle.getParcelable("parentClassifyBean");
+            position = bundle.getInt("position");
+            from = bundle.getString("from");
+            articleBean = bundle.getParcelable("articleBean");
         }
 
         switch (from) {
-            case ArticlesFragment.FROM_PROJECT:
+            case FROM_WE_CHAT:
+                toolbar.setTitle(R.string.we_chat);
+                break;
+            case FROM_PROJECT:
                 toolbar.setTitle(R.string.project);
                 break;
-            case ArticlesFragment.FROM_CLASSIFY:
-                if (parentClassifyBean == null) return;
+            case FROM_CLASSIFY:
                 toolbar.setTitle(parentClassifyBean.getName());
+                break;
+            default:
+                assert articleBean != null;
+                toolbar.setTitle(articleBean.getSuperChapterName());
                 break;
         }
         ((AppCompatActivity) context).setSupportActionBar(toolbar);
@@ -103,17 +120,23 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
     protected void loadData() {
         super.loadData();
         switch (from) {
-            case ArticlesFragment.FROM_PROJECT:
+            case FROM_WE_CHAT:
+                presenter.getWxList();
+                break;
+            case FROM_PROJECT:
                 presenter.getProject();
                 break;
-            case ArticlesFragment.FROM_CLASSIFY:
-                setProject(parentClassifyBean.getChildClassifyBeanList());
+            case FROM_CLASSIFY:
+                setClassifies(parentClassifyBean.getChildClassifyBeanList());
+                break;
+            default:
+                presenter.getKnowledge();
                 break;
         }
     }
 
     @Override
-    public void setProject(List<ChildClassifyBean> childClassifyBeans) {
+    public void setClassifies(List<ChildClassifyBean> childClassifyBeans) {
         List<String> fragmentTitles = new ArrayList<>();
         for (int i = 0; i < childClassifyBeans.size(); i++) {
             fragmentTitles.add(childClassifyBeans.get(i).getName());
@@ -121,9 +144,29 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
 
         viewPager.setAdapter(new MyPagerAdapter(fragmentTitles, childClassifyBeans, getChildFragmentManager()));
         viewPager.setOffscreenPageLimit(1);
-        viewPager.setCurrentItem(0);
+        viewPager.setCurrentItem(position);
 
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void setKnowledge(List<ParentClassifyBean> parentClassifyBeans) {
+        ParentClassifyBean parentClassifyBean = null;
+        for (int i = 0; i < parentClassifyBeans.size(); i++) {
+            if (parentClassifyBeans.get(i).getChildClassifyBeanList().get(0).getId() == articleBean.getSuperChapterId()) {
+                parentClassifyBean = parentClassifyBeans.get(i);
+                break;
+            }
+        }
+        if (parentClassifyBean == null) return;
+
+        for (int i = 0; i < parentClassifyBean.getChildClassifyBeanList().size(); i++) {
+            if (parentClassifyBean.getChildClassifyBeanList().get(i).getId() == articleBean.getChapterId()) {
+                position = i;
+                break;
+            }
+        }
+        setClassifies(parentClassifyBean.getChildClassifyBeanList());
     }
 
     private final class MyPagerAdapter extends SectionsPagerAdapter {

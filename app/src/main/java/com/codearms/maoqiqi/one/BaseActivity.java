@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * 基类Activity
@@ -127,5 +128,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         Log.d(TAG + getNumber(), "-->onConfigurationChanged(Configuration newConfig)");
         Log.e("configuration", newConfig.toString());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return false;
     }
 }

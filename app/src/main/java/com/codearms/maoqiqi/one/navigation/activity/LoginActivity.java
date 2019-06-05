@@ -20,9 +20,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         LoginFragment fragment = (LoginFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {

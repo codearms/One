@@ -163,7 +163,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
                 // 导航
                 ActivityUtils.startActivity(context, NavigationActivity.class);
                 return true;
-            case R.id.menu_we_chat_number:
+            case R.id.menu_we_chat:
                 ActivityUtils.startActivity(context, WeChatActivity.class);
                 // 公众号
                 return true;

@@ -17,8 +17,6 @@ public class UpdateDescriptionActivity extends BaseActivity {
         setContentView(R.layout.activity_update_description);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 }

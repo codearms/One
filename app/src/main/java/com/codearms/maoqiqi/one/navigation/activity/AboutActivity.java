@@ -27,7 +27,6 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         TextView tvStar = findViewById(R.id.tv_star);
 
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         try {
             String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;

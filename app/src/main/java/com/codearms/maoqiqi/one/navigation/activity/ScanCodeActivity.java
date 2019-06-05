@@ -17,8 +17,6 @@ public class ScanCodeActivity extends BaseActivity {
         setContentView(R.layout.activity_scan_code);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 }

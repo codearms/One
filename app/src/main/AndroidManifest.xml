@@ -27,7 +27,7 @@
         <activity android:name=".home.activity.WeChatActivity" />
         <activity android:name=".home.activity.KnowledgeActivity" />
         <activity android:name=".home.activity.ProjectActivity" />
-        <activity android:name=".navigation.activity.ClassifyActivity" />
+        <activity android:name=".home.activity.ClassifyActivity" />
         <!--navigation-->
         <activity
             android:name=".navigation.activity.LoginActivity"

@@ -24,7 +24,6 @@ public class NavigationActivity extends BaseActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         NavigationFragment fragment = (NavigationFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {

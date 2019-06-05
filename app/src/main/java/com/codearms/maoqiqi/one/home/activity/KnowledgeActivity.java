@@ -21,10 +21,9 @@ public class KnowledgeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         StatusBarUtils.setFullScreen(this);
         setContentView(R.layout.activity_knowledge);
-        Toolbar toolbar = findViewById(R.id.toolbar);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         FlowLayoutFragment fragment = (FlowLayoutFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {

@@ -60,7 +60,6 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
         toolbar.setBackgroundResource(bgResIds[position]);
         toolbar.setPopupTheme(themeIds[position]);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag(TAG_SEARCH);
         if (searchFragment == null) {

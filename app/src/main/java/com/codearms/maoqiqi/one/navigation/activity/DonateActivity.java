@@ -23,7 +23,6 @@ public class DonateActivity extends BaseActivity {
         ImageView ivPay = findViewById(R.id.iv_pay);
 
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.rb_alipay) {

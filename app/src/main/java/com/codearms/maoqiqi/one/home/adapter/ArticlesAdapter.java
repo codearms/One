@@ -21,8 +21,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
+import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.home.fragment.ArticlesFragment;
-import com.codearms.maoqiqi.one.navigation.activity.ClassifyActivity;
 
 import java.util.List;
 
@@ -94,7 +94,7 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
             tagAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 // 跳转到分类
                 int index = (int) view.getTag();
-                ClassifyActivity.start(view.getContext(), getData().get(index));
+                ClassifyActivity.start(view.getContext(), from, getData().get(index));
             });
 
             helper.recyclerView.setLayoutManager(new LinearLayoutManager(application));

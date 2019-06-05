@@ -9,7 +9,7 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_we_chat_number"
+        android:id="@+id/menu_we_chat"
         android:icon="@drawable/ic_we_chat_number"
         android:orderInCategory="3"
         android:title="@string/we_chat"

@@ -93,7 +93,6 @@ public class WebViewActivity extends BaseActivity {
         // if (!title.equals("")) toolbar.setTitle(title);
         toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu_more));
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         fragment = (WebViewFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {

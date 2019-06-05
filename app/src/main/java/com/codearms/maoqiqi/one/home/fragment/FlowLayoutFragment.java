@@ -20,9 +20,9 @@ import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.home.presenter.FlowLayoutPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.FlowLayoutContract;
-import com.codearms.maoqiqi.one.navigation.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 
 import java.util.List;
@@ -88,33 +88,37 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
         recyclerView.setNestedScrollingEnabled(false);
     }
 
+    private void addOnScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    if (needScroll) {
+                        scrollRecyclerView();
+                    } else {
+                        isClick = false;
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!isClick && listener != null) {
+                    listener.onSmoothScrollToPosition(manager.findFirstVisibleItemPosition());
+                }
+            }
+        });
+    }
+
     @Override
     protected void loadData() {
         super.loadData();
         switch (from) {
             case FROM_NAVIGATION:
                 recyclerView.setAdapter(new RecyclerViewAdapter(navigationBeans, null));
-                recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                        super.onScrollStateChanged(recyclerView, newState);
-                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                            if (needScroll) {
-                                scrollRecyclerView();
-                            } else {
-                                isClick = false;
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                        super.onScrolled(recyclerView, dx, dy);
-                        if (!isClick && listener != null) {
-                            listener.onSmoothScrollToPosition(manager.findFirstVisibleItemPosition());
-                        }
-                    }
-                });
+                addOnScrollListener();
                 break;
             case FROM_KNOWLEDGE:
                 presenter.getKnowledge();
@@ -226,7 +230,11 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
                 chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_chip, null);
                 chip.setText(bean.getChildClassifyBeanList().get(j).getName());
                 chip.setTextColor(randomColor());
-                chip.setOnClickListener(v -> ClassifyActivity.start(context, bean));
+                chip.setTag(j);
+                chip.setOnClickListener(v -> {
+                    int index = (int) v.getTag();
+                    ClassifyActivity.start(context, bean, index);
+                });
                 viewHolder.chipGroup.addView(chip);
             }
 
