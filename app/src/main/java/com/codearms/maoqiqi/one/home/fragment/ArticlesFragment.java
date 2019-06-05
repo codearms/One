@@ -15,11 +15,11 @@ import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
+import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.home.activity.ImageActivity;
 import com.codearms.maoqiqi.one.home.adapter.ArticlesAdapter;
 import com.codearms.maoqiqi.one.home.presenter.ArticlesPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.ArticlesContract;
-import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 
 import java.util.ArrayList;
@@ -144,7 +144,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
                 break;
             case R.id.tv_classify:
                 // 跳转到分类
-                ClassifyActivity.start(context, from, bean);
+                if (bean.getSuperChapterId() != 0) ClassifyActivity.start(context, from, bean);
                 break;
         }
     }
