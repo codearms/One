@@ -39,12 +39,16 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getWxArticles(int id, int page) {
         addSubscribe(repository.getWxArticles(id, page)
-                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>() {
+                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>(view) {
                     @Override
                     public void onNext(CommonBean<ArticleBeans> commonBean) {
                         if (!view.isActive()) return;
 
-                        view.setArticles(commonBean.getData(), true);
+                        if (commonBean.getErrorCode() == 0) {
+                            view.setArticles(commonBean.getData(), true);
+                        } else {
+                            view.showErrorMsg(commonBean.getErrorMsg());
+                        }
                     }
                 }));
     }
@@ -52,12 +56,16 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getKnowledgeArticles(int page, int cid) {
         addSubscribe(repository.getKnowledgeArticles(page, cid)
-                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>() {
+                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>(view) {
                     @Override
                     public void onNext(CommonBean<ArticleBeans> commonBean) {
                         if (!view.isActive()) return;
 
-                        view.setArticles(commonBean.getData(), true);
+                        if (commonBean.getErrorCode() == 0) {
+                            view.setArticles(commonBean.getData(), true);
+                        } else {
+                            view.showErrorMsg(commonBean.getErrorMsg());
+                        }
                     }
                 }));
     }
@@ -65,12 +73,16 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getProjectArticles(int page, int cid) {
         addSubscribe(repository.getProjectArticles(page, cid)
-                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>() {
+                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>(view) {
                     @Override
                     public void onNext(CommonBean<ArticleBeans> commonBean) {
                         if (!view.isActive()) return;
 
-                        view.setArticles(commonBean.getData(), true);
+                        if (commonBean.getErrorCode() == 0) {
+                            view.setArticles(commonBean.getData(), true);
+                        } else {
+                            view.showErrorMsg(commonBean.getErrorMsg());
+                        }
                     }
                 }));
     }
@@ -78,12 +90,16 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getCollect(int page) {
         addSubscribe(repository.getCollect(page)
-                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>() {
+                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>(view) {
                     @Override
                     public void onNext(CommonBean<ArticleBeans> commonBean) {
                         if (!view.isActive()) return;
 
-                        view.setArticles(commonBean.getData(), true);
+                        if (commonBean.getErrorCode() == 0) {
+                            view.setArticles(commonBean.getData(), true);
+                        } else {
+                            view.showErrorMsg(commonBean.getErrorMsg());
+                        }
                     }
                 }));
     }
@@ -91,7 +107,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void collect(int id) {
         addSubscribe(repository.collect(id)
-                .subscribeWith(new BaseObserver<CommonBean<String>>() {
+                .subscribeWith(new BaseObserver<CommonBean<String>>(view) {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
                         if (!view.isActive()) return;
@@ -108,11 +124,16 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void unCollect(int id) {
         addSubscribe(repository.unCollect(id)
-                .subscribeWith(new BaseObserver<CommonBean<String>>() {
+                .subscribeWith(new BaseObserver<CommonBean<String>>(view) {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
                         if (!view.isActive()) return;
 
+                        if (commonBean.getErrorCode() == 0) {
+                            view.unCollectSuccess();
+                        } else {
+                            view.showErrorMsg(commonBean.getErrorMsg());
+                        }
                     }
                 }));
     }
@@ -120,13 +141,32 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void unCollect(int id, int originId) {
         addSubscribe(repository.unCollect(id, originId)
-                .subscribeWith(new BaseObserver<CommonBean<String>>() {
+                .subscribeWith(new BaseObserver<CommonBean<String>>(view) {
                     @Override
                     public void onNext(CommonBean<String> commonBean) {
                         if (!view.isActive()) return;
 
+                        if (commonBean.getErrorCode() == 0) {
+                            view.unCollectSuccess();
+                        } else {
+                            view.showErrorMsg(commonBean.getErrorMsg());
+                        }
                     }
                 }));
+    }
+
+    @Override
+    public void query(int page, String k) {
+        addSubscribe(repository.query(page, k).subscribeWith(
+                new BaseObserver<CommonBean<ArticleBeans>>(view) {
+                    @Override
+                    public void onNext(CommonBean<ArticleBeans> commonBean) {
+                        if (!view.isActive()) return;
+
+                        view.setArticles(commonBean.getData(), true);
+                    }
+                }
+        ));
     }
 
     private final class Data {

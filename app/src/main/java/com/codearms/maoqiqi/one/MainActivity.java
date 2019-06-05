@@ -74,6 +74,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         navigationHeader.findViewById(R.id.iv_scan_code).setOnClickListener(this);
         tvUserName.setOnClickListener(this);
         navigationHeader.findViewById(R.id.tv_project).setOnClickListener(this);
+        navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
         navigationView.setNavigationItemSelectedListener(this);
 
         tvSetting.setOnClickListener(this);
@@ -176,6 +177,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                 return true;
             case R.id.nav_donate:
                 ActivityUtils.startActivity(this, DonateActivity.class);
+                return true;
+            case R.id.nav_logout:
                 return true;
         }
         return false;

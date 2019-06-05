@@ -37,6 +37,14 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
      *
      * @return A new instance of fragment ClassifyFragment.
      */
+    public static ClassifyFragment newInstance(String from) {
+        Bundle bundle = new Bundle();
+        bundle.putString("from", from);
+        ClassifyFragment fragment = new ClassifyFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     public static ClassifyFragment newInstance() {
         Bundle bundle = new Bundle();
         bundle.putString("from", ArticlesFragment.FROM_PROJECT);
@@ -45,9 +53,9 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
         return fragment;
     }
 
-    public static ClassifyFragment newInstance(ParentClassifyBean parentClassifyBean) {
+    public static ClassifyFragment newInstance(String from, ParentClassifyBean parentClassifyBean) {
         Bundle bundle = new Bundle();
-        bundle.putString("from", ArticlesFragment.FROM_CLASSIFY);
+        bundle.putString("from", from);
         bundle.putParcelable("parentClassifyBean", parentClassifyBean);
         ClassifyFragment fragment = new ClassifyFragment();
         fragment.setArguments(bundle);

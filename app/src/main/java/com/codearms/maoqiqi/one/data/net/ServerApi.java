@@ -5,6 +5,7 @@ import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
+import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
@@ -43,7 +44,7 @@ public interface ServerApi {
      * @return 热词数据
      */
     @GET("hotkey/json")
-    Observable<CommonBean> getHotKey();
+    Observable<CommonBean<List<HotKeyBean>>> getHotKey();
 
     /**
      * 置顶文章(https://www.wanandroid.com/article/top/json)
@@ -193,7 +194,7 @@ public interface ServerApi {
      */
     @POST("lg/collect/add/json")
     @FormUrlEncoded
-    Observable<CommonBean<String>> collect(@Field("title") String title, @Field("author") String author, @Field("link") String link);
+    Observable<CommonBean<ArticleBean>> collect(@Field("title") String title, @Field("author") String author, @Field("link") String link);
 
     /**
      * 取消收藏[文章列表](https://www.wanandroid.com/lg/uncollect_originId/2333/json)
@@ -265,5 +266,5 @@ public interface ServerApi {
      */
     @POST("article/query/0/json")
     @FormUrlEncoded
-    Observable<CommonBean> query(@Field("page") int page, @Field("k") String k);
+    Observable<CommonBean<ArticleBeans>> query(@Field("page") int page, @Field("k") String k);
 }

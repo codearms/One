@@ -1,8 +1,11 @@
 package com.codearms.maoqiqi.one.data.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class ArticleBean {
+public class ArticleBean implements Parcelable {
 
     private int id;
     // 收藏文章列表独有
@@ -31,9 +34,37 @@ public class ArticleBean {
     private boolean collect;
     private int courseId;
 
-    public class TagBean {
+    public static class TagBean implements Parcelable {
         private String name;
         private String url;
+
+        private TagBean(Parcel in) {
+            name = in.readString();
+            url = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(name);
+            dest.writeString(url);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<TagBean> CREATOR = new Creator<TagBean>() {
+            @Override
+            public TagBean createFromParcel(Parcel in) {
+                return new TagBean(in);
+            }
+
+            @Override
+            public TagBean[] newArray(int size) {
+                return new TagBean[size];
+            }
+        };
 
         public String getName() {
             return name;
@@ -59,6 +90,80 @@ public class ArticleBean {
                     '}';
         }
     }
+
+    protected ArticleBean(Parcel in) {
+        id = in.readInt();
+        originId = in.readInt();
+        type = in.readInt();
+        title = in.readString();
+        userId = in.readInt();
+        author = in.readString();
+        chapterId = in.readInt();
+        chapterName = in.readString();
+        superChapterId = in.readInt();
+        superChapterName = in.readString();
+        link = in.readString();
+        apkLink = in.readString();
+        projectLink = in.readString();
+        tags = in.createTypedArrayList(TagBean.CREATOR);
+        zan = in.readInt();
+        visible = in.readInt();
+        desc = in.readString();
+        envelopePic = in.readString();
+        publishTime = in.readLong();
+        niceDate = in.readString();
+        origin = in.readString();
+        prefix = in.readString();
+        fresh = in.readByte() != 0;
+        collect = in.readByte() != 0;
+        courseId = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(originId);
+        dest.writeInt(type);
+        dest.writeString(title);
+        dest.writeInt(userId);
+        dest.writeString(author);
+        dest.writeInt(chapterId);
+        dest.writeString(chapterName);
+        dest.writeInt(superChapterId);
+        dest.writeString(superChapterName);
+        dest.writeString(link);
+        dest.writeString(apkLink);
+        dest.writeString(projectLink);
+        dest.writeTypedList(tags);
+        dest.writeInt(zan);
+        dest.writeInt(visible);
+        dest.writeString(desc);
+        dest.writeString(envelopePic);
+        dest.writeLong(publishTime);
+        dest.writeString(niceDate);
+        dest.writeString(origin);
+        dest.writeString(prefix);
+        dest.writeByte((byte) (fresh ? 1 : 0));
+        dest.writeByte((byte) (collect ? 1 : 0));
+        dest.writeInt(courseId);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ArticleBean> CREATOR = new Creator<ArticleBean>() {
+        @Override
+        public ArticleBean createFromParcel(Parcel in) {
+            return new ArticleBean(in);
+        }
+
+        @Override
+        public ArticleBean[] newArray(int size) {
+            return new ArticleBean[size];
+        }
+    };
 
     public int getId() {
         return id;

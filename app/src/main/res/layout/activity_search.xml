@@ -20,7 +20,6 @@
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back"
         app:popupTheme="@style/navigation_popup_theme"
-        app:title=""
         app:titleTextColor="@color/color_text_title">
 
         <LinearLayout
@@ -55,4 +54,9 @@
                 android:src="@drawable/ic_menu_search" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

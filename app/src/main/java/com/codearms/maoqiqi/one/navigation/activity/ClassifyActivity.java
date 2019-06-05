@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.home.activity;
+package com.codearms.maoqiqi.one.navigation.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import android.view.MenuItem;
 
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
-import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.utils.Toasty;
 
@@ -19,6 +19,14 @@ public class ClassifyActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.ClassifyFragment";
 
+    public static void start(@NonNull Context context, ArticleBean articleBean) {
+        Bundle bundle = new Bundle();
+        Intent intent = new Intent(context, ClassifyActivity.class);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+    // 从知识体系跳转过来
     public static void start(@NonNull Context context, @NonNull ParentClassifyBean parentClassifyBean) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("parentClassifyBean", parentClassifyBean);
@@ -35,13 +43,14 @@ public class ClassifyActivity extends BaseActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
+            int chapterId = bundle.getInt("chapterId");
             ParentClassifyBean parentClassifyBean = bundle.getParcelable("parentClassifyBean");
 
-            ClassifyFragment fragment = (ClassifyFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-            if (fragment == null) {
-                fragment = ClassifyFragment.newInstance(parentClassifyBean);
-                getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
-            }
+//            ClassifyFragment fragment = (ClassifyFragment) getSupportFragmentManager().findFragmentByTag(TAG);
+//            if (fragment == null) {
+//                fragment = ClassifyFragment.newInstance(ArticlesFragment.FROM_CLASSIFY, parentClassifyBean);
+//                getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
+//            }
         }
     }
 

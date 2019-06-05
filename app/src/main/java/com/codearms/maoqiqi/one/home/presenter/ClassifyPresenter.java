@@ -9,9 +9,6 @@ import com.codearms.maoqiqi.one.utils.BaseObserver;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public class ClassifyPresenter extends RxPresenterImpl<ClassifyContract.View> implements ClassifyContract.Presenter {
 
     private OneRepository repository;
@@ -23,10 +20,8 @@ public class ClassifyPresenter extends RxPresenterImpl<ClassifyContract.View> im
 
     @Override
     public void getProject() {
-        addSubscribe(repository.getProject()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new BaseObserver<CommonBean<List<ChildClassifyBean>>>() {
+        addSubscribe(repository.getProject().subscribeWith(
+                new BaseObserver<CommonBean<List<ChildClassifyBean>>>(view) {
                     @Override
                     public void onNext(CommonBean<List<ChildClassifyBean>> commonBean) {
                         if (!view.isActive()) return;

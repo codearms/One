@@ -5,6 +5,7 @@ import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
+import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
@@ -34,7 +35,7 @@ public interface OneDataSource {
      *
      * @return 热词数据
      */
-    Observable<CommonBean> getHotKey();
+    Observable<CommonBean<List<HotKeyBean>>> getHotKey();
 
     /**
      * 置顶文章(https://www.wanandroid.com/article/top/json)
@@ -166,7 +167,7 @@ public interface OneDataSource {
      * @param link   链接
      * @return 收藏站外文章
      */
-    Observable<CommonBean<String>> collect(String title, String author, String link);
+    Observable<CommonBean<ArticleBean>> collect(String title, String author, String link);
 
     /**
      * 取消收藏[文章列表](https://www.wanandroid.com/lg/uncollect_originId/2333/json)
@@ -226,5 +227,5 @@ public interface OneDataSource {
      * @param k    搜索关键词
      * @return 搜索数据
      */
-    Observable<CommonBean> query(int page, String k);
+    Observable<CommonBean<ArticleBeans>> query(int page, String k);
 }

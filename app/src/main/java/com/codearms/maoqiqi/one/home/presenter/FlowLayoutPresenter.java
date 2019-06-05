@@ -9,9 +9,6 @@ import com.codearms.maoqiqi.one.utils.BaseObserver;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public class FlowLayoutPresenter extends RxPresenterImpl<FlowLayoutContract.View> implements FlowLayoutContract.Presenter {
 
     private OneRepository repository;
@@ -23,10 +20,8 @@ public class FlowLayoutPresenter extends RxPresenterImpl<FlowLayoutContract.View
 
     @Override
     public void getKnowledge() {
-        addSubscribe(repository.getKnowledge()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new BaseObserver<CommonBean<List<ParentClassifyBean>>>() {
+        addSubscribe(repository.getKnowledge().subscribeWith(
+                new BaseObserver<CommonBean<List<ParentClassifyBean>>>(view) {
                     @Override
                     public void onNext(CommonBean<List<ParentClassifyBean>> commonBean) {
                         if (!view.isActive()) return;

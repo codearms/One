@@ -9,9 +9,6 @@ import com.codearms.maoqiqi.one.utils.BaseObserver;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public class NavigationPresenter extends RxPresenterImpl<NavigationContract.View> implements NavigationContract.Presenter {
 
     private OneRepository repository;
@@ -23,10 +20,8 @@ public class NavigationPresenter extends RxPresenterImpl<NavigationContract.View
 
     @Override
     public void getNavigation() {
-        addSubscribe(repository.getNavigation()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new BaseObserver<CommonBean<List<NavigationBean>>>() {
+        addSubscribe(repository.getNavigation().subscribeWith(
+                new BaseObserver<CommonBean<List<NavigationBean>>>(view) {
                     @Override
                     public void onNext(CommonBean<List<NavigationBean>> commonBean) {
                         if (!view.isActive()) return;

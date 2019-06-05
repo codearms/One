@@ -5,6 +5,7 @@ import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.CommonBean;
+import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
@@ -48,7 +49,7 @@ public class OneRepository implements OneDataSource {
     }
 
     @Override
-    public Observable<CommonBean> getHotKey() {
+    public Observable<CommonBean<List<HotKeyBean>>> getHotKey() {
         return api.getHotKey().compose(RxUtils.rxSchedulerHelper());
     }
 
@@ -94,7 +95,7 @@ public class OneRepository implements OneDataSource {
 
     @Override
     public Observable<CommonBean<List<ChildClassifyBean>>> getProject() {
-        return api.getProject();
+        return api.getProject().compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
@@ -128,7 +129,7 @@ public class OneRepository implements OneDataSource {
     }
 
     @Override
-    public Observable<CommonBean<String>> collect(String title, String author, String link) {
+    public Observable<CommonBean<ArticleBean>> collect(String title, String author, String link) {
         return api.collect(title, author, link).compose(RxUtils.rxSchedulerHelper());
     }
 
@@ -163,7 +164,7 @@ public class OneRepository implements OneDataSource {
     }
 
     @Override
-    public Observable<CommonBean> query(int page, String k) {
+    public Observable<CommonBean<ArticleBeans>> query(int page, String k) {
         return api.query(page, k).compose(RxUtils.rxSchedulerHelper());
     }
 }

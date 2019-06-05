@@ -73,7 +73,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
 
         ArticlesFragment fragment = (ArticlesFragment) getChildFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_HOME);
+            fragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_HOME, 0);
             getChildFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
     }
@@ -83,8 +83,8 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
         super.loadData();
         if (context instanceof MainActivity)
             ((MainActivity) context).associateDrawerLayout(toolbar);
-        //presenter.getData();
-        presenter.getBanner();
+        presenter.getData();
+//        presenter.getBanner();
     }
 
     @Override

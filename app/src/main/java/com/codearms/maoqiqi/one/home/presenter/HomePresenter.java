@@ -40,8 +40,8 @@ public class HomePresenter extends RxPresenterImpl<HomeContract.View> implements
     public void getData() {
         Observable<CommonBean<UserBean>> loginObservable = repository.login("maoqiqi", "123456");
         Observable<CommonBean<List<BannerBean>>> bannerObservable = repository.getBanner();
-        addSubscribe(Observable.zip(loginObservable, bannerObservable, Data::new)
-                .subscribeWith(new BaseObserver<Data>() {
+        addSubscribe(Observable.zip(loginObservable, bannerObservable, Data::new).subscribeWith(
+                new BaseObserver<Data>(view) {
                     @Override
                     public void onNext(Data data) {
                         if (!view.isActive()) return;

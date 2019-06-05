@@ -26,7 +26,7 @@ public class CollectActivity extends BaseActivity {
 
         ArticlesFragment fragment = (ArticlesFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_COLLECT);
+            fragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_COLLECT, 0);
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
     }

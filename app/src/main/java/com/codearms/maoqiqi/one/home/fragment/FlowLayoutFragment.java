@@ -17,11 +17,12 @@ import android.widget.TextView;
 
 import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
-import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.home.presenter.FlowLayoutPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.FlowLayoutContract;
+import com.codearms.maoqiqi.one.navigation.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 
 import java.util.List;
@@ -202,12 +203,11 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
 
             viewHolder.chipGroup.removeAllViews();
             for (int j = 0; j < bean.getArticleBeanList().size(); j++) {
-                chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_item_flow_layout, null);
+                chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_chip, null);
                 chip.setText(bean.getArticleBeanList().get(j).getTitle());
                 chip.setTextColor(randomColor());
-                final int id = bean.getArticleBeanList().get(j).getId();
-                final String url = bean.getArticleBeanList().get(j).getLink();
-                chip.setOnClickListener(v -> WebViewActivity.start(context, id, url));
+                final ArticleBean articleBean = bean.getArticleBeanList().get(j);
+                chip.setOnClickListener(v -> WebViewActivity.start(context, from, articleBean));
                 viewHolder.chipGroup.addView(chip);
             }
 
@@ -223,7 +223,7 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
 
             viewHolder.chipGroup.removeAllViews();
             for (int j = 0; j < bean.getChildClassifyBeanList().size(); j++) {
-                chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_item_flow_layout, null);
+                chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_chip, null);
                 chip.setText(bean.getChildClassifyBeanList().get(j).getName());
                 chip.setTextColor(randomColor());
                 chip.setOnClickListener(v -> ClassifyActivity.start(context, bean));

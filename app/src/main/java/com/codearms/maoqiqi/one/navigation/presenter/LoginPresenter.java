@@ -7,9 +7,6 @@ import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.LoginContract;
 import com.codearms.maoqiqi.one.utils.BaseObserver;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public class LoginPresenter extends RxPresenterImpl<LoginContract.View> implements LoginContract.Presenter {
 
     private OneRepository repository;
@@ -21,10 +18,8 @@ public class LoginPresenter extends RxPresenterImpl<LoginContract.View> implemen
 
     @Override
     public void login(String userName, String password) {
-        addSubscribe(repository.login(userName, password)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new BaseObserver<CommonBean<UserBean>>() {
+        addSubscribe(repository.login(userName, password).subscribeWith(
+                new BaseObserver<CommonBean<UserBean>>(view) {
                     @Override
                     public void onNext(CommonBean<UserBean> commonBean) {
                         if (!view.isActive()) return;

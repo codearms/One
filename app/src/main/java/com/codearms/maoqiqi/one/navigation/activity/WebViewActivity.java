@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.navigation.fragment.WebViewFragment;
 import com.codearms.maoqiqi.one.utils.ActivityUtils;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
@@ -43,23 +44,29 @@ public class WebViewActivity extends BaseActivity {
     private WebViewFragment fragment;
 
     public static void start(@NonNull Context context, @NonNull String url) {
-        start(context, 0, url);
+        start(context, DEFAULT_POSITION, url);
     }
 
-    public static void start(@NonNull Context context, int id, @NonNull String url) {
-        start(context, DEFAULT_POSITION, id, url);
-    }
-
-    public static void start(@NonNull Context context, int position, int id, @NonNull String url) {
-        start(context, position, id, "", url);
-    }
-
-    public static void start(@NonNull Context context, int position, int id, @Nullable String title, @NonNull String url) {
+    public static void start(@NonNull Context context, int position, @NonNull String url) {
         Bundle bundle = new Bundle();
+        bundle.putInt("type", 1);
         bundle.putInt("position", position);
-        bundle.putInt("id", id);
-        bundle.putString("title", title);
         bundle.putString("url", url);
+        Intent intent = new Intent(context, WebViewActivity.class);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+    public static void start(@NonNull Context context, String from, @NonNull ArticleBean articleBean) {
+        start(context, DEFAULT_POSITION, from, articleBean);
+    }
+
+    public static void start(@NonNull Context context, int position, String from, @NonNull ArticleBean articleBean) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", 2);
+        bundle.putInt("position", position);
+        bundle.putString("from", from);
+        bundle.putParcelable("articleBean", articleBean);
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
@@ -77,22 +84,27 @@ public class WebViewActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) return;
 
+        int type = bundle.getInt("type");
         position = bundle.getInt("position", DEFAULT_POSITION);
-        int id = bundle.getInt("id");
-        String title = bundle.getString("title", "");
-        String url = bundle.getString("url", "");
 
         statusBarView.setBackgroundResource(bgResIds[position]);
         toolbar.setBackgroundResource(bgResIds[position]);
         toolbar.setPopupTheme(themeIds[position]);
-        if (!title.equals("")) toolbar.setTitle(title);
+        // if (!title.equals("")) toolbar.setTitle(title);
         toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu_more));
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         fragment = (WebViewFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = WebViewFragment.newInstance(bgResIds[position], id, title, url);
+            if (type == 1) {
+                String url = bundle.getString("url", "");
+                fragment = WebViewFragment.newInstance(bgResIds[position], url);
+            } else {
+                String from = bundle.getString("from", "");
+                ArticleBean articleBean = bundle.getParcelable("articleBean");
+                fragment = WebViewFragment.newInstance(bgResIds[position], from, articleBean);
+            }
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
     }
@@ -158,7 +170,7 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (fragment.getWebView().canGoBack()) fragment.getWebView().goBack();
+        if (fragment != null && fragment.getWebView().canGoBack()) fragment.getWebView().goBack();
         else super.onBackPressed();
     }
 }

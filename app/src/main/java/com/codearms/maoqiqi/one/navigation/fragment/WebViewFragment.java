@@ -20,6 +20,8 @@ import android.widget.ProgressBar;
 import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.data.bean.ArticleBean;
+import com.codearms.maoqiqi.one.home.fragment.ArticlesFragment;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.navigation.presenter.WebViewPresenter;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.WebViewContract;
@@ -36,18 +38,32 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
 
     private String titleText;
     private String url;
+    private String from;
+    private ArticleBean articleBean;
+
+    private boolean isCollect;
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
      *
      * @return A new instance of fragment WebViewFragment.
      */
-    public static WebViewFragment newInstance(int bgResId, int id, String title, @NonNull String url) {
+    public static WebViewFragment newInstance(int bgResId, @NonNull String url) {
         Bundle bundle = new Bundle();
+        bundle.putInt("type", 1);
         bundle.putInt("bgResId", bgResId);
-        bundle.putInt("id", id);
-        bundle.putString("title", title);
         bundle.putString("url", url);
+        WebViewFragment fragment = new WebViewFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    public static WebViewFragment newInstance(int bgResId, String from, ArticleBean articleBean) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", 2);
+        bundle.putInt("bgResId", bgResId);
+        bundle.putString("from", from);
+        bundle.putParcelable("articleBean", articleBean);
         WebViewFragment fragment = new WebViewFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -108,11 +124,18 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         Bundle bundle = getArguments();
         if (bundle == null) return;
 
-        int bgResId = bundle.getInt("bgResId", R.color.color_navigation);
-        int id = bundle.getInt("id");
-        titleText = bundle.getString("title");
-        url = bundle.getString("url", getString(R.string.project_git));
-        if (id != 0) url = url.replaceAll("http://", "https://");
+        int type = bundle.getInt("type");
+        int bgResId = bundle.getInt("bgResId");
+        if (type == 1) {
+            url = bundle.getString("url", getString(R.string.project_git));
+        } else {
+            from = bundle.getString("from", "");
+            articleBean = bundle.getParcelable("articleBean");
+            assert articleBean != null;
+            url = articleBean.getLink();
+            url = url.replaceAll("http://", "https://");
+            isCollect = from.equals(ArticlesFragment.FROM_COLLECT) || articleBean.isCollect();
+        }
 
         webView.loadUrl(url);
         webView.setOnScrollChangeListener((l, t, oldl, oldt) -> {
@@ -124,15 +147,32 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         });
 
         fabCollection.setBackgroundTintList(ContextCompat.getColorStateList(context, bgResId));
+        fabCollection.setImageResource(isCollect ? R.drawable.ic_collect : R.drawable.ic_un_collect);
         fabCollection.setOnClickListener(v -> {
             if (App.getInstance().getUserBean() == null) {
                 Toasty.show(context, getString(R.string.please_login));
                 return;
             }
-            if (id == 0) {
-                presenter.collect(titleText, App.getInstance().getUserBean().getUserName(), url);
+
+            if (isCollect) {
+                // 收藏页面(自定义收藏内容取消收藏需要调用unCollect(int id, int originId))
+                if (from == null || from.equals(ArticlesFragment.FROM_COLLECT)) {
+                    presenter.unCollect(articleBean.getId(), articleBean.getOriginId());
+                } else {
+                    presenter.unCollect(articleBean.getId());
+                }
             } else {
-                presenter.collect(id);
+                // 自定义收藏内容
+                if (from == null) {
+                    presenter.collect(titleText, App.getInstance().getUserBean().getUserName(), url);
+                } else {
+                    // 收藏页面的取消之后不能再次收藏
+                    if (from.equals(ArticlesFragment.FROM_COLLECT)) {
+                        showErrorMsg("已经取消收藏");
+                    } else {
+                        presenter.collect(articleBean.getId());
+                    }
+                }
             }
         });
     }
@@ -142,8 +182,18 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
     }
 
     @Override
-    public void collectSuccess() {
-        Toasty.show(context, "收藏成功");
+    public void collectSuccess(ArticleBean articleBean) {
+        if (articleBean != null) this.articleBean = articleBean;
+        isCollect = true;
+        fabCollection.setImageResource(R.drawable.ic_collect);
+        showErrorMsg("收藏成功");
+    }
+
+    @Override
+    public void unCollectSuccess() {
+        isCollect = false;
+        fabCollection.setImageResource(R.drawable.ic_un_collect);
+        showErrorMsg("取消收藏成功");
     }
 
     private final class MyWebViewClient extends WebViewClient {
@@ -171,7 +221,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
-            if (!titleText.equals("")) return;
+            if (titleText != null && !titleText.equals("")) return;
 
             titleText = title;
             if (context instanceof WebViewActivity) {

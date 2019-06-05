@@ -9,9 +9,6 @@ import com.codearms.maoqiqi.one.utils.BaseObserver;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public class WeChatPresenter extends RxPresenterImpl<WeChatContract.View> implements WeChatContract.Presenter {
 
     private OneRepository repository;
@@ -23,10 +20,8 @@ public class WeChatPresenter extends RxPresenterImpl<WeChatContract.View> implem
 
     @Override
     public void getWxList() {
-        addSubscribe(repository.getWxList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new BaseObserver<CommonBean<List<ChildClassifyBean>>>() {
+        addSubscribe(repository.getWxList().subscribeWith(
+                new BaseObserver<CommonBean<List<ChildClassifyBean>>>(view) {
                     @Override
                     public void onNext(CommonBean<List<ChildClassifyBean>> commonBean) {
                         if (!view.isActive()) return;

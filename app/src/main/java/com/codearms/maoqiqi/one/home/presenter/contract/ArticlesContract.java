@@ -29,6 +29,8 @@ public interface ArticlesContract {
 
         // 取消收藏
         void unCollect(int id, int originId);
+
+        void query(int page, String k);
     }
 
     interface View extends BaseView<Presenter> {
@@ -38,5 +40,7 @@ public interface ArticlesContract {
         void setArticles(ArticleBeans articleBeans, boolean isRefresh);
 
         void collectSuccess();
+
+        void unCollectSuccess();
     }
 }

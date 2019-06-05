@@ -9,9 +9,6 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
 
     private BaseView<? extends BasePresenter> view;
 
-    public BaseObserver() {
-    }
-
     public BaseObserver(BaseView<? extends BasePresenter> view) {
         this.view = view;
     }

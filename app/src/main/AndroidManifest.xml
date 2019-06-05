@@ -27,7 +27,7 @@
         <activity android:name=".home.activity.WeChatActivity" />
         <activity android:name=".home.activity.KnowledgeActivity" />
         <activity android:name=".home.activity.ProjectActivity" />
-        <activity android:name=".home.activity.ClassifyActivity" />
+        <activity android:name=".navigation.activity.ClassifyActivity" />
         <!--navigation-->
         <activity
             android:name=".navigation.activity.LoginActivity"
@@ -62,6 +62,10 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity
+            android:name=".home.activity.ImageActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
