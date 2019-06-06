@@ -2,7 +2,6 @@ package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.base.RxPresenterImpl;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
-import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.home.presenter.contract.HomeContract;
@@ -24,52 +23,44 @@ public class HomePresenter extends RxPresenterImpl<HomeContract.View> implements
     @Override
     public void getBanner() {
         addSubscribe(repository.getBanner().subscribeWith(
-                new BaseObserver<CommonBean<List<BannerBean>>>(view) {
+                new BaseObserver<List<BannerBean>>(view) {
                     @Override
-                    public void onNext(CommonBean<List<BannerBean>> commonBean) {
+                    public void onNext(List<BannerBean> bannerBeans) {
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.setBanner(commonBean.getData());
-                        }
+                        view.setBanner(bannerBeans);
                     }
                 }));
     }
 
     @Override
     public void getData() {
-        Observable<CommonBean<UserBean>> loginObservable = repository.login("maoqiqi", "123456");
-        Observable<CommonBean<List<BannerBean>>> bannerObservable = repository.getBanner();
+        Observable<UserBean> loginObservable = repository.login("maoqiqi", "123456");
+        Observable<List<BannerBean>> bannerObservable = repository.getBanner();
         addSubscribe(Observable.zip(loginObservable, bannerObservable, Data::new).subscribeWith(
                 new BaseObserver<Data>(view) {
                     @Override
                     public void onNext(Data data) {
                         if (!view.isActive()) return;
-
-                        if (data.getUserData().getErrorCode() == 0) {
-                            view.userInfo(data.getUserData().getData());
-                        }
-                        if (data.getBannerData().getErrorCode() == 0) {
-                            view.setBanner(data.getBannerData().getData());
-                        }
+                        view.userInfo(data.getUserData());
+                        view.setBanner(data.getBannerData());
                     }
                 }));
     }
 
     private final class Data {
-        private CommonBean<UserBean> userData;
-        private CommonBean<List<BannerBean>> bannerData;
+        private UserBean userData;
+        private List<BannerBean> bannerData;
 
-        Data(CommonBean<UserBean> userData, CommonBean<List<BannerBean>> bannerData) {
+        Data(UserBean userData, List<BannerBean> bannerData) {
             this.userData = userData;
             this.bannerData = bannerData;
         }
 
-        CommonBean<UserBean> getUserData() {
+        UserBean getUserData() {
             return userData;
         }
 
-        CommonBean<List<BannerBean>> getBannerData() {
+        List<BannerBean> getBannerData() {
             return bannerData;
         }
     }

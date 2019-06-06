@@ -79,6 +79,24 @@
     <string name="preference">偏好设置</string>
 
     <string name="image_description">image description</string>
+    <string name="http_error">网络异常</string>
+    <string name="unKnown_error">未知错误</string>
+
+    <string name="failed_to_banner">获取广告数据失败</string>
+    <string name="failed_to_article">获取文章列表数据失败</string>
+    <string name="failed_to_knowledge">获取知识体系数据列表失败</string>
+    <string name="failed_to_wx_chat">获取公众号数据列表失败</string>
+    <string name="failed_to_navigation">获取导航数据列表失败</string>
+    <string name="failed_to_project">获取项目数据列表失败</string>
+    <string name="failed_to_project_classify">获取项目分类数据列表失败</string>
+    <string name="success_to_collect">收藏成功</string>
+    <string name="failed_to_collect">收藏失败</string>
+    <string name="success_to_cancel_collect">取消收藏成功</string>
+    <string name="failed_to_cancel_collect">取消收藏失败</string>
+    <string name="failed_to_collection">获取收藏数据失败</string>
+    <string name="failed_to_search">获取搜索数据列表失败</string>
+    <string name="failed_to_top">获取热门数据失败</string>
+    <string name="failed_to_useful_sites">获取常用网站数据失败</string>
 
     <string-array name="news_titles">
         <item>推荐</item>

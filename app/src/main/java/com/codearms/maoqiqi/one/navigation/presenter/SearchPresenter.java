@@ -1,7 +1,6 @@
 package com.codearms.maoqiqi.one.navigation.presenter;
 
 import com.codearms.maoqiqi.base.RxPresenterImpl;
-import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.SearchContract;
@@ -21,14 +20,11 @@ public class SearchPresenter extends RxPresenterImpl<SearchContract.View> implem
     @Override
     public void getHotKey() {
         addSubscribe(repository.getHotKey().subscribeWith(
-                new BaseObserver<CommonBean<List<HotKeyBean>>>(view) {
+                new BaseObserver<List<HotKeyBean>>(view) {
                     @Override
-                    public void onNext(CommonBean<List<HotKeyBean>> commonBean) {
+                    public void onNext(List<HotKeyBean> hotKeyBeans) {
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.setHotKey(commonBean.getData());
-                        }
+                        view.setHotKey(hotKeyBeans);
                     }
                 }));
     }

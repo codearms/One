@@ -1,7 +1,6 @@
 package com.codearms.maoqiqi.one.navigation.presenter;
 
 import com.codearms.maoqiqi.base.RxPresenterImpl;
-import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.RegisterContract;
@@ -19,16 +18,11 @@ public class RegisterPresenter extends RxPresenterImpl<RegisterContract.View> im
     @Override
     public void register(String userName, String password, String confirmPassword) {
         addSubscribe(repository.register(userName, password, confirmPassword).subscribeWith(
-                new BaseObserver<CommonBean<UserBean>>(view) {
+                new BaseObserver<UserBean>(view) {
                     @Override
-                    public void onNext(CommonBean<UserBean> commonBean) {
+                    public void onNext(UserBean userBean) {
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.userInfo(commonBean.getData());
-                        } else {
-                            view.showErrorMsg(commonBean.getErrorMsg());
-                        }
+                        view.userInfo(userBean);
                     }
                 }));
     }

@@ -36,7 +36,7 @@ public interface ServerApi {
      * @return 常用网站数据
      */
     @GET("friend/json")
-    Observable<CommonBean> getCommon();
+    Observable<CommonBean<Object>> getCommon();
 
     /**
      * 热词(https://www.wanandroid.com/hotkey/json)
@@ -98,7 +98,7 @@ public interface ServerApi {
      * @return 指定搜索内容, 搜索当前公众号的某页的此类数据
      */
     @GET("wxarticle/list/{id}/{page}/json")
-    Observable<CommonBean> getWxSearchArticles(@Path("id") int id, @Path("page") int page, @Query("k") String k);
+    Observable<CommonBean<Object>> getWxSearchArticles(@Path("id") int id, @Path("page") int page, @Query("k") String k);
 
     /**
      * 知识体系(https://www.wanandroid.com/tree/json)
@@ -164,7 +164,7 @@ public interface ServerApi {
      *
      * @return 退出
      */
-    Observable<CommonBean> logout();
+    Observable<CommonBean<Object>> logout();
 
     /**
      * 收藏文章列表(https://www.wanandroid.com/lg/collect/list/0/json)
@@ -182,7 +182,7 @@ public interface ServerApi {
      * @return 收藏站内文章
      */
     @POST("lg/collect/{id}/json")
-    Observable<CommonBean<String>> collect(@Path("id") int id);
+    Observable<CommonBean<Object>> collect(@Path("id") int id);
 
     /**
      * 收藏站外文章(https://www.wanandroid.com/lg/collect/add/json)
@@ -203,7 +203,7 @@ public interface ServerApi {
      * @return 取消收藏
      */
     @POST("lg/uncollect_originId/{id}/json")
-    Observable<CommonBean<String>> unCollect(@Path("id") int id);
+    Observable<CommonBean<Object>> unCollect(@Path("id") int id);
 
     /**
      * 取消收藏[我的收藏页面](https://www.wanandroid.com/lg/uncollect/2805/json)
@@ -214,7 +214,7 @@ public interface ServerApi {
      */
     @POST("lg/uncollect/{id}/json")
     @FormUrlEncoded
-    Observable<CommonBean<String>> unCollect(@Path("id") int id, @Field("originId") int originId);
+    Observable<CommonBean<Object>> unCollect(@Path("id") int id, @Field("originId") int originId);
 
     /**
      * 收藏网站列表(https://www.wanandroid.com/lg/collect/usertools/json)
@@ -222,7 +222,7 @@ public interface ServerApi {
      * @return 收藏网站列表数据
      */
     @GET("lg/collect/usertools/json")
-    Observable<CommonBean> getCollectUrl();
+    Observable<CommonBean<Object>> getCollectUrl();
 
     /**
      * 收藏网址(https://www.wanandroid.com/lg/collect/addtool/json)
@@ -233,7 +233,7 @@ public interface ServerApi {
      */
     @POST("lg/collect/addtool/json")
     @FormUrlEncoded
-    Observable<CommonBean> collectUrl(@Field("name") String name, @Field("link") String link);
+    Observable<CommonBean<Object>> collectUrl(@Field("name") String name, @Field("link") String link);
 
     /**
      * 编辑收藏网站(https://www.wanandroid.com/lg/collect/updatetool/json)
@@ -245,7 +245,7 @@ public interface ServerApi {
      */
     @POST("lg/collect/updatetool/json")
     @FormUrlEncoded
-    Observable<CommonBean> collectUrl(@Field("id") int id, @Field("name") String name, @Field("link") String link);
+    Observable<CommonBean<Object>> collectUrl(@Field("id") int id, @Field("name") String name, @Field("link") String link);
 
     /**
      * 删除收藏网站(https://www.wanandroid.com/lg/collect/deletetool/json)
@@ -255,7 +255,7 @@ public interface ServerApi {
      */
     @POST("lg/collect/deletetool/json")
     @FormUrlEncoded
-    Observable<CommonBean> unCollectUrl(@Field("id") int id);
+    Observable<CommonBean<Object>> unCollectUrl(@Field("id") int id);
 
     /**
      * 搜索(https://www.wanandroid.com/article/query/0/json)

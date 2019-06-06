@@ -1,7 +1,6 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.base.RxPresenterImpl;
-import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.home.presenter.contract.NavigationContract;
@@ -21,12 +20,11 @@ public class NavigationPresenter extends RxPresenterImpl<NavigationContract.View
     @Override
     public void getNavigation() {
         addSubscribe(repository.getNavigation().subscribeWith(
-                new BaseObserver<CommonBean<List<NavigationBean>>>(view) {
+                new BaseObserver<List<NavigationBean>>(view) {
                     @Override
-                    public void onNext(CommonBean<List<NavigationBean>> commonBean) {
+                    public void onNext(List<NavigationBean> navigationBeans) {
                         if (!view.isActive()) return;
-
-                        view.setNavigation(commonBean.getData());
+                        view.setNavigation(navigationBeans);
                     }
                 }));
     }

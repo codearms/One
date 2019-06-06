@@ -3,7 +3,6 @@ package com.codearms.maoqiqi.one.home.presenter;
 import com.codearms.maoqiqi.base.RxPresenterImpl;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
-import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.home.presenter.contract.ArticlesContract;
 import com.codearms.maoqiqi.one.utils.BaseObserver;
@@ -23,15 +22,14 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
 
     @Override
     public void getHomeArticles() {
-        Observable<CommonBean<List<ArticleBean>>> topArticleObservable = repository.getTopArticles();
-        Observable<CommonBean<ArticleBeans>> articleObservable = repository.getArticles(0);
+        Observable<List<ArticleBean>> topArticleObservable = repository.getTopArticles();
+        Observable<ArticleBeans> articleObservable = repository.getArticles(0);
         addSubscribe(Observable.zip(topArticleObservable, articleObservable, Data::new)
                 .subscribeWith(new BaseObserver<Data>(view) {
                     @Override
                     public void onNext(Data data) {
                         if (!view.isActive()) return;
-
-                        view.setHomeArticles(data.getTopArticleBeans().getData(), data.getArticleBeans().getData());
+                        view.setHomeArticles(data.getTopArticleBeans(), data.getArticleBeans());
                     }
                 }));
     }
@@ -39,16 +37,11 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getWxArticles(int id, int page) {
         addSubscribe(repository.getWxArticles(id, page)
-                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>(view) {
+                .subscribeWith(new BaseObserver<ArticleBeans>(view) {
                     @Override
-                    public void onNext(CommonBean<ArticleBeans> commonBean) {
+                    public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.setArticles(commonBean.getData(), true);
-                        } else {
-                            view.showErrorMsg(commonBean.getErrorMsg());
-                        }
+                        view.setArticles(articleBeans, true);
                     }
                 }));
     }
@@ -56,16 +49,11 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getKnowledgeArticles(int page, int cid) {
         addSubscribe(repository.getKnowledgeArticles(page, cid)
-                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>(view) {
+                .subscribeWith(new BaseObserver<ArticleBeans>(view) {
                     @Override
-                    public void onNext(CommonBean<ArticleBeans> commonBean) {
+                    public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.setArticles(commonBean.getData(), true);
-                        } else {
-                            view.showErrorMsg(commonBean.getErrorMsg());
-                        }
+                        view.setArticles(articleBeans, true);
                     }
                 }));
     }
@@ -73,16 +61,11 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getProjectArticles(int page, int cid) {
         addSubscribe(repository.getProjectArticles(page, cid)
-                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>(view) {
+                .subscribeWith(new BaseObserver<ArticleBeans>(view) {
                     @Override
-                    public void onNext(CommonBean<ArticleBeans> commonBean) {
+                    public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.setArticles(commonBean.getData(), true);
-                        } else {
-                            view.showErrorMsg(commonBean.getErrorMsg());
-                        }
+                        view.setArticles(articleBeans, true);
                     }
                 }));
     }
@@ -90,16 +73,11 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getCollect(int page) {
         addSubscribe(repository.getCollect(page)
-                .subscribeWith(new BaseObserver<CommonBean<ArticleBeans>>(view) {
+                .subscribeWith(new BaseObserver<ArticleBeans>(view) {
                     @Override
-                    public void onNext(CommonBean<ArticleBeans> commonBean) {
+                    public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.setArticles(commonBean.getData(), true);
-                        } else {
-                            view.showErrorMsg(commonBean.getErrorMsg());
-                        }
+                        view.setArticles(articleBeans, true);
                     }
                 }));
     }
@@ -107,16 +85,12 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void collect(int id) {
         addSubscribe(repository.collect(id)
-                .subscribeWith(new BaseObserver<CommonBean<String>>(view) {
+                .subscribeWith(new BaseObserver<Object>(view) {
                     @Override
-                    public void onNext(CommonBean<String> commonBean) {
+                    public void onComplete() {
+                        super.onComplete();
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.collectSuccess();
-                        } else {
-                            view.showErrorMsg(commonBean.getErrorMsg());
-                        }
+                        view.collectSuccess();
                     }
                 }));
     }
@@ -124,16 +98,12 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void unCollect(int id) {
         addSubscribe(repository.unCollect(id)
-                .subscribeWith(new BaseObserver<CommonBean<String>>(view) {
+                .subscribeWith(new BaseObserver<Object>(view) {
                     @Override
-                    public void onNext(CommonBean<String> commonBean) {
+                    public void onComplete() {
+                        super.onComplete();
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.unCollectSuccess();
-                        } else {
-                            view.showErrorMsg(commonBean.getErrorMsg());
-                        }
+                        view.unCollectSuccess();
                     }
                 }));
     }
@@ -141,16 +111,12 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void unCollect(int id, int originId) {
         addSubscribe(repository.unCollect(id, originId)
-                .subscribeWith(new BaseObserver<CommonBean<String>>(view) {
+                .subscribeWith(new BaseObserver<Object>(view) {
                     @Override
-                    public void onNext(CommonBean<String> commonBean) {
+                    public void onComplete() {
+                        super.onComplete();
                         if (!view.isActive()) return;
-
-                        if (commonBean.getErrorCode() == 0) {
-                            view.unCollectSuccess();
-                        } else {
-                            view.showErrorMsg(commonBean.getErrorMsg());
-                        }
+                        view.unCollectSuccess();
                     }
                 }));
     }
@@ -158,31 +124,30 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void query(int page, String k) {
         addSubscribe(repository.query(page, k).subscribeWith(
-                new BaseObserver<CommonBean<ArticleBeans>>(view) {
+                new BaseObserver<ArticleBeans>(view) {
                     @Override
-                    public void onNext(CommonBean<ArticleBeans> commonBean) {
+                    public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
-
-                        view.setArticles(commonBean.getData(), true);
+                        view.setArticles(articleBeans, true);
                     }
                 }
         ));
     }
 
     private final class Data {
-        private CommonBean<List<ArticleBean>> topArticleBeans;
-        private CommonBean<ArticleBeans> articleBeans;
+        private List<ArticleBean> topArticleBeans;
+        private ArticleBeans articleBeans;
 
-        Data(CommonBean<List<ArticleBean>> topArticleBeans, CommonBean<ArticleBeans> articleBeans) {
+        Data(List<ArticleBean> topArticleBeans, ArticleBeans articleBeans) {
             this.topArticleBeans = topArticleBeans;
             this.articleBeans = articleBeans;
         }
 
-        CommonBean<List<ArticleBean>> getTopArticleBeans() {
+        List<ArticleBean> getTopArticleBeans() {
             return topArticleBeans;
         }
 
-        CommonBean<ArticleBeans> getArticleBeans() {
+        ArticleBeans getArticleBeans() {
             return articleBeans;
         }
     }
