@@ -10,6 +10,5 @@
     android:paddingTop="2dp"
     android:paddingRight="4dp"
     android:paddingBottom="2dp"
-    android:text="@string/project"
     android:textColor="@color/color_navigation"
     android:textSize="@dimen/text_size_smallest" />

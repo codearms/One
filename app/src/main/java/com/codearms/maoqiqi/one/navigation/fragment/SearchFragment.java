@@ -83,7 +83,7 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
             chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_chip, null);
             chip.setText(name);
             chip.setOnClickListener(v -> {
-                if (listener != null) listener.onSearch(name);
+                if (listener != null) listener.onSearch(name, true);
             });
             chipGroup.addView(chip);
         }
@@ -107,7 +107,7 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
         public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
             viewHolder.tvName.setText(list.get(i));
             viewHolder.view.setOnClickListener(v -> {
-                if (listener != null) listener.onSearch("android");
+                if (listener != null) listener.onSearch("android", true);
             });
             viewHolder.ivDelete.setOnClickListener(v -> {
             });
@@ -135,7 +135,7 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
 
     public interface SearchListener {
 
-        void onSearch(String k);
+        void onSearch(String k, boolean setText);
     }
 
     public void setSearchListener(SearchListener searchListener) {

@@ -13,7 +13,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="@dimen/sixteen"
         android:layout_marginBottom="@dimen/sixteen"
-        android:contentDescription="@string/scan_code_description"
+        android:contentDescription="@string/image_description"
         android:src="@drawable/ic_scan_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/sixteen"
         android:layout_marginLeft="@dimen/sixteen"
-        android:contentDescription="@string/project_description"
+        android:contentDescription="@string/image_description"
         android:src="@drawable/ic_avatar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

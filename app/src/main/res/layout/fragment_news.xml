@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="@string/news_category_description"
+        android:contentDescription="@string/image_description"
         android:paddingLeft="@dimen/sixteen"
         android:paddingRight="@dimen/sixteen"
         android:src="@drawable/ic_news_category"

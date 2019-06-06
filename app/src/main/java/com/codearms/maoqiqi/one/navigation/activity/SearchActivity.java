@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
@@ -30,7 +31,6 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
 
     private EditText etSearch;
 
-    private SearchFragment searchFragment;
     private ArticlesFragment articlesFragment;
 
     public static void start(@NonNull Context context, int position) {
@@ -50,6 +50,7 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
         StatusBarView statusBarView = findViewById(R.id.status_bar);
         Toolbar toolbar = findViewById(R.id.toolbar);
         etSearch = findViewById(R.id.et_search);
+        ImageView ivSearch = findViewById(R.id.iv_search);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) return;
@@ -60,8 +61,9 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
         toolbar.setBackgroundResource(bgResIds[position]);
         toolbar.setPopupTheme(themeIds[position]);
         setSupportActionBar(toolbar);
+        ivSearch.setOnClickListener(v -> onSearch(etSearch.getText().toString(), false));
 
-        searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag(TAG_SEARCH);
+        SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag(TAG_SEARCH);
         if (searchFragment == null) {
             searchFragment = SearchFragment.newInstance();
             searchFragment.setSearchListener(this);
@@ -70,25 +72,20 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
     }
 
     @Override
-    public void onSearch(String k) {
-        etSearch.setText(k);
-        etSearch.setSelection(etSearch.getText().length());
+    public void onSearch(String k, boolean setText) {
+        if (setText) {
+            etSearch.setText(k);
+            etSearch.setSelection(etSearch.getText().length());
+        }
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        if (searchFragment != null) ft.hide(searchFragment);
-
+        articlesFragment = (ArticlesFragment) getSupportFragmentManager().findFragmentByTag(TAG_ARTICLES);
         if (articlesFragment == null) {
-            articlesFragment = (ArticlesFragment) getSupportFragmentManager().findFragmentByTag(TAG_ARTICLES);
-            if (articlesFragment == null)
-                articlesFragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_SEARCH, k);
-        }
-
-        if (!articlesFragment.isAdded()) {
-            ft.add(R.id.fl_content, articlesFragment, TAG_ARTICLES).commit();
+            articlesFragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_SEARCH, k);
+            ft.add(R.id.fl_content, articlesFragment, TAG_ARTICLES).addToBackStack(null).commit();
         } else {
-            // articlesFragment.setData(k);
-            ft.show(articlesFragment).commit();
+            articlesFragment.setSearchData(k);
         }
     }
 }

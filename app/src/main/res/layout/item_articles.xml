@@ -22,7 +22,7 @@
             android:id="@+id/iv_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/article_top_description"
+            android:contentDescription="@string/image_description"
             android:src="@drawable/ic_article_top"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"

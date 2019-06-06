@@ -180,6 +180,13 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
         }
     }
 
+    public void setSearchData(String k) {
+        // 内容相同,不去搜索
+        if (this.k.equals(k)) return;
+        this.k = k;
+        presenter.query(0, k);
+    }
+
     @Override
     public void setHomeArticles(List<ArticleBean> topArticleBeans, ArticleBeans articleBeans) {
         List<ArticleBean> list = new ArrayList<>();
