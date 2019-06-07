@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
-import com.codearms.maoqiqi.one.BaseActivity;
+import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 

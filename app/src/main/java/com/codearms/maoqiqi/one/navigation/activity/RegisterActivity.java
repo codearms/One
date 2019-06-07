@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
-import com.codearms.maoqiqi.one.BaseActivity;
+import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.navigation.fragment.RegisterFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;

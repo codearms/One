@@ -1,8 +1,7 @@
-package com.codearms.maoqiqi.one.data.bean;
+package com.codearms.maoqiqi.bean;
 
 public class CommonBean<T> {
 
-    // 未登录的错误码为-1001,其他错误码为-1,成功为0.
     private int errorCode;
     private String errorMsg;
     private T data;

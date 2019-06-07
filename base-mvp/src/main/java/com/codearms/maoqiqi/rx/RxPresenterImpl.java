@@ -1,4 +1,6 @@
-package com.codearms.maoqiqi.base;
+package com.codearms.maoqiqi.rx;
+
+import com.codearms.maoqiqi.base.BaseView;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;

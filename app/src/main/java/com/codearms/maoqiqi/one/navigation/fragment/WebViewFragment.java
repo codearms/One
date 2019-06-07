@@ -25,8 +25,8 @@ import com.codearms.maoqiqi.one.home.fragment.ArticlesFragment;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.navigation.presenter.WebViewPresenter;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.WebViewContract;
-import com.codearms.maoqiqi.one.utils.Toasty;
 import com.codearms.maoqiqi.one.view.ObservableWebView;
+import com.codearms.maoqiqi.utils.T;
 
 public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> implements WebViewContract.View {
 
@@ -149,7 +149,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         fabCollection.setImageResource(isCollect ? R.drawable.ic_collect : R.drawable.ic_un_collect);
         fabCollection.setOnClickListener(v -> {
             if (App.getInstance().getUserBean() == null) {
-                Toasty.show(context, getString(R.string.please_login));
+                T.show(context, getString(R.string.please_login));
                 return;
             }
 

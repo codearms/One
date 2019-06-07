@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import com.codearms.maoqiqi.one.BaseActivity;
+import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 

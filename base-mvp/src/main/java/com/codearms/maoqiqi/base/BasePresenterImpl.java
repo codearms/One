@@ -1,10 +1,10 @@
 package com.codearms.maoqiqi.base;
 
-public abstract class PresenterImpl<T extends BaseView> implements BasePresenter<T> {
+public abstract class BasePresenterImpl<T extends BaseView> implements BasePresenter<T> {
 
     protected T view;
 
-    public PresenterImpl(T view) {
+    public BasePresenterImpl(T view) {
         this.view = view;
     }
 

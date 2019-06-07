@@ -28,8 +28,8 @@ import com.codearms.maoqiqi.one.home.activity.WeChatActivity;
 import com.codearms.maoqiqi.one.home.presenter.HomePresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.HomeContract;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
-import com.codearms.maoqiqi.one.utils.ActivityUtils;
 import com.codearms.maoqiqi.one.utils.GlideImageLoader;
+import com.codearms.maoqiqi.utils.ActivityUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 

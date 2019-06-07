@@ -1,10 +1,10 @@
 package com.codearms.maoqiqi.one.data.net;
 
+import com.codearms.maoqiqi.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
-import com.codearms.maoqiqi.one.data.bean.CommonBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;

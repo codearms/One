@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.codearms.maoqiqi.one.BaseActivity;
+import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.ArticlesFragment;
 import com.codearms.maoqiqi.one.navigation.fragment.SearchFragment;

@@ -1,11 +1,11 @@
 package com.codearms.maoqiqi.one.navigation.presenter;
 
-import com.codearms.maoqiqi.base.RxPresenterImpl;
+import com.codearms.maoqiqi.base.BaseObserver;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.SearchContract;
-import com.codearms.maoqiqi.one.utils.BaseObserver;
+import com.codearms.maoqiqi.rx.RxPresenterImpl;
 
 import java.util.List;
 

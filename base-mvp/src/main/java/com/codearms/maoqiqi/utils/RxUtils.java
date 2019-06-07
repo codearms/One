@@ -1,6 +1,7 @@
-package com.codearms.maoqiqi.one.utils;
+package com.codearms.maoqiqi.utils;
 
-import com.codearms.maoqiqi.one.data.bean.CommonBean;
+import com.codearms.maoqiqi.bean.CommonBean;
+import com.codearms.maoqiqi.execption.ErrorCodeException;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;

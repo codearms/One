@@ -20,7 +20,7 @@ import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.navigation.activity.RegisterActivity;
 import com.codearms.maoqiqi.one.navigation.presenter.LoginPresenter;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.LoginContract;
-import com.codearms.maoqiqi.one.utils.ActivityUtils;
+import com.codearms.maoqiqi.utils.ActivityUtils;
 
 public class LoginFragment extends BaseFragment<LoginContract.Presenter> implements LoginContract.View, View.OnClickListener {
 

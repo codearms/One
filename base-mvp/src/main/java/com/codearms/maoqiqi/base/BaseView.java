@@ -34,6 +34,13 @@ public interface BaseView<T extends BasePresenter> {
     /**
      * 显示错误信息
      *
+     * @param resId 资源Id
+     */
+    void showErrorMsg(int resId);
+
+    /**
+     * 显示错误信息
+     *
      * @param errorMsg 错误信息
      */
     void showErrorMsg(String errorMsg);

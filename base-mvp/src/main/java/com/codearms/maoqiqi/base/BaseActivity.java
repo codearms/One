@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one;
+package com.codearms.maoqiqi.base;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

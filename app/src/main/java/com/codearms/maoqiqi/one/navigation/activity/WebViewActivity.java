@@ -14,15 +14,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.App;
-import com.codearms.maoqiqi.one.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.navigation.fragment.WebViewFragment;
-import com.codearms.maoqiqi.one.utils.ActivityUtils;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
-import com.codearms.maoqiqi.one.utils.Toasty;
 import com.codearms.maoqiqi.one.view.StatusBarView;
+import com.codearms.maoqiqi.utils.ActivityUtils;
+import com.codearms.maoqiqi.utils.T;
 
 import java.lang.reflect.Method;
 
@@ -158,7 +158,7 @@ public class WebViewActivity extends BaseActivity {
             case R.id.menu_collect:
                 // 收藏列表
                 if (App.getInstance().getUserBean() == null) {
-                    Toasty.show(this, getString(R.string.please_login));
+                    T.show(this, getString(R.string.please_login));
                 } else {
                     ActivityUtils.startActivity(this, CollectActivity.class);
                 }

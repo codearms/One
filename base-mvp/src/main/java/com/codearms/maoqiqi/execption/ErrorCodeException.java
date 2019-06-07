@@ -1,4 +1,4 @@
-package com.codearms.maoqiqi.one.utils;
+package com.codearms.maoqiqi.execption;
 
 public class ErrorCodeException extends Exception {
 

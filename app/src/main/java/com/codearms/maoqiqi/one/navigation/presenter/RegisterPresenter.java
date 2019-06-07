@@ -1,11 +1,11 @@
 package com.codearms.maoqiqi.one.navigation.presenter;
 
-import com.codearms.maoqiqi.base.RxPresenterImpl;
+import com.codearms.maoqiqi.base.BaseObserver;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.RegisterContract;
-import com.codearms.maoqiqi.one.utils.BaseObserver;
+import com.codearms.maoqiqi.rx.RxPresenterImpl;
 
 public class RegisterPresenter extends RxPresenterImpl<RegisterContract.View> implements RegisterContract.Presenter {
 

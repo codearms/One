@@ -21,6 +21,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.book.fragment.BookFragment;
 import com.codearms.maoqiqi.one.home.fragment.HomeFragment;
 import com.codearms.maoqiqi.one.movie.fragment.MovieFragment;
@@ -36,10 +37,10 @@ import com.codearms.maoqiqi.one.navigation.activity.SearchActivity;
 import com.codearms.maoqiqi.one.navigation.activity.UpdateDescriptionActivity;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.news.fragment.NewsFragment;
-import com.codearms.maoqiqi.one.utils.ActivityUtils;
 import com.codearms.maoqiqi.one.utils.FragmentCheckedChangeListener;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
-import com.codearms.maoqiqi.one.utils.Toasty;
+import com.codearms.maoqiqi.utils.ActivityUtils;
+import com.codearms.maoqiqi.utils.T;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener,
         NavigationView.OnNavigationItemSelectedListener {
@@ -152,7 +153,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 //                ActivityUtils.startActivity(this, SettingActivity.class);
                 break;
             case R.id.tv_mode:
-                Toasty.show(this, "开发中");
+                T.show(this, "开发中");
                 break;
         }
     }

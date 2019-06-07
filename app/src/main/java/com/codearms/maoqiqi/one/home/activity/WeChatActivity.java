@@ -5,11 +5,11 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.codearms.maoqiqi.one.BaseActivity;
+import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
-import com.codearms.maoqiqi.one.utils.Toasty;
+import com.codearms.maoqiqi.utils.T;
 
 public class WeChatActivity extends BaseActivity {
 
@@ -38,7 +38,7 @@ public class WeChatActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.menu_search) {
-            Toasty.show(this, "search");
+            T.show(this, "search");
             return true;
         }
         return false;

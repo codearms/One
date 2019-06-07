@@ -1,10 +1,8 @@
-package com.codearms.maoqiqi.one.utils;
+package com.codearms.maoqiqi.base;
 
 import android.util.Log;
 
-import com.codearms.maoqiqi.base.BasePresenter;
-import com.codearms.maoqiqi.base.BaseView;
-import com.codearms.maoqiqi.one.App;
+import com.codearms.maoqiqi.execption.ErrorCodeException;
 
 import io.reactivex.observers.ResourceObserver;
 
@@ -33,7 +31,7 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
 
         if (e instanceof ErrorCodeException) {
             if (errorMsgId != 0) {
-                view.showErrorMsg(App.getInstance().getString(errorMsgId));
+                view.showErrorMsg(errorMsgId);
             } else {
                 view.showErrorMsg(((ErrorCodeException) e).getErrorMsg());
             }

@@ -10,7 +10,7 @@ import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.data.net.ServerApi;
-import com.codearms.maoqiqi.one.utils.RxUtils;
+import com.codearms.maoqiqi.utils.RxUtils;
 
 import java.util.List;
 
