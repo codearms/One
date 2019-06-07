@@ -211,7 +211,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
         ArticleBean bean = adapter.getData().get(operationPosition);
         bean.setCollect(true);
         adapter.setData(operationPosition, bean);
-        showErrorMsg("收藏成功");
+        showErrorMsg(getString(R.string.success_to_collect));
     }
 
     @Override
@@ -228,6 +228,6 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
             bean.setCollect(false);
             adapter.setData(operationPosition, bean);
         }
-        showErrorMsg("取消收藏成功");
+        showErrorMsg(getString(R.string.success_to_un_collect));
     }
 }

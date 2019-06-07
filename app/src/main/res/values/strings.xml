@@ -31,12 +31,6 @@
     <string name="book">图书</string>
     <string name="movie">影视</string>
 
-    <string name="loading">加载中…</string>
-    <string name="share">分享</string>
-    <string name="copy_url">复制链接</string>
-    <string name="browser_open">浏览器打开</string>
-    <string name="collect">收藏列表</string>
-
     <string name="search">搜索</string>
     <string name="navigation">导航</string>
     <string name="we_chat">公众号</string>
@@ -49,35 +43,7 @@
     <string name="hour">小时</string>
     <string name="one_day">1天</string>
 
-
-    <string name="download_content">喜欢就推荐给你的小伙伴吧，扫描二维码直接下载，或者点击右上角分享链接地址。</string>
-    <string name="star_content">喜欢的朋友请Star，欢迎一起学习讨论。你的支持将是我最大的动力与褒奖~ O(∩_∩)O ~</string>
-
-    <string name="problem_feedback_content">您好，很希望得到您的意见，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我 ~ </string>
-    <string name="issues">Issues</string>
-    <string name="faq_name">常见问题</string>
-    <string name="contact_me">联系我</string>
-    <string name="qq">QQ</string>
-    <string name="email">Email</string>
-
-    <string name="current_version">当前版本 V%1$s</string>
-    <string name="function_introduction">功能介绍</string>
-    <string name="check_update">检查更新</string>
-    <string name="give_a_star">给个Star吧</string>
-
-    <string name="alipay">支付宝</string>
-    <string name="wxpay">微信</string>
-
     <string name="please_login">请先登录</string>
-
-    <string name="top_search">热门搜索</string>
-    <string name="search_clean">清空搜索历史</string>
-
-    <string name="preference">偏好设置</string>
-
-    <string name="image_description">image description</string>
-    <string name="http_error">网络异常</string>
-    <string name="unKnown_error">未知错误</string>
 
     <string name="failed_to_banner">获取广告数据失败</string>
     <string name="failed_to_common">获取常用网站数据失败</string>
@@ -101,7 +67,44 @@
     <string name="failed_to_query">搜索数据失败</string>
 
     <string name="success_to_collect">收藏成功</string>
-    <string name="success_to_cancel_collect">取消收藏成功</string>
+    <string name="success_to_un_collect">取消收藏成功</string>
+
+    <string name="already_un_collect">已经取消收藏</string>
+
+    <string name="loading">加载中…</string>
+    <string name="share">分享</string>
+    <string name="copy_url">复制链接</string>
+    <string name="browser_open">浏览器打开</string>
+    <string name="collect">收藏列表</string>
+
+    <string name="top_search">热门搜索</string>
+    <string name="search_clean">清空搜索历史</string>
+
+    <!-- =====================================首页资源结束===================================== -->
+
+    <string name="download_content">喜欢就推荐给你的小伙伴吧，扫描二维码直接下载，或者点击右上角分享链接地址。</string>
+    <string name="star_content">喜欢的朋友请Star，欢迎一起学习讨论。你的支持将是我最大的动力与褒奖~ O(∩_∩)O ~</string>
+
+    <string name="problem_feedback_content">您好，很希望得到您的意见，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我 ~ </string>
+    <string name="issues">Issues</string>
+    <string name="faq_name">常见问题</string>
+    <string name="contact_me">联系我</string>
+    <string name="qq">QQ</string>
+    <string name="email">Email</string>
+
+    <string name="current_version">当前版本 V%1$s</string>
+    <string name="function_introduction">功能介绍</string>
+    <string name="check_update">检查更新</string>
+    <string name="give_a_star">给个Star吧</string>
+
+    <string name="alipay">支付宝</string>
+    <string name="wxpay">微信</string>
+
+    <string name="preference">偏好设置</string>
+
+    <string name="image_description">image description</string>
+    <string name="http_error">网络异常</string>
+    <string name="unKnown_error">未知错误</string>
 
     <string-array name="news_titles">
         <item>推荐</item>

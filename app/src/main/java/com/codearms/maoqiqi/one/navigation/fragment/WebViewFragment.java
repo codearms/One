@@ -167,7 +167,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
                 } else {
                     // 收藏页面的取消之后不能再次收藏
                     if (from.equals(ArticlesFragment.FROM_COLLECT)) {
-                        showErrorMsg("已经取消收藏");
+                        showErrorMsg(getString(R.string.already_un_collect));
                     } else {
                         presenter.collect(articleBean.getId());
                     }
@@ -185,14 +185,14 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         if (articleBean != null) this.articleBean = articleBean;
         isCollect = true;
         fabCollection.setImageResource(R.drawable.ic_collect);
-        showErrorMsg("收藏成功");
+        showErrorMsg(getString(R.string.success_to_collect));
     }
 
     @Override
     public void unCollectSuccess() {
         isCollect = false;
         fabCollection.setImageResource(R.drawable.ic_un_collect);
-        showErrorMsg("取消收藏成功");
+        showErrorMsg(getString(R.string.success_to_un_collect));
     }
 
     private final class MyWebViewClient extends WebViewClient {
