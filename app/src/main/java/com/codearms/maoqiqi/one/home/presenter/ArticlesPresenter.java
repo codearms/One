@@ -1,6 +1,7 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.base.RxPresenterImpl;
+import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
@@ -22,6 +23,8 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
 
     @Override
     public void getHomeArticles() {
+        // failed_to_top_articles
+        // failed_to_articles
         Observable<List<ArticleBean>> topArticleObservable = repository.getTopArticles();
         Observable<ArticleBeans> articleObservable = repository.getArticles(0);
         addSubscribe(Observable.zip(topArticleObservable, articleObservable, Data::new)
@@ -37,7 +40,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getWxArticles(int id, int page) {
         addSubscribe(repository.getWxArticles(id, page)
-                .subscribeWith(new BaseObserver<ArticleBeans>(view) {
+                .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_wx_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
@@ -49,7 +52,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getKnowledgeArticles(int page, int cid) {
         addSubscribe(repository.getKnowledgeArticles(page, cid)
-                .subscribeWith(new BaseObserver<ArticleBeans>(view) {
+                .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_knowledge_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
@@ -61,7 +64,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getProjectArticles(int page, int cid) {
         addSubscribe(repository.getProjectArticles(page, cid)
-                .subscribeWith(new BaseObserver<ArticleBeans>(view) {
+                .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_project_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
@@ -73,7 +76,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void getCollect(int page) {
         addSubscribe(repository.getCollect(page)
-                .subscribeWith(new BaseObserver<ArticleBeans>(view) {
+                .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_collect_data) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
@@ -85,7 +88,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void collect(int id) {
         addSubscribe(repository.collect(id)
-                .subscribeWith(new BaseObserver<Object>(view) {
+                .subscribeWith(new BaseObserver<Object>(view, R.string.failed_to_collect) {
                     @Override
                     public void onComplete() {
                         super.onComplete();
@@ -98,7 +101,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void unCollect(int id) {
         addSubscribe(repository.unCollect(id)
-                .subscribeWith(new BaseObserver<Object>(view) {
+                .subscribeWith(new BaseObserver<Object>(view, R.string.failed_to_un_collect) {
                     @Override
                     public void onComplete() {
                         super.onComplete();
@@ -111,7 +114,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void unCollect(int id, int originId) {
         addSubscribe(repository.unCollect(id, originId)
-                .subscribeWith(new BaseObserver<Object>(view) {
+                .subscribeWith(new BaseObserver<Object>(view, R.string.failed_to_un_collect) {
                     @Override
                     public void onComplete() {
                         super.onComplete();
@@ -124,7 +127,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     @Override
     public void query(int page, String k) {
         addSubscribe(repository.query(page, k).subscribeWith(
-                new BaseObserver<ArticleBeans>(view) {
+                new BaseObserver<ArticleBeans>(view, R.string.failed_to_query) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;

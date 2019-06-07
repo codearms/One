@@ -46,7 +46,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/thirty_two"
             android:background="@color/color_text_title"
-            android:contentDescription="@string/code_description"
+            android:contentDescription="@string/image_description"
             android:padding="@dimen/eight"
             android:src="@drawable/ic_code" />
 

@@ -1,6 +1,7 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.base.RxPresenterImpl;
+import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.home.presenter.contract.FlowLayoutContract;
@@ -20,7 +21,7 @@ public class FlowLayoutPresenter extends RxPresenterImpl<FlowLayoutContract.View
     @Override
     public void getKnowledge() {
         addSubscribe(repository.getKnowledge().subscribeWith(
-                new BaseObserver<List<ParentClassifyBean>>(view) {
+                new BaseObserver<List<ParentClassifyBean>>(view, R.string.failed_to_knowledge) {
                     @Override
                     public void onNext(List<ParentClassifyBean> parentClassifyBeans) {
                         if (!view.isActive()) return;

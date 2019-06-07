@@ -1,6 +1,7 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.base.RxPresenterImpl;
+import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
@@ -21,7 +22,7 @@ public class ClassifyPresenter extends RxPresenterImpl<ClassifyContract.View> im
     @Override
     public void getWxList() {
         addSubscribe(repository.getWxList().subscribeWith(
-                new BaseObserver<List<ChildClassifyBean>>(view) {
+                new BaseObserver<List<ChildClassifyBean>>(view, R.string.failed_to_wx_chat) {
                     @Override
                     public void onNext(List<ChildClassifyBean> childClassifyBeans) {
                         if (!view.isActive()) return;
@@ -33,7 +34,7 @@ public class ClassifyPresenter extends RxPresenterImpl<ClassifyContract.View> im
     @Override
     public void getProject() {
         addSubscribe(repository.getProject().subscribeWith(
-                new BaseObserver<List<ChildClassifyBean>>(view) {
+                new BaseObserver<List<ChildClassifyBean>>(view, R.string.failed_to_project) {
                     @Override
                     public void onNext(List<ChildClassifyBean> childClassifyBeans) {
                         if (!view.isActive()) return;
@@ -45,7 +46,7 @@ public class ClassifyPresenter extends RxPresenterImpl<ClassifyContract.View> im
     @Override
     public void getKnowledge() {
         addSubscribe(repository.getKnowledge().subscribeWith(
-                new BaseObserver<List<ParentClassifyBean>>(view) {
+                new BaseObserver<List<ParentClassifyBean>>(view, R.string.failed_to_knowledge) {
                     @Override
                     public void onNext(List<ParentClassifyBean> parentClassifyBeans) {
                         if (!view.isActive()) return;

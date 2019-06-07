@@ -1,6 +1,7 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.base.RxPresenterImpl;
+import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
@@ -23,7 +24,7 @@ public class HomePresenter extends RxPresenterImpl<HomeContract.View> implements
     @Override
     public void getBanner() {
         addSubscribe(repository.getBanner().subscribeWith(
-                new BaseObserver<List<BannerBean>>(view) {
+                new BaseObserver<List<BannerBean>>(view, R.string.failed_to_banner) {
                     @Override
                     public void onNext(List<BannerBean> bannerBeans) {
                         if (!view.isActive()) return;

@@ -24,7 +24,7 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
 
     @Override
     public void onNext(T t) {
-
+        Log.e("info", "onNext()");
     }
 
     @Override
