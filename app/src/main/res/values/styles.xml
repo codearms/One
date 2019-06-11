@@ -116,4 +116,10 @@
         <item name="android:textColor">@color/color_navigation</item>
         <item name="android:textSize">@dimen/text_size_smaller</item>
     </style>
+
+    <!--项目描述标题栏展开样式-->
+    <style name="project_introduction_expanded_title_text_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/transparent</item>
+    </style>
 </resources>

@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <!--home-->
+        <activity android:name=".home.activity.UsefulSitesActivity" />
         <activity android:name=".home.activity.NavigationActivity" />
         <activity android:name=".home.activity.WeChatActivity" />
         <activity android:name=".home.activity.KnowledgeActivity" />

@@ -7,6 +7,7 @@ import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.data.bean.UsefulSitesBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.data.net.ServerApi;
@@ -43,8 +44,8 @@ public class OneRepository implements OneDataSource {
     }
 
     @Override
-    public Observable<Object> getCommon() {
-        return api.getCommon().compose(RxUtils.rxSchedulerHelper()).compose(RxUtils.handleResult());
+    public Observable<List<UsefulSitesBean>> getUsefulSites() {
+        return api.getUsefulSites().compose(RxUtils.rxSchedulerHelper()).compose(RxUtils.handleResult());
     }
 
     @Override

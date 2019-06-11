@@ -24,6 +24,7 @@ import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.home.activity.KnowledgeActivity;
 import com.codearms.maoqiqi.one.home.activity.NavigationActivity;
 import com.codearms.maoqiqi.one.home.activity.ProjectActivity;
+import com.codearms.maoqiqi.one.home.activity.UsefulSitesActivity;
 import com.codearms.maoqiqi.one.home.activity.WeChatActivity;
 import com.codearms.maoqiqi.one.home.presenter.HomePresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.HomeContract;
@@ -140,7 +141,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
                 }
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                for (int i = 1; i < menu.size(); i++) {
+                for (int i = 2; i < menu.size(); i++) {
                     Drawable drawable = menu.getItem(i).getIcon();
                     if (drawable != null)
                         drawable.setTint(getResources().getColor(R.color.color_home));
@@ -159,6 +160,10 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
+            case R.id.menu_useful_sites:
+                // 常用网站
+                ActivityUtils.startActivity(context, UsefulSitesActivity.class);
+                return true;
             case R.id.menu_navigation:
                 // 导航
                 ActivityUtils.startActivity(context, NavigationActivity.class);

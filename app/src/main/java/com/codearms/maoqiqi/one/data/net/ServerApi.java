@@ -8,6 +8,7 @@ import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.data.bean.UsefulSitesBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public interface ServerApi {
      * @return 常用网站数据
      */
     @GET("friend/json")
-    Observable<CommonBean<Object>> getCommon();
+    Observable<CommonBean<List<UsefulSitesBean>>> getUsefulSites();
 
     /**
      * 热词(https://www.wanandroid.com/hotkey/json)
