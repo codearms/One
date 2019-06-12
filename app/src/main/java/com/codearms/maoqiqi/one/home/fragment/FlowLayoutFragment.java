@@ -1,6 +1,5 @@
 package com.codearms.maoqiqi.one.home.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,9 +23,9 @@ import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.home.presenter.FlowLayoutPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.FlowLayoutContract;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
+import com.codearms.maoqiqi.utils.ColorUtils;
 
 import java.util.List;
-import java.util.Random;
 
 public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presenter> implements FlowLayoutContract.View {
 
@@ -209,9 +208,9 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
             for (int j = 0; j < bean.getArticleBeanList().size(); j++) {
                 chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_chip, null);
                 chip.setText(bean.getArticleBeanList().get(j).getTitle());
-                chip.setTextColor(randomColor());
+                chip.setTextColor(ColorUtils.randomDarkColor());
                 final ArticleBean articleBean = bean.getArticleBeanList().get(j);
-                chip.setOnClickListener(v -> WebViewActivity.start(context, from, articleBean));
+                chip.setOnClickListener(v -> WebViewActivity.start(context, 0, from, articleBean));
                 viewHolder.chipGroup.addView(chip);
             }
 
@@ -229,7 +228,7 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
             for (int j = 0; j < bean.getChildClassifyBeanList().size(); j++) {
                 chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_chip, null);
                 chip.setText(bean.getChildClassifyBeanList().get(j).getName());
-                chip.setTextColor(randomColor());
+                chip.setTextColor(ColorUtils.randomDarkColor());
                 chip.setTag(j);
                 chip.setOnClickListener(v -> {
                     int index = (int) v.getTag();
@@ -242,19 +241,6 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
                 ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewHolder.chipGroup.getLayoutParams();
                 params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
             }
-        }
-
-        /**
-         * 获取随机rgb颜色值
-         */
-        private int randomColor() {
-            Random random = new Random();
-            // 0-190,如果颜色值过大,就越接近白色,就看不清了,所以需要限定范围
-            int red = random.nextInt(150);
-            int green = random.nextInt(150);
-            int blue = random.nextInt(150);
-            // 使用rgb混合生成一种新的颜色,Color.rgb生成的是一个int数
-            return Color.rgb(red, green, blue);
         }
     }
 

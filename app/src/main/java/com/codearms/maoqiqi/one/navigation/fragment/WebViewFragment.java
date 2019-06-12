@@ -26,7 +26,7 @@ import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.navigation.presenter.WebViewPresenter;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.WebViewContract;
 import com.codearms.maoqiqi.one.view.ObservableWebView;
-import com.codearms.maoqiqi.utils.T;
+import com.codearms.maoqiqi.utils.ToastUtils;
 
 public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> implements WebViewContract.View {
 
@@ -35,6 +35,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
     private ObservableWebView webView;
     private ProgressBar progressBar;
     private FloatingActionButton fabCollection;
+    private boolean hide = false;
 
     private String titleText;
     private String url;
@@ -138,7 +139,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
 
         webView.loadUrl(url);
         webView.setOnScrollChangeListener((l, t, oldl, oldt) -> {
-            if (t - oldt > 0) {
+            if (hide || t - oldt > 0) {
                 fabCollection.hide();
             } else {
                 fabCollection.show();
@@ -149,7 +150,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         fabCollection.setImageResource(isCollect ? R.drawable.ic_collect : R.drawable.ic_un_collect);
         fabCollection.setOnClickListener(v -> {
             if (App.getInstance().getUserBean() == null) {
-                T.show(context, getString(R.string.please_login));
+                ToastUtils.show(context, getString(R.string.please_login));
                 return;
             }
 
@@ -165,12 +166,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
                 if (from == null) {
                     presenter.collect(titleText, App.getInstance().getUserBean().getUserName(), url);
                 } else {
-                    // 收藏页面的取消之后不能再次收藏
-                    if (from.equals(ArticlesFragment.FROM_COLLECT)) {
-                        showErrorMsg(getString(R.string.already_un_collect));
-                    } else {
-                        presenter.collect(articleBean.getId());
-                    }
+                    presenter.collect(articleBean.getId());
                 }
             }
         });
@@ -191,7 +187,13 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
     @Override
     public void unCollectSuccess() {
         isCollect = false;
-        fabCollection.setImageResource(R.drawable.ic_un_collect);
+        if (from.equals(ArticlesFragment.FROM_COLLECT)) {
+            // 收藏页面的取消之后不能再次收藏
+            hide = true;
+            fabCollection.hide();
+        } else {
+            fabCollection.setImageResource(R.drawable.ic_un_collect);
+        }
         showErrorMsg(getString(R.string.success_to_un_collect));
     }
 

@@ -11,9 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
@@ -26,6 +29,8 @@ import java.util.List;
 public class SearchFragment extends BaseFragment<SearchContract.Presenter> implements SearchContract.View {
 
     private ChipGroup chipGroup;
+    private Button btnClean;
+    private RecyclerViewAdapter adapter;
 
     private SearchListener listener;
 
@@ -54,18 +59,40 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
         super.initViews(savedInstanceState);
         chipGroup = rootView.findViewById(R.id.chip_group);
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+        btnClean = rootView.findViewById(R.id.btn_clean);
+        btnClean.setOnClickListener(v -> {
+            adapter.getData().clear();
+            adapter.notifyDataSetChanged();
+            if (adapter.getData().size() == 0) {
+                btnClean.setVisibility(View.GONE);
+            }
+        });
 
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add("item" + i);
-        }
+        adapter = new RecyclerViewAdapter(R.layout.item_history, new ArrayList<>());
+        adapter.setOnItemChildClickListener((adapter, view, position) -> itemChildClick(view, position));
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void itemChildClick(View view, int position) {
+        switch (view.getId()) {
+            case R.id.view:
+                if (listener != null) {
+                    listener.onSearch(adapter.getData().get(position).getName(), true);
+                }
+                break;
+            case R.id.iv_delete:
+                adapter.getData().remove(position);
+                adapter.notifyDataSetChanged();
+                if (adapter.getData().size() == 0) {
+                    btnClean.setVisibility(View.GONE);
+                }
+                break;
+        }
     }
 
     @Override
@@ -87,41 +114,30 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
             });
             chipGroup.addView(chip);
         }
-    }
 
-    private final class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
-
-        private List<String> list;
-
-        RecyclerViewAdapter(List<String> list) {
-            this.list = list;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_history, viewGroup, false));
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            viewHolder.tvName.setText(list.get(i));
-            viewHolder.view.setOnClickListener(v -> {
-                if (listener != null) listener.onSearch("android", true);
-            });
-            viewHolder.ivDelete.setOnClickListener(v -> {
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return list.size();
+        if (hotKeyBeanList.size() > 0) {
+            adapter.replaceData(hotKeyBeanList);
+            btnClean.setVisibility(View.VISIBLE);
         }
     }
 
-    private final class ViewHolder extends RecyclerView.ViewHolder {
+    static final class RecyclerViewAdapter extends BaseQuickAdapter<HotKeyBean, SearchFragment.ViewHolder> {
 
-        private View view;
+        RecyclerViewAdapter(int layoutResId, @Nullable List<HotKeyBean> data) {
+            super(layoutResId, data);
+        }
+
+        @Override
+        protected void convert(ViewHolder helper, HotKeyBean item) {
+            helper.tvName.setText(item.getName());
+            helper.addOnClickListener(R.id.view);
+            helper.addOnClickListener(R.id.iv_delete);
+        }
+    }
+
+    static final class ViewHolder extends BaseViewHolder {
+
+        View view;
         TextView tvName;
         ImageView ivDelete;
 

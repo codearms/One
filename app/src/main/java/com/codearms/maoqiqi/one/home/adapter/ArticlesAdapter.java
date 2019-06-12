@@ -30,6 +30,7 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
 
     private int topArticles;
     private String from;
+    private boolean isClassify;
 
     private final Application application;
     private final String just;
@@ -37,10 +38,11 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
     private final String hour;
     private final String oneDay;
 
-    public ArticlesAdapter(int layoutResId, @Nullable List<ArticleBean> data, int topArticles, String from) {
+    public ArticlesAdapter(int layoutResId, @Nullable List<ArticleBean> data, int topArticles, String from, boolean isClassify) {
         super(layoutResId, data);
         this.topArticles = topArticles;
         this.from = from;
+        this.isClassify = isClassify;
         this.application = App.getInstance();
         this.just = application.getString(R.string.just);
         this.minute = application.getString(R.string.minute);
@@ -90,7 +92,7 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
         }
 
         if (articleBean.getTags() != null && articleBean.getTags().size() > 0) {
-            TagAdapter tagAdapter = new TagAdapter(R.layout.item_tag, articleBean.getTags(), helper.getLayoutPosition());
+            TagAdapter tagAdapter = new TagAdapter(R.layout.item_tag, articleBean.getTags(), isClassify, helper.getLayoutPosition());
             tagAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 // 跳转到分类
                 int index = (int) view.getTag();
@@ -112,6 +114,7 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
                 helper.tvClassify.setText(articleBean.getChapterName());
             } else {
                 helper.tvClassify.setText(String.format("%s/%s", articleBean.getSuperChapterName(), articleBean.getChapterName()));
+                if (isClassify) helper.addOnClickListener(R.id.tv_classify);
             }
         }
 
@@ -130,7 +133,6 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
         helper.addOnClickListener(R.id.card_view);
         helper.addOnClickListener(R.id.iv_project);
         helper.addOnClickListener(R.id.iv_collect);
-        helper.addOnClickListener(R.id.tv_classify);
     }
 
     private void setTintList(ImageView imageView) {
@@ -176,10 +178,12 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
 
     static final class TagAdapter extends BaseQuickAdapter<ArticleBean.TagBean, ArticlesAdapter.TagViewHolder> {
 
+        private boolean isClassify;
         private int position;
 
-        TagAdapter(int layoutResId, @Nullable List<ArticleBean.TagBean> data, int position) {
+        TagAdapter(int layoutResId, @Nullable List<ArticleBean.TagBean> data, boolean isClassify, int position) {
             super(layoutResId, data);
+            this.isClassify = isClassify;
             this.position = position;
         }
 
@@ -187,7 +191,7 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
         protected void convert(TagViewHolder helper, ArticleBean.TagBean item) {
             helper.tvName.setText(item.getName());
             helper.tvName.setTag(position);
-            helper.addOnClickListener(R.id.tv_name);
+            if (isClassify) helper.addOnClickListener(R.id.tv_name);
         }
     }
 

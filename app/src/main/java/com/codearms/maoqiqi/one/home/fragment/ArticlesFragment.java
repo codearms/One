@@ -42,6 +42,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
     private String from;
     private int id;
     private String k;
+    private boolean isClassify;
 
     // 记录点击的文章位置,便于在文章内点击收藏返回到此界面时能展示正确的收藏状态
     private int operationPosition = -1;
@@ -49,14 +50,16 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
      *
-     * @param from 来自哪个页面
-     * @param id   公众号Id或者分类的Id
+     * @param from       来自哪个页面
+     * @param id         公众号Id或者分类的Id
+     * @param isClassify 是否能再次打开分类页面 true:不能 false:能
      * @return A new instance of fragment ArticlesFragment.
      */
-    public static ArticlesFragment newInstance(String from, int id) {
+    public static ArticlesFragment newInstance(String from, int id, boolean isClassify) {
         Bundle bundle = new Bundle();
         bundle.putString("from", from);
         bundle.putInt("id", id);
+        bundle.putBoolean("isClassify", isClassify);
         ArticlesFragment fragment = new ArticlesFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -73,6 +76,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
         Bundle bundle = new Bundle();
         bundle.putString("from", from);
         bundle.putString("k", k);
+        bundle.putBoolean("isClassify", false);
         ArticlesFragment fragment = new ArticlesFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -98,9 +102,10 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
             from = bundle.getString("from", FROM_HOME);
             id = bundle.getInt("id");
             k = bundle.getString("k");
+            isClassify = bundle.getBoolean("isClassify", true);
         }
 
-        adapter = new ArticlesAdapter(R.layout.item_articles, new ArrayList<>(), 0, from);
+        adapter = new ArticlesAdapter(R.layout.item_articles, new ArrayList<>(), 0, from, isClassify);
         adapter.setOnItemChildClickListener((adapter, view, position) -> itemChildClick(view, position));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -148,7 +153,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
                 break;
             case R.id.tv_classify:
                 // 跳转到分类
-                if (bean.getSuperChapterId() != 0) ClassifyActivity.start(context, from, bean);
+                ClassifyActivity.start(context, from, bean);
                 break;
         }
     }

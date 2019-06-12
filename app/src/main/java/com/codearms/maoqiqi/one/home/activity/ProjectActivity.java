@@ -7,9 +7,10 @@ import android.view.MenuItem;
 
 import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.home.fragment.ArticlesFragment;
 import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
-import com.codearms.maoqiqi.utils.T;
+import com.codearms.maoqiqi.utils.ToastUtils;
 
 public class ProjectActivity extends BaseActivity {
 
@@ -23,7 +24,7 @@ public class ProjectActivity extends BaseActivity {
 
         ClassifyFragment fragment = (ClassifyFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = ClassifyFragment.newInstance(ClassifyFragment.FROM_PROJECT);
+            fragment = ClassifyFragment.newInstance(ArticlesFragment.FROM_PROJECT);
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
     }
@@ -38,7 +39,7 @@ public class ProjectActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.menu_search) {
-            T.show(this, "search");
+            ToastUtils.show(this, "search");
             return true;
         }
         return false;

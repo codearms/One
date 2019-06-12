@@ -74,7 +74,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
 
         ArticlesFragment fragment = (ArticlesFragment) getChildFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_HOME, 0);
+            fragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_HOME, 0, true);
             getChildFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
     }

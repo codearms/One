@@ -14,7 +14,7 @@ import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
-import com.codearms.maoqiqi.utils.T;
+import com.codearms.maoqiqi.utils.ToastUtils;
 
 public class ClassifyActivity extends BaseActivity {
 
@@ -76,7 +76,7 @@ public class ClassifyActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.menu_search) {
-            T.show(this, "search");
+            ToastUtils.show(this, "search");
             return true;
         }
         return false;

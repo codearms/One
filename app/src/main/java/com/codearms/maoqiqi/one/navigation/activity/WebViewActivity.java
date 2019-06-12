@@ -22,7 +22,7 @@ import com.codearms.maoqiqi.one.navigation.fragment.WebViewFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.view.StatusBarView;
 import com.codearms.maoqiqi.utils.ActivityUtils;
-import com.codearms.maoqiqi.utils.T;
+import com.codearms.maoqiqi.utils.ToastUtils;
 
 import java.lang.reflect.Method;
 
@@ -158,7 +158,7 @@ public class WebViewActivity extends BaseActivity {
             case R.id.menu_collect:
                 // 收藏列表
                 if (App.getInstance().getUserBean() == null) {
-                    T.show(this, getString(R.string.please_login));
+                    ToastUtils.show(this, getString(R.string.please_login));
                 } else {
                     ActivityUtils.startActivity(this, CollectActivity.class);
                 }

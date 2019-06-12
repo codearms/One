@@ -14,6 +14,8 @@ import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.UsefulSitesBean;
 import com.codearms.maoqiqi.one.home.presenter.UsefulSitesPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.UsefulSitesContract;
+import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
+import com.codearms.maoqiqi.utils.ColorUtils;
 
 import java.util.List;
 
@@ -59,9 +61,9 @@ public class UsefulSitesFragment extends BaseFragment<UsefulSitesContract.Presen
         for (int j = 0; j < usefulSitesBeans.size(); j++) {
             chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_chip, null);
             chip.setText(usefulSitesBeans.get(j).getName());
-//            chip.setTextColor(randomColor());
-//            final ArticleBean articleBean = bean.getArticleBeanList().get(j);
-//            chip.setOnClickListener(v -> WebViewActivity.start(context, from, articleBean));
+            chip.setTextColor(ColorUtils.randomDarkColor());
+            final UsefulSitesBean usefulSitesBean = usefulSitesBeans.get(j);
+            chip.setOnClickListener(v -> WebViewActivity.start(context, 0, usefulSitesBean.getLink()));
             chipGroup.addView(chip);
         }
     }

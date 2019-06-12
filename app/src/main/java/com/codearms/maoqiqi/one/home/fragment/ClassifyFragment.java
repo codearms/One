@@ -27,10 +27,6 @@ import java.util.List;
 
 public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> implements ClassifyContract.View {
 
-    public static final String FROM_WE_CHAT = "FROM_WE_CHAT";
-    public static final String FROM_PROJECT = "FROM_PROJECT";
-    public static final String FROM_CLASSIFY = "FROM_CLASSIFY";
-
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -54,7 +50,6 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
 
     public static ClassifyFragment newInstance(ParentClassifyBean parentClassifyBean, int position) {
         Bundle bundle = new Bundle();
-        bundle.putString("from", FROM_CLASSIFY);
         bundle.putParcelable("parentClassifyBean", parentClassifyBean);
         bundle.putInt("position", position);
         ClassifyFragment fragment = new ClassifyFragment();
@@ -91,20 +86,20 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
 
         Bundle bundle = getArguments();
         if (bundle != null) {
+            from = bundle.getString("from", ArticlesFragment.FROM_CLASSIFY);
             parentClassifyBean = bundle.getParcelable("parentClassifyBean");
             position = bundle.getInt("position");
-            from = bundle.getString("from");
             articleBean = bundle.getParcelable("articleBean");
         }
 
         switch (from) {
-            case FROM_WE_CHAT:
+            case ArticlesFragment.FROM_WE_CHAT:
                 toolbar.setTitle(R.string.we_chat);
                 break;
-            case FROM_PROJECT:
+            case ArticlesFragment.FROM_PROJECT:
                 toolbar.setTitle(R.string.project);
                 break;
-            case FROM_CLASSIFY:
+            case ArticlesFragment.FROM_CLASSIFY:
                 toolbar.setTitle(parentClassifyBean.getName());
                 break;
             default:
@@ -120,13 +115,13 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
     protected void loadData() {
         super.loadData();
         switch (from) {
-            case FROM_WE_CHAT:
+            case ArticlesFragment.FROM_WE_CHAT:
                 presenter.getWxList();
                 break;
-            case FROM_PROJECT:
+            case ArticlesFragment.FROM_PROJECT:
                 presenter.getProject();
                 break;
-            case FROM_CLASSIFY:
+            case ArticlesFragment.FROM_CLASSIFY:
                 setClassifies(parentClassifyBean.getChildClassifyBeanList());
                 break;
             default:
@@ -180,7 +175,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
 
         @Override
         public Fragment getItem(int i) {
-            return ArticlesFragment.newInstance(from, childClassifyBeans.get(i).getId());
+            return ArticlesFragment.newInstance(from, childClassifyBeans.get(i).getId(), false);
         }
     }
 }

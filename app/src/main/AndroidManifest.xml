@@ -62,7 +62,7 @@
             android:name=".navigation.activity.SearchActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="adjustResize|stateVisible" />
         <activity
             android:name=".home.activity.ImageActivity"
             android:launchMode="singleTask"

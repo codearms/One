@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -16,6 +17,7 @@ import com.codearms.maoqiqi.one.home.fragment.ArticlesFragment;
 import com.codearms.maoqiqi.one.navigation.fragment.SearchFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.view.StatusBarView;
+import com.codearms.maoqiqi.utils.KeyboardUtils;
 
 public class SearchActivity extends BaseActivity implements SearchFragment.SearchListener {
 
@@ -31,7 +33,7 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
 
     private EditText etSearch;
 
-    private ArticlesFragment articlesFragment;
+    private SearchFragment searchFragment;
 
     public static void start(@NonNull Context context, int position) {
         Bundle bundle = new Bundle();
@@ -63,7 +65,7 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
         setSupportActionBar(toolbar);
         ivSearch.setOnClickListener(v -> onSearch(etSearch.getText().toString(), false));
 
-        SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag(TAG_SEARCH);
+        searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag(TAG_SEARCH);
         if (searchFragment == null) {
             searchFragment = SearchFragment.newInstance();
             searchFragment.setSearchListener(this);
@@ -73,19 +75,40 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
 
     @Override
     public void onSearch(String k, boolean setText) {
+        // 赋值
         if (setText) {
             etSearch.setText(k);
             etSearch.setSelection(etSearch.getText().length());
         }
 
+        // 搜索内容时,如果软键盘显示,则隐藏
+        if (KeyboardUtils.isSoftInputVisible(this)) {
+            KeyboardUtils.hideSoftInput(this);
+        }
+
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        articlesFragment = (ArticlesFragment) getSupportFragmentManager().findFragmentByTag(TAG_ARTICLES);
+        if (searchFragment != null) ft.hide(searchFragment);
+
+        ArticlesFragment articlesFragment = (ArticlesFragment) getSupportFragmentManager().findFragmentByTag(TAG_ARTICLES);
         if (articlesFragment == null) {
             articlesFragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_SEARCH, k);
             ft.add(R.id.fl_content, articlesFragment, TAG_ARTICLES).addToBackStack(null).commit();
         } else {
             articlesFragment.setSearchData(k);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (KeyboardUtils.isSoftInputVisible(this)) {
+                KeyboardUtils.hideSoftInput(this);
+            } else {
+                onBackPressed();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

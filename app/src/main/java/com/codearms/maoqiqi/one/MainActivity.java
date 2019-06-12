@@ -40,7 +40,7 @@ import com.codearms.maoqiqi.one.news.fragment.NewsFragment;
 import com.codearms.maoqiqi.one.utils.FragmentCheckedChangeListener;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.utils.ActivityUtils;
-import com.codearms.maoqiqi.utils.T;
+import com.codearms.maoqiqi.utils.ToastUtils;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener,
         NavigationView.OnNavigationItemSelectedListener {
@@ -153,7 +153,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 //                ActivityUtils.startActivity(this, SettingActivity.class);
                 break;
             case R.id.tv_mode:
-                T.show(this, "开发中");
+                ToastUtils.show(this, "开发中");
                 break;
         }
     }

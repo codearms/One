@@ -3,7 +3,7 @@ package com.codearms.maoqiqi.one;
 import android.app.Application;
 
 import com.codearms.maoqiqi.one.data.bean.UserBean;
-import com.codearms.maoqiqi.utils.L;
+import com.codearms.maoqiqi.utils.LogUtils;
 
 public class App extends Application {
 
@@ -19,7 +19,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         INSTANCE = this;
-        L.SHOW_LOG = true;
+        LogUtils.SHOW_LOG = true;
     }
 
     public UserBean getUserBean() {

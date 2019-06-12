@@ -70,8 +70,6 @@
     <string name="success_to_collect">收藏成功</string>
     <string name="success_to_un_collect">取消收藏成功</string>
 
-    <string name="already_un_collect">已经取消收藏</string>
-
     <string name="loading">加载中…</string>
     <string name="share">分享</string>
     <string name="copy_url">复制链接</string>

@@ -10,7 +10,7 @@ import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.FlowLayoutFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
-import com.codearms.maoqiqi.utils.T;
+import com.codearms.maoqiqi.utils.ToastUtils;
 
 public class KnowledgeActivity extends BaseActivity {
 
@@ -42,7 +42,7 @@ public class KnowledgeActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.menu_search) {
-            T.show(this, "search");
+            ToastUtils.show(this, "search");
             return true;
         }
         return false;

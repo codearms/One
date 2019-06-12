@@ -8,7 +8,7 @@ import android.widget.Toast;
  * Author: fengqi.mao.march@gmail.com
  * Date: 2019-06-11 11:55
  */
-public final class T {
+public final class ToastUtils {
 
     public static void show(Context context, CharSequence text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
