@@ -150,7 +150,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         fabCollection.setImageResource(isCollect ? R.drawable.ic_collect : R.drawable.ic_un_collect);
         fabCollection.setOnClickListener(v -> {
             if (App.getInstance().getUserBean() == null) {
-                ToastUtils.show(context, getString(R.string.please_login));
+                ToastUtils.show(getString(R.string.please_login));
                 return;
             }
 

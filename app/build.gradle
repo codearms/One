@@ -48,7 +48,8 @@ dependencies {
 
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     implementation project(path: ':base-mvp')
-    implementation project(path: ':utils')
 
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+
+    implementation 'com.codearms.maoqiqi:utils:1.0.1'
 }

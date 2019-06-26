@@ -153,7 +153,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 //                ActivityUtils.startActivity(this, SettingActivity.class);
                 break;
             case R.id.tv_mode:
-                ToastUtils.show(this, "开发中");
+                ToastUtils.show("开发中");
                 break;
         }
     }

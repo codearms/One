@@ -76,7 +76,7 @@ public class ClassifyActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.menu_search) {
-            ToastUtils.show(this, "search");
+            ToastUtils.show("search");
             return true;
         }
         return false;

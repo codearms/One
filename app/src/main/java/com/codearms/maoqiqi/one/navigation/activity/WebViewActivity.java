@@ -158,7 +158,7 @@ public class WebViewActivity extends BaseActivity {
             case R.id.menu_collect:
                 // 收藏列表
                 if (App.getInstance().getUserBean() == null) {
-                    ToastUtils.show(this, getString(R.string.please_login));
+                    ToastUtils.show(getString(R.string.please_login));
                 } else {
                     ActivityUtils.startActivity(this, CollectActivity.class);
                 }

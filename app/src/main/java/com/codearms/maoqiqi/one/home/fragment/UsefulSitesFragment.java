@@ -60,8 +60,8 @@ public class UsefulSitesFragment extends BaseFragment<UsefulSitesContract.Presen
         Chip chip;
         for (int j = 0; j < usefulSitesBeans.size(); j++) {
             chip = (Chip) LayoutInflater.from(context).inflate(R.layout.item_chip, null);
+            chip.setChipBackgroundColor(ColorUtils.createColorStateList());
             chip.setText(usefulSitesBeans.get(j).getName());
-            chip.setTextColor(ColorUtils.randomDarkColor());
             final UsefulSitesBean usefulSitesBean = usefulSitesBeans.get(j);
             chip.setOnClickListener(v -> WebViewActivity.start(context, 0, usefulSitesBean.getLink()));
             chipGroup.addView(chip);

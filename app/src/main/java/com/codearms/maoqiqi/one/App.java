@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.utils.LogUtils;
+import com.codearms.maoqiqi.utils.ToastUtils;
 
 public class App extends Application {
 
@@ -19,7 +20,8 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         INSTANCE = this;
-        LogUtils.SHOW_LOG = true;
+        LogUtils.init(true);
+        ToastUtils.init(this);
     }
 
     public UserBean getUserBean() {
