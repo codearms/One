@@ -13,15 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:name=".navigation.activity.SplashActivity"
+            android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!--home-->
         <activity android:name=".home.activity.UsefulSitesActivity" />
         <activity android:name=".home.activity.NavigationActivity" />
@@ -67,6 +70,8 @@
             android:name=".home.activity.ImageActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+        <!--news-->
+        <activity android:name=".news.activity.NewsDetailActivity" />
     </application>
 
 </manifest>

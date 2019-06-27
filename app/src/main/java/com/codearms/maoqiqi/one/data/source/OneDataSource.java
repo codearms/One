@@ -6,6 +6,8 @@ import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
+import com.codearms.maoqiqi.one.data.bean.NewsBean;
+import com.codearms.maoqiqi.one.data.bean.NewsDetailBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.UsefulSitesBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
@@ -228,4 +230,10 @@ public interface OneDataSource {
      * @return 搜索数据
      */
     Observable<ArticleBeans> query(int page, String k);
+
+    // ============================================================================================
+
+    Observable<NewsBean> getLatestNews();
+
+    Observable<NewsDetailBean> getNewsDetail(int id);
 }

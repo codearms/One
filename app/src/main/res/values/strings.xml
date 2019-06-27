@@ -123,6 +123,11 @@
     <string name="introduction_5_text">该页面演示了Android v4 包中的DrawerLayout抽屉控件、Android Material Design风格控件中的BottomNavigationView、NavigationView的基本使用；以及如何解决状态栏透明问题。</string>
     <string name="introduction_read_me">这里只是简单列举一些内容，详见README，如果感兴趣可以下载项目亲自体验一下。</string>
 
+    <string name="jump">跳过</string>
+    <string name="jump_num">跳过 %d</string>
+    <string name="splash_title">干货集中营</string>
+    <string name="splash_des">每天都有新发现</string>
+
     <string-array name="news_titles">
         <item>推荐</item>
         <item>热点</item>

@@ -17,12 +17,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitManager {
 
     private static final String BASE_URL = "https://www.wanandroid.com/";
+    private static final String BASE_NEWS_URL = "http://news-at.zhihu.com/api/4/";
     private static final int DEFAULT_TIMEOUT = 15;
 
     private static RetrofitManager instance;
 
     private OkHttpClient okHttpClient;
     private ServerApi serverApi;
+    private NewsAPI newsAPI;
 
     public static RetrofitManager getInstance() {
         if (instance == null) {
@@ -70,5 +72,19 @@ public class RetrofitManager {
                     .create(ServerApi.class);
         }
         return serverApi;
+    }
+
+    public NewsAPI getNewsAPI() {
+        initOKHttp();
+        if (newsAPI == null) {
+            newsAPI = new Retrofit.Builder()
+                    .baseUrl(BASE_NEWS_URL)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build()
+                    .create(NewsAPI.class);
+        }
+        return newsAPI;
     }
 }

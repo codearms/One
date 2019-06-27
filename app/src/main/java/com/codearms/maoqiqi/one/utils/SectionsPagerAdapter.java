@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    private List<String> fragmentTitles;
+    protected List<String> fragmentTitles;
 
     public SectionsPagerAdapter(List<String> fragmentTitles, FragmentManager fm) {
         super(fm);

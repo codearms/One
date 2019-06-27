@@ -6,9 +6,12 @@ import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
+import com.codearms.maoqiqi.one.data.bean.NewsBean;
+import com.codearms.maoqiqi.one.data.bean.NewsDetailBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.UsefulSitesBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
+import com.codearms.maoqiqi.one.data.net.NewsAPI;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.data.net.ServerApi;
 import com.codearms.maoqiqi.utils.RxUtils;
@@ -22,9 +25,11 @@ public class OneRepository implements OneDataSource {
     private static volatile OneRepository INSTANCE = null;
 
     private ServerApi api;
+    private NewsAPI newsAPI;
 
     private OneRepository() {
         api = RetrofitManager.getInstance().getServerApi();
+        newsAPI = RetrofitManager.getInstance().getNewsAPI();
     }
 
     public static OneRepository getInstance() {
@@ -166,5 +171,15 @@ public class OneRepository implements OneDataSource {
     @Override
     public Observable<ArticleBeans> query(int page, String k) {
         return api.query(page, k).compose(RxUtils.rxSchedulerHelper()).compose(RxUtils.handleResult());
+    }
+
+    @Override
+    public Observable<NewsBean> getLatestNews() {
+        return newsAPI.getLatestNews().compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<NewsDetailBean> getNewsDetail(int id) {
+        return newsAPI.getNewsDetail(id).compose(RxUtils.rxSchedulerHelper());
     }
 }

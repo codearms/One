@@ -31,4 +31,6 @@
     <color name="bg_btn">#4CAF50</color>
     <color name="bg_btn_disenabled">#4D4CAF50</color>
     <color name="bg_btn_pressed">#37913B</color>
+
+    <color name="color_news_source">#A1FFFFFF</color>
 </resources>

@@ -46,6 +46,11 @@
         <!--<item name="actionOverflowButtonStyle">@style/OverflowButtonStyle</item>-->
     </style>
 
+    <!--全屏-->
+    <style name="AppTheme.Fullscreen">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <!-- 首页底部样式 -->
     <style name="tab_main_style">
         <item name="android:layout_width">match_parent</item>
