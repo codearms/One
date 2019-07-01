@@ -7,6 +7,10 @@ package com.codearms.maoqiqi.one;
  */
 public interface Constants {
 
+    int PAGE_INDEX = 1;
+
+    int PAGE_COUNT = 10;
+
     // 欢迎页面随机图
     String[] URLS = {
             "http://sjbz.fd.zol-img.com.cn/t_s720x1280c/g2/M00/05/0F/ChMlWl0THiKIVU8TAA0KNBRh4OAAALRbwLstcQADQpM861.jpg",

@@ -3,8 +3,11 @@ package com.codearms.maoqiqi.one.data.source;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
+import com.codearms.maoqiqi.one.data.bean.BookListBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
+import com.codearms.maoqiqi.one.data.bean.MovieDetailBean;
+import com.codearms.maoqiqi.one.data.bean.MovieListBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.NewsBean;
 import com.codearms.maoqiqi.one.data.bean.NewsDetailBean;
@@ -236,4 +239,50 @@ public interface OneDataSource {
     Observable<NewsBean> getLatestNews();
 
     Observable<NewsDetailBean> getNewsDetail(int id);
+
+    /**
+     * 搜索图书(https://api.douban.com/v2/book/search)
+     *
+     * @param q     查询关键字
+     * @param tag   查询的tag
+     * @param start 取结果的offset 默认为0
+     * @param count 取结果的条数 默认为20，最大为100
+     */
+    Observable<BookListBean> getBook(String q, String tag, int start, int count);
+
+    /**
+     * 获取图书信息(https://api.douban.com/v2/book/:id)
+     *
+     * @param id
+     */
+    Observable<BookListBean.BookBean> getBookDetail(String id);
+
+    /**
+     * 正在热映
+     */
+    Observable<MovieListBean> inTheatersMovies(String city, int start, int count);
+
+    /**
+     * 即将上映
+     */
+    Observable<MovieListBean> comingSoonMovies(int start, int count);
+
+    /**
+     * 电影条目信息
+     *
+     * @param id
+     */
+    Observable<MovieDetailBean> getMovieDetail(String id);
+
+    /**
+     * 影人条目信息
+     *
+     * @param id
+     */
+    Observable<String> getCelebrity(String id);
+
+    /**
+     * 搜索电影
+     */
+    Observable<MovieListBean> searchMovie(String q, String tag, int start, int count);
 }

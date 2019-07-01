@@ -3,14 +3,18 @@ package com.codearms.maoqiqi.one.data.source;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
+import com.codearms.maoqiqi.one.data.bean.BookListBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
+import com.codearms.maoqiqi.one.data.bean.MovieDetailBean;
+import com.codearms.maoqiqi.one.data.bean.MovieListBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.NewsBean;
 import com.codearms.maoqiqi.one.data.bean.NewsDetailBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.UsefulSitesBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
+import com.codearms.maoqiqi.one.data.net.DouBanApi;
 import com.codearms.maoqiqi.one.data.net.NewsAPI;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.data.net.ServerApi;
@@ -26,10 +30,12 @@ public class OneRepository implements OneDataSource {
 
     private ServerApi api;
     private NewsAPI newsAPI;
+    private DouBanApi douBanApi;
 
     private OneRepository() {
         api = RetrofitManager.getInstance().getServerApi();
         newsAPI = RetrofitManager.getInstance().getNewsAPI();
+        douBanApi = RetrofitManager.getInstance().getDouBanApi();
     }
 
     public static OneRepository getInstance() {
@@ -181,5 +187,40 @@ public class OneRepository implements OneDataSource {
     @Override
     public Observable<NewsDetailBean> getNewsDetail(int id) {
         return newsAPI.getNewsDetail(id).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<BookListBean> getBook(String q, String tag, int start, int count) {
+        return douBanApi.getBook("0df993c66c0c636e29ecbb5344252a4a", q, tag, start, count).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<BookListBean.BookBean> getBookDetail(String id) {
+        return douBanApi.getBookDetail(id).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<MovieListBean> inTheatersMovies(String city, int start, int count) {
+        return douBanApi.inTheatersMovies("0df993c66c0c636e29ecbb5344252a4a", city, start, count).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<MovieListBean> comingSoonMovies(int start, int count) {
+        return douBanApi.comingSoonMovies(start, count).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<MovieDetailBean> getMovieDetail(String id) {
+        return douBanApi.getMovieDetail(id, "0df993c66c0c636e29ecbb5344252a4a").compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<String> getCelebrity(String id) {
+        return douBanApi.getCelebrity(id).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<MovieListBean> searchMovie(String q, String tag, int start, int count) {
+        return douBanApi.searchMovie(q, tag, start, count).compose(RxUtils.rxSchedulerHelper());
     }
 }

@@ -18,6 +18,7 @@ public class RetrofitManager {
 
     private static final String BASE_URL = "https://www.wanandroid.com/";
     private static final String BASE_NEWS_URL = "http://news-at.zhihu.com/api/4/";
+    private static final String BASE_DOU_BAN_URL = "https://api.douban.com/v2/";
     private static final int DEFAULT_TIMEOUT = 15;
 
     private static RetrofitManager instance;
@@ -25,6 +26,7 @@ public class RetrofitManager {
     private OkHttpClient okHttpClient;
     private ServerApi serverApi;
     private NewsAPI newsAPI;
+    private DouBanApi douBanApi;
 
     public static RetrofitManager getInstance() {
         if (instance == null) {
@@ -86,5 +88,19 @@ public class RetrofitManager {
                     .create(NewsAPI.class);
         }
         return newsAPI;
+    }
+
+    public DouBanApi getDouBanApi() {
+        initOKHttp();
+        if (douBanApi == null) {
+            douBanApi = new Retrofit.Builder()
+                    .baseUrl(BASE_DOU_BAN_URL)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build()
+                    .create(DouBanApi.class);
+        }
+        return douBanApi;
     }
 }

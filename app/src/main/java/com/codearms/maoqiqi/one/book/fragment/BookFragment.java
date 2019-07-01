@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.fragment.HomeFragment;
 import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -73,7 +72,7 @@ public class BookFragment extends BaseFragment {
 
         @Override
         public Fragment getItem(int i) {
-            return HomeFragment.newInstance();
+            return BookListFragment.newInstance("", fragmentTitles.get(i));
         }
     }
 

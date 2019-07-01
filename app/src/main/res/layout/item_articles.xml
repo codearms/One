@@ -38,7 +38,7 @@
             android:layout_marginBottom="@dimen/sixteen"
             android:contentDescription="@string/image_description"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_image_default"
+            android:src="@drawable/ic_article_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -60,7 +60,7 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
         } else {
             helper.ivProject.setVisibility(View.VISIBLE);
             Glide.with(application).load(articleBean.getEnvelopePic())
-                    .placeholder(R.drawable.ic_image_default).into(helper.ivProject);
+                    .placeholder(R.drawable.ic_article_placeholder).into(helper.ivProject);
         }
 
         // 标题

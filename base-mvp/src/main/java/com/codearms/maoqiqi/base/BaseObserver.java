@@ -6,7 +6,7 @@ import com.codearms.maoqiqi.execption.ErrorCodeException;
 
 import io.reactivex.observers.ResourceObserver;
 
-public abstract class BaseObserver<T> extends ResourceObserver<T> {
+public class BaseObserver<T> extends ResourceObserver<T> {
 
     private BaseView<? extends BasePresenter> view;
     private int errorMsgId;

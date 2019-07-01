@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/sixteen">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_movie_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/color_text_main"
+                android:textSize="@dimen/text_size_big"
+                tools:text="标题标题" />
+
+            <TextView
+                android:id="@+id/tv_movie_genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/four"
+                android:textColor="@color/color_text_general"
+                android:textSize="@dimen/text_size_smaller"
+                tools:text="类型： 喜剧 / 动画 / 奇幻" />
+
+            <TextView
+                android:id="@+id/tv_movie_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/four"
+                android:textColor="@color/color_text_general"
+                android:textSize="@dimen/text_size_smaller"
+                tools:text="时长：125分钟" />
+
+            <TextView
+                android:id="@+id/tv_movie_main_land_pub_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/four"
+                android:textColor="@color/color_text_general"
+                android:textSize="@dimen/text_size_smaller"
+                tools:text="上映日期：2019" />
+
+            <TextView
+                android:id="@+id/tv_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/four"
+                android:textColor="@color/color_text_general"
+                android:textSize="@dimen/text_size_smaller"
+                tools:text="制片国家/地区：" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="1dp"
+            android:background="@color/bg"
+            android:elevation="@dimen/four"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/eight">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dou_ban_score"
+                android:textColor="@color/color_text_general"
+                android:textSize="@dimen/text_size_smaller" />
+
+            <TextView
+                android:id="@+id/tv_movie_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/four"
+                android:textColor="@color/color_text_main"
+                android:textSize="@dimen/text_size_biggest"
+                android:textStyle="bold"
+                tools:text="9.0" />
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/four"
+                android:isIndicator="true"
+                android:progressDrawable="@drawable/rating_bar"
+                android:rating="2.5" />
+
+            <TextView
+                android:id="@+id/tv_movie_ratings_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/four"
+                android:textColor="@color/color_text_general"
+                android:textSize="@dimen/text_size_smaller"
+                tools:text="1234人" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.codearms.maoqiqi.one.view.SummaryView
+        android:id="@+id/summary_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/introduction" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_divider"
+        android:paddingLeft="@dimen/sixteen"
+        android:paddingTop="@dimen/eight"
+        android:paddingRight="@dimen/sixteen"
+        android:paddingBottom="@dimen/eight"
+        android:text="@string/actor"
+        android:textColor="@color/color_text_general"
+        android:textSize="@dimen/text_size_small" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_person"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/sixteen"
+        android:paddingBottom="@dimen/sixteen" />
+
+    <TextView
+        android:id="@+id/tv_trailers_photos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_divider"
+        android:paddingLeft="@dimen/sixteen"
+        android:paddingTop="@dimen/eight"
+        android:paddingRight="@dimen/sixteen"
+        android:paddingBottom="@dimen/eight"
+        android:text="@string/trailers_and_photos"
+        android:textColor="@color/color_text_general"
+        android:textSize="@dimen/text_size_small" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/sixteen"
+        android:paddingBottom="@dimen/sixteen" />
+</LinearLayout>

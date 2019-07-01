@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DetailView">
+        <attr name="expanded_text" format="string" />
+        <attr name="collapsed_text" format="string" />
+    </declare-styleable>
+    <declare-styleable name="SummaryView">
+        <attr name="title" format="string" />
+    </declare-styleable>
+</resources>
