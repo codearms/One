@@ -72,7 +72,7 @@ public class MovieFragment extends BaseFragment {
 
         @Override
         public Fragment getItem(int i) {
-            return MovieListFragment.newInstance(i, "上海", "", "");
+            return MovieListFragment.newInstance(i, "上海", "");
         }
     }
 

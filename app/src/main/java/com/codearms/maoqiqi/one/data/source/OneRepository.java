@@ -206,7 +206,7 @@ public class OneRepository implements OneDataSource {
 
     @Override
     public Observable<MovieListBean> comingSoonMovies(int start, int count) {
-        return douBanApi.comingSoonMovies(start, count).compose(RxUtils.rxSchedulerHelper());
+        return douBanApi.comingSoonMovies("0df993c66c0c636e29ecbb5344252a4a", start, count).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
@@ -215,12 +215,12 @@ public class OneRepository implements OneDataSource {
     }
 
     @Override
-    public Observable<String> getCelebrity(String id) {
-        return douBanApi.getCelebrity(id).compose(RxUtils.rxSchedulerHelper());
+    public Observable<String> getCelebrity(String id, int start, int count) {
+        return douBanApi.getCelebrity(id, "0df993c66c0c636e29ecbb5344252a4a", start, count).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
-    public Observable<MovieListBean> searchMovie(String q, String tag, int start, int count) {
-        return douBanApi.searchMovie(q, tag, start, count).compose(RxUtils.rxSchedulerHelper());
+    public Observable<MovieListBean> searchMovie(String q, int start, int count) {
+        return douBanApi.searchMovie(q, start, count).compose(RxUtils.rxSchedulerHelper());
     }
 }

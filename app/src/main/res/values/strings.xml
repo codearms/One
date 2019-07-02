@@ -147,6 +147,7 @@
     <string name="movie_director">导演</string>
     <string name="movie_star">主演</string>
     <string name="trailers_and_photos">预告片/剧照</string>
+    <string name="more">更多信息</string>
 
     <string-array name="news_titles">
         <item>推荐</item>

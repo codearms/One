@@ -1,6 +1,6 @@
 package com.codearms.maoqiqi.one.movie.activity;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -32,14 +32,14 @@ public class MovieDetailActivity extends BaseActivity {
     private ImageView ivBg;
     private ImageView ivMovie;
 
-    public static void start(Activity activity, String id, String title, String imageUrl, Bundle options) {
+    public static void start(Context context, String id, String title, String imageUrl, Bundle options) {
         Bundle bundle = new Bundle();
         bundle.putString("id", id);
         bundle.putString("title", title);
         bundle.putString("imageUrl", imageUrl);
-        Intent intent = new Intent(activity, MovieDetailActivity.class);
+        Intent intent = new Intent(context, MovieDetailActivity.class);
         intent.putExtras(bundle);
-        ActivityCompat.startActivity(activity, intent, options);
+        ActivityCompat.startActivity(context, intent, options);
     }
 
     @Override

@@ -279,10 +279,10 @@ public interface OneDataSource {
      *
      * @param id
      */
-    Observable<String> getCelebrity(String id);
+    public Observable<String> getCelebrity(String id, int start, int count);
 
     /**
      * 搜索电影
      */
-    Observable<MovieListBean> searchMovie(String q, String tag, int start, int count);
+    Observable<MovieListBean> searchMovie(String q, int start, int count);
 }

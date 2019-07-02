@@ -19,7 +19,5 @@ public interface MovieDetailContract {
     interface View extends BaseView<Presenter> {
 
         void setMovieDetail(MovieDetailBean movieDetailBean);
-
-        void moreInfo();
     }
 }

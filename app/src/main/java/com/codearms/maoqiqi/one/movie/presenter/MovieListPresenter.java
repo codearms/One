@@ -42,8 +42,8 @@ public class MovieListPresenter extends RxPresenterImpl<MovieListContract.View> 
     }
 
     @Override
-    public void searchMovie(String q, String tag, int start, int count) {
-        addSubscribe(repository.searchMovie(q, tag, start, count)
+    public void searchMovie(String q, int start, int count) {
+        addSubscribe(repository.searchMovie(q, start, count)
                 .subscribeWith(new BaseObserver<MovieListBean>(view) {
 
                     @Override

@@ -77,12 +77,12 @@ public class SummaryView extends FrameLayout implements View.OnClickListener {
         if (summaryExpand) {
             // 展开动画 --> 从起始高度增长至实际高度
             differ = tvSummaryContent.getLineHeight() * tvSummaryContent.getLineCount() - startValue;
-            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.summary_view_2);
+            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.summary_view_1);
             ivSummary.startAnimation(animation);
         } else {
             // 折叠动画 --> 从实际高度缩回起始高度
             differ = tvSummaryContent.getLineHeight() * maxLine - startValue;
-            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.summary_view_1);
+            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.summary_view_2);
             ivSummary.startAnimation(animation);
         }
 

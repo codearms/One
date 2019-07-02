@@ -1,6 +1,5 @@
 package com.codearms.maoqiqi.one.movie.fragment;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +7,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -19,10 +21,10 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.codearms.maoqiqi.base.BaseFragment;
-import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.MovieDetailBean;
 import com.codearms.maoqiqi.one.decoration.SpaceItemDecoration;
+import com.codearms.maoqiqi.one.decoration.TopBottomDecoration;
 import com.codearms.maoqiqi.one.movie.presenter.MovieDetailPresenter;
 import com.codearms.maoqiqi.one.movie.presenter.contract.MovieDetailContract;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
@@ -62,7 +64,7 @@ public class MovieDetailFragment extends BaseFragment<MovieDetailContract.Presen
     private List<MovieDetailBean.PhotoBean> photoBeanList;
     private List<String> imageList = new ArrayList<>();
 
-    private String url = "";
+    private String url;
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
@@ -80,6 +82,7 @@ public class MovieDetailFragment extends BaseFragment<MovieDetailContract.Presen
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         presenter = new MovieDetailPresenter(this);
     }
 
@@ -128,6 +131,7 @@ public class MovieDetailFragment extends BaseFragment<MovieDetailContract.Presen
         recyclerViewImage.setNestedScrollingEnabled(false);
         recyclerViewImage.setHasFixedSize(true);
         recyclerViewImage.addItemDecoration(new SpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.four)));
+        recyclerViewImage.addItemDecoration(new TopBottomDecoration(getResources().getDimensionPixelSize(R.dimen.twelve)));
         recyclerViewImage.setAdapter(imageRecyclerAdapter);
     }
 
@@ -169,8 +173,22 @@ public class MovieDetailFragment extends BaseFragment<MovieDetailContract.Presen
     }
 
     @Override
-    public void moreInfo() {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_detail, menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.menu_share:
+                return true;
+            case R.id.menu_more:
+                if (url != null) WebViewActivity.start(context, 4, url);
+                break;
+        }
+        return false;
     }
 
     final class PersonRecyclerAdapter extends BaseQuickAdapter<MovieDetailBean.PersonBean, PersonViewHolder> {
@@ -204,11 +222,8 @@ public class MovieDetailFragment extends BaseFragment<MovieDetailContract.Presen
 
     final class ImageRecyclerAdapter extends BaseQuickAdapter<String, ImageViewHolder> {
 
-        private Application application;
-
         ImageRecyclerAdapter(int layoutResId, @Nullable List<String> data) {
             super(layoutResId, data);
-            application = App.getInstance();
         }
 
         @Override
@@ -223,15 +238,6 @@ public class MovieDetailFragment extends BaseFragment<MovieDetailContract.Presen
             }
             Glide.with(helper.ivMovieImage.getContext()).load(url)
                     .placeholder(R.drawable.ic_movie_placeholder).into(helper.ivMovieImage);
-
-            // 设置间距
-            if (helper.getLayoutPosition() == 0) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) helper.frameLayout.getLayoutParams();
-                params.leftMargin = application.getResources().getDimensionPixelSize(R.dimen.twelve);
-            } else if (helper.getLayoutPosition() == getItemCount() - 1) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) helper.frameLayout.getLayoutParams();
-                params.rightMargin = application.getResources().getDimensionPixelSize(R.dimen.twelve);
-            }
         }
     }
 

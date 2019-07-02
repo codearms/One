@@ -1,6 +1,5 @@
 package com.codearms.maoqiqi.one.movie.fragment;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,7 +20,6 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.codearms.maoqiqi.base.BaseFragment;
-import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.MovieListBean;
@@ -35,6 +33,10 @@ import java.util.List;
 
 public class MovieListFragment extends BaseFragment<MovieListContract.Presenter> implements MovieListContract.View {
 
+    private int type;
+    private String city;
+    private String keyword;
+
     private List<MovieListBean.MovieBean> list;
     private RecyclerAdapter adapter;
 
@@ -43,12 +45,11 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
      *
      * @return A new instance of fragment MovieListFragment.
      */
-    public static MovieListFragment newInstance(int type, String city, String keyword, String movieTag) {
+    public static MovieListFragment newInstance(int type, String city, String keyword) {
         Bundle bundle = new Bundle();
         bundle.putInt("type", type);
         bundle.putString("city", city);
         bundle.putString("keyword", keyword);
-        bundle.putString("movieTag", movieTag);
         MovieListFragment fragment = new MovieListFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -70,17 +71,19 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
         super.initViews(savedInstanceState);
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
 
-        int type = getArguments().getInt("type");
+        Bundle bundle = getArguments();
+        if (bundle == null) return;
 
-        adapter = new RecyclerAdapter(R.layout.item_movie_list, list, type);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                MovieListBean.MovieBean item = list.get(position);
-                ImageView ivMovie = (ImageView) adapter.getViewByPosition(recyclerView, position, R.id.iv_movie);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ivMovie, ViewCompat.getTransitionName(ivMovie));
-                MovieDetailActivity.start(getActivity(), item.getId(), item.getTitle(), item.getImageBean().getLarge(), options.toBundle());
-            }
+        type = bundle.getInt("type");
+        city = bundle.getString("city");
+        keyword = bundle.getString("keyword");
+
+        adapter = new RecyclerAdapter(R.layout.item_movie_list, list);
+        adapter.setOnItemClickListener((adapter, view, position) -> {
+            MovieListBean.MovieBean item = list.get(position);
+            ImageView ivMovie = (ImageView) adapter.getViewByPosition(recyclerView, position, R.id.iv_movie);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ivMovie, ViewCompat.getTransitionName(ivMovie));
+            MovieDetailActivity.start(context, item.getId(), item.getTitle(), item.getImageBean().getLarge(), options.toBundle());
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -94,7 +97,13 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
     @Override
     protected void loadData() {
         super.loadData();
-        presenter.getInTheatersMovies("上海", Constants.PAGE_INDEX, Constants.PAGE_COUNT);
+        if (type == 0) {
+            presenter.getInTheatersMovies(city, Constants.PAGE_INDEX, Constants.PAGE_COUNT);
+        } else if (type == 1) {
+            presenter.getComingSoonMovies(Constants.PAGE_INDEX, Constants.PAGE_COUNT);
+        } else if (type == 2) {
+            presenter.searchMovie(keyword, Constants.PAGE_INDEX, Constants.PAGE_COUNT);
+        }
     }
 
     @Override
@@ -103,15 +112,10 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
         adapter.replaceData(list);
     }
 
-    static final class RecyclerAdapter extends BaseQuickAdapter<MovieListBean.MovieBean, ViewHolder> {
+    final class RecyclerAdapter extends BaseQuickAdapter<MovieListBean.MovieBean, ViewHolder> {
 
-        private int type;
-        private final Resources resources;
-
-        RecyclerAdapter(int layoutResId, @Nullable List<MovieListBean.MovieBean> data, int type) {
+        RecyclerAdapter(int layoutResId, @Nullable List<MovieListBean.MovieBean> data) {
             super(layoutResId, data);
-            this.type = type;
-            this.resources = App.getInstance().getResources();
         }
 
         @Override
@@ -119,43 +123,46 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
             Glide.with(helper.ivMovie.getContext()).load(item.getImageBean().getLarge()).placeholder(R.drawable.ic_movie_placeholder).into(helper.ivMovie);
 
             helper.tvMovieTitle.setText(item.getTitle());
-            helper.tvMovieDirector.setText(resources.getString(R.string.movie_director_, MovieUtils.formatPersonName(item.getDirectorsPersonBeanList())));
-            helper.tvMovieCast.setText(resources.getString(R.string.movie_star_, MovieUtils.formatPersonName(item.getCastPersonBeanList())));
-            helper.tvMovieGenre.setText(resources.getString(R.string.movie_classify, MovieUtils.formatGenre(item.getGenres())));
+            helper.tvMovieDirector.setText(getResources().getString(R.string.movie_director_, MovieUtils.formatPersonName(item.getDirectorsPersonBeanList())));
+            helper.tvMovieCast.setText(getResources().getString(R.string.movie_star_, MovieUtils.formatPersonName(item.getCastPersonBeanList())));
+            helper.tvMovieGenre.setText(getResources().getString(R.string.movie_classify, MovieUtils.formatGenre(item.getGenres())));
 
             if (type == 0) {
                 helper.llRating.setVisibility(View.VISIBLE);
                 helper.ratingBar.setRating((float) (item.getRatingBean().getAverage() / 2));
                 helper.tvMovieRating.setText(String.valueOf(item.getRatingBean().getAverage()));
+                helper.tvMovieMainLandPubDate.setVisibility(View.GONE);
             } else {
                 helper.llRating.setVisibility(View.GONE);
+                helper.tvMovieMainLandPubDate.setVisibility(View.VISIBLE);
+                helper.tvMovieMainLandPubDate.setText(String.format(getString(R.string.movie_year), item.getMainLandPubDate()));
             }
         }
     }
 
     static final class ViewHolder extends BaseViewHolder {
 
-        LinearLayout llItem;
         ImageView ivMovie;
         TextView tvMovieTitle;
         TextView tvMovieDirector;
         TextView tvMovieCast;
         TextView tvMovieGenre;
+        LinearLayout llRating;
         RatingBar ratingBar;
         TextView tvMovieRating;
-        LinearLayout llRating;
+        TextView tvMovieMainLandPubDate;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            llItem = itemView.findViewById(R.id.ll_item);
             ivMovie = itemView.findViewById(R.id.iv_movie);
             tvMovieTitle = itemView.findViewById(R.id.tv_movie_title);
             tvMovieDirector = itemView.findViewById(R.id.tv_movie_director);
             tvMovieCast = itemView.findViewById(R.id.tv_movie_cast);
             tvMovieGenre = itemView.findViewById(R.id.tv_movie_genre);
+            llRating = itemView.findViewById(R.id.ll_rating);
             ratingBar = itemView.findViewById(R.id.rating_rar);
             tvMovieRating = itemView.findViewById(R.id.tv_movie_rating);
-            llRating = itemView.findViewById(R.id.ll_rating);
+            tvMovieMainLandPubDate = itemView.findViewById(R.id.tv_movie_main_land_pub_date);
         }
     }
 }

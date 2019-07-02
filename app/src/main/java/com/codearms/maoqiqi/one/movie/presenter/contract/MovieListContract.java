@@ -12,7 +12,7 @@ public interface MovieListContract {
 
         void getComingSoonMovies(int start, int count);
 
-        void searchMovie(String q, String tag, int start, int count);
+        void searchMovie(String q, int start, int count);
     }
 
     interface View extends BaseView<Presenter> {
