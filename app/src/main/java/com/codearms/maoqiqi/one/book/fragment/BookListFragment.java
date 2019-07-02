@@ -70,7 +70,7 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 BookListBean.BookBean item = list.get(position);
-                ImageView ivBook = (ImageView) adapter.getViewByPosition(position, R.id.iv_book);
+                ImageView ivBook = (ImageView) adapter.getViewByPosition(recyclerView, position, R.id.iv_book);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ivBook, ViewCompat.getTransitionName(ivBook));
                 BookDetailActivity.start(context, item.getId(), item.getTitle(), item.getImageBean().getLarge(), options.toBundle());
             }

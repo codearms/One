@@ -1,5 +1,6 @@
 package com.codearms.maoqiqi.one.data.net;
 
+import com.codearms.maoqiqi.one.data.bean.BookDetailBean;
 import com.codearms.maoqiqi.one.data.bean.BookListBean;
 import com.codearms.maoqiqi.one.data.bean.MovieDetailBean;
 import com.codearms.maoqiqi.one.data.bean.MovieListBean;
@@ -12,25 +13,26 @@ import retrofit2.http.Query;
 public interface DouBanApi {
 
     /**
-     * 搜索图书(https://api.douban.com/v2/book/search)
+     * 搜索豆瓣书籍(https://api.douban.com/v2/book/search?q=我是传奇&start=1)
      *
      * @param apiKey apiKey
      * @param q      查询关键字
      * @param tag    查询的tag
-     * @param start  取结果的offset 默认为0
-     * @param count  取结果的条数 默认为20，最大为100
+     * @param start  从第几条开始
+     * @param count  一页条数
      * @return 图书数据
      */
     @GET("book/search")
     Observable<BookListBean> getBook(@Query("apikey") String apiKey, @Query("q") String q, @Query("tag") String tag, @Query("start") int start, @Query("count") int count);
 
     /**
-     * 获取图书信息(https://api.douban.com/v2/book/:id)
+     * 获取豆瓣书籍信息(https://api.douban.com/v2/book/25902185)
      *
-     * @param id
+     * @param id 图书豆瓣ID
+     * @return 书籍详情
      */
     @GET("book/{id}")
-    Observable<BookListBean.BookBean> getBookDetail(@Path("id") String id);
+    Observable<BookDetailBean> getBookDetail(@Path("id") String id, @Query("apikey") String apiKey);
 
     /**
      * 获取正在热映的电影(https://api.douban.com/v2/movie/in\_theaters?city=广州&start=0&count=10)

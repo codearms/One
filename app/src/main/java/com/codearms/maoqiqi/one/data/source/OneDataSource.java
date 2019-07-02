@@ -3,6 +3,7 @@ package com.codearms.maoqiqi.one.data.source;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
+import com.codearms.maoqiqi.one.data.bean.BookDetailBean;
 import com.codearms.maoqiqi.one.data.bean.BookListBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
@@ -255,7 +256,7 @@ public interface OneDataSource {
      *
      * @param id
      */
-    Observable<BookListBean.BookBean> getBookDetail(String id);
+    Observable<BookDetailBean> getBookDetail(String id);
 
     /**
      * 正在热映

@@ -123,9 +123,9 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
             Glide.with(helper.ivMovie.getContext()).load(item.getImageBean().getLarge()).placeholder(R.drawable.ic_movie_placeholder).into(helper.ivMovie);
 
             helper.tvMovieTitle.setText(item.getTitle());
-            helper.tvMovieDirector.setText(getResources().getString(R.string.movie_director_, MovieUtils.formatPersonName(item.getDirectorsPersonBeanList())));
-            helper.tvMovieCast.setText(getResources().getString(R.string.movie_star_, MovieUtils.formatPersonName(item.getCastPersonBeanList())));
-            helper.tvMovieGenre.setText(getResources().getString(R.string.movie_classify, MovieUtils.formatGenre(item.getGenres())));
+            helper.tvMovieDirector.setText(getString(R.string.movie_director_, MovieUtils.formatPersonName(item.getDirectorsPersonBeanList())));
+            helper.tvMovieCast.setText(getString(R.string.movie_star_, MovieUtils.formatPersonName(item.getCastPersonBeanList())));
+            helper.tvMovieGenre.setText(getString(R.string.movie_classify, MovieUtils.formatGenre(item.getGenres())));
 
             if (type == 0) {
                 helper.llRating.setVisibility(View.VISIBLE);
@@ -135,7 +135,7 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
             } else {
                 helper.llRating.setVisibility(View.GONE);
                 helper.tvMovieMainLandPubDate.setVisibility(View.VISIBLE);
-                helper.tvMovieMainLandPubDate.setText(String.format(getString(R.string.movie_year), item.getMainLandPubDate()));
+                helper.tvMovieMainLandPubDate.setText(getString(R.string.movie_year, item.getMainLandPubDate()));
             }
         }
     }

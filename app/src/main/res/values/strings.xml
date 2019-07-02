@@ -143,11 +143,19 @@
     <string name="country">制片国家/地区：%s</string>
     <string name="dou_ban_score">豆瓣评分</string>
     <string name="introduction">简介</string>
-    <string name="movie_num_raters">%d人</string>
+    <string name="num_raters">%d人</string>
     <string name="movie_director">导演</string>
     <string name="movie_star">主演</string>
     <string name="trailers_and_photos">预告片/剧照</string>
     <string name="more">更多信息</string>
+    <string name="book_detail">图书详情</string>
+    <string name="author">作者</string>
+    <string name="catalog">目录</string>
+
+    <string name="book_author">作者：%s</string>
+    <string name="book_publisher">出版社：%s</string>
+    <string name="book_publish_date">出版时间：%s</string>
+    <string name="book_price">价格：%s</string>
 
     <string-array name="news_titles">
         <item>推荐</item>

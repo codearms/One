@@ -3,6 +3,7 @@ package com.codearms.maoqiqi.one.data.source;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
+import com.codearms.maoqiqi.one.data.bean.BookDetailBean;
 import com.codearms.maoqiqi.one.data.bean.BookListBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
@@ -195,8 +196,8 @@ public class OneRepository implements OneDataSource {
     }
 
     @Override
-    public Observable<BookListBean.BookBean> getBookDetail(String id) {
-        return douBanApi.getBookDetail(id).compose(RxUtils.rxSchedulerHelper());
+    public Observable<BookDetailBean> getBookDetail(String id) {
+        return douBanApi.getBookDetail(id, "0df993c66c0c636e29ecbb5344252a4a").compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override

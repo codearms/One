@@ -56,12 +56,12 @@ public class SplashActivity extends BaseActivity {
     // 显示跳过按钮
     private void showView() {
         tvJump.setVisibility(View.VISIBLE);
-        tvJump.setText(String.format(getString(R.string.jump_num), COUNT));
+        tvJump.setText(getString(R.string.jump_num, COUNT));
         tvJump.setOnClickListener(v -> startMainActivity());
         // 每隔1s执行一次任务,执行5次
         compositeDisposable.add(Observable.interval(1000, TimeUnit.MILLISECONDS).take(COUNT)
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> {
-                    tvJump.setText(String.format(getString(R.string.jump_num), (COUNT - 1 - aLong)));
+                    tvJump.setText(getString(R.string.jump_num, COUNT - 1 - aLong));
                     if (COUNT - 1 - aLong == 0) {
                         tvJump.setVisibility(View.GONE);
                         startMainActivity();

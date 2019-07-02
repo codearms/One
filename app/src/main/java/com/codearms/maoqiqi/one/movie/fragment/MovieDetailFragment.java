@@ -146,14 +146,14 @@ public class MovieDetailFragment extends BaseFragment<MovieDetailContract.Presen
         url = detailBean.getShareUrl();
 
         tvMovieTitle.setText(detailBean.getTitle());
-        tvMovieGenre.setText(String.format(getString(R.string.movie_genre), MovieUtils.formatGenre(detailBean.getGenres())));
-        tvMovieDuration.setText(String.format(getString(R.string.movie_duration), MovieUtils.formatDuration(detailBean.getDurations())));
-        tvMovieMainLandPubDate.setText(String.format(getString(R.string.movie_year), detailBean.getMainLandPubDate()));
-        tvCountry.setText(String.format(getString(R.string.country), MovieUtils.formatCountry(detailBean.getCountries())));
+        tvMovieGenre.setText(getString(R.string.movie_genre, MovieUtils.formatGenre(detailBean.getGenres())));
+        tvMovieDuration.setText(getString(R.string.movie_duration, MovieUtils.formatDuration(detailBean.getDurations())));
+        tvMovieMainLandPubDate.setText(getString(R.string.movie_year, detailBean.getMainLandPubDate()));
+        tvCountry.setText(getString(R.string.country, MovieUtils.formatCountry(detailBean.getCountries())));
 
         ratingBar.setRating((float) (detailBean.getRatingBean().getAverage() / 2));
         tvMovieRating.setText(String.valueOf(detailBean.getRatingBean().getAverage()));
-        tvMovieRatingsCount.setText(String.format(getString(R.string.movie_num_raters), detailBean.getRatingsCount()));
+        tvMovieRatingsCount.setText(getString(R.string.num_raters, detailBean.getRatingsCount()));
 
         summaryView.setText(detailBean.getSummary());
 
