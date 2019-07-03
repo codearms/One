@@ -153,6 +153,7 @@
     <string name="catalog">目录</string>
 
     <string name="book_author">作者：%s</string>
+    <string name="book_publish">发行：%s / %s</string>
     <string name="book_publisher">出版社：%s</string>
     <string name="book_publish_date">出版时间：%s</string>
     <string name="book_price">价格：%s</string>

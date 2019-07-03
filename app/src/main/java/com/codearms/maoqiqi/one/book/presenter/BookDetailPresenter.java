@@ -3,7 +3,6 @@ package com.codearms.maoqiqi.one.book.presenter;
 import com.codearms.maoqiqi.base.BaseObserver;
 import com.codearms.maoqiqi.one.book.presenter.contract.BookDetailContract;
 import com.codearms.maoqiqi.one.data.bean.BookDetailBean;
-import com.codearms.maoqiqi.one.data.bean.BookListBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.rx.RxPresenterImpl;
 

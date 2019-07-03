@@ -12,7 +12,7 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            android:theme="@style/toolbar_theme"
             app:contentScrim="@color/color_news"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
@@ -58,7 +58,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_margin="8dp"
+                    android:layout_margin="@dimen/eight"
                     android:textColor="@color/color_news_source"
                     android:textSize="@dimen/text_size_smaller" />
             </RelativeLayout>
@@ -67,6 +67,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="25dp"
                 android:background="@color/transparent"
                 android:theme="@style/toolbar_theme"
                 app:contentInsetStartWithNavigation="0dp"
@@ -74,7 +75,7 @@
                 app:navigationIcon="@drawable/ic_back">
 
                 <TextView
-                    android:id="@+id/tvTitle"
+                    android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"

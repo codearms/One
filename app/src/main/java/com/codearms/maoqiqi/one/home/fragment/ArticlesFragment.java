@@ -36,6 +36,8 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
     public static final String FROM_COLLECT = "FROM_COLLECT";
     public static final String FROM_SEARCH = "FROM_SEARCH";
 
+    private List<ArticleBean> list = new ArrayList<>();
+    private int topArticles;
     private ArticlesAdapter adapter;
 
     // 来自哪一个页面
@@ -105,7 +107,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
             isClassify = bundle.getBoolean("isClassify", true);
         }
 
-        adapter = new ArticlesAdapter(R.layout.item_articles, new ArrayList<>(), 0, from, isClassify);
+        adapter = new ArticlesAdapter(R.layout.item_articles, list, topArticles, from, isClassify);
         adapter.setOnItemChildClickListener((adapter, view, position) -> itemChildClick(view, position));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -198,19 +200,21 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
 
     @Override
     public void setHomeArticles(List<ArticleBean> topArticleBeans, ArticleBeans articleBeans) {
-        List<ArticleBean> list = new ArrayList<>();
         list.addAll(topArticleBeans);
         list.addAll(articleBeans.getArticleBeanList());
 
-        adapter.setTopArticles(topArticleBeans.size());
+        topArticles = topArticleBeans.size();
+        adapter.setTopArticles(topArticles);
         adapter.replaceData(list);
     }
 
     @Override
     public void setArticles(ArticleBeans articleBeans, boolean isRefresh) {
         if (isRefresh) {
-            adapter.replaceData(articleBeans.getArticleBeanList());
+            list = articleBeans.getArticleBeanList();
+            adapter.replaceData(list);
         } else {
+            list.addAll(articleBeans.getArticleBeanList());
             adapter.addData(articleBeans.getArticleBeanList());
         }
     }

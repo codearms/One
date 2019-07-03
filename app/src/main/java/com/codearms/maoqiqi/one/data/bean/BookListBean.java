@@ -4,110 +4,132 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/**
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-07-03 10:14
+ */
 public class BookListBean {
-    @SerializedName("count")
+
     private int count;
-    @SerializedName("start")
     private int start;
-    @SerializedName("total")
     private int total;
     @SerializedName("books")
     private List<BookBean> bookBeanList;
 
-    public class BookBean {
-        @SerializedName("rating")
-        private RatingBean ratingBean;
-        @SerializedName("subtitle")
-        private String subTitle;
-        @SerializedName("author")
-        private List<String> authorList;
-        @SerializedName("pubdate")
-        private String pubDate;
-        @SerializedName("tags")
-        private List<TagBean> tagBeanList;
-        @SerializedName("origin_title")
-        private String originTitle;
-        @SerializedName("image")
+    public static class BookBean {
+        private String id;
+        // 封面
         private String image;
-        @SerializedName("binding")
-        private String binding;
-        @SerializedName("translator")
-        private List<String> translatorList;
-        @SerializedName("catalog")
-        private String catalog;
-        @SerializedName("pages")
-        private String pages;
         @SerializedName("images")
         private ImageBean imageBean;
-        @SerializedName("alt")
-        private String alt;
-        @SerializedName("id")
-        private String id;
-        @SerializedName("publisher")
-        private String publisher;
-        @SerializedName("isbn10")
-        private String isbn10;
-        @SerializedName("isbn13")
-        private String isbn13;
-        @SerializedName("title")
+        // 书名
         private String title;
-        @SerializedName("url")
-        private String url;
+        // 副标题
+        private String subtitle;
+        @SerializedName("origin_title")
+        private String originTitle;
         @SerializedName("alt_title")
         private String altTitle;
+        // 作者
+        private List<String> author;
+        // 作者简介
         @SerializedName("author_intro")
-        private String authorintro;
-        @SerializedName("summary")
+        private String authorIntro;
+        // 出版社
+        private String publisher;
+        // 出版时间
+        @SerializedName("pubdate")
+        private String pubDate;
+        // 内容简介
         private String summary;
-        @SerializedName("price")
+        // 价格
         private String price;
+        // 标签
+        @SerializedName("tags")
+        private List<TagBean> tagBeanList;
 
-        public RatingBean getRatingBean() {
-            return ratingBean;
+        // 书籍评价
+        @SerializedName("rating")
+        private BookDetailBean.RatingBean ratingBean;
+
+        // 详情链接
+        private String url;
+        private String alt;
+        // 目录
+        private String catalog;
+        // 页数
+        private String pages;
+
+        private String binding;
+        private String isbn10;
+        private String isbn13;
+        private List<String> translator;
+
+        @SerializedName("series")
+        private SeriesBean seriesBeanList;
+        @SerializedName("ebook_url")
+        private String ebookUrl;
+        @SerializedName("ebook_price")
+        private String ebookPrice;
+
+        public static class SeriesBean {
+            private String id;
+            private String title;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
         }
 
-        public void setRatingBean(RatingBean ratingBean) {
-            this.ratingBean = ratingBean;
+        public static class TagBean {
+            private int count;
+            private String name;
+            private String title;
+
+            public int getCount() {
+                return count;
+            }
+
+            public void setCount(int count) {
+                this.count = count;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
         }
 
-        public String getSubTitle() {
-            return subTitle;
+        public String getId() {
+            return id;
         }
 
-        public void setSubTitle(String subTitle) {
-            this.subTitle = subTitle;
-        }
-
-        public List<String> getAuthorList() {
-            return authorList;
-        }
-
-        public void setAuthorList(List<String> authorList) {
-            this.authorList = authorList;
-        }
-
-        public String getPubDate() {
-            return pubDate;
-        }
-
-        public void setPubDate(String pubDate) {
-            this.pubDate = pubDate;
-        }
-
-        public List<TagBean> getTagBeanList() {
-            return tagBeanList;
-        }
-
-        public void setTagBeanList(List<TagBean> tagBeanList) {
-            this.tagBeanList = tagBeanList;
-        }
-
-        public String getOriginTitle() {
-            return originTitle;
-        }
-
-        public void setOriginTitle(String originTitle) {
-            this.originTitle = originTitle;
+        public void setId(String id) {
+            this.id = id;
         }
 
         public String getImage() {
@@ -118,20 +140,124 @@ public class BookListBean {
             this.image = image;
         }
 
-        public String getBinding() {
-            return binding;
+        public ImageBean getImageBean() {
+            return imageBean;
         }
 
-        public void setBinding(String binding) {
-            this.binding = binding;
+        public void setImageBean(ImageBean imageBean) {
+            this.imageBean = imageBean;
         }
 
-        public List<String> getTranslatorList() {
-            return translatorList;
+        public String getTitle() {
+            return title;
         }
 
-        public void setTranslatorList(List<String> translatorList) {
-            this.translatorList = translatorList;
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getSubtitle() {
+            return subtitle;
+        }
+
+        public void setSubtitle(String subtitle) {
+            this.subtitle = subtitle;
+        }
+
+        public String getOriginTitle() {
+            return originTitle;
+        }
+
+        public void setOriginTitle(String originTitle) {
+            this.originTitle = originTitle;
+        }
+
+        public String getAltTitle() {
+            return altTitle;
+        }
+
+        public void setAltTitle(String altTitle) {
+            this.altTitle = altTitle;
+        }
+
+        public List<String> getAuthor() {
+            return author;
+        }
+
+        public void setAuthor(List<String> author) {
+            this.author = author;
+        }
+
+        public String getAuthorIntro() {
+            return authorIntro;
+        }
+
+        public void setAuthorIntro(String authorIntro) {
+            this.authorIntro = authorIntro;
+        }
+
+        public String getPublisher() {
+            return publisher;
+        }
+
+        public void setPublisher(String publisher) {
+            this.publisher = publisher;
+        }
+
+        public String getPubDate() {
+            return pubDate;
+        }
+
+        public void setPubDate(String pubDate) {
+            this.pubDate = pubDate;
+        }
+
+        public String getSummary() {
+            return summary;
+        }
+
+        public void setSummary(String summary) {
+            this.summary = summary;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
+
+        public List<TagBean> getTagBeanList() {
+            return tagBeanList;
+        }
+
+        public void setTagBeanList(List<TagBean> tagBeanList) {
+            this.tagBeanList = tagBeanList;
+        }
+
+        public BookDetailBean.RatingBean getRatingBean() {
+            return ratingBean;
+        }
+
+        public void setRatingBean(BookDetailBean.RatingBean ratingBean) {
+            this.ratingBean = ratingBean;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getAlt() {
+            return alt;
+        }
+
+        public void setAlt(String alt) {
+            this.alt = alt;
         }
 
         public String getCatalog() {
@@ -150,36 +276,12 @@ public class BookListBean {
             this.pages = pages;
         }
 
-        public ImageBean getImageBean() {
-            return imageBean;
+        public String getBinding() {
+            return binding;
         }
 
-        public void setImageBean(ImageBean imageBean) {
-            this.imageBean = imageBean;
-        }
-
-        public String getAlt() {
-            return alt;
-        }
-
-        public void setAlt(String alt) {
-            this.alt = alt;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getPublisher() {
-            return publisher;
-        }
-
-        public void setPublisher(String publisher) {
-            this.publisher = publisher;
+        public void setBinding(String binding) {
+            this.binding = binding;
         }
 
         public String getIsbn10() {
@@ -198,151 +300,36 @@ public class BookListBean {
             this.isbn13 = isbn13;
         }
 
-        public String getTitle() {
-            return title;
+        public List<String> getTranslator() {
+            return translator;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
+        public void setTranslator(List<String> translator) {
+            this.translator = translator;
         }
 
-        public String getUrl() {
-            return url;
+        public SeriesBean getSeriesBeanList() {
+            return seriesBeanList;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setSeriesBeanList(SeriesBean seriesBeanList) {
+            this.seriesBeanList = seriesBeanList;
         }
 
-        public String getAltTitle() {
-            return altTitle;
+        public String getEbookUrl() {
+            return ebookUrl;
         }
 
-        public void setAltTitle(String altTitle) {
-            this.altTitle = altTitle;
+        public void setEbookUrl(String ebookUrl) {
+            this.ebookUrl = ebookUrl;
         }
 
-        public String getAuthorintro() {
-            return authorintro;
+        public String getEbookPrice() {
+            return ebookPrice;
         }
 
-        public void setAuthorintro(String authorintro) {
-            this.authorintro = authorintro;
-        }
-
-        public String getSummary() {
-            return summary;
-        }
-
-        public void setSummary(String summary) {
-            this.summary = summary;
-        }
-
-        public String getPrice() {
-            return price;
-        }
-
-        public void setPrice(String price) {
-            this.price = price;
-        }
-    }
-
-    public class RatingBean {
-        private int max;
-        private int numRaters;
-        private String average;
-        private int min;
-
-        public int getMax() {
-            return max;
-        }
-
-        public void setMax(int max) {
-            this.max = max;
-        }
-
-        public int getNumRaters() {
-            return numRaters;
-        }
-
-        public void setNumRaters(int numRaters) {
-            this.numRaters = numRaters;
-        }
-
-        public String getAverage() {
-            return average;
-        }
-
-        public void setAverage(String average) {
-            this.average = average;
-        }
-
-        public int getMin() {
-            return min;
-        }
-
-        public void setMin(int min) {
-            this.min = min;
-        }
-    }
-
-    public class TagBean {
-        private int count;
-        private String name;
-        private String title;
-
-        public int getCount() {
-            return count;
-        }
-
-        public void setCount(int count) {
-            this.count = count;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-    }
-
-    public class ImageBean {
-        private String small;
-        private String large;
-        private String medium;
-
-        public String getSmall() {
-            return small;
-        }
-
-        public void setSmall(String small) {
-            this.small = small;
-        }
-
-        public String getLarge() {
-            return large;
-        }
-
-        public void setLarge(String large) {
-            this.large = large;
-        }
-
-        public String getMedium() {
-            return medium;
-        }
-
-        public void setMedium(String medium) {
-            this.medium = medium;
+        public void setEbookPrice(String ebookPrice) {
+            this.ebookPrice = ebookPrice;
         }
     }
 

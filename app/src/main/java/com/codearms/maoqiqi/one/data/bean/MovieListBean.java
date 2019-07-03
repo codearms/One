@@ -16,7 +16,7 @@ public class MovieListBean {
         private String id;
         // 存放各种大小的电影图
         @SerializedName("images")
-        private MovieDetailBean.ImageBean imageBean;
+        private ImageBean imageBean;
         // 电影中文名
         private String title;
         // 电影原名
@@ -62,11 +62,11 @@ public class MovieListBean {
             this.id = id;
         }
 
-        public MovieDetailBean.ImageBean getImageBean() {
+        public ImageBean getImageBean() {
             return imageBean;
         }
 
-        public void setImageBean(MovieDetailBean.ImageBean imageBean) {
+        public void setImageBean(ImageBean imageBean) {
             this.imageBean = imageBean;
         }
 

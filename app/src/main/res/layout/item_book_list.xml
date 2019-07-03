@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_item"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:clickable="true"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="@dimen/sixteen">
 
     <ImageView
         android:id="@+id/iv_book"
         android:layout_width="78dp"
         android:layout_height="120dp"
+        android:contentDescription="@string/image_description"
         android:scaleType="fitXY"
         android:src="@drawable/ic_book_placeholder"
-        android:transitionName="@string/transition_book_img" />
+        android:transitionName="@string/transition_book_img"
+        tools:ignore="UnusedAttribute" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sixteen"
+        android:layout_marginLeft="@dimen/sixteen"
         android:orientation="vertical">
 
         <TextView
@@ -27,49 +29,53 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
-            android:text="标题"
+            android:singleLine="true"
             android:textColor="@color/color_text_main"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_size_big"
+            tools:text="标题标题" />
 
         <TextView
             android:id="@+id/tv_book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="作者"
+            android:layout_marginTop="@dimen/eight"
             android:textColor="@color/color_text_general"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_size_smaller"
+            tools:text="作者" />
 
         <TextView
             android:id="@+id/tv_book_publish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="出版社/时间"
+            android:layout_marginTop="@dimen/four"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textColor="@color/color_text_general"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_size_smaller"
+            tools:text="出版社/时间" />
 
         <TextView
             android:id="@+id/tv_book_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="价格"
+            android:layout_marginTop="@dimen/four"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:textColor="@color/color_text_general"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_size_smaller"
+            tools:text="价格" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
+            android:layout_marginTop="@dimen/four"
+            android:gravity="center_vertical">
 
             <RatingBar
                 android:id="@+id/rating_rar"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:isIndicator="true"
                 android:progressDrawable="@drawable/rating_bar" />
 
@@ -77,11 +83,11 @@
                 android:id="@+id/tv_book_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="4dp"
-                android:text="9.0"
+                android:layout_marginStart="@dimen/four"
+                android:layout_marginLeft="@dimen/four"
                 android:textColor="@color/color_text_general"
-                android:textSize="12sp" />
+                android:textSize="@dimen/text_size_smaller"
+                tools:text="9.0" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

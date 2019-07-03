@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
@@ -14,6 +17,7 @@ import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.book.presenter.BookDetailPresenter;
 import com.codearms.maoqiqi.one.book.presenter.contract.BookDetailContract;
 import com.codearms.maoqiqi.one.data.bean.BookDetailBean;
+import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.utils.BookUtils;
 import com.codearms.maoqiqi.one.view.SummaryView;
 
@@ -38,6 +42,8 @@ public class BookDetailFragment extends BaseFragment<BookDetailContract.Presente
     SummaryView summaryViewAuthor;
     TextView tvBookCatalog;
 
+    private String url;
+
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
      *
@@ -54,6 +60,7 @@ public class BookDetailFragment extends BaseFragment<BookDetailContract.Presente
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         presenter = new BookDetailPresenter(this);
     }
 
@@ -93,8 +100,10 @@ public class BookDetailFragment extends BaseFragment<BookDetailContract.Presente
 
     @Override
     public void setBookDetail(BookDetailBean bookDetailBean) {
+        url = bookDetailBean.getAlt();
+
         tvBookTitle.setText(bookDetailBean.getTitle());
-        tvBookAuthor.setText(BookUtils.formatAuthor(bookDetailBean.getAuthor()));
+        tvBookAuthor.setText(getString(R.string.book_author, BookUtils.formatAuthor(bookDetailBean.getAuthor())));
         tvBookPublisher.setText(getString(R.string.book_publisher, bookDetailBean.getPublisher()));
         tvBookPublishDate.setText(getString(R.string.book_publish_date, bookDetailBean.getPubDate()));
         tvBookPrice.setText(getString(R.string.book_price, bookDetailBean.getPrice()));
@@ -106,5 +115,24 @@ public class BookDetailFragment extends BaseFragment<BookDetailContract.Presente
         summaryView.setText(bookDetailBean.getSummary());
         summaryViewAuthor.setText(bookDetailBean.getAuthorIntro());
         tvBookCatalog.setText(bookDetailBean.getCatalog());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_detail, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.menu_share:
+                return true;
+            case R.id.menu_more:
+                if (url != null) WebViewActivity.start(context, 2, url);
+                break;
+        }
+        return false;
     }
 }

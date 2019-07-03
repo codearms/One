@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -27,6 +26,8 @@ import com.codearms.maoqiqi.one.book.presenter.BookListPresenter;
 import com.codearms.maoqiqi.one.book.presenter.contract.BookListContract;
 import com.codearms.maoqiqi.one.data.bean.BookListBean;
 import com.codearms.maoqiqi.one.decoration.DividerDecoration;
+import com.codearms.maoqiqi.one.utils.BookUtils;
+import com.codearms.maoqiqi.one.utils.RecyclerViewScrollListener;
 
 import java.util.List;
 
@@ -66,14 +67,11 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
 
         adapter = new RecyclerAdapter(R.layout.item_book_list, list);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                BookListBean.BookBean item = list.get(position);
-                ImageView ivBook = (ImageView) adapter.getViewByPosition(recyclerView, position, R.id.iv_book);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ivBook, ViewCompat.getTransitionName(ivBook));
-                BookDetailActivity.start(context, item.getId(), item.getTitle(), item.getImageBean().getLarge(), options.toBundle());
-            }
+        adapter.setOnItemClickListener((adapter, view, position) -> {
+            BookListBean.BookBean item = list.get(position);
+            ImageView ivBook = (ImageView) adapter.getViewByPosition(recyclerView, position, R.id.iv_book);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ivBook, ViewCompat.getTransitionName(ivBook));
+            BookDetailActivity.start(context, item.getId(), item.getTitle(), item.getImageBean().getLarge(), options.toBundle());
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -82,13 +80,19 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerDecoration());
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerViewScrollListener(context));
     }
 
     @Override
     protected void loadData() {
         super.loadData();
         Bundle bundle = getArguments();
-        presenter.getBook(bundle.getString("keyword"), bundle.getString("bookTag"), Constants.PAGE_INDEX, Constants.PAGE_COUNT);
+        if (bundle == null) return;
+
+        String keyword = bundle.getString("keyword");
+        String bookTag = bundle.getString("bookTag");
+
+        presenter.getBook(keyword, bookTag, Constants.PAGE_INDEX, Constants.PAGE_COUNT);
     }
 
     @Override
@@ -97,7 +101,7 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
         adapter.replaceData(list);
     }
 
-    static final class RecyclerAdapter extends BaseQuickAdapter<BookListBean.BookBean, ViewHolder> {
+    final class RecyclerAdapter extends BaseQuickAdapter<BookListBean.BookBean, ViewHolder> {
 
         RecyclerAdapter(int layoutResId, @Nullable List<BookListBean.BookBean> data) {
             super(layoutResId, data);
@@ -108,19 +112,10 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
             Glide.with(helper.ivBook.getContext()).load(item.getImageBean().getLarge()).placeholder(R.drawable.ic_book_placeholder).into(helper.ivBook);
 
             helper.tvBookTitle.setText(item.getTitle());
-            if (item.getAuthorList() != null && item.getAuthorList().size() > 0) {
-                helper.tvBookAuthor.setVisibility(View.VISIBLE);
-                helper.tvBookAuthor.setText(item.getAuthorList().get(0));
-            } else {
-                helper.tvBookAuthor.setVisibility(View.GONE);
-            }
-            helper.tvBookPublish.setText(item.getPublisher() + " / " + item.getPubDate());
-            if (item.getPrice().equals("")) {
-                helper.tvBookPrice.setVisibility(View.GONE);
-            } else {
-                helper.tvBookPrice.setVisibility(View.VISIBLE);
-                helper.tvBookPrice.setText(item.getPrice());
-            }
+            helper.tvBookAuthor.setText(getString(R.string.book_author, BookUtils.formatAuthor(item.getAuthor())));
+            helper.tvBookPublish.setText(getString(R.string.book_publish, item.getPublisher(), item.getPubDate()));
+            helper.tvBookPrice.setText(getString(R.string.book_price, item.getPrice()));
+
             helper.ratingBar.setRating(Float.parseFloat(item.getRatingBean().getAverage()) / 2);
             helper.tvBookRating.setText(item.getRatingBean().getAverage());
         }
@@ -128,7 +123,6 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
 
     static final class ViewHolder extends BaseViewHolder {
 
-        LinearLayout llItem;
         ImageView ivBook;
         TextView tvBookTitle;
         TextView tvBookAuthor;
@@ -139,7 +133,6 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            llItem = itemView.findViewById(R.id.ll_item);
             ivBook = itemView.findViewById(R.id.iv_book);
             tvBookTitle = itemView.findViewById(R.id.tv_book_title);
             tvBookAuthor = itemView.findViewById(R.id.tv_book_author);
