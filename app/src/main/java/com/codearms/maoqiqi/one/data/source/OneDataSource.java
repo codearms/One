@@ -9,6 +9,9 @@ import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.MovieDetailBean;
 import com.codearms.maoqiqi.one.data.bean.MovieListBean;
+import com.codearms.maoqiqi.one.data.bean.MusicAlbumBean;
+import com.codearms.maoqiqi.one.data.bean.MusicArtistBean;
+import com.codearms.maoqiqi.one.data.bean.MusicSongBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.NewsBean;
 import com.codearms.maoqiqi.one.data.bean.NewsDetailBean;
@@ -286,4 +289,24 @@ public interface OneDataSource {
      * 搜索电影
      */
     Observable<MovieListBean> searchMovie(String q, int start, int count);
+
+    /**
+     * 得到歌曲列表
+     */
+    Observable<List<MusicSongBean>> getSongList(Long artistId, long albumId, String folderPath, String sortOrder);
+
+    /**
+     * 得到艺术家列表
+     */
+    Observable<List<MusicArtistBean>> getArtistList(String sortOrder);
+
+    /**
+     * 得到专辑列表
+     */
+    Observable<List<MusicAlbumBean>> getAlbumList(String sortOrder);
+
+    /**
+     * 获取包含音频文件的文件夹信息
+     */
+    Observable<List<String>> getFolderList();
 }

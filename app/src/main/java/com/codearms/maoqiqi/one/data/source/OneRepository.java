@@ -1,5 +1,6 @@
 package com.codearms.maoqiqi.one.data.source;
 
+import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
@@ -9,6 +10,9 @@ import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.MovieDetailBean;
 import com.codearms.maoqiqi.one.data.bean.MovieListBean;
+import com.codearms.maoqiqi.one.data.bean.MusicAlbumBean;
+import com.codearms.maoqiqi.one.data.bean.MusicArtistBean;
+import com.codearms.maoqiqi.one.data.bean.MusicSongBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.NewsBean;
 import com.codearms.maoqiqi.one.data.bean.NewsDetailBean;
@@ -19,6 +23,7 @@ import com.codearms.maoqiqi.one.data.net.DouBanApi;
 import com.codearms.maoqiqi.one.data.net.NewsAPI;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.data.net.ServerApi;
+import com.codearms.maoqiqi.one.utils.MediaLoader;
 import com.codearms.maoqiqi.utils.RxUtils;
 
 import java.util.List;
@@ -223,5 +228,25 @@ public class OneRepository implements OneDataSource {
     @Override
     public Observable<MovieListBean> searchMovie(String q, int start, int count) {
         return douBanApi.searchMovie(q, start, count).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<List<MusicSongBean>> getSongList(Long artistId, long albumId, String folderPath, String sortOrder) {
+        return RxUtils.createData(MediaLoader.getSongBeanList(App.getInstance(), artistId, albumId, folderPath, sortOrder)).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<List<MusicArtistBean>> getArtistList(String sortOrder) {
+        return RxUtils.createData(MediaLoader.getArtistBeanList(App.getInstance(), sortOrder)).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<List<MusicAlbumBean>> getAlbumList(String sortOrder) {
+        return RxUtils.createData(MediaLoader.getAlbumBeanList(App.getInstance(), sortOrder)).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<List<String>> getFolderList() {
+        return RxUtils.createData(MediaLoader.getFolderList(App.getInstance())).compose(RxUtils.rxSchedulerHelper());
     }
 }

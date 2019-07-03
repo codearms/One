@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.home.fragment.HomeFragment;
 import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 
 import java.util.Arrays;
@@ -76,6 +75,18 @@ public class MusicFragment extends BaseFragment {
         inflater.inflate(R.menu.menu_news, menu);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        List<Fragment> fragments = getChildFragmentManager().getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment != null && fragment.getUserVisibleHint()) {
+                fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+                break;
+            }
+        }
+    }
+
     private final class MyPagerAdapter extends SectionsPagerAdapter {
 
         MyPagerAdapter(List<String> fragmentTitles, FragmentManager fm) {
@@ -84,7 +95,7 @@ public class MusicFragment extends BaseFragment {
 
         @Override
         public Fragment getItem(int i) {
-            return HomeFragment.newInstance();
+            return MusicListFragment.newInstance(i);
         }
     }
 }

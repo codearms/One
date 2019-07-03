@@ -27,7 +27,7 @@ public class RxUtils {
         });
     }
 
-    private static <T> Observable<T> createData(final T t) {
+    public static <T> Observable<T> createData(final T t) {
         return Observable.create(emitter -> {
             try {
                 if (!emitter.isDisposed()) {

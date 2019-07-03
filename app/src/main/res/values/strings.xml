@@ -158,6 +158,17 @@
     <string name="book_publish_date">出版时间：%s</string>
     <string name="book_price">价格：%s</string>
 
+    <string name="read_external_storage">ONE将读取外部存储以在您的设备上显示歌曲。</string>
+    <string name="no_authorization">没有权限读取外部存储，以在您的设备上显示歌曲。</string>
+    <string name="to_settings">去应用程序详情设置，授权读取外部存储以在设备上显示歌曲。</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+
+    <string name="music_song_info">%1$s · %2$s</string>
+    <string name="music_artist_info">%1$d 张专辑 | %2$d 首歌</string>
+    <string name="music_album_info">%1$s | %2$d 首歌</string>
+    <string name="music_folder_info">%1$d首 %2$s</string>
+
     <string-array name="news_titles">
         <item>推荐</item>
         <item>热点</item>
