@@ -15,24 +15,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.MusicAlbumBean;
 import com.codearms.maoqiqi.one.data.bean.MusicArtistBean;
 import com.codearms.maoqiqi.one.data.bean.MusicSongBean;
 import com.codearms.maoqiqi.one.decoration.DividerDecoration;
+import com.codearms.maoqiqi.one.music.adapter.MusicAdapter;
 import com.codearms.maoqiqi.one.music.presenter.MusicListPresenter;
 import com.codearms.maoqiqi.one.music.presenter.contract.MusicListContract;
-import com.codearms.maoqiqi.one.utils.MusicUtils;
 import com.codearms.maoqiqi.one.utils.PermissionManager;
 import com.codearms.maoqiqi.one.utils.SortOrder;
-import com.codearms.maoqiqi.utils.LogUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
 import java.util.List;
@@ -77,6 +71,17 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
         return fragment;
     }
 
+    public static MusicListFragment newInstance(long artistId, long albumId, String folderPath) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("type", TYPE_SONG);
+        bundle.putLong("artistId", artistId);
+        bundle.putLong("albumId", albumId);
+        bundle.putString("folderPath", folderPath);
+        MusicListFragment fragment = new MusicListFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +102,9 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
         if (bundle == null) return;
 
         type = bundle.getInt("type");
+        artistId = bundle.getLong("artistId");
+        albumId = bundle.getLong("albumId");
+        folderPath = bundle.getString("folderPath");
 
         recyclerView = rootView.findViewById(R.id.recycler_view);
 
@@ -121,7 +129,6 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
 
     @Override
     public void onSuccess() {
-        LogUtils.e("info", "onSuccess");
         getData(true);
     }
 
@@ -222,97 +229,25 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
 
     @Override
     public void setSongList(List<MusicSongBean> musicSongBeanList) {
-        RecyclerAdapter<MusicSongBean> adapter = new RecyclerAdapter<>(R.layout.item_music_list, musicSongBeanList, null);
+        MusicAdapter<MusicSongBean> adapter = new MusicAdapter<>(R.layout.item_music_list, musicSongBeanList, getActivity(), type, null);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void setArtistList(List<MusicArtistBean> musicArtistBeanList) {
-        RecyclerAdapter<MusicArtistBean> adapter = new RecyclerAdapter<>(R.layout.item_music_list, musicArtistBeanList, null);
+        MusicAdapter<MusicArtistBean> adapter = new MusicAdapter<>(R.layout.item_music_list, musicArtistBeanList, getActivity(), type, null);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void setAlbumList(List<MusicAlbumBean> musicAlbumBeanList) {
-        RecyclerAdapter<MusicAlbumBean> adapter = new RecyclerAdapter<>(R.layout.item_music_list, musicAlbumBeanList, null);
+        MusicAdapter<MusicAlbumBean> adapter = new MusicAdapter<>(R.layout.item_music_list, musicAlbumBeanList, getActivity(), type, null);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void setFolderList(List<String> folderList, List<Integer> integers) {
-        RecyclerAdapter<String> adapter = new RecyclerAdapter<>(R.layout.item_music_list, folderList, null);
+        MusicAdapter<String> adapter = new MusicAdapter<>(R.layout.item_music_list, folderList, getActivity(), type, integers);
         recyclerView.setAdapter(adapter);
-    }
-
-    final class RecyclerAdapter<T> extends BaseQuickAdapter<T, ViewHolder> {
-
-        private final List<Integer> integers;
-
-        RecyclerAdapter(int layoutResId, @Nullable List<T> data, List<Integer> integers) {
-            super(layoutResId, data);
-            this.integers = integers;
-        }
-
-        @Override
-        protected void convert(ViewHolder helper, T item) {
-            switch (type) {
-                case TYPE_SONG:// 歌曲
-                    helper.ivMusic.setVisibility(View.VISIBLE);
-                    helper.ivFolder.setVisibility(View.GONE);
-
-                    MusicSongBean songBean = (MusicSongBean) item;
-
-                    helper.tvName.setText(songBean.getTitle());
-                    helper.tvInfo.setText(getString(R.string.music_song_info, MusicUtils.getArtist(songBean.getArtist()), MusicUtils.getAlbum(songBean.getAlbum())));
-                    break;
-                case TYPE_ARTIST:// 艺术家
-                    helper.ivMusic.setVisibility(View.VISIBLE);
-                    helper.ivFolder.setVisibility(View.GONE);
-
-                    MusicArtistBean artistBean = (MusicArtistBean) item;
-
-                    helper.tvName.setText(MusicUtils.getArtist(artistBean.getArtist()));
-                    helper.tvInfo.setText(getString(R.string.music_artist_info, artistBean.getNumberOfAlbums(), artistBean.getNumberOfTracks()));
-                    break;
-                case TYPE_ALBUM:// 专辑
-                    helper.ivMusic.setVisibility(View.VISIBLE);
-                    helper.ivFolder.setVisibility(View.GONE);
-
-                    MusicAlbumBean albumBean = (MusicAlbumBean) item;
-
-                    helper.tvName.setText(MusicUtils.getAlbum(albumBean.getAlbum()));
-                    helper.tvInfo.setText(getString(R.string.music_album_info, MusicUtils.getArtist(albumBean.getArtist()), albumBean.getNumberOfSongs()));
-                    break;
-                case TYPE_FOLDER:// 文件夹
-                    helper.ivMusic.setVisibility(View.GONE);
-                    helper.ivFolder.setVisibility(View.VISIBLE);
-
-                    String folderPath = (String) item;
-
-                    helper.tvName.setText(MusicUtils.getFolderName(folderPath));
-                    helper.tvInfo.setText(getString(R.string.music_folder_info, integers.get(helper.getLayoutPosition()), MusicUtils.getPath(folderPath)));
-                    break;
-            }
-        }
-    }
-
-    static final class ViewHolder extends BaseViewHolder {
-
-        LinearLayout llItem;
-        ImageView ivMusic;
-        ImageView ivFolder;
-        TextView tvName;
-        TextView tvInfo;
-        ImageView ivMore;
-
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            llItem = itemView.findViewById(R.id.llItem);
-            ivMusic = itemView.findViewById(R.id.ivMusic);
-            ivFolder = itemView.findViewById(R.id.ivFolder);
-            tvName = itemView.findViewById(R.id.tvName);
-            tvInfo = itemView.findViewById(R.id.tvInfo);
-            ivMore = itemView.findViewById(R.id.ivMore);
-        }
     }
 }

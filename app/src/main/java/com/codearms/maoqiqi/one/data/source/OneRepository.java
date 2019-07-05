@@ -232,17 +232,17 @@ public class OneRepository implements OneDataSource {
 
     @Override
     public Observable<List<MusicSongBean>> getSongList(Long artistId, long albumId, String folderPath, String sortOrder) {
-        return RxUtils.createData(MediaLoader.getSongBeanList(App.getInstance(), artistId, albumId, folderPath, sortOrder)).compose(RxUtils.rxSchedulerHelper());
+        return RxUtils.createData(MediaLoader.getSongBeanList(artistId, albumId, folderPath, sortOrder)).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
     public Observable<List<MusicArtistBean>> getArtistList(String sortOrder) {
-        return RxUtils.createData(MediaLoader.getArtistBeanList(App.getInstance(), sortOrder)).compose(RxUtils.rxSchedulerHelper());
+        return RxUtils.createData(MediaLoader.getArtistBeanList(sortOrder)).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
     public Observable<List<MusicAlbumBean>> getAlbumList(String sortOrder) {
-        return RxUtils.createData(MediaLoader.getAlbumBeanList(App.getInstance(), sortOrder)).compose(RxUtils.rxSchedulerHelper());
+        return RxUtils.createData(MediaLoader.getAlbumBeanList(sortOrder)).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override

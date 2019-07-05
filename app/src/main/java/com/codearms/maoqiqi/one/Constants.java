@@ -7,8 +7,10 @@ package com.codearms.maoqiqi.one;
  */
 public interface Constants {
 
+    // 默认加载数据起始页
     int PAGE_INDEX = 1;
 
+    // 默认加载数据条数
     int PAGE_COUNT = 10;
 
     // 欢迎页面随机图
@@ -18,5 +20,15 @@ public interface Constants {
             "http://sjbz.fd.zol-img.com.cn/t_s720x1280c/g2/M00/01/0C/ChMlWl0Ix0yICfPrAAupSFoQi8QAALAyQHhjMgAC6lg066.jpg",
             "http://sjbz.fd.zol-img.com.cn/t_s720x1280c/g5/M00/0F/09/ChMkJ1fJQVSIMLbUACHw9N-ATccAAU7cAJiX0oAIfEM441.jpg",
             "http://b.zol-img.com.cn/sjbizhi/images/9/720x1280/1561533932728.jpg"
+    };
+
+    // 音乐图标
+    String[] MUSICS = {
+            "http://aliyunimg.9ku.com/geshoutuji/singertuji/8/8325/8325_10.jpg",
+            "http://aliyunimg.9ku.com/geshoutuji/singertuji/8/8325/8325_7.jpg",
+            "http://f1.haiqq.com/allimg/521567549/2581038756.jpg",
+            "http://f1.haiqq.com/allimg/655391911/1609831445.jpg",
+            "http://f1.haiqq.com/allimg/3547466170/1439188363.jpg",
+            "http://f1.haiqq.com/allimg/351408267/1438664910.jpg",
     };
 }

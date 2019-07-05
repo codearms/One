@@ -1,7 +1,6 @@
 package com.codearms.maoqiqi.one.music.presenter;
 
 import com.codearms.maoqiqi.base.BaseObserver;
-import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.data.bean.MusicAlbumBean;
 import com.codearms.maoqiqi.one.data.bean.MusicArtistBean;
 import com.codearms.maoqiqi.one.data.bean.MusicSongBean;
@@ -82,7 +81,7 @@ public class MusicListPresenter extends RxPresenterImpl<MusicListContract.View> 
 
     private void getCount(List<String> folderList) {
         Observable.fromIterable(folderList)
-                .map(s -> MediaLoader.getSongBeanList(App.getInstance(), 0, 0, s, SortOrder.SongSortOrder.SONG_A_Z).size()).toList()
+                .map(s -> MediaLoader.getSongBeanList(0, 0, s, SortOrder.SongSortOrder.SONG_A_Z).size()).toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<List<Integer>>() {
@@ -93,7 +92,7 @@ public class MusicListPresenter extends RxPresenterImpl<MusicListContract.View> 
 
                     @Override
                     public void onSuccess(List<Integer> integers) {
-                        if (!view.isActive()) return;
+                        if (view == null || !view.isActive()) return;
                         view.setFolderList(folderList, integers);
                     }
 

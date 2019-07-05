@@ -63,7 +63,7 @@ public class MusicFragment extends BaseFragment {
 
         String[] arr = getResources().getStringArray(R.array.music_titles);
         viewPager.setAdapter(new MyPagerAdapter(Arrays.asList(arr), getChildFragmentManager()));
-        viewPager.setOffscreenPageLimit(1);
+        viewPager.setOffscreenPageLimit(arr.length - 1);
         viewPager.setCurrentItem(0);
 
         tabLayout.setupWithViewPager(viewPager);

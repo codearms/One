@@ -7,9 +7,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.data.bean.MusicAlbumBean;
 import com.codearms.maoqiqi.one.data.bean.MusicArtistBean;
 import com.codearms.maoqiqi.one.data.bean.MusicSongBean;
+import com.codearms.maoqiqi.utils.LogUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class MediaLoader {
 
+    private static final String TAG = MediaLoader.class.getSimpleName();
     private static final int FILTER_SIZE = 1024 * 1024;// 1MB
     private static final int FILTER_DURATION = 60 * 1000;// 1分钟
 
@@ -68,7 +71,7 @@ public class MediaLoader {
     private static List<MusicArtistBean> getArtistsForCursor(Cursor cursor) {
         List<MusicArtistBean> list = new ArrayList<>();
         try {
-            if ((cursor != null) && (cursor.moveToFirst())) {
+            if (cursor != null && cursor.moveToFirst()) {
                 int _id = cursor.getColumnIndex(MediaStore.Audio.Artists._ID);
                 int artist = cursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST);
                 int numberOfAlbums = cursor.getColumnIndex(MediaStore.Audio.Artists.NUMBER_OF_ALBUMS);
@@ -133,7 +136,7 @@ public class MediaLoader {
     private static List<String> getFoldersForCursor(Cursor cursor) {
         List<String> list = new ArrayList<>();
         try {
-            if ((cursor != null) && (cursor.moveToFirst())) {
+            if (cursor != null && cursor.moveToFirst()) {
                 int data = cursor.getColumnIndex(MediaStore.Files.FileColumns.DATA);
 
                 String filePath;
@@ -154,14 +157,13 @@ public class MediaLoader {
     }
 
     // 得到 Cursor
-    private static Cursor makeCursor(Context context, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-        if (context == null) return null;
-        ContentResolver resolver = context.getContentResolver();
+    private static Cursor makeCursor(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        ContentResolver resolver = App.getInstance().getContentResolver();
         return resolver.query(uri, projection, selection, selectionArgs, sortOrder);
     }
 
     // 得到歌曲列表 Cursor
-    public static Cursor getSongCursor(Context context, long artistId, long albumId, String sortOrder) {
+    private static Cursor getSongCursor(long artistId, long albumId, String sortOrder) {
         // Uri 地址
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         // 查询字段
@@ -180,10 +182,10 @@ public class MediaLoader {
         // 帅选条件(MediaStore.Audio.Media.IS_MUSIC=1 and MediaStore.Audio.Media.TITLE!='')
         StringBuilder builder = new StringBuilder(MediaStore.Audio.Media.IS_MUSIC + " = 1 " + " AND " + MediaStore.Audio.Media.TITLE + " != ''");
         if (artistId != 0) {
-            builder.append(" AND " + MediaStore.Audio.Media.ARTIST_ID + " = " + artistId);
+            builder.append(" AND ").append(MediaStore.Audio.Media.ARTIST_ID).append(" = ").append(artistId);
         }
         if (albumId != 0) {
-            builder.append(" AND " + MediaStore.Audio.Media.ALBUM_ID + " = " + albumId);
+            builder.append(" AND ").append(MediaStore.Audio.Media.ALBUM_ID).append(" = ").append(albumId);
         }
         String selection = builder.toString();
         // 帅选条件参数
@@ -194,21 +196,23 @@ public class MediaLoader {
             sortOrder = MediaStore.Audio.Media.DEFAULT_SORT_ORDER;
         }
 
-        return makeCursor(context, uri, projection, selection, selectionArgs, sortOrder);
+        return makeCursor(uri, projection, selection, selectionArgs, sortOrder);
     }
 
     // 得到歌曲列表
-    public static List<MusicSongBean> getSongBeanList(Context context, long artistId, long albumId, String folderPath, String sortOrder) {
-        List<MusicSongBean> songBeans = getSongsForCursor(getSongCursor(context, artistId, albumId, sortOrder));
-        if (folderPath == null)
+    public static List<MusicSongBean> getSongBeanList(long artistId, long albumId, String folderPath, String sortOrder) {
+        LogUtils.e(TAG, "artistId:" + artistId + ",albumId:" + albumId + ",folderPath:" + folderPath);
+        List<MusicSongBean> songBeans = getSongsForCursor(getSongCursor(artistId, albumId, sortOrder));
+        if (folderPath == null || folderPath.equals("")) {
             return songBeans;
-        else {
+        } else {
             List<MusicSongBean> list = new ArrayList<>();
+
             String data;
-            for (int j = 0; j < songBeans.size(); j++) {
-                data = songBeans.get(j).getData();
+            for (MusicSongBean bean : songBeans) {
+                data = bean.getData();
                 if (data.substring(0, data.lastIndexOf(File.separator)).equals(folderPath)) {
-                    list.add(songBeans.get(j));
+                    list.add(bean);
                 }
             }
             return list;
@@ -216,7 +220,7 @@ public class MediaLoader {
     }
 
     // 得到艺术家列表 Cursor
-    public static Cursor getArtistCursor(Context context, String sortOrder) {
+    private static Cursor getArtistCursor(String sortOrder) {
         Uri uri = MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI;
         String[] projection = {
                 MediaStore.Audio.Artists._ID,
@@ -231,16 +235,16 @@ public class MediaLoader {
             sortOrder = MediaStore.Audio.Artists.DEFAULT_SORT_ORDER;
         }
 
-        return makeCursor(context, uri, projection, selection, selectionArgs, sortOrder);
+        return makeCursor(uri, projection, selection, selectionArgs, sortOrder);
     }
 
     // 得到艺术家列表
-    public static List<MusicArtistBean> getArtistBeanList(Context context, String sortOrder) {
-        return getArtistsForCursor(getArtistCursor(context, sortOrder));
+    public static List<MusicArtistBean> getArtistBeanList(String sortOrder) {
+        return getArtistsForCursor(getArtistCursor(sortOrder));
     }
 
     // 得到专辑列表 Cursor
-    public static Cursor getAlbumCursor(Context context, String sortOrder) {
+    private static Cursor getAlbumCursor(String sortOrder) {
         Uri uri = MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI;
         String[] projection = {
                 MediaStore.Audio.Albums._ID,
@@ -257,37 +261,35 @@ public class MediaLoader {
             sortOrder = MediaStore.Audio.Albums.DEFAULT_SORT_ORDER;
         }
 
-        return makeCursor(context, uri, projection, selection, selectionArgs, sortOrder);
+        return makeCursor(uri, projection, selection, selectionArgs, sortOrder);
     }
 
     // 得到专辑列表
-    public static List<MusicAlbumBean> getAlbumBeanList(Context context, String sortOrder) {
-        return getAlbumsForCursor(getAlbumCursor(context, sortOrder));
+    public static List<MusicAlbumBean> getAlbumBeanList(String sortOrder) {
+        return getAlbumsForCursor(getAlbumCursor(sortOrder));
     }
 
     // 获取包含音频文件的文件夹信息 Cursor
-    public static Cursor getFolderCursor(Context context) {
+    private static Cursor getFolderCursor() {
         Uri uri = MediaStore.Files.getContentUri("external");
         String[] projection = {MediaStore.Files.FileColumns.DATA};
 
         // 查询语句：检索出.mp3为后缀名,时长大于1分钟,文件大小大于1MB的媒体文件
-        StringBuilder builder = new StringBuilder();
-        builder.append(MediaStore.Files.FileColumns.MEDIA_TYPE + " = " + MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO);
-        builder.append(" and " + "(" + MediaStore.Files.FileColumns.DATA + " like '%.mp3' or " + MediaStore.Audio.Media.DATA + " like'%.wma')");
-        builder.append(" and " + MediaStore.Audio.Media.SIZE + " > " + FILTER_SIZE);
-        builder.append(" and " + MediaStore.Audio.Media.DURATION + " > " + FILTER_DURATION);
-        builder.append(") group by ( " + MediaStore.Files.FileColumns.PARENT);
 
-        String selection = builder.toString();
+        String selection = MediaStore.Files.FileColumns.MEDIA_TYPE + " = " + MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO
+                + " and " + "(" + MediaStore.Files.FileColumns.DATA + " like '%.mp3' or " + MediaStore.Audio.Media.DATA + " like'%.wma')"
+                + " and " + MediaStore.Audio.Media.SIZE + " > " + FILTER_SIZE
+                + " and " + MediaStore.Audio.Media.DURATION + " > " + FILTER_DURATION
+                + ") group by ( " + MediaStore.Files.FileColumns.PARENT;
         String[] selectionArgs = null;
         String sortOrder = null;
 
-        return makeCursor(context, uri, projection, selection, selectionArgs, sortOrder);
+        return makeCursor(uri, projection, selection, selectionArgs, sortOrder);
     }
 
     // 获取包含音频文件的文件夹信息
     public static List<String> getFolderList(Context context) {
-        return getFoldersForCursor(getFolderCursor(context));
+        return getFoldersForCursor(getFolderCursor());
     }
 
     public static Uri getAlbumArtUri(long albumId) {
@@ -295,7 +297,7 @@ public class MediaLoader {
     }
 
     // 通过album_id,找到其所对应的专辑图片路径
-    public static String getAlbumArt(Context context, long albumId) {
+    public static String getAlbumArt(long albumId) {
         String albumArt = "";
 
         Uri uri = Uri.parse(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI + "/" + albumId);
@@ -304,19 +306,13 @@ public class MediaLoader {
         String[] selectionArgs = null;
         String sortOrder = MediaStore.Audio.Artists.DEFAULT_SORT_ORDER;
 
-        Cursor cursor = makeCursor(context, uri, projection, selection, selectionArgs, sortOrder);
-
-        try {
-            if (cursor.getCount() > 0) {
+        try (Cursor cursor = makeCursor(uri, projection, selection, selectionArgs, sortOrder)) {
+            if (cursor != null && cursor.moveToFirst()) {
                 cursor.moveToNext();
                 albumArt = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART));
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
         }
         return albumArt;
     }

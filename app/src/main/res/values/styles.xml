@@ -134,4 +134,9 @@
         <item name="android:layout_height">1px</item>
         <item name="android:background">@color/color_divider</item>
     </style>
+
+    <!--音乐艺术家、专辑、文件夹详情标题栏展开样式-->
+    <style name="musicExpandedTitleTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">24sp</item>
+    </style>
 </resources>
