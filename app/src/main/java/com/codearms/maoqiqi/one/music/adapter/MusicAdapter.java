@@ -64,6 +64,7 @@ public class MusicAdapter<T> extends BaseQuickAdapter<T, MusicAdapter.ViewHolder
                 helper.tvName.setText(songBean.getTitle());
                 helper.tvInfo.setText(activity.getString(R.string.music_song_info, MusicUtils.getArtist(songBean.getArtist()), MusicUtils.getAlbum(songBean.getAlbum())));
                 helper.ivMore.setOnClickListener(v -> {
+                    // 可以使用DialogFragment展示(下面将Activity设置为Dialog模式)
                     FragmentManager manager = activity.getSupportFragmentManager();
                     MusicMoreFragment fragment = (MusicMoreFragment) manager.findFragmentByTag(TAG_SONG);
                     if (fragment == null) {

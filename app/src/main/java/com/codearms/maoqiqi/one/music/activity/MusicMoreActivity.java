@@ -117,7 +117,6 @@ public class MusicMoreActivity extends BaseActivity {
     public void finish() {
         super.finish();
         // 设置了自己的动画之后,必须重写,解决退出动画无效或者被干扰的问题
-        overridePendingTransition(0, 0);
+//        overridePendingTransition(0, 0);
     }
-
 }

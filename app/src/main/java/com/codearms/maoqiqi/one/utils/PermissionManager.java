@@ -33,7 +33,7 @@ public class PermissionManager {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 
-    // 验证权限
+    // 检查权限
     public void checkSelfPermission(Fragment fragment, int requestCode) {
         if (weakReference == null || weakReference.get() == null) return;
 

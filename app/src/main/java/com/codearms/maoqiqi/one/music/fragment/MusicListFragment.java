@@ -151,7 +151,8 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
                 .setMessage(getString(R.string.read_external_storage))
                 .setPositiveButton(R.string.ok, (dialog, i) -> {
                     dialog.dismiss();
-                    // 确定,请求权限
+                    // 确定,请求权限.
+                    // 如果是嵌入到Fragment中,二级Fragment不能收到onRequestPermissionsResult回调,要在一级Fragment中处理
                     if (getParentFragment() == null) {
                         requestPermissions(PERMISSIONS, REQUEST_PERMISSIONS);
                     } else {
@@ -188,6 +189,7 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
                 .create().show();
     }
 
+    // 权限请求结果回调
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_PERMISSIONS) {
@@ -195,6 +197,7 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
         }
     }
 
+    // 去设置界面授权之后,返回当前页面回调
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
