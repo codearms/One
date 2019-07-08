@@ -51,6 +51,32 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <!-- Activity Dialog 主题-->
+    <style name="OneAppDialog" parent="@style/Theme.AppCompat.Dialog">
+        <!-- 无标题 -->
+        <item name="windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!-- Dialog 以外的区域模糊效果 -->
+        <!--<item name="android:backgroundDimEnabled">true</item>-->
+        <!-- 边框 -->
+        <!--<item name="android:windowFrame">@null</item>-->
+        <!-- 背景透明 -->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!-- 浮于Activity之上 -->
+        <!--<item name="android:windowIsFloating">true</item>-->
+        <!-- Dialog 进入及退出动画 -->
+        <!--<item name="android:windowAnimationStyle">@style/DialogSheetAnimation</item>-->
+        <item name="android:overScrollMode">never</item>
+    </style>
+
+    <!-- Dialog Sheet进出动画 -->
+    <style name="DialogSheetAnimation" parent="@android:style/Theme.Dialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_action_sheet_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_action_sheet_out</item>
+    </style>
+
     <!-- 首页底部样式 -->
     <style name="tab_main_style">
         <item name="android:layout_width">match_parent</item>

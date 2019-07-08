@@ -1,9 +1,10 @@
 package com.codearms.maoqiqi.one.music.adapter;
 
-import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,7 +20,9 @@ import com.codearms.maoqiqi.one.data.bean.MusicAlbumBean;
 import com.codearms.maoqiqi.one.data.bean.MusicArtistBean;
 import com.codearms.maoqiqi.one.data.bean.MusicSongBean;
 import com.codearms.maoqiqi.one.music.activity.MusicListActivity;
+import com.codearms.maoqiqi.one.music.activity.MusicMoreActivity;
 import com.codearms.maoqiqi.one.music.fragment.MusicListFragment;
+import com.codearms.maoqiqi.one.music.fragment.MusicMoreFragment;
 import com.codearms.maoqiqi.one.utils.MediaLoader;
 import com.codearms.maoqiqi.one.utils.MusicUtils;
 
@@ -32,11 +35,13 @@ import java.util.List;
  */
 public class MusicAdapter<T> extends BaseQuickAdapter<T, MusicAdapter.ViewHolder> {
 
-    private Activity activity;
+    private static final String TAG_SONG = "com.codearms.maoqiqi.one.SONG";
+
+    private FragmentActivity activity;
     private int type;
     private final List<Integer> integers;
 
-    public MusicAdapter(int layoutResId, @Nullable List<T> data, Activity activity, int type, List<Integer> integers) {
+    public MusicAdapter(int layoutResId, @Nullable List<T> data, FragmentActivity activity, int type, List<Integer> integers) {
         super(layoutResId, data);
         this.activity = activity;
         this.type = type;
@@ -59,7 +64,12 @@ public class MusicAdapter<T> extends BaseQuickAdapter<T, MusicAdapter.ViewHolder
                 helper.tvName.setText(songBean.getTitle());
                 helper.tvInfo.setText(activity.getString(R.string.music_song_info, MusicUtils.getArtist(songBean.getArtist()), MusicUtils.getAlbum(songBean.getAlbum())));
                 helper.ivMore.setOnClickListener(v -> {
-
+                    FragmentManager manager = activity.getSupportFragmentManager();
+                    MusicMoreFragment fragment = (MusicMoreFragment) manager.findFragmentByTag(TAG_SONG);
+                    if (fragment == null) {
+                        fragment = MusicMoreFragment.newInstance(songBean);
+                        fragment.show(manager, TAG_SONG);
+                    }
                 });
                 helper.llItem.setOnClickListener(v -> {
 
@@ -73,9 +83,7 @@ public class MusicAdapter<T> extends BaseQuickAdapter<T, MusicAdapter.ViewHolder
                 Glide.with(activity).load(imageUrl).placeholder(R.drawable.ic_artist_placeholder).into(helper.ivMusic);
                 helper.tvName.setText(MusicUtils.getArtist(artistBean.getArtist()));
                 helper.tvInfo.setText(activity.getString(R.string.music_artist_info, artistBean.getNumberOfAlbums(), artistBean.getNumberOfTracks()));
-                helper.ivMore.setOnClickListener(v -> {
-
-                });
+                helper.ivMore.setOnClickListener(v -> MusicMoreActivity.start(activity, artistBean));
                 helper.llItem.setTag(imageUrl);
                 helper.llItem.setOnClickListener(v -> {
                     Pair<View, String> ivMusicPair = new Pair<>(helper.ivMusic, activity.getString(R.string.transition_music_img));
@@ -94,9 +102,7 @@ public class MusicAdapter<T> extends BaseQuickAdapter<T, MusicAdapter.ViewHolder
                 Glide.with(activity).load(imageUrl).placeholder(R.drawable.ic_album_placeholder).into(helper.ivMusic);
                 helper.tvName.setText(name);
                 helper.tvInfo.setText(activity.getString(R.string.music_album_info, MusicUtils.getArtist(albumBean.getArtist()), albumBean.getNumberOfSongs()));
-                helper.ivMore.setOnClickListener(v -> {
-
-                });
+                helper.ivMore.setOnClickListener(v -> MusicMoreActivity.start(activity, albumBean));
                 helper.llItem.setTag(imageUrl);
                 helper.llItem.setOnClickListener(v -> {
                     ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, Pair.create(helper.ivMusic, activity.getString(R.string.transition_music_img)));
@@ -110,9 +116,7 @@ public class MusicAdapter<T> extends BaseQuickAdapter<T, MusicAdapter.ViewHolder
                 helper.ivMusic.setImageResource(R.drawable.ic_folder_placeholder);
                 helper.tvName.setText(MusicUtils.getFolderName(folderPath));
                 helper.tvInfo.setText(activity.getString(R.string.music_folder_info, integers.get(helper.getLayoutPosition()), MusicUtils.getPath(folderPath)));
-                helper.ivMore.setOnClickListener(v -> {
-
-                });
+                helper.ivMore.setOnClickListener(v -> MusicMoreActivity.start(activity, folderPath));
                 helper.llItem.setOnClickListener(v -> MusicListActivity.start(activity, name, "", null, 0, 0, folderPath));
                 break;
         }

@@ -75,6 +75,9 @@
         <activity android:name=".news.activity.NewsDetailActivity" />
         <activity android:name=".book.activity.BookDetailActivity" />
         <activity android:name=".music.activity.MusicListActivity" />
+        <activity
+            android:name=".music.activity.MusicMoreActivity"
+            android:theme="@style/OneAppDialog" />
         <activity android:name=".movie.activity.MovieDetailActivity" />
     </application>
 

@@ -75,7 +75,7 @@ public class PermissionManager {
 
         for (int i = 0; i < grantResults.length; i++) {
             // 判断权限的结果,如果有被拒绝,就return
-            if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+            if (PackageManager.PERMISSION_GRANTED != grantResults[i]) {
                 if (isMarshmallow() && weakReference.get().shouldShowRequestPermissionRationale(permissions[i])) {
                     if (callBack != null) callBack.onFail();
                 } else {
@@ -84,8 +84,8 @@ public class PermissionManager {
                     // 显示提示对话框(去设置界面授权读取外部存储器来显示设备上的歌曲)
                     if (callBack != null) callBack.onSetting();
                 }
+                return;
             }
-            return;
         }
         // 所有权限都通过
         if (callBack != null) callBack.onSuccess();

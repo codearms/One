@@ -3,6 +3,7 @@
     <dimen name="eight">8dp</dimen>
     <dimen name="twelve">12dp</dimen>
     <dimen name="sixteen">16dp</dimen>
+    <dimen name="twenty">20dp</dimen>
     <dimen name="twenty_four">24dp</dimen>
     <dimen name="thirty_two">32dp</dimen>
 

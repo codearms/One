@@ -13,6 +13,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -210,21 +213,28 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
     private void getData(boolean isFirst) {
         switch (type) {
             case TYPE_SONG:
-                if (!isFirst) sortOrder = SortOrder.SongSortOrder.SONG_A_Z;
+                if (isFirst) sortOrder = SortOrder.SongSortOrder.SONG_A_Z;
                 presenter.getSongList(artistId, albumId, folderPath, sortOrder);
                 break;
             case TYPE_ARTIST:
-                if (!isFirst) sortOrder = SortOrder.ArtistSortOrder.ARTIST_A_Z;
+                if (isFirst) sortOrder = SortOrder.ArtistSortOrder.ARTIST_A_Z;
                 presenter.getArtistList(sortOrder);
                 break;
             case TYPE_ALBUM:
-                if (!isFirst) sortOrder = SortOrder.AlbumSortOrder.ALBUM_A_Z;
+                if (isFirst) sortOrder = SortOrder.AlbumSortOrder.ALBUM_A_Z;
                 presenter.getAlbumList(sortOrder);
                 break;
             case TYPE_FOLDER:
                 presenter.getFolderList();
                 break;
         }
+    }
+
+    public void sortOrder(String sortOrder) {
+        if (this.sortOrder.equals(sortOrder)) return;
+
+        this.sortOrder = sortOrder;
+        getData(false);
     }
 
     @Override
@@ -249,5 +259,72 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
     public void setFolderList(List<String> folderList, List<Integer> integers) {
         MusicAdapter<String> adapter = new MusicAdapter<>(R.layout.item_music_list, folderList, getActivity(), type, integers);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        if (getParentFragment() != null && !getParentFragment().getUserVisibleHint()) return;
+        switch (type) {
+            case TYPE_SONG:
+                inflater.inflate(R.menu.menu_songs_sort_by, menu);
+                break;
+            case TYPE_ARTIST:
+                inflater.inflate(R.menu.menu_artist_sort_by, menu);
+                break;
+            case TYPE_ALBUM:
+                inflater.inflate(R.menu.menu_album_sort, menu);
+                break;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            // 歌曲排序
+            case R.id.menu_song_sort_az:
+                sortOrder(SortOrder.SongSortOrder.SONG_A_Z);
+                return true;
+            case R.id.menu_song_sort_za:
+                sortOrder(SortOrder.SongSortOrder.SONG_Z_A);
+                return true;
+            case R.id.menu_song_sort_artist:
+                sortOrder(SortOrder.SongSortOrder.SONG_ARTIST);
+                return true;
+            case R.id.menu_song_sort_album:
+                sortOrder(SortOrder.SongSortOrder.SONG_ALBUM);
+                return true;
+            case R.id.menu_song_sort_duration:
+                sortOrder(SortOrder.SongSortOrder.SONG_DURATION);
+                return true;
+            // 艺术家排序
+            case R.id.menu_artist_sort_az:
+                sortOrder(SortOrder.ArtistSortOrder.ARTIST_A_Z);
+                return true;
+            case R.id.menu_artist_sort_za:
+                sortOrder(SortOrder.ArtistSortOrder.ARTIST_Z_A);
+                return true;
+            case R.id.menu_artist_sort_number_of_songs:
+                sortOrder(SortOrder.ArtistSortOrder.ARTIST_NUMBER_OF_SONGS);
+                return true;
+            case R.id.menu_artist_sort_number_of_albums:
+                sortOrder(SortOrder.ArtistSortOrder.ARTIST_NUMBER_OF_ALBUMS);
+                return true;
+            // 专辑排序
+            case R.id.menu_album_sort_az:
+                sortOrder(SortOrder.AlbumSortOrder.ALBUM_A_Z);
+                return true;
+            case R.id.menu_album_sort_za:
+                sortOrder(SortOrder.AlbumSortOrder.ALBUM_Z_A);
+                return true;
+            case R.id.menu_album_sort_artist:
+                sortOrder(SortOrder.AlbumSortOrder.ALBUM_ARTIST);
+                return true;
+            case R.id.menu_album_sort_number_of_songs:
+                sortOrder(SortOrder.AlbumSortOrder.ALBUM_NUMBER_OF_SONGS);
+                return true;
+        }
+        return false;
     }
 }
