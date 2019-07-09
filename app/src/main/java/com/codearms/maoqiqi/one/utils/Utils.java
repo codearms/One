@@ -1,12 +1,26 @@
 package com.codearms.maoqiqi.one.utils;
 
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.graphics.Palette;
 import android.view.View;
 
 public class Utils {
+
+    public static void setTint(FloatingActionButton floatingActionButton, int color) {
+        int[] colors = new int[]{color, color, color, color, color, color};
+        int[][] states = new int[6][];
+        states[0] = new int[]{android.R.attr.state_pressed, android.R.attr.state_enabled};
+        states[1] = new int[]{android.R.attr.state_enabled, android.R.attr.state_focused};
+        states[2] = new int[]{android.R.attr.state_enabled};
+        states[3] = new int[]{android.R.attr.state_focused};
+        states[4] = new int[]{android.R.attr.state_window_focused};
+        states[5] = new int[]{};
+        floatingActionButton.setBackgroundTintList(new ColorStateList(states, colors));
+    }
 
     public static void setBackground(View view, Bitmap bitmap) {
         Palette.from(bitmap).generate(palette -> {

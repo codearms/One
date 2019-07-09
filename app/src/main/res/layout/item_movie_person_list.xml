@@ -12,7 +12,7 @@
         android:layout_height="120dp"
         android:contentDescription="@string/image_description"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_picture_placeholder" />
+        android:src="@drawable/ic_belle_placeholder" />
 
     <TextView
         android:id="@+id/tv_movie_actor_name"

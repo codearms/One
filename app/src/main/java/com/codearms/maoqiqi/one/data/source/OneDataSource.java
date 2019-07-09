@@ -6,6 +6,7 @@ import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.BookDetailBean;
 import com.codearms.maoqiqi.one.data.bean.BookListBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
+import com.codearms.maoqiqi.one.data.bean.DataBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.MovieDetailBean;
 import com.codearms.maoqiqi.one.data.bean.MovieListBean;
@@ -309,4 +310,8 @@ public interface OneDataSource {
      * 获取包含音频文件的文件夹信息
      */
     Observable<List<String>> getFolderList();
+
+    Observable<DataBean> getData(String type, int pageIndex, int pageCount);
+
+    Observable<DataBean> getRandomData(String type, int number);
 }

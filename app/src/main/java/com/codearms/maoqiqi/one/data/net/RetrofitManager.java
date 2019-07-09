@@ -19,6 +19,7 @@ public class RetrofitManager {
     private static final String BASE_URL = "https://www.wanandroid.com/";
     private static final String BASE_NEWS_URL = "http://news-at.zhihu.com/api/4/";
     private static final String BASE_DOU_BAN_URL = "https://api.douban.com/v2/";
+    private static final String BASE_GANK_URL = "https://gank.io/api/";
     private static final int DEFAULT_TIMEOUT = 15;
 
     private static RetrofitManager instance;
@@ -27,6 +28,7 @@ public class RetrofitManager {
     private ServerApi serverApi;
     private NewsAPI newsAPI;
     private DouBanApi douBanApi;
+    private GankApi gankApi;
 
     public static RetrofitManager getInstance() {
         if (instance == null) {
@@ -102,5 +104,19 @@ public class RetrofitManager {
                     .create(DouBanApi.class);
         }
         return douBanApi;
+    }
+
+    public GankApi getGankApi() {
+        initOKHttp();
+        if (gankApi == null) {
+            gankApi = new Retrofit.Builder()
+                    .baseUrl(BASE_GANK_URL)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build()
+                    .create(GankApi.class);
+        }
+        return gankApi;
     }
 }

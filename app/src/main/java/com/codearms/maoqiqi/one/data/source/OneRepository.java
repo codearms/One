@@ -7,6 +7,7 @@ import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.BookDetailBean;
 import com.codearms.maoqiqi.one.data.bean.BookListBean;
 import com.codearms.maoqiqi.one.data.bean.ChildClassifyBean;
+import com.codearms.maoqiqi.one.data.bean.DataBean;
 import com.codearms.maoqiqi.one.data.bean.HotKeyBean;
 import com.codearms.maoqiqi.one.data.bean.MovieDetailBean;
 import com.codearms.maoqiqi.one.data.bean.MovieListBean;
@@ -20,6 +21,7 @@ import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
 import com.codearms.maoqiqi.one.data.bean.UsefulSitesBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.data.net.DouBanApi;
+import com.codearms.maoqiqi.one.data.net.GankApi;
 import com.codearms.maoqiqi.one.data.net.NewsAPI;
 import com.codearms.maoqiqi.one.data.net.RetrofitManager;
 import com.codearms.maoqiqi.one.data.net.ServerApi;
@@ -37,11 +39,13 @@ public class OneRepository implements OneDataSource {
     private ServerApi api;
     private NewsAPI newsAPI;
     private DouBanApi douBanApi;
+    private GankApi gankApi;
 
     private OneRepository() {
         api = RetrofitManager.getInstance().getServerApi();
         newsAPI = RetrofitManager.getInstance().getNewsAPI();
         douBanApi = RetrofitManager.getInstance().getDouBanApi();
+        gankApi = RetrofitManager.getInstance().getGankApi();
     }
 
     public static OneRepository getInstance() {
@@ -248,5 +252,15 @@ public class OneRepository implements OneDataSource {
     @Override
     public Observable<List<String>> getFolderList() {
         return RxUtils.createData(MediaLoader.getFolderList(App.getInstance())).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<DataBean> getData(String type, int pageIndex, int pageCount) {
+        return gankApi.getData(type, pageIndex, pageCount).compose(RxUtils.rxSchedulerHelper());
+    }
+
+    @Override
+    public Observable<DataBean> getRandomData(String type, int number) {
+        return gankApi.getRandomData(type, number).compose(RxUtils.rxSchedulerHelper());
     }
 }

@@ -12,6 +12,8 @@ import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.gank.activity.GankActivity;
+import com.codearms.maoqiqi.utils.ActivityUtils;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +29,6 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 public class SplashActivity extends BaseActivity {
 
-    private ImageView ivSplash;
     private TextView tvJump;
 
     private CompositeDisposable compositeDisposable;
@@ -40,8 +41,12 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        ivSplash = findViewById(R.id.iv_splash);
+        ImageView ivSplash = findViewById(R.id.iv_splash);
         tvJump = findViewById(R.id.tv_jump);
+        findViewById(R.id.layout).setOnClickListener(v -> {
+            ActivityUtils.startActivity(SplashActivity.this, GankActivity.class);
+            finish();
+        });
 
         // 随机加载图片
         int i = new Random().nextInt(Constants.URLS.length);

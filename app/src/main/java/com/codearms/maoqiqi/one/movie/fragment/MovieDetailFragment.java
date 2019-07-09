@@ -200,7 +200,7 @@ public class MovieDetailFragment extends BaseFragment<MovieDetailContract.Presen
         @Override
         protected void convert(PersonViewHolder helper, MovieDetailBean.PersonBean item) {
             Glide.with(helper.ivMovieActor.getContext()).load(item.getImageBean().getLarge())
-                    .placeholder(R.drawable.ic_picture_placeholder).into(helper.ivMovieActor);
+                    .placeholder(R.drawable.ic_belle_placeholder).into(helper.ivMovieActor);
             helper.tvMovieActorName.setText(item.getName());
             helper.tvMovieActorTypeName.setText(directorsPersonNum <= helper.getLayoutPosition() ? R.string.movie_star : R.string.movie_director);
         }
