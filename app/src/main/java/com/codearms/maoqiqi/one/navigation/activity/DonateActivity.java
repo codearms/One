@@ -31,5 +31,6 @@ public class DonateActivity extends BaseActivity {
                 ivPay.setImageResource(R.drawable.ic_wxpay);
             }
         });
+        // 谢谢，您没有安装支付宝客户端
     }
 }

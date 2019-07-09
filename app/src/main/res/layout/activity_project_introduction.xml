@@ -47,7 +47,7 @@
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_back"
                 app:popupTheme="@style/navigation_popup_theme"
-                app:title="@string/update_description"
+                app:title="@string/project_introduction"
                 app:titleTextColor="@color/color_text_title" />
 
         </android.support.design.widget.CollapsingToolbarLayout>

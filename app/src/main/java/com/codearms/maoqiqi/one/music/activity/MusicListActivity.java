@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
@@ -73,6 +74,7 @@ public class MusicListActivity extends BaseActivity {
         appBarLayout.getLayoutParams().height = ScreenUtils.getScreenWidth();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu_more));
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
 

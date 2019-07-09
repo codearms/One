@@ -165,4 +165,13 @@
     <style name="musicExpandedTitleTextAppearance" parent="@android:style/TextAppearance">
         <item name="android:textSize">24sp</item>
     </style>
+
+    <!--CheckBox主题-->
+    <style name="CheckBoxAndSwitchTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--1-->
+        <item name="colorAccent">@color/color_navigation</item>
+        <!--2-->
+        <!--<item name="colorControlNormal">@color/colorTextGrayDark</item>-->
+        <!--<item name="colorControlActivated">@color/colorNavigation</item>-->
+    </style>
 </resources>

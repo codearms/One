@@ -108,6 +108,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
                 break;
         }
         ((AppCompatActivity) context).setSupportActionBar(toolbar);
+        // setSupportActionBar()会覆盖这个方法,所以必须在setSupportActionBar()之后调用
         toolbar.setNavigationOnClickListener(v -> ((AppCompatActivity) context).onBackPressed());
     }
 

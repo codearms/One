@@ -32,7 +32,7 @@
         android:padding="@dimen/sixteen"
         android:text="@string/problem_feedback_content"
         android:textColor="@color/color_text_general"
-        android:textSize="@dimen/text_size_small" />
+        android:textSize="@dimen/text_size_normal" />
 
     <LinearLayout
         android:layout_width="match_parent"

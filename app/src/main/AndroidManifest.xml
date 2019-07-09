@@ -48,6 +48,7 @@
         <activity android:name=".navigation.activity.ProblemFeedbackActivity" />
         <activity android:name=".navigation.activity.AboutActivity" />
         <activity android:name=".navigation.activity.DonateActivity" />
+        <activity android:name=".navigation.activity.SettingActivity" />
         <activity
             android:name=".navigation.activity.WebViewActivity"
             android:launchMode="singleTask"

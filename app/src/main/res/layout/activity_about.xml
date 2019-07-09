@@ -141,4 +141,29 @@
         android:text="@string/star_content"
         android:textColor="@color/text_color_gray"
         android:textSize="@dimen/text_size_small" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tvGank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:text="《代码家 · 干货集中营》"
+        android:textColor="@color/color_text_main"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvDouBan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:text="《豆瓣开发者服务使用条款》"
+        android:textColor="@color/color_text_main"
+        android:textSize="12sp" />
 </LinearLayout>

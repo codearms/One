@@ -187,6 +187,12 @@
     <string name="sort_duration">时长</string>
     <string name="sort_number_of_songs">歌曲数</string>
     <string name="sort_number_of_albums">专辑数</string>
+    <string name="star">star</string>
+    <string name="issues_url">https://github.com/maoqiqi/One/issues</string>
+    <string name="faq_url">https://github.com/maoqiqi/One/issues</string>
+
+    <string name="gank_api">http://gank.io/api</string>
+    <string name="dou_ban_terms">https://developers.douban.com/wiki/?title=terms</string>
 
     <string-array name="news_titles">
         <item>推荐</item>
