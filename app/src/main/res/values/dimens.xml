@@ -6,7 +6,7 @@
     <dimen name="twenty">20dp</dimen>
     <dimen name="twenty_four">24dp</dimen>
     <dimen name="thirty_two">32dp</dimen>
-    <dimen name="sixty">60dp</dimen>
+    <dimen name="sixty_four">64dp</dimen>
 
     <dimen name="text_size_biggest">22sp</dimen>
     <dimen name="text_size_bigger">20sp</dimen>

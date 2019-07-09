@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".gank.activity.GankActivity"
->
+            android:name=".navigation.activity.SplashActivity"
+            android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -80,7 +80,6 @@
             android:name=".music.activity.MusicMoreActivity"
             android:theme="@style/OneAppDialog" />
         <activity android:name=".movie.activity.MovieDetailActivity" />
-        <!--<activity android:name=".gank.activity.GankActivity" />-->
     </application>
 
 </manifest>
