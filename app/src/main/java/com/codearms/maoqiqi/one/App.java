@@ -3,6 +3,7 @@ package com.codearms.maoqiqi.one;
 import android.app.Application;
 
 import com.codearms.maoqiqi.one.data.bean.UserBean;
+import com.codearms.maoqiqi.utils.DensityUtils;
 import com.codearms.maoqiqi.utils.LogUtils;
 import com.codearms.maoqiqi.utils.ScreenUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
@@ -24,6 +25,7 @@ public class App extends Application {
         LogUtils.init(true);
         ToastUtils.init(this);
         ScreenUtils.init(this);
+        DensityUtils.init(this);
     }
 
     public UserBean getUserBean() {

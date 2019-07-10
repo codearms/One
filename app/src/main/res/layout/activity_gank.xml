@@ -45,11 +45,12 @@
                     android:background="@drawable/bg_search_gank"
                     android:drawableStart="@drawable/ic_search_gank"
                     android:drawableLeft="@drawable/ic_search_gank"
-                    android:drawablePadding="@dimen/eight"
+                    android:drawablePadding="@dimen/four"
                     android:gravity="center_vertical"
-                    android:padding="@dimen/eight"
+                    android:padding="@dimen/four"
                     android:text="@string/search_gank"
-                    android:textColor="@color/color_text_general" />
+                    android:textColor="@color/color_text_general"
+                    android:textSize="@dimen/text_size_normal" />
 
                 <ImageView
                     android:id="@+id/iv_collection"
