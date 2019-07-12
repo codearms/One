@@ -15,7 +15,7 @@ public interface GankListContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void getData(String type, int pageIndex, int pageCount);
+        void getData(String type, int pageIndex);
     }
 
     interface View extends BaseView<Presenter> {

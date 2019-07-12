@@ -4,12 +4,9 @@ import java.util.HashMap;
 
 public class UrlMatch {
 
-    private static final String HTTP = "http://";
-    private static final String HTTPS = "https://";
-
-    public static final String GITHUB_PREFIX = "github.com";
-    public static final String GITHUB_CONTENT = "github";
-    public static final int GITHUB_COLOR = 0xff000000;
+    private static final String GITHUB_PREFIX = "github.com";
+    private static final String GITHUB_CONTENT = "github";
+    private static final int GITHUB_COLOR = 0xff000000;
 
     private static final String JCODECRAEER_PREFIX = "jcodecraeer.com";
     private static final String JCODECRAEER_CONTENT = "泡在网上的日子";
@@ -112,66 +109,51 @@ public class UrlMatch {
     public static final HashMap<String, Integer> URL_2_COLOR = new HashMap<>();
     public static final HashMap<String, String> URL_2_CONTENT = new HashMap<>();
 
-    static {
-        URL_2_COLOR.put(GITHUB_PREFIX, GITHUB_COLOR);
-        URL_2_COLOR.put(JCODECRAEER_PREFIX, JCODECRAEER_COLOR);
-        URL_2_COLOR.put(CSDN_PREFIX, CSDN_COLOR);
-        URL_2_COLOR.put(OSCHINA_PREFIX, OSCHINA_COLOR);
-        URL_2_COLOR.put(BOLE_PREFIX, BOLE_COLOR);
-        URL_2_COLOR.put(WEIXIN_PREFIX, WEIXIN_COLOR);
-        URL_2_COLOR.put(JIANSHU_PREFIX, JIANSHU_COLOR);
-        URL_2_COLOR.put(TUDOU_PREFIX, TUDOU_COLOR);
-        URL_2_COLOR.put(YOUKU_PREFIX, YOUKU_COLOR);
-        URL_2_COLOR.put(MIAOPAI_PREFIX, MIAOPAI_COLOR);
-        URL_2_COLOR.put(WEIBO_PREFIX, WEIBO_COLOR);
-        URL_2_COLOR.put(M_WEIBO_PREFIX, M_WEIBO_COLOR);
-        URL_2_COLOR.put(V_SINA_PREFIX, V_SINA_COLOR);
-        URL_2_COLOR.put(TENCENT_PREFIX, TENCENT_COLOR);
-        URL_2_COLOR.put(BILIBILI_PREFIX, BILIBILI_COLOR);
-        URL_2_COLOR.put(STATIC_TENCENT_PREFIX, STATIC_TENCENT_COLOR);
-        URL_2_COLOR.put(ACFUN_PREFIX, ACFUN_COLOR);
-        URL_2_COLOR.put(NETEASE_PREFIX, NETEASE_COLOR);
-        URL_2_COLOR.put(SINA_PREFIX, SINA_COLOR);
-        URL_2_COLOR.put(VMOVIER_PREFIX, VMOVIER_COLOR);
-        URL_2_COLOR.put(SOUHU_PREFIX, SOUHU_COLOR);
-        URL_2_COLOR.put(FIVE_SIX_PREFIX, FIVE_SIX_COLOR);
-        URL_2_COLOR.put(LETV_PREFIX, LETV_COLOR);
-        URL_2_COLOR.put(TV_SOUHU_PREFIX, TV_SOUHU_COLOR);
+    private static void put(String key, Integer v1, String v2) {
+        URL_2_COLOR.put(key, v1);
+        URL_2_CONTENT.put(key, v2);
+    }
 
-        URL_2_CONTENT.put(GITHUB_PREFIX, GITHUB_CONTENT);
-        URL_2_CONTENT.put(JCODECRAEER_PREFIX, JCODECRAEER_CONTENT);
-        URL_2_CONTENT.put(CSDN_PREFIX, CSDN_CONTENT);
-        URL_2_CONTENT.put(OSCHINA_PREFIX, OSCHINA_CONTENT);
-        URL_2_CONTENT.put(BOLE_PREFIX, BOLE_CONTENT);
-        URL_2_CONTENT.put(WEIXIN_PREFIX, WEIXIN_CONTENT);
-        URL_2_CONTENT.put(JIANSHU_PREFIX, JIANSHU_CONTENT);
-        URL_2_CONTENT.put(TUDOU_PREFIX, TUDOU_CONTENT);
-        URL_2_CONTENT.put(YOUKU_PREFIX, YOUKU_CONTENT);
-        URL_2_CONTENT.put(MIAOPAI_PREFIX, MIAOPAI_CONTENT);
-        URL_2_CONTENT.put(WEIBO_PREFIX, WEIBO_CONTENT);
-        URL_2_CONTENT.put(M_WEIBO_PREFIX, M_WEIBO_CONTENT);
-        URL_2_CONTENT.put(V_SINA_PREFIX, V_SINA_CONTENT);
-        URL_2_CONTENT.put(V_SINA_PREFIX, V_SINA_CONTENT);
-        URL_2_CONTENT.put(TENCENT_PREFIX, TENCENT_CONTENT);
-        URL_2_CONTENT.put(BILIBILI_PREFIX, BILIBILI_CONTENT);
-        URL_2_CONTENT.put(STATIC_TENCENT_PREFIX, STATIC_TENCENT_CONTENT);
-        URL_2_CONTENT.put(ACFUN_PREFIX, ACFUN_CONTENT);
-        URL_2_CONTENT.put(NETEASE_PREFIX, NETEASE_CONTENT);
-        URL_2_CONTENT.put(SINA_PREFIX, SINA_CONTENT);
-        URL_2_CONTENT.put(VMOVIER_PREFIX, VMOVIER_CONTENT);
-        URL_2_CONTENT.put(SOUHU_PREFIX, SOUHU_CONTENT);
-        URL_2_CONTENT.put(FIVE_SIX_PREFIX, FIVE_SIX_CONTENT);
-        URL_2_CONTENT.put(LETV_PREFIX, LETV_CONTENT);
-        URL_2_CONTENT.put(TV_SOUHU_PREFIX, TV_SOUHU_CONTENT);
+    static {
+        put(GITHUB_PREFIX, GITHUB_COLOR, GITHUB_CONTENT);
+        put(JCODECRAEER_PREFIX, JCODECRAEER_COLOR, JCODECRAEER_CONTENT);
+        put(CSDN_PREFIX, CSDN_COLOR, CSDN_CONTENT);
+        put(OSCHINA_PREFIX, OSCHINA_COLOR, OSCHINA_CONTENT);
+        put(BOLE_PREFIX, BOLE_COLOR, BOLE_CONTENT);
+        put(WEIXIN_PREFIX, WEIXIN_COLOR, WEIXIN_CONTENT);
+        put(JIANSHU_PREFIX, JIANSHU_COLOR, JIANSHU_CONTENT);
+        put(TUDOU_PREFIX, TUDOU_COLOR, TUDOU_CONTENT);
+        put(YOUKU_PREFIX, YOUKU_COLOR, YOUKU_CONTENT);
+        put(MIAOPAI_PREFIX, MIAOPAI_COLOR, MIAOPAI_CONTENT);
+        put(WEIBO_PREFIX, WEIBO_COLOR, WEIBO_CONTENT);
+        put(M_WEIBO_PREFIX, M_WEIBO_COLOR, M_WEIBO_CONTENT);
+        put(V_SINA_PREFIX, V_SINA_COLOR, V_SINA_CONTENT);
+        put(TENCENT_PREFIX, TENCENT_COLOR, TENCENT_CONTENT);
+        put(BILIBILI_PREFIX, BILIBILI_COLOR, BILIBILI_CONTENT);
+        put(STATIC_TENCENT_PREFIX, STATIC_TENCENT_COLOR, STATIC_TENCENT_CONTENT);
+        put(ACFUN_PREFIX, ACFUN_COLOR, ACFUN_CONTENT);
+        put(NETEASE_PREFIX, NETEASE_COLOR, NETEASE_CONTENT);
+        put(SINA_PREFIX, SINA_COLOR, SINA_CONTENT);
+        put(VMOVIER_PREFIX, VMOVIER_COLOR, VMOVIER_CONTENT);
+        put(SOUHU_PREFIX, SOUHU_COLOR, SOUHU_CONTENT);
+        put(FIVE_SIX_PREFIX, FIVE_SIX_COLOR, FIVE_SIX_CONTENT);
+        put(LETV_PREFIX, LETV_COLOR, LETV_CONTENT);
+        put(TV_SOUHU_PREFIX, TV_SOUHU_COLOR, TV_SOUHU_CONTENT);
     }
 
     public static String processUrl(String url) {
-        String temp;
-        if (url.startsWith(HTTPS)) {
-            temp = url.replace(HTTPS, "");
-        } else {
-            temp = url.replace(HTTP, "");
-        }
-        return temp.substring(temp.indexOf(".") + 1, temp.indexOf("/"));
+        url = url.substring(url.indexOf("//") + 2);
+        url = url.substring(0, url.indexOf("/"));
+        return url;
+    }
+
+    public static int getColor(String type, String key) {
+        Integer integer = URL_2_COLOR.get(key);
+        return integer == null ? (type.equals("休息视频") ? VIDEO_COLOR : OTHER_BLOG_COLOR) : integer;
+    }
+
+    public static String getContent(String type, String key) {
+        String str = URL_2_CONTENT.get(key);
+        return str == null ? (type.equals("休息视频") ? VIDEO_CONTENT : OTHER_BLOG_CONTENT) : str;
     }
 }

@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:theme="@style/toolbar_theme"
             app:contentScrim="@color/color_gank"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <FrameLayout
                 android:id="@+id/fl_content"
@@ -36,24 +36,24 @@
                 app:layout_collapseParallaxMultiplier="0">
 
                 <TextView
-                    android:id="@+id/tv_search_gank"
+                    android:id="@+id/tv_search"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/sixteen"
                     android:layout_marginLeft="@dimen/sixteen"
                     android:layout_weight="1"
                     android:background="@drawable/bg_search_gank"
-                    android:drawableStart="@drawable/ic_search_gank"
-                    android:drawableLeft="@drawable/ic_search_gank"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawableLeft="@drawable/ic_search"
                     android:drawablePadding="@dimen/four"
                     android:gravity="center_vertical"
                     android:padding="@dimen/four"
                     android:text="@string/search_gank"
-                    android:textColor="@color/color_text_general"
-                    android:textSize="@dimen/text_size_normal" />
+                    android:textColor="@color/color_text_secondary"
+                    android:textSize="@dimen/text_size_small" />
 
                 <ImageView
-                    android:id="@+id/iv_collection"
+                    android:id="@+id/iv_collect"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/twelve"

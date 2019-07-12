@@ -1,6 +1,7 @@
 package com.codearms.maoqiqi.one.gank.presenter;
 
 import com.codearms.maoqiqi.base.BaseObserver;
+import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.data.bean.DataBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.gank.presenter.contract.GankListContract;
@@ -21,8 +22,8 @@ public class GankListPresenter extends RxPresenterImpl<GankListContract.View> im
     }
 
     @Override
-    public void getData(String type, int pageIndex, int pageCount) {
-        addSubscribe(repository.getData(type, pageIndex, pageCount)
+    public void getData(String type, int pageIndex) {
+        addSubscribe(repository.getData(type, pageIndex, Constants.PAGE_COUNT)
                 .subscribeWith(new BaseObserver<DataBean>(view) {
                     @Override
                     public void onNext(DataBean dataBean) {

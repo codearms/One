@@ -25,6 +25,8 @@
     <string name="setting">设置</string>
     <string name="mode_night">夜间</string>
 
+    <!-- =====================================首页资源开始===================================== -->
+
     <string name="home">首页</string>
     <string name="news">新闻</string>
     <string name="music">音乐</string>
@@ -194,18 +196,6 @@
     <string name="gank_api">http://gank.io/api</string>
     <string name="dou_ban_terms">https://developers.douban.com/wiki/?title=terms</string>
 
-    <string name="search_gank">搜索干货</string>
-
-    <string-array name="gank_classify">
-        <item>全部</item>
-        <item>Android</item>
-        <item>iOS</item>
-        <item>前端</item>
-        <item>休息视频</item>
-        <item>拓展资源</item>
-        <item>瞎推荐</item>
-        <item>福利</item>
-    </string-array>
 
     <string-array name="news_titles">
         <item>推荐</item>
@@ -247,5 +237,19 @@
     <string-array name="movie_titles">
         <item>正在热映</item>
         <item>即将上映</item>
+    </string-array>
+
+    <!-- =====================================干货资源===================================== -->
+    <string name="search_gank">搜索干货</string>
+
+    <string-array name="gank_classify">
+        <item>全部</item>
+        <item>Android</item>
+        <item>iOS</item>
+        <item>前端</item>
+        <item>休息视频</item>
+        <item>拓展资源</item>
+        <item>瞎推荐</item>
+        <item>福利</item>
     </string-array>
 </resources>
