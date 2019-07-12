@@ -59,7 +59,7 @@ public class HeaderImageFragment extends BaseFragment<HeaderImageContract.Presen
         ivHeader.setOnClickListener(v -> {
             if (url != null && !url.equals("")) {
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ivHeader, getString(R.string.transition_picture));
-                PictureActivity.start(context, null, url, options.toBundle());
+                PictureActivity.start(context, url, options.toBundle());
             }
         });
     }

@@ -19,24 +19,26 @@
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:background="@color/transparent"
+        android:visibility="gone"
+        app:elevation="0dp">
 
         <com.codearms.maoqiqi.one.view.StatusBarView
             android:id="@+id/status_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_navigation" />
+            android:background="@color/transparent" />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/color_navigation"
+            android:background="@color/transparent"
             android:theme="@style/toolbar_theme"
             app:contentInsetStartWithNavigation="0dp"
+            app:elevation="0dp"
             app:navigationIcon="@drawable/ic_back"
             app:popupTheme="@style/navigation_popup_theme"
-            app:title="@string/picture_preview"
             app:titleTextColor="@color/color_text_title" />
     </android.support.design.widget.AppBarLayout>
 </FrameLayout>

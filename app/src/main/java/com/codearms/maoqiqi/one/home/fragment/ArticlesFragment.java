@@ -131,7 +131,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
                 }
                 break;
             case R.id.iv_project:
-                PictureActivity.start(context, "", "", null);
+                PictureActivity.start(context, "", null);
                 break;
             case R.id.iv_collect:
                 // 判断是否登录
