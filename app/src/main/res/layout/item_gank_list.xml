@@ -62,6 +62,15 @@
                 android:paddingRight="@dimen/eight"
                 android:paddingBottom="@dimen/sixteen">
 
+                <ImageView
+                    android:id="@+id/iv_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/eight"
+                    android:layout_marginLeft="@dimen/eight"
+                    android:contentDescription="@string/image_description"
+                    android:src="@drawable/iv_category_android" />
+
                 <TextView
                     android:id="@+id/tv_tag"
                     android:layout_width="wrap_content"

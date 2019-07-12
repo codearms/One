@@ -139,6 +139,10 @@ public class GankListFragment extends BaseFragment<GankListContract.Presenter> i
                     helper.ivImage.setVisibility(View.GONE);
                 }
 
+                if (item.getType().equals("")) {
+
+                }
+
                 setTag(helper.tvTag, item.getType(), item.getUrl());
 
                 helper.tvAuthor.setText(GankUtils.getWho(item.getWho()));
@@ -173,6 +177,7 @@ public class GankListFragment extends BaseFragment<GankListContract.Presenter> i
         CardView cardView;
         TextView tvTitle;
         ImageView ivImage;
+        ImageView ivCategory;
         TextView tvTag;
         TextView tvAuthor;
         TextView tvTime;
@@ -184,6 +189,7 @@ public class GankListFragment extends BaseFragment<GankListContract.Presenter> i
             cardView = itemView.findViewById(R.id.card_view);
             tvTitle = itemView.findViewById(R.id.tv_title);
             ivImage = itemView.findViewById(R.id.iv_image);
+            ivCategory = itemView.findViewById(R.id.iv_category);
             tvTag = itemView.findViewById(R.id.tv_tag);
             tvAuthor = itemView.findViewById(R.id.tv_author);
             tvTime = itemView.findViewById(R.id.tv_date);

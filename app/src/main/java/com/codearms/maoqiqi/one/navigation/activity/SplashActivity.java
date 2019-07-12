@@ -23,6 +23,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
+ * 闪屏页面
  * Link: https://github.com/maoqiqi/AndroidUtils
  * Author: fengqi.mao.march@gmail.com
  * Date: 2019-06-27 10:15

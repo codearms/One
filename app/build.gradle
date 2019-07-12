@@ -53,4 +53,6 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
 
     implementation 'com.codearms.maoqiqi:utils:1.0.1'
+
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }

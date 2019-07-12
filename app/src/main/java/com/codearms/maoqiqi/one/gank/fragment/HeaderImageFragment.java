@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.gank.presenter.HeaderImagePresenter;
 import com.codearms.maoqiqi.one.gank.presenter.contract.HeaderImageContract;
+import com.codearms.maoqiqi.one.home.activity.PictureActivity;
 
 /**
  * Link: https://github.com/maoqiqi/AndroidUtils
@@ -28,6 +30,7 @@ public class HeaderImageFragment extends BaseFragment<HeaderImageContract.Presen
     private HeaderImageCallBack callBack;
 
     private ImageView ivHeader;
+    private String url;
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
@@ -53,6 +56,12 @@ public class HeaderImageFragment extends BaseFragment<HeaderImageContract.Presen
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
         ivHeader = rootView.findViewById(R.id.iv_header);
+        ivHeader.setOnClickListener(v -> {
+            if (url != null && !url.equals("")) {
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ivHeader, getString(R.string.transition_picture));
+                PictureActivity.start(context, null, url, options.toBundle());
+            }
+        });
     }
 
     @Override
@@ -67,6 +76,7 @@ public class HeaderImageFragment extends BaseFragment<HeaderImageContract.Presen
 
     @Override
     public void setHeaderImage(String url) {
+        this.url = url;
         Glide.with(this).asBitmap().load(url).placeholder(R.drawable.ic_belle_placeholder).into(
                 new SimpleTarget<Bitmap>() {
                     @Override

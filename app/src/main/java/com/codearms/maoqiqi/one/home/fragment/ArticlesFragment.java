@@ -17,7 +17,7 @@ import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
 import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
-import com.codearms.maoqiqi.one.home.activity.ImageActivity;
+import com.codearms.maoqiqi.one.home.activity.PictureActivity;
 import com.codearms.maoqiqi.one.home.adapter.ArticlesAdapter;
 import com.codearms.maoqiqi.one.home.presenter.ArticlesPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.ArticlesContract;
@@ -131,7 +131,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
                 }
                 break;
             case R.id.iv_project:
-                ImageActivity.start(context);
+                PictureActivity.start(context, "", "", null);
                 break;
             case R.id.iv_collect:
                 // 判断是否登录
