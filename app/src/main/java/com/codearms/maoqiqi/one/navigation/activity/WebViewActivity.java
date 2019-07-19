@@ -19,6 +19,7 @@ import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.navigation.fragment.WebViewFragment;
+import com.codearms.maoqiqi.one.utils.DeviceUtils;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.view.StatusBarView;
 import com.codearms.maoqiqi.utils.ActivityUtils;
@@ -146,11 +147,18 @@ public class WebViewActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
+            case R.id.menu_web_refresh:
+                // 刷新
+                if (fragment != null && fragment.getWebView() != null)
+                    fragment.getWebView().reload();
+                break;
             case R.id.menu_web_share:
                 // 分享
                 return true;
             case R.id.menu_copy_url:
                 // 复制链接
+                DeviceUtils.copy2Clipboard(this, fragment.getWebView().getUrl());
+                ToastUtils.show(getString(R.string.copy_success));
                 return true;
             case R.id.menu_browser_open:
                 // 浏览器打开

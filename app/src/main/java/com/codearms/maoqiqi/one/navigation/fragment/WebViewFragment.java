@@ -197,6 +197,30 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         showErrorMsg(getString(R.string.success_to_un_collect));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (webView != null) {
+            webView.onResume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (webView != null) {
+            webView.onPause();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (webView != null) {
+            webView.destroy();
+        }
+    }
+
     private final class MyWebViewClient extends WebViewClient {
 
         @Override

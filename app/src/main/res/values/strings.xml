@@ -196,6 +196,8 @@
     <string name="gank_api">http://gank.io/api</string>
     <string name="dou_ban_terms">https://developers.douban.com/wiki/?title=terms</string>
 
+    <string name="refresh">刷新</string>
+    <string name="copy_success">复制成功</string>
 
     <string-array name="news_titles">
         <item>推荐</item>

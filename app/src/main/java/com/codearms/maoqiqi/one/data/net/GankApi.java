@@ -18,4 +18,7 @@ public interface GankApi {
 
     @GET("random/data/{type}/{number}")
     Observable<DataBean> getRandomData(@Path("type") String type, @Path("number") int number);
+
+    @GET("history/content/{pageCount}/{pageIndex}")
+    Observable<DataBean> getHistory(@Path("pageIndex") int pageIndex, @Path("pageCount") int pageCount);
 }
