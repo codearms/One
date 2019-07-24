@@ -232,3 +232,7 @@ mService = restAdapter.create(GuDong.class);
 
 
 请作者喝一杯咖啡 (￣▽￣)~*
+
+
+protected int pageIndex;
+protected int pageCount = Constants.PAGE_COUNT;

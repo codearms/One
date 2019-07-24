@@ -21,7 +21,7 @@
         app:navigationIcon="@drawable/ic_back"
         app:popupTheme="@style/navigation_popup_theme"
         app:title="@string/update_description"
-        app:titleTextColor="@color/color_text_title" />
+        app:titleTextAppearance="@style/toolbar_appearance" />
 
     <FrameLayout
         android:id="@+id/fl_content"

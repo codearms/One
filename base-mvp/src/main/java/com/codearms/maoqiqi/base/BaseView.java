@@ -27,11 +27,6 @@ public interface BaseView<T extends BasePresenter> {
     void hideLoading();
 
     /**
-     * 刷新
-     */
-    void refresh();
-
-    /**
      * 显示错误信息
      *
      * @param resId 资源Id

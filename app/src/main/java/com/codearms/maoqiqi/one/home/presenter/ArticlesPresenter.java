@@ -1,6 +1,7 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.base.BaseObserver;
+import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
@@ -15,6 +16,8 @@ import io.reactivex.Observable;
 public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> implements ArticlesContract.Presenter {
 
     private OneRepository repository;
+    private int pageIndex;
+    private int pageCount = Constants.PAGE_COUNT;
 
     public ArticlesPresenter(ArticlesContract.View view) {
         super(view);
@@ -38,49 +41,53 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
     }
 
     @Override
-    public void getWxArticles(int id, int page) {
-        addSubscribe(repository.getWxArticles(id, page)
+    public void getWxArticles(int id, boolean isRefresh) {
+        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        addSubscribe(repository.getWxArticles(id, pageIndex)
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_wx_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
-                        view.setArticles(articleBeans, true);
+                        view.setArticles(articleBeans, isRefresh);
                     }
                 }));
     }
 
     @Override
-    public void getKnowledgeArticles(int page, int cid) {
-        addSubscribe(repository.getKnowledgeArticles(page, cid)
+    public void getKnowledgeArticles(int cid, boolean isRefresh) {
+        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        addSubscribe(repository.getKnowledgeArticles(pageIndex, cid)
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_knowledge_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
-                        view.setArticles(articleBeans, true);
+                        view.setArticles(articleBeans, isRefresh);
                     }
                 }));
     }
 
     @Override
-    public void getProjectArticles(int page, int cid) {
-        addSubscribe(repository.getProjectArticles(page, cid)
+    public void getProjectArticles(int cid, boolean isRefresh) {
+        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        addSubscribe(repository.getProjectArticles(pageIndex, cid)
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_project_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
-                        view.setArticles(articleBeans, true);
+                        view.setArticles(articleBeans, isRefresh);
                     }
                 }));
     }
 
     @Override
-    public void getCollect(int page) {
-        addSubscribe(repository.getCollect(page)
+    public void getCollect(boolean isRefresh) {
+        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        addSubscribe(repository.getCollect(pageIndex)
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_collect_data) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
                         if (!view.isActive()) return;
-                        view.setArticles(articleBeans, true);
+                        view.setArticles(articleBeans, isRefresh);
                     }
                 }));
     }

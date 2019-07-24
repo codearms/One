@@ -30,7 +30,7 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/music_popup_theme"
                 app:title="@string/music"
-                app:titleTextColor="@color/color_text_title" />
+                app:titleTextAppearance="@style/toolbar_appearance" />
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"

@@ -45,11 +45,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends LazyLoadFrag
     }
 
     @Override
-    public void refresh() {
-
-    }
-
-    @Override
     public void showErrorMsg(int resId) {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show();
     }

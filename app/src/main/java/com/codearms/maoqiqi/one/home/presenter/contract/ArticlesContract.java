@@ -13,13 +13,13 @@ public interface ArticlesContract {
 
         void getHomeArticles();
 
-        void getWxArticles(int id, int page);
+        void getWxArticles(int id, boolean isRefresh);
 
-        void getKnowledgeArticles(int page, int cid);
+        void getKnowledgeArticles(int cid, boolean isRefresh);
 
-        void getProjectArticles(int page, int cid);
+        void getProjectArticles(int cid, boolean isRefresh);
 
-        void getCollect(int page);
+        void getCollect(boolean isRefresh);
 
         // 收藏
         void collect(int id);

@@ -48,6 +48,7 @@
 
     <!--全屏-->
     <style name="AppTheme.Fullscreen">
+        <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 
@@ -94,6 +95,12 @@
     <!--android.support.design.widget.NavigationView-->
     <style name="navigation_view" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <!--注意,Toolbar的标题在横竖屏下字体大小不一样。所以需要指定标题栏字体大小。-->
+    <style name="toolbar_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/color_text_title</item>
     </style>
 
     <!--ToolBar主题-->

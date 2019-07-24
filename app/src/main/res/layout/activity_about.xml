@@ -21,7 +21,7 @@
         app:navigationIcon="@drawable/ic_back"
         app:popupTheme="@style/navigation_popup_theme"
         app:title="@string/about"
-        app:titleTextColor="@color/color_text_title" />
+        app:titleTextAppearance="@style/toolbar_appearance" />
 
     <ImageView
         android:layout_width="80dp"
@@ -166,4 +166,13 @@
         android:text="《豆瓣开发者服务使用条款》"
         android:textColor="@color/color_text_main"
         android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:text="©2017 干货营 github.com/maoqiqi"
+        android:textColor="@color/color_text_secondary"
+        android:textSize="14sp" />
 </LinearLayout>

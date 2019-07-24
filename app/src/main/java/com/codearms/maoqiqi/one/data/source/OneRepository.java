@@ -29,6 +29,7 @@ import com.codearms.maoqiqi.one.utils.MediaLoader;
 import com.codearms.maoqiqi.utils.RxUtils;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 
@@ -121,7 +122,7 @@ public class OneRepository implements OneDataSource {
 
     @Override
     public Observable<ArticleBeans> getProjectArticles(int page, int cid) {
-        return api.getProjectArticles(page, cid).compose(RxUtils.rxSchedulerHelper()).compose(RxUtils.handleResult());
+        return api.getProjectArticles(page, cid).delay(3000, TimeUnit.MILLISECONDS).compose(RxUtils.rxSchedulerHelper()).compose(RxUtils.handleResult());
     }
 
     @Override

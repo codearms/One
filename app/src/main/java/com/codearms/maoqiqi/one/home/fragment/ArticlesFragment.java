@@ -1,18 +1,14 @@
 package com.codearms.maoqiqi.one.home.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
-import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.App;
+import com.codearms.maoqiqi.one.ListFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
@@ -27,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> implements ArticlesContract.View {
+public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> implements ArticlesContract.View {
 
     public static final String FROM_HOME = "FROM_HOME";
     public static final String FROM_WE_CHAT = "FROM_WE_CHAT";
@@ -87,24 +83,26 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         presenter = new ArticlesPresenter(this);
-    }
-
-    @Override
-    protected View createView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_articles, container, false);
     }
 
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             from = bundle.getString("from", FROM_HOME);
             id = bundle.getInt("id");
             k = bundle.getString("k");
             isClassify = bundle.getBoolean("isClassify", true);
+        }
+
+        // 首页不需要
+        if (from.equals(FROM_HOME)) {
+            refreshLayout.setEnableRefresh(false);
+            refreshLayout.setEnableLoadMore(false);
         }
 
         adapter = new ArticlesAdapter(R.layout.item_articles, list, topArticles, from, isClassify);
@@ -161,8 +159,26 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
     }
 
     @Override
+    protected void onVisibleChange(boolean isVisible) {
+        super.onVisibleChange(isVisible);
+        if (!from.equals(FROM_HOME)) {
+            if (isVisible && !isLoadDataCompleted()) {
+                showLoading();
+            } else {
+                hideLoading();
+            }
+        }
+    }
+
+    // refreshLayout.autoRefresh();会调用loadData()方法,所以不能自己再次调用
+    @Override
     protected void loadData() {
         super.loadData();
+        if (from.equals(FROM_HOME)) getData();
+    }
+
+    @Override
+    protected void getData() {
         switch (from) {
             case FROM_HOME:
                 // 首页数据
@@ -170,19 +186,19 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
                 break;
             case FROM_WE_CHAT:
                 // 查看某个公众号历史数据
-                presenter.getWxArticles(id, 0);
+                presenter.getWxArticles(id, isRefresh);
                 break;
             case FROM_PROJECT:
                 // 项目列表数据
-                presenter.getProjectArticles(0, id);
+                presenter.getProjectArticles(id, isRefresh);
                 break;
             case FROM_CLASSIFY:
                 // 知识体系下的文章
-                presenter.getKnowledgeArticles(0, id);
+                presenter.getKnowledgeArticles(id, isRefresh);
                 break;
             case FROM_COLLECT:
                 // 收藏文章列表
-                presenter.getCollect(0);
+                presenter.getCollect(isRefresh);
                 break;
             case FROM_SEARCH:
                 // 搜索
@@ -200,6 +216,7 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
 
     @Override
     public void setHomeArticles(List<ArticleBean> topArticleBeans, ArticleBeans articleBeans) {
+        loadDataCompleted();
         list.addAll(topArticleBeans);
         list.addAll(articleBeans.getArticleBeanList());
 
@@ -210,12 +227,27 @@ public class ArticlesFragment extends BaseFragment<ArticlesContract.Presenter> i
 
     @Override
     public void setArticles(ArticleBeans articleBeans, boolean isRefresh) {
+        loadDataCompleted();
         if (isRefresh) {
             list = articleBeans.getArticleBeanList();
             adapter.replaceData(list);
+
+            // 完成刷新
+            if (articleBeans.getPageCount() <= articleBeans.getCurPage()) {
+                refreshLayout.finishRefreshWithNoMoreData();
+            } else {
+                refreshLayout.finishRefresh();
+            }
         } else {
             list.addAll(articleBeans.getArticleBeanList());
-            adapter.addData(articleBeans.getArticleBeanList());
+            adapter.replaceData(list);
+
+            // 完成加载
+            if (articleBeans.getPageCount() <= articleBeans.getCurPage()) {
+                refreshLayout.finishLoadMoreWithNoMoreData();
+            } else {
+                refreshLayout.finishLoadMore();
+            }
         }
     }
 

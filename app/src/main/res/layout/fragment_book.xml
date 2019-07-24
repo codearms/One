@@ -17,8 +17,9 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_book"
         android:theme="@style/toolbar_theme"
+        app:contentInsetStartWithNavigation="0dp"
         app:popupTheme="@style/book_popup_theme"
-        app:contentInsetStartWithNavigation="0dp">
+        app:titleTextAppearance="@style/toolbar_appearance">
 
         <RelativeLayout
             android:layout_width="match_parent"

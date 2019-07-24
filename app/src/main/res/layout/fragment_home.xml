@@ -20,13 +20,11 @@
         app:contentInsetStartWithNavigation="0dp"
         app:popupTheme="@style/home_popup_theme"
         app:title="@string/home"
-        app:titleTextColor="@color/color_text_title" />
+        app:titleTextAppearance="@style/toolbar_appearance" />
 
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@color/bg"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 app:image_scale_type="fit_xy"
                 app:indicator_drawable_selected="@drawable/ic_banner_selected"
                 app:indicator_drawable_unselected="@drawable/ic_banner_normal"
@@ -54,5 +54,5 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </ScrollView>
 </LinearLayout>

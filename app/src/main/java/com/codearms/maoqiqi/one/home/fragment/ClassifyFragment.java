@@ -35,6 +35,8 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
     private String from;
     private ArticleBean articleBean;
 
+    private List<ChildClassifyBean> childClassifyBeans;
+
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
      *
@@ -69,6 +71,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         presenter = new ClassifyPresenter(this);
     }
 
@@ -84,8 +87,12 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
         tabLayout = rootView.findViewById(R.id.tab_layout);
         viewPager = rootView.findViewById(R.id.view_pager);
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
+        if (savedInstanceState != null) {
+            setClassifies(childClassifyBeans);
+        } else {
+            Bundle bundle = getArguments();
+            if (bundle == null) return;
+
             from = bundle.getString("from", ArticlesFragment.FROM_CLASSIFY);
             parentClassifyBean = bundle.getParcelable("parentClassifyBean");
             position = bundle.getInt("position");
@@ -133,6 +140,8 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
 
     @Override
     public void setClassifies(List<ChildClassifyBean> childClassifyBeans) {
+        loadDataCompleted();
+        this.childClassifyBeans = childClassifyBeans;
         List<String> fragmentTitles = new ArrayList<>();
         for (int i = 0; i < childClassifyBeans.size(); i++) {
             fragmentTitles.add(childClassifyBeans.get(i).getName());
@@ -147,6 +156,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
 
     @Override
     public void setKnowledge(List<ParentClassifyBean> parentClassifyBeans) {
+        loadDataCompleted();
         ParentClassifyBean parentClassifyBean = null;
         for (int i = 0; i < parentClassifyBeans.size(); i++) {
             if (parentClassifyBeans.get(i).getChildClassifyBeanList().get(0).getId() == articleBean.getSuperChapterId()) {
@@ -176,7 +186,8 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
 
         @Override
         public Fragment getItem(int i) {
-            return ArticlesFragment.newInstance(from, childClassifyBeans.get(i).getId(), false);
+            String f = from.equals(ArticlesFragment.FROM_HOME) ? ArticlesFragment.FROM_CLASSIFY : from;
+            return ArticlesFragment.newInstance(f, childClassifyBeans.get(i).getId(), false);
         }
     }
 }

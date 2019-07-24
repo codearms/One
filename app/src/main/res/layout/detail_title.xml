@@ -19,5 +19,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back"
-        app:popupTheme="@style/movie_popup_theme" />
+        app:popupTheme="@style/movie_popup_theme"
+        app:titleTextAppearance="@style/toolbar_appearance" />
 </RelativeLayout>

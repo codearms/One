@@ -45,6 +45,8 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
     private Toolbar toolbar;
     private Banner banner;
 
+    private List<BannerBean> bannerBeanList;
+
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
      *
@@ -57,6 +59,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         setHasOptionsMenu(true);
         presenter = new HomePresenter(this);
     }
@@ -71,6 +74,12 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
         super.initViews(savedInstanceState);
         toolbar = rootView.findViewById(R.id.toolbar);
         banner = rootView.findViewById(R.id.banner);
+
+        if (savedInstanceState != null) {
+            if (context instanceof MainActivity)
+                ((MainActivity) context).associateDrawerLayout(toolbar);
+            setBanner(bannerBeanList);
+        }
 
         ArticlesFragment fragment = (ArticlesFragment) getChildFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
@@ -96,6 +105,9 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
 
     @Override
     public void setBanner(List<BannerBean> bannerBeanList) {
+        loadDataCompleted();
+        this.bannerBeanList = bannerBeanList;
+
         List<String> imageUrls = new ArrayList<>();
         List<String> titles = new ArrayList<>();
 

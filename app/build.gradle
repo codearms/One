@@ -32,7 +32,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.codearms.maoqiqi:lazyload:1.1.0'
+    implementation 'com.codearms.maoqiqi:lazyload:1.1.1'
     implementation 'com.youth.banner:banner:1.4.10'
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     implementation 'com.squareup.okio:okio:1.17.2'
@@ -55,4 +55,5 @@ dependencies {
     implementation 'com.codearms.maoqiqi:utils:1.0.1'
 
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-31'
 }
