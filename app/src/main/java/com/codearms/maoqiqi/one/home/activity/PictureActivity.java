@@ -3,48 +3,59 @@ package com.codearms.maoqiqi.one.home.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.home.fragment.PictureOperationFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
-import com.codearms.maoqiqi.utils.RxUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.util.ArrayList;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Function;
-import io.reactivex.observers.ResourceObserver;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class PictureActivity extends BaseActivity {
 
-    private CompositeDisposable compositeDisposable;
+    private static final String TAG = "com.codearms.maoqiqi.one.PictureOperationFragment";
+
+    private AppBarLayout appBarLayout;
+
     private boolean showing;
-    private Bitmap bitmap;
+    private String url;
+
+    private PictureOperationFragment fragment;
 
     public static void start(@NonNull Context context, String url, Bundle options) {
         Bundle bundle = new Bundle();
         bundle.putString("url", url);
+        Intent intent = new Intent(context, PictureActivity.class);
+        intent.putExtras(bundle);
+        ActivityCompat.startActivity(context, intent, options);
+    }
+
+    public static void start(@NonNull Context context, ArrayList<String> urls, int position, Bundle options) {
+        Bundle bundle = new Bundle();
+        bundle.putStringArrayList("urls", urls);
+        bundle.putInt("position", position);
         Intent intent = new Intent(context, PictureActivity.class);
         intent.putExtras(bundle);
         ActivityCompat.startActivity(context, intent, options);
@@ -59,99 +70,64 @@ public class PictureActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) return;
 
-        String url = bundle.getString("url");
+        url = bundle.getString("url");
+        ArrayList<String> urls = bundle.getStringArrayList("urls");
+        int position = bundle.getInt("position");
 
-        AppBarLayout appBarLayout = findViewById(R.id.app_bar_layout);
+        appBarLayout = findViewById(R.id.app_bar_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         ImageView ivImage = findViewById(R.id.iv_image);
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        TextView tvInfo = findViewById(R.id.tv_info);
 
         toolbar.setTitle("");
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu_more));
         setSupportActionBar(toolbar);
 
-        ivImage.setOnClickListener(v -> {
-            showing = !showing;
-            appBarLayout.setVisibility(showing ? View.VISIBLE : View.GONE);
-        });
-        ivImage.setOnLongClickListener(v -> {
-            ToastUtils.show("保存图片");
-            save(url, bitmap);
+        ivImage.setOnClickListener(this::onClick);
+        ivImage.setOnLongClickListener(this::onLongClick);
+
+        fragment = (PictureOperationFragment) getSupportFragmentManager().findFragmentByTag(TAG);
+        if (fragment == null) fragment = new PictureOperationFragment();
+
+        if (urls == null) {
+            ivImage.setVisibility(VISIBLE);
+            viewPager.setVisibility(GONE);
+            tvInfo.setVisibility(GONE);
+            Glide.with(this).asBitmap().load(url).placeholder(R.drawable.ic_belle_placeholder).into(ivImage);
+        } else {
+            ivImage.setVisibility(GONE);
+            viewPager.setVisibility(VISIBLE);
+            tvInfo.setVisibility(VISIBLE);
+            tvInfo.setText(String.format("%s / %s", position + 1, urls.size()));
+            viewPager.setAdapter(new SectionsPagerAdapter(urls));
+            viewPager.setOffscreenPageLimit(1);
+            viewPager.setCurrentItem(position);
+        }
+    }
+
+    public void onClick(View view) {
+        showing = !showing;
+        appBarLayout.setVisibility(showing ? VISIBLE : GONE);
+    }
+
+    public boolean onLongClick(View view) {
+        if (view instanceof ImageView) {
+            ImageView imageView = (ImageView) view;
+
+            Object tag = imageView.getTag();
+            if (tag == null && url == null) return false;
+            String u = url;
+            if (tag != null) u = tag.toString();
+
+            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+
+            fragment.setUrl(u);
+            fragment.setBitmap(bitmap);
+            fragment.show(getSupportFragmentManager(), TAG);
             return true;
-        });
-        Glide.with(this).asBitmap().load(url).placeholder(R.drawable.ic_belle_placeholder).into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                bitmap = resource;
-                ivImage.setImageBitmap(bitmap);
-            }
-        });
-
-        compositeDisposable = new CompositeDisposable();
-    }
-
-    private void save(final String url, final Bitmap b) {
-        if (bitmap == null) {
-            ToastUtils.show("无法下载");
-            return;
         }
-
-        ResourceObserver<File> observer = new ResourceObserver<File>() {
-            @Override
-            public void onNext(File file) {
-                notifyGalleryUpdate(PictureActivity.this, file);
-                ToastUtils.show(getString(R.string.save_folder, file.getAbsolutePath()));
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-
-        compositeDisposable.add(RxUtils.createData(b)
-                .flatMap((Function<Bitmap, ObservableSource<File>>) bitmap -> {
-                    File file = saveFile(url, bitmap);
-                    if (file != null) {
-                        return Observable.just(file);
-                    }
-                    return Observable.empty();
-                }).compose(RxUtils.rxSchedulerHelper())
-                .subscribeWith(observer));
-    }
-
-    private File saveFile(final String url, final Bitmap bitmap) {
-        File appDir = new File(Environment.getExternalStorageDirectory(), getString(R.string.app_name));
-        if (!appDir.exists()) {
-            boolean flag = appDir.mkdir();
-        }
-
-        String fileName = url.substring(url.lastIndexOf("/"));
-        File file = new File(appDir, fileName);
-
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-            return file;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    private void notifyGalleryUpdate(Context context, File file) {
-        Uri uri = Uri.fromFile(file);
-        // 通知图库更新
-        Intent scannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
-        context.sendBroadcast(scannerIntent);
+        return false;
     }
 
     @Override
@@ -171,11 +147,40 @@ public class PictureActivity extends BaseActivity {
         return false;
     }
 
-    @Override
-    protected void onDestroy() {
-        if (compositeDisposable != null) {
-            compositeDisposable.clear();
+    public final class SectionsPagerAdapter extends PagerAdapter {
+
+        private ArrayList<String> urls;
+
+        SectionsPagerAdapter(ArrayList<String> urls) {
+            this.urls = urls;
         }
-        super.onDestroy();
+
+        @Override
+        public int getCount() {
+            return urls.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
+            return view == o;
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            ImageView imageView = (ImageView) LayoutInflater.from(PictureActivity.this).inflate(R.layout.item_picture, null);
+            Glide.with(imageView).load(urls.get(position)).placeholder(R.drawable.ic_belle_placeholder).into(imageView);
+            imageView.setTag(urls.get(position));
+            imageView.setOnClickListener(PictureActivity.this::onClick);
+            imageView.setOnLongClickListener(PictureActivity.this::onLongClick);
+            container.addView(imageView);
+            return imageView;
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            // super.destroyItem(container, position, object);
+            container.removeView((View) object);
+        }
     }
 }

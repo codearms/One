@@ -256,5 +256,8 @@
     </string-array>
 
     <string name="transition_picture">transition_picture</string>
+    <string name="save">保存</string>
+    <string name="collection">收藏</string>
+    <string name="wallpaper">设为壁纸</string>
     <string name="save_folder">图片已保存至 %s 文件夹</string>
 </resources>

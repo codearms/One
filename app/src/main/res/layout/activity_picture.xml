@@ -13,14 +13,35 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/image_description"
         android:transitionName="@string/transition_picture"
+        android:visibility="gone"
         tools:ignore="UnusedAttribute" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="@dimen/sixteen"
+        android:background="@drawable/bg_number"
+        android:paddingLeft="@dimen/eight"
+        android:paddingTop="@dimen/four"
+        android:paddingRight="@dimen/eight"
+        android:paddingBottom="@dimen/four"
+        android:textColor="@color/color_text_title"
+        android:textSize="@dimen/text_size_smaller"
+        tools:text="1 / 0" />
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
-        android:visibility="gone"
         app:elevation="0dp">
 
         <com.codearms.maoqiqi.one.view.StatusBarView
@@ -38,7 +59,7 @@
             app:contentInsetStartWithNavigation="0dp"
             app:elevation="0dp"
             app:navigationIcon="@drawable/ic_back"
-            app:popupTheme="@style/navigation_popup_theme"
+            app:popupTheme="@style/movie_popup_theme"
             app:titleTextAppearance="@style/toolbar_appearance" />
     </android.support.design.widget.AppBarLayout>
 </FrameLayout>

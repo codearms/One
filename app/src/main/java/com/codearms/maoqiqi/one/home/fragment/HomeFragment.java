@@ -23,12 +23,12 @@ import com.codearms.maoqiqi.one.data.bean.BannerBean;
 import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.home.activity.KnowledgeActivity;
 import com.codearms.maoqiqi.one.home.activity.NavigationActivity;
+import com.codearms.maoqiqi.one.home.activity.PictureActivity;
 import com.codearms.maoqiqi.one.home.activity.ProjectActivity;
 import com.codearms.maoqiqi.one.home.activity.UsefulSitesActivity;
 import com.codearms.maoqiqi.one.home.activity.WeChatActivity;
 import com.codearms.maoqiqi.one.home.presenter.HomePresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.HomeContract;
-import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.utils.GlideImageLoader;
 import com.codearms.maoqiqi.utils.ActivityUtils;
 import com.youth.banner.Banner;
@@ -108,8 +108,8 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
         loadDataCompleted();
         this.bannerBeanList = bannerBeanList;
 
-        List<String> imageUrls = new ArrayList<>();
-        List<String> titles = new ArrayList<>();
+        ArrayList<String> imageUrls = new ArrayList<>();
+        ArrayList<String> titles = new ArrayList<>();
 
         for (int i = 0; i < bannerBeanList.size(); i++) {
             BannerBean bannerBean = bannerBeanList.get(i);
@@ -120,7 +120,9 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
         banner.setImages(imageUrls).setBannerTitles(titles)
                 .setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE)
                 .setImageLoader(new GlideImageLoader())
-                .setOnBannerListener(position -> WebViewActivity.start(context, bannerBeanList.get(position).getUrl()))
+                // .setOnBannerListener(position -> WebViewActivity.start(context, bannerBeanList.get(position).getUrl()))
+                // .setOnBannerListener(position -> PictureActivity.start(context, bannerBeanList.get(position).getImagePath(), null))
+                .setOnBannerListener(position -> PictureActivity.start(context, imageUrls, position, null))
                 .setDelayTime(3000).start();
     }
 
