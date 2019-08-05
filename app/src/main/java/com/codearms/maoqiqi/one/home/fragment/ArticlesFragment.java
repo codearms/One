@@ -12,6 +12,7 @@ import com.codearms.maoqiqi.one.ListFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
+import com.codearms.maoqiqi.one.decoration.MarginItemDecoration;
 import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.home.activity.PictureActivity;
 import com.codearms.maoqiqi.one.home.adapter.ArticlesAdapter;
@@ -113,6 +114,7 @@ public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> i
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new MarginItemDecoration(getResources().getDimensionPixelSize(R.dimen.twelve)));
 
         ((SimpleItemAnimator) Objects.requireNonNull(recyclerView.getItemAnimator())).setSupportsChangeAnimations(false);
     }

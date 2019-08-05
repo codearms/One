@@ -20,7 +20,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.codearms.maoqiqi.base.BaseBottomSheetDialogFragment;
 import com.codearms.maoqiqi.one.R;
-import com.codearms.maoqiqi.one.decoration.DividerDecoration;
+import com.codearms.maoqiqi.one.decoration.DividerItemDecoration;
 import com.codearms.maoqiqi.one.home.presenter.PictureOperationPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.PictureOperationContract;
 import com.codearms.maoqiqi.utils.ToastUtils;
@@ -90,7 +90,7 @@ public class PictureOperationFragment extends BaseBottomSheetDialogFragment<Pict
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerDecoration());
+        recyclerView.addItemDecoration(new DividerItemDecoration(context));
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 

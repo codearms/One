@@ -144,9 +144,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_person"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/sixteen"
-        android:paddingBottom="@dimen/sixteen" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/tv_trailers_photos"
@@ -164,7 +162,5 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/sixteen"
-        android:paddingBottom="@dimen/sixteen" />
+        android:layout_height="wrap_content" />
 </LinearLayout>

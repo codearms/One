@@ -24,7 +24,7 @@ import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.MusicAlbumBean;
 import com.codearms.maoqiqi.one.data.bean.MusicArtistBean;
 import com.codearms.maoqiqi.one.data.bean.MusicSongBean;
-import com.codearms.maoqiqi.one.decoration.DividerDecoration;
+import com.codearms.maoqiqi.one.decoration.DividerItemDecoration;
 import com.codearms.maoqiqi.one.music.adapter.MusicAdapter;
 import com.codearms.maoqiqi.one.music.presenter.MusicListPresenter;
 import com.codearms.maoqiqi.one.music.presenter.contract.MusicListContract;
@@ -115,7 +115,7 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerDecoration());
+        recyclerView.addItemDecoration(new DividerItemDecoration(context));
     }
 
     @Override

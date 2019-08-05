@@ -6,7 +6,7 @@ import android.net.Uri;
 
 /**
  * 专用于分享的工具类
- *
+ * <p>
  * Author: nanchen
  * Email: liushilin520@foxmail.com
  * Date: 2017-04-20  11:56

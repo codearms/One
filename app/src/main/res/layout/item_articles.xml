@@ -4,11 +4,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/twelve"
-    android:layout_marginTop="@dimen/twelve"
-    android:layout_marginRight="@dimen/twelve"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/color_text_title"
     app:cardCornerRadius="5dp"
     app:cardElevation="2dp">
 

@@ -30,7 +30,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Base64;
-import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;

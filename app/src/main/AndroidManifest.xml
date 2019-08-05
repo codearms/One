@@ -73,7 +73,8 @@
         <activity
             android:name=".home.activity.PictureActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentTheme" />
         <!--news-->
         <activity android:name=".news.activity.NewsDetailActivity" />
         <activity android:name=".book.activity.BookDetailActivity" />
@@ -82,7 +83,7 @@
             android:name=".music.activity.MusicMoreActivity"
             android:theme="@style/OneAppDialog" />
         <activity android:name=".movie.activity.MovieDetailActivity" />
-        <!--<activity android:name=".gank.activity.GankActivity" />-->
+        <activity android:name=".gank.activity.GankActivity" />
     </application>
 
 </manifest>

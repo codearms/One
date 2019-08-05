@@ -1,7 +1,6 @@
 package com.codearms.maoqiqi.one.utils;
 
 import android.animation.ObjectAnimator;
-import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 

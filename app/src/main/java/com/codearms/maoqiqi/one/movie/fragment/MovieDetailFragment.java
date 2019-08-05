@@ -23,8 +23,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.MovieDetailBean;
-import com.codearms.maoqiqi.one.decoration.SpaceItemDecoration;
-import com.codearms.maoqiqi.one.decoration.TopBottomDecoration;
+import com.codearms.maoqiqi.one.decoration.MarginItemDecoration;
 import com.codearms.maoqiqi.one.movie.presenter.MovieDetailPresenter;
 import com.codearms.maoqiqi.one.movie.presenter.contract.MovieDetailContract;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
@@ -123,15 +122,18 @@ public class MovieDetailFragment extends BaseFragment<MovieDetailContract.Presen
         recyclerViewPerson.setItemAnimator(new DefaultItemAnimator());
         recyclerViewPerson.setNestedScrollingEnabled(false);
         recyclerViewPerson.setHasFixedSize(true);
-        recyclerViewPerson.addItemDecoration(new SpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.sixteen)));
+        recyclerViewPerson.addItemDecoration(new MarginItemDecoration(getResources().getDimensionPixelSize(R.dimen.sixteen)));
         recyclerViewPerson.setAdapter(personRecyclerAdapter);
 
         recyclerViewImage.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         recyclerViewImage.setItemAnimator(new DefaultItemAnimator());
         recyclerViewImage.setNestedScrollingEnabled(false);
         recyclerViewImage.setHasFixedSize(true);
-        recyclerViewImage.addItemDecoration(new SpaceItemDecoration(getResources().getDimensionPixelSize(R.dimen.four)));
-        recyclerViewImage.addItemDecoration(new TopBottomDecoration(getResources().getDimensionPixelSize(R.dimen.twelve)));
+        recyclerViewImage.addItemDecoration(new MarginItemDecoration(
+                getResources().getDimensionPixelSize(R.dimen.sixteen),
+                getResources().getDimensionPixelSize(R.dimen.sixteen),
+                getResources().getDimensionPixelSize(R.dimen.four)
+        ));
         recyclerViewImage.setAdapter(imageRecyclerAdapter);
     }
 

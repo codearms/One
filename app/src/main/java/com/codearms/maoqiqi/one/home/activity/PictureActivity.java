@@ -26,6 +26,7 @@ import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.PictureOperationFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
+import com.codearms.maoqiqi.one.view.GestureView;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class PictureActivity extends BaseActivity {
     private static final String TAG = "com.codearms.maoqiqi.one.PictureOperationFragment";
 
     private AppBarLayout appBarLayout;
+    private View view;
 
     private boolean showing;
     private String url;
@@ -75,14 +77,45 @@ public class PictureActivity extends BaseActivity {
         int position = bundle.getInt("position");
 
         appBarLayout = findViewById(R.id.app_bar_layout);
+        GestureView gestureView = findViewById(R.id.gesture_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         ImageView ivImage = findViewById(R.id.iv_image);
         ViewPager viewPager = findViewById(R.id.view_pager);
         TextView tvInfo = findViewById(R.id.tv_info);
+        view = findViewById(R.id.view);
 
         toolbar.setTitle("");
         toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu_more));
         setSupportActionBar(toolbar);
+
+        gestureView.setOnSwipeListener(new GestureView.OnSwipeListener() {
+            @Override
+            public void downSwipe() {
+                tvInfo.setVisibility(View.GONE);
+                view.setAlpha(0);
+                finish();
+                overridePendingTransition(0, R.anim.picture_exit_anim);
+            }
+
+            @Override
+            public void overSwipe() {
+                tvInfo.setVisibility(View.VISIBLE);
+                view.setAlpha(1);
+            }
+
+            @Override
+            public void onSwiping(float y) {
+                tvInfo.setVisibility(View.GONE);
+
+                float alpha = 1 - y / 500;
+                if (alpha < 0.3) {
+                    alpha = 0.3f;
+                } else if (alpha > 1) {
+                    alpha = 1;
+                }
+                view.setAlpha(alpha);
+            }
+        });
 
         ivImage.setOnClickListener(this::onClick);
         ivImage.setOnLongClickListener(this::onLongClick);
@@ -103,6 +136,22 @@ public class PictureActivity extends BaseActivity {
             viewPager.setAdapter(new SectionsPagerAdapter(urls));
             viewPager.setOffscreenPageLimit(1);
             viewPager.setCurrentItem(position);
+            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int i, float v, int i1) {
+
+                }
+
+                @Override
+                public void onPageSelected(int i) {
+                    tvInfo.setText(String.format("%s / %s", i + 1, urls.size()));
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int i) {
+
+                }
+            });
         }
     }
 
@@ -115,7 +164,7 @@ public class PictureActivity extends BaseActivity {
         if (view instanceof ImageView) {
             ImageView imageView = (ImageView) view;
 
-            Object tag = imageView.getTag();
+            Object tag = imageView.getTag(R.id.tag);
             if (tag == null && url == null) return false;
             String u = url;
             if (tag != null) u = tag.toString();
@@ -170,7 +219,7 @@ public class PictureActivity extends BaseActivity {
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
             ImageView imageView = (ImageView) LayoutInflater.from(PictureActivity.this).inflate(R.layout.item_picture, null);
             Glide.with(imageView).load(urls.get(position)).placeholder(R.drawable.ic_belle_placeholder).into(imageView);
-            imageView.setTag(urls.get(position));
+            imageView.setTag(R.id.tag, urls.get(position));
             imageView.setOnClickListener(PictureActivity.this::onClick);
             imageView.setOnLongClickListener(PictureActivity.this::onLongClick);
             container.addView(imageView);

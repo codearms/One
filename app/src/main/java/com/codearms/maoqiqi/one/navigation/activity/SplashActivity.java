@@ -45,6 +45,7 @@ public class SplashActivity extends BaseActivity {
         ImageView ivSplash = findViewById(R.id.iv_splash);
         tvJump = findViewById(R.id.tv_jump);
         findViewById(R.id.layout).setOnClickListener(v -> {
+            compositeDisposable.clear();
             ActivityUtils.startActivity(SplashActivity.this, GankActivity.class);
             finish();
         });

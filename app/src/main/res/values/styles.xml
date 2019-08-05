@@ -52,6 +52,10 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="TranslucentTheme" parent="AppTheme.Fullscreen">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
     <!-- Activity Dialog 主题-->
     <style name="OneAppDialog" parent="@style/Theme.AppCompat.Dialog">
         <!-- 无标题 -->

@@ -236,3 +236,9 @@ mService = restAdapter.create(GuDong.class);
 
 protected int pageIndex;
 protected int pageCount = Constants.PAGE_COUNT;
+
+
+   StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) viewHolder.itemView.getLayoutParams();
+            layoutParams.setFullSpan(true);
+
+获取存储权限失败，请前往设置页面打开存储权限

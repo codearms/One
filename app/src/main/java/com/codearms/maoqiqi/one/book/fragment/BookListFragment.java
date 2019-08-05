@@ -25,7 +25,7 @@ import com.codearms.maoqiqi.one.book.activity.BookDetailActivity;
 import com.codearms.maoqiqi.one.book.presenter.BookListPresenter;
 import com.codearms.maoqiqi.one.book.presenter.contract.BookListContract;
 import com.codearms.maoqiqi.one.data.bean.BookListBean;
-import com.codearms.maoqiqi.one.decoration.DividerDecoration;
+import com.codearms.maoqiqi.one.decoration.DividerItemDecoration;
 import com.codearms.maoqiqi.one.utils.BookUtils;
 import com.codearms.maoqiqi.one.utils.RecyclerViewScrollListener;
 
@@ -78,7 +78,7 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerDecoration());
+        recyclerView.addItemDecoration(new DividerItemDecoration(context));
         recyclerView.setAdapter(adapter);
         recyclerView.addOnScrollListener(new RecyclerViewScrollListener(context));
     }

@@ -36,7 +36,7 @@ public class NewsDetailActivity extends BaseActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) return;
-        
+
         int id = bundle.getInt("id");
         String title = bundle.getString("title");
 

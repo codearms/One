@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 
 /**
  * 状态栏设置工具类
- *
+ * <p>
  * Author: nanchen
  * Email: liushilin520@foxmail.com
  * Date: 2017-04-07  14:30
@@ -23,7 +23,7 @@ import android.widget.LinearLayout;
 
 public class StatusBarUtil {
     public static final int DEFAULT_STATUS_BAR_ALPHA = 112;
-//    private static final int FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view;
+    //    private static final int FAKE_STATUS_BAR_VIEW_ID = R.id.statusbarutil_fake_status_bar_view;
 //    private static final int FAKE_TRANSLUCENT_VIEW_ID = R.id.statusbarutil_translucent_view;
     private static final int TAG_KEY_HAVE_SET_OFFSET = -123;
 

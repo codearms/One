@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="200dp">
+
+    <ImageView
+        android:id="@+id/iv_welfare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_border"
+        android:contentDescription="@string/image_description" />
+
+    <TextView
+        android:id="@+id/tv_welfare_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#a3181818"
+        android:paddingLeft="@dimen/sixteen"
+        android:paddingTop="@dimen/eight"
+        android:paddingRight="@dimen/sixteen"
+        android:paddingBottom="@dimen/eight"
+        android:textColor="@color/color_text_title"
+        tools:text="2019-05-04" />
+</FrameLayout>

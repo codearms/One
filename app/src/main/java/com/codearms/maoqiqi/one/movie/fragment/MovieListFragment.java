@@ -23,7 +23,7 @@ import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.MovieListBean;
-import com.codearms.maoqiqi.one.decoration.DividerDecoration;
+import com.codearms.maoqiqi.one.decoration.DividerItemDecoration;
 import com.codearms.maoqiqi.one.movie.activity.MovieDetailActivity;
 import com.codearms.maoqiqi.one.movie.presenter.MovieListPresenter;
 import com.codearms.maoqiqi.one.movie.presenter.contract.MovieListContract;
@@ -90,7 +90,7 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerDecoration());
+        recyclerView.addItemDecoration(new DividerItemDecoration(context));
         recyclerView.setAdapter(adapter);
     }
 

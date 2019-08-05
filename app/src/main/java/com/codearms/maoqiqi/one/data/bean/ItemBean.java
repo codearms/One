@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ItemBean {
-    @SerializedName(value = "_id",alternate = "ganhuo_id")
+    @SerializedName(value = "_id", alternate = "ganhuo_id")
     private String id;
     private String desc;
     private List<String> images;

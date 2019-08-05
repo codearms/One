@@ -1,19 +1,5 @@
 package com.codearms.maoqiqi.one.utils;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.UUID;
-
-import io.reactivex.Observable;
-
 /**
  * Description：PicturePresenter
  * Created by：CaMnter

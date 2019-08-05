@@ -1,9 +1,11 @@
 package com.codearms.maoqiqi.one.gank.fragment;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,11 +20,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.codearms.maoqiqi.base.BaseFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ItemBean;
+import com.codearms.maoqiqi.one.decoration.MarginItemDecoration;
 import com.codearms.maoqiqi.one.gank.presenter.GankListPresenter;
 import com.codearms.maoqiqi.one.gank.presenter.contract.GankListContract;
 import com.codearms.maoqiqi.one.utils.GankUtils;
@@ -31,6 +37,8 @@ import com.codearms.maoqiqi.one.utils.TimeUtils;
 import com.codearms.maoqiqi.one.utils.UrlMatch;
 import com.codearms.maoqiqi.utils.ScreenUtils;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -45,7 +53,8 @@ public class GankListFragment extends BaseFragment<GankListContract.Presenter> i
     private int pageIndex = 1;
 
     private RecyclerAdapter adapter;
-    private List<ItemBean> list;
+    private List<ItemBean> list = new ArrayList<>();
+    private ArrayList<String> imageUrls = new ArrayList<>();
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
@@ -85,11 +94,20 @@ public class GankListFragment extends BaseFragment<GankListContract.Presenter> i
         RecyclerView.LayoutManager manager;
         if (category.equals("福利")) {
             manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            recyclerView.addItemDecoration(new MarginItemDecoration(getResources().getDimensionPixelSize(R.dimen.four)));
         } else {
             manager = new LinearLayoutManager(context);
+            recyclerView.addItemDecoration(new MarginItemDecoration(getResources().getDimensionPixelSize(R.dimen.twelve)));
         }
 
-        adapter = new RecyclerAdapter(R.layout.item_gank_list, list);
+        adapter = new RecyclerAdapter(list);
+//        adapter.setOnItemClickListener((adapter, view, position) -> {
+//            imageUrls.clear();
+//            for (ItemBean itemBean : list) {
+//                imageUrls.add(itemBean.getUrl());
+//            }
+//            PictureActivity.start(context, imageUrls, position, null);
+//        });
 
         recyclerView.setLayoutManager(manager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -110,54 +128,99 @@ public class GankListFragment extends BaseFragment<GankListContract.Presenter> i
         adapter.replaceData(list);
     }
 
-    final class RecyclerAdapter extends BaseQuickAdapter<ItemBean, ViewHolder> {
+    final class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        RecyclerAdapter(int layoutResId, @Nullable List<ItemBean> data) {
-            super(layoutResId, data);
+        private List<ItemBean> data;
+        // 保存图片Size的集合
+        private ArrayMap<String, PictureSizeBean> map = new ArrayMap<>();
+
+        RecyclerAdapter(List<ItemBean> data) {
+            this.data = data;
+        }
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            if (category.equals("福利")) {
+                return new WelfareViewHolder(View.inflate(context, R.layout.item_gank_list_welfare, null));
+            } else {
+                // View.inflate(context, R.layout.item_gank_list, null)); 布局Margin无效
+                return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_gank_list, viewGroup, false));
+            }
         }
 
         @Override
-        protected void convert(ViewHolder helper, ItemBean item) {
-            if (item.getType().equals("福利")) {
-                helper.ivWelfare.setVisibility(View.VISIBLE);
-                helper.cardView.setVisibility(View.GONE);
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+            ItemBean item = data.get(i);
 
-                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) helper.ivWelfare.getLayoutParams();
-                params.width = ScreenUtils.getScreenWidth() / 2;
+            if (viewHolder instanceof WelfareViewHolder) {
+                WelfareViewHolder holder = (WelfareViewHolder) viewHolder;
 
-                setImage(helper.ivWelfare, item.getUrl());
+                holder.tvWelfareTime.setText(item.getDesc());
+
+                FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) holder.ivWelfare.getLayoutParams();
+                layoutParams.width = ScreenUtils.getScreenWidth() / 2;
+                holder.ivWelfare.setLayoutParams(layoutParams);
+
+                PictureSizeBean bean = map.get(item.getUrl());
+                if (bean != null && !bean.isNull()) {
+                    RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+                    params.height = (ScreenUtils.getScreenWidth() / 2) * bean.getHeight() / bean.getWidth();
+                }
+
+                Glide.with(holder.ivWelfare.getContext()).asBitmap().load(item.getUrl())
+//                    .thumbnail(0.2f)
+                        .listener(new RequestListener<Bitmap>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                                PictureSizeBean bean = map.get(item.getUrl());
+                                if (bean != null && !bean.isNull()) {
+                                    RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
+                                    params.height = (ScreenUtils.getScreenWidth() / 2) * bean.getHeight() / bean.getWidth();
+                                    map.put(item.getUrl(), new PictureSizeBean(bean.getWidth(), bean.getHeight()));
+                                }
+                                return false;
+                            }
+                        })
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(holder.ivWelfare);
             } else {
-                helper.ivWelfare.setVisibility(View.GONE);
-                helper.cardView.setVisibility(View.VISIBLE);
+                ViewHolder holder = (ViewHolder) viewHolder;
 
-                helper.tvTitle.setText(item.getDesc());
+                holder.tvTitle.setText(item.getDesc());
 
                 if (item.getImages() != null && item.getImages().size() > 0 && !TextUtils.isEmpty(item.getImages().get(0))) {
-                    helper.ivImage.setVisibility(View.VISIBLE);
-                    setImage(helper.ivImage, item.getImages().get(0));
+                    holder.ivImage.setVisibility(View.VISIBLE);
+                    setImage(holder.ivImage, item.getImages().get(0));
                 } else {
-                    helper.ivImage.setVisibility(View.GONE);
+                    holder.ivImage.setVisibility(View.GONE);
                 }
 
                 if (item.getType().equals("")) {
 
                 }
 
-                setTag(helper.tvTag, item.getType(), item.getUrl());
+                setTag(holder.tvTag, item.getType(), item.getUrl());
 
-                helper.tvAuthor.setText(GankUtils.getWho(item.getWho()));
-                helper.tvTime.setText(TimeUtils.getTranslateTime(item.getPublishedAt()));
-            }
-
-            // 设置间距
-            if (helper.getLayoutPosition() == getItemCount() - 1) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) helper.frameLayout.getLayoutParams();
-                params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
+                holder.tvAuthor.setText(GankUtils.getWho(item.getWho()));
+                holder.tvTime.setText(TimeUtils.getTranslateTime(item.getPublishedAt()));
             }
         }
 
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+
         private void setImage(ImageView imageView, String imageUrl) {
-            Glide.with(imageView.getContext()).load(imageUrl).into(imageView);
+            Glide.with(imageView.getContext()).asBitmap().load(imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageView);
         }
 
         private void setTag(TextView tvTag, String type, String url) {
@@ -169,11 +232,20 @@ public class GankListFragment extends BaseFragment<GankListContract.Presenter> i
             String prefix = category.equals("all") ? type + " · " : "";
             tvTag.setText(String.format("%s%s", prefix, UrlMatch.getContent(type, key)));
         }
+
+        void replaceData(@NonNull Collection<ItemBean> list) {
+            // 不是同一个引用才清空列表
+            if (list != data) {
+                data.clear();
+                data.addAll(list);
+            }
+            notifyDataSetChanged();
+        }
     }
 
-    static final class ViewHolder extends BaseViewHolder {
+    private static final class ViewHolder extends RecyclerView.ViewHolder {
 
-        FrameLayout frameLayout;
+        View itemView;
         CardView cardView;
         TextView tvTitle;
         ImageView ivImage;
@@ -181,11 +253,10 @@ public class GankListFragment extends BaseFragment<GankListContract.Presenter> i
         TextView tvTag;
         TextView tvAuthor;
         TextView tvTime;
-        ImageView ivWelfare;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            frameLayout = itemView.findViewById(R.id.frame_layout);
+            this.itemView = itemView;
             cardView = itemView.findViewById(R.id.card_view);
             tvTitle = itemView.findViewById(R.id.tv_title);
             ivImage = itemView.findViewById(R.id.iv_image);
@@ -193,7 +264,60 @@ public class GankListFragment extends BaseFragment<GankListContract.Presenter> i
             tvTag = itemView.findViewById(R.id.tv_tag);
             tvAuthor = itemView.findViewById(R.id.tv_author);
             tvTime = itemView.findViewById(R.id.tv_date);
+        }
+    }
+
+    private static final class WelfareViewHolder extends RecyclerView.ViewHolder {
+
+        View itemView;
+        ImageView ivWelfare;
+        TextView tvWelfareTime;
+
+        WelfareViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.itemView = itemView;
             ivWelfare = itemView.findViewById(R.id.iv_welfare);
+            tvWelfareTime = itemView.findViewById(R.id.tv_welfare_time);
+        }
+    }
+
+    // 加载图片缓存宽高,防止出现滑动图片改变高度问题
+    private class PictureSizeBean {
+        private String url;
+        private int width;
+        private int height;
+
+        PictureSizeBean(int width, int height) {
+            this.width = width;
+            this.height = height;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public boolean isNull() {
+            return width == 0 || height == 0;
         }
     }
 }

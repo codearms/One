@@ -123,12 +123,6 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
         // 时间
         helper.tvDate.setText(articleBean.getNiceDate());
 
-        // 设置间距
-        if (helper.getLayoutPosition() == getItemCount() - 1) {
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) helper.cardView.getLayoutParams();
-            params.bottomMargin = application.getResources().getDimensionPixelSize(R.dimen.sixteen);
-        }
-
         // 设置事件
         helper.addOnClickListener(R.id.card_view);
         helper.addOnClickListener(R.id.iv_project);

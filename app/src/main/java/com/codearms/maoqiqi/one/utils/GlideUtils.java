@@ -41,7 +41,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 public class GlideUtils {
 
     private static final String TAG = "GlideUtils";
-    
+
     /**
      * glide加载图片
      *
