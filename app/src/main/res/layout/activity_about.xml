@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/thirty_two"
-        android:background="@color/color_text_title"
+        android:background="@color/color_title"
         android:orientation="vertical">
 
         <View
@@ -62,7 +62,7 @@
             android:paddingStart="@dimen/sixteen"
             android:paddingEnd="@dimen/sixteen"
             android:text="@string/function_introduction"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
 
         <View
@@ -82,7 +82,7 @@
             android:paddingStart="@dimen/sixteen"
             android:paddingEnd="@dimen/sixteen"
             android:text="@string/check_update"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
 
         <View
@@ -102,7 +102,7 @@
             android:paddingStart="@dimen/sixteen"
             android:paddingEnd="@dimen/sixteen"
             android:text="@string/update_description"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
 
         <View
@@ -122,7 +122,7 @@
             android:paddingStart="@dimen/sixteen"
             android:paddingEnd="@dimen/sixteen"
             android:text="@string/give_a_star"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
 
         <View
@@ -154,7 +154,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="8dp"
         android:text="《代码家 · 干货集中营》"
-        android:textColor="@color/color_text_main"
+        android:textColor="@color/color_content_main"
         android:textSize="12sp" />
 
     <TextView
@@ -164,7 +164,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="8dp"
         android:text="《豆瓣开发者服务使用条款》"
-        android:textColor="@color/color_text_main"
+        android:textColor="@color/color_content_main"
         android:textSize="12sp" />
 
     <TextView
@@ -173,6 +173,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="8dp"
         android:text="©2017 干货营 github.com/maoqiqi"
-        android:textColor="@color/color_text_secondary"
+        android:textColor="@color/color_content_secondary"
         android:textSize="14sp" />
 </LinearLayout>

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 设置壁纸 -->
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <!-- 外部存储 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -74,7 +75,7 @@
             android:name=".home.activity.PictureActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/TranslucentTheme" />
+            android:theme="@style/AppTheme.Fullscreen.Translucent" />
         <!--news-->
         <activity android:name=".news.activity.NewsDetailActivity" />
         <activity android:name=".book.activity.BookDetailActivity" />

@@ -7,5 +7,5 @@
     android:paddingTop="12dp"
     android:paddingBottom="12dp"
     android:text="2017/2/02"
-    android:textColor="@color/color_text_main"
+    android:textColor="@color/color_content_main"
     android:textSize="16sp" />

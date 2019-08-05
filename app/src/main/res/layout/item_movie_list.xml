@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_big"
             tools:text="标题标题" />
 
@@ -41,7 +41,7 @@
             android:layout_marginTop="@dimen/eight"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_smaller"
             tools:text="导演" />
 
@@ -52,7 +52,7 @@
             android:layout_marginTop="@dimen/four"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_smaller"
             tools:text="主演" />
 
@@ -63,7 +63,7 @@
             android:layout_marginTop="@dimen/four"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_smaller"
             tools:text="类型： 喜剧 / 动画 / 奇幻" />
 
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/four"
                 android:layout_marginLeft="@dimen/four"
-                android:textColor="@color/color_text_general"
+                android:textColor="@color/color_content_general"
                 android:textSize="@dimen/text_size_smaller"
                 tools:text="9.0" />
         </LinearLayout>
@@ -101,7 +101,7 @@
             android:layout_marginTop="@dimen/four"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_smaller"
             android:visibility="gone"
             tools:text="上映日期：2019" />

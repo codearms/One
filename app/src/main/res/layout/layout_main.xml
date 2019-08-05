@@ -18,7 +18,7 @@
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_text_title"
+        android:background="@color/color_title"
         android:elevation="10dp"
         android:orientation="horizontal">
 

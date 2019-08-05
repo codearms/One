@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_big"
             tools:text="标题标题" />
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/eight"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_smaller"
             tools:text="作者" />
 
@@ -50,7 +50,7 @@
             android:layout_marginTop="@dimen/four"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_smaller"
             tools:text="出版社/时间" />
 
@@ -61,7 +61,7 @@
             android:layout_marginTop="@dimen/four"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_smaller"
             tools:text="价格" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/four"
                 android:layout_marginLeft="@dimen/four"
-                android:textColor="@color/color_text_general"
+                android:textColor="@color/color_content_general"
                 android:textSize="@dimen/text_size_smaller"
                 tools:text="9.0" />
         </LinearLayout>

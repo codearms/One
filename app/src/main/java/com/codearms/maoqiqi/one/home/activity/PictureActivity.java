@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -85,7 +84,6 @@ public class PictureActivity extends BaseActivity {
         view = findViewById(R.id.view);
 
         toolbar.setTitle("");
-        toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu_more));
         setSupportActionBar(toolbar);
 
         gestureView.setOnSwipeListener(new GestureView.OnSwipeListener() {

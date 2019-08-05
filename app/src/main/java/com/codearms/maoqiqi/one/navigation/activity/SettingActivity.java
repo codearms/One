@@ -61,13 +61,13 @@ public class SettingActivity extends BaseActivity {
         if (scLauncherPage.isChecked()) {
             tvLauncherPageDesc.setText("没有妹子太寂寞");
             rlLauncherPageRandom.setClickable(true);
-            tvLauncherPageRandomTitle.setTextColor(getResources().getColor(R.color.color_text_main));
-            tvLauncherPageRandomDesc.setTextColor(getResources().getColor(R.color.color_text_general));
+            tvLauncherPageRandomTitle.setTextColor(getResources().getColor(R.color.color_content_main));
+            tvLauncherPageRandomDesc.setTextColor(getResources().getColor(R.color.color_content_general));
         } else {
             tvLauncherPageDesc.setText("基佬怎么会需要妹子");
             rlLauncherPageRandom.setClickable(false);
-            tvLauncherPageRandomTitle.setTextColor(getResources().getColor(R.color.color_text_secondary));
-            tvLauncherPageRandomDesc.setTextColor(getResources().getColor(R.color.color_text_secondary));
+            tvLauncherPageRandomTitle.setTextColor(getResources().getColor(R.color.color_content_secondary));
+            tvLauncherPageRandomDesc.setTextColor(getResources().getColor(R.color.color_content_secondary));
         }
     }
 

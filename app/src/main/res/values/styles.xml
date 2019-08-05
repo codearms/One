@@ -1,6 +1,6 @@
 <resources>
 
-    <!--Activity动画-->
+    <!-- Activity打开关闭动画 -->
     <style name="Animation" parent="@android:style/Animation">
         <item name="android:activityOpenEnterAnimation">@anim/open_enter</item>
         <item name="android:activityOpenExitAnimation">@anim/open_exit</item>
@@ -8,13 +8,18 @@
         <item name="android:activityCloseExitAnimation">@anim/close_exit</item>
     </style>
 
-    <!-- ActionBarDrawerToggle图标颜色 -->
+    <!-- 抽屉箭头图标 -->
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
     </style>
 
-    <!-- ActionBar溢出菜单样式 -->
+    <!-- 溢出菜单图标 -->
+    <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_menu_more</item>
+    </style>
+
+    <!-- 溢出菜单样式 -->
     <style name="OverflowMenuStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
         <!-- 是否覆盖锚点,默认为true,即盖住Toolbar -->
         <item name="overlapAnchor">false</item>
@@ -23,12 +28,7 @@
         <!-- 弹出层水平方向上的偏移,即距离屏幕左边的距离,负值会导致右边出现空隙 -->
         <item name="android:dropDownHorizontalOffset">0dp</item>
         <item name="android:popupBackground">@android:color/white</item>
-        <item name="android:textColor">@color/color_text_main</item>
-    </style>
-
-    <!-- ActionBar三个小点图标设置 -->
-    <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_menu_more</item>
+        <item name="android:textColor">@color/color_content_main</item>
     </style>
 
     <!--主题-->
@@ -36,14 +36,20 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
-        <item name="android:windowAnimationStyle">@style/Animation</item>
         <!--去除顶部下拉时的半月形阴影和上下滑动顶部和底部的虚化-->
         <item name="android:overScrollMode">never</item>
-        <!--已经在代码中设置-->
-        <!--<item name="drawerArrowStyle">@style/DrawerArrowStyle</item>-->
+        <item name="android:windowAnimationStyle">@style/Animation</item>
+        <!--在代码中设置-->
+        <!--// 定义drawerArrowDrawable-->
+        <!--DrawerArrowDrawable drawerArrowDrawable = new DrawerArrowDrawable(this);-->
+        <!--drawerArrowDrawable.setColor(ContextCompat.getColor(this, R.color.color_text_title));-->
+        <!--// 设置drawerArrowDrawable-->
+        <!--toggle.setDrawerArrowDrawable(drawerArrowDrawable);-->
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <!--在代码中设置-->
+        <!--toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu_more));-->
+        <item name="actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
         <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
-        <!--已经在代码中设置-->
-        <!--<item name="actionOverflowButtonStyle">@style/OverflowButtonStyle</item>-->
     </style>
 
     <!--全屏-->
@@ -52,7 +58,8 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="TranslucentTheme" parent="AppTheme.Fullscreen">
+    <!--透明-->
+    <style name="AppTheme.Fullscreen.Translucent">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
@@ -76,7 +83,7 @@
         <item name="android:overScrollMode">never</item>
     </style>
 
-    <!-- Dialog Sheet进出动画 -->
+    <!-- DialogSheetAnimation动画 -->
     <style name="DialogSheetAnimation" parent="@android:style/Theme.Dialog">
         <item name="android:windowEnterAnimation">@anim/dialog_action_sheet_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_action_sheet_out</item>
@@ -104,7 +111,7 @@
     <!--注意,Toolbar的标题在横竖屏下字体大小不一样。所以需要指定标题栏字体大小。-->
     <style name="toolbar_appearance" parent="@android:style/TextAppearance">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/color_text_title</item>
+        <item name="android:textColor">@color/color_title</item>
     </style>
 
     <!--ToolBar主题-->

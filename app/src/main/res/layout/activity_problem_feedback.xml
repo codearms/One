@@ -31,13 +31,13 @@
         android:lineSpacingExtra="2dp"
         android:padding="@dimen/sixteen"
         android:text="@string/problem_feedback_content"
-        android:textColor="@color/color_text_general"
+        android:textColor="@color/color_content_general"
         android:textSize="@dimen/text_size_normal" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_text_title"
+        android:background="@color/color_title"
         android:orientation="vertical">
 
         <View
@@ -66,7 +66,7 @@
             android:paddingLeft="@dimen/sixteen"
             android:paddingRight="@dimen/sixteen"
             android:text="@string/app_name"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
 
         <View
@@ -86,7 +86,7 @@
             android:paddingLeft="@dimen/sixteen"
             android:paddingRight="@dimen/sixteen"
             android:text="@string/faq_name"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
 
         <View
@@ -99,7 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/sixteen"
-        android:background="@color/color_text_title"
+        android:background="@color/color_title"
         android:orientation="vertical">
 
         <View
@@ -128,7 +128,7 @@
             android:paddingLeft="@dimen/sixteen"
             android:paddingRight="@dimen/sixteen"
             android:text="@string/qq"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
 
         <View
@@ -148,7 +148,7 @@
             android:paddingLeft="@dimen/sixteen"
             android:paddingRight="@dimen/sixteen"
             android:text="@string/email"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
 
         <View

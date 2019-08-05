@@ -5,7 +5,7 @@
         android:right="-5dp"
         android:top="-5dp">
         <shape>
-            <solid android:color="@color/color_text_title" />
+            <solid android:color="@color/color_title" />
             <stroke
                 android:width="@dimen/four"
                 android:color="@color/color_accent" />

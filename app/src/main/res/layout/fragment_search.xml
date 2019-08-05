@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/sixteen"
             android:text="@string/top_search"
-            android:textColor="@color/color_text_secondary"
+            android:textColor="@color/color_content_secondary"
             android:textSize="@dimen/text_size_smaller"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

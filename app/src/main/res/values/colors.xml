@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="colorPrimary">#008577</color>-->
-    <!--<color name="colorPrimaryDark">#00574B</color>-->
-    <!--<color name="colorAccent">#D81B60</color>-->
-
     <color name="color_primary">#5F7C8A</color>
     <color name="color_primary_dark">#5F7C8A</color>
     <color name="color_accent">#FF4081</color>
+
+    <!--basic color-->
+    <color name="transparent">#00FFFFFF</color>
+    <color name="bg">#eaeaea</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#040404</color>
+
+    <color name="color_title">@color/white</color>
+    <color name="color_title_pressed">#E9E9E9</color>
+
+    <color name="color_content_main">#333333</color>
+    <color name="color_content_general">#666666</color>
+    <color name="color_content_secondary">#999999</color>
+    <color name="color_content_transparent">#A1FFFFFF</color>
+
+    <color name="color_divider">#1a000000</color>
+    <color name="color_mask">#33333333</color>
+
+    <color name="bg_btn">#4CAF50</color>
+    <color name="bg_btn_disabled">#4D4CAF50</color>
+    <color name="bg_btn_pressed">#37913B</color>
 
     <color name="color_home">#FF9800</color>
     <color name="color_news">#0F88EB</color>
@@ -16,135 +33,103 @@
     <color name="color_navigation">#4CAF50</color>
     <color name="color_gank">#7B1FA2</color>
 
-    <color name="transparent">#00FFFFFF</color>
-    <color name="bg">#f8f8f8</color>
-
-    <color name="color_text_main">#333333</color>
-    <color name="color_text_general">#666666</color>
-    <color name="color_text_secondary">#999999</color>
-    <color name="color_divider">#1a000000</color>
-
-    <color name="color_text_title">#FFFFFF</color>
-    <color name="color_text_title_pressed">#E9E9E9</color>
-    <color name="color_mask">#33333333</color>
-
-    <color name="color_input_highlight">#4D4CAF50</color>
-    <color name="bg_btn">#4CAF50</color>
-    <color name="bg_btn_disenabled">#4D4CAF50</color>
-    <color name="bg_btn_pressed">#37913B</color>
-
-    <color name="color_news_source">#A1FFFFFF</color>
-
-    <!--====-->
-    <array name="colors">
-        <item>@color/colorBluePrimary</item>
-        <item>@color/colorRedPrimary</item>
-        <item>@color/colorBrownPrimary</item>
-        <item>@color/colorGreenPrimary</item>
-        <item>@color/colorPurplePrimary</item>
-        <item>@color/colorTealPrimary</item>
-        <item>@color/colorPinkPrimary</item>
-        <item>@color/colorDeepPurplePrimary</item>
-        <item>@color/colorOrangePrimary</item>
-        <item>@color/colorIndigoPrimary</item>
-        <item>@color/colorCyanPrimary</item>
-        <item>@color/colorLightGreenPrimary</item>
-        <item>@color/colorLimePrimary</item>
-        <item>@color/colorDeepOrangePrimary</item>
-        <item>@color/colorBlueGreyPrimary</item>
-    </array>
-
-    <!--basic color-->
-    <color name="white">#ffffff</color>
-    <color name="black">#040404</color>
-    <color name="colorTextIcon">#ffffff</color>
-    <color name="colorPrimaryText">#212121</color>
-    <color name="colorSecondText">#727272</color>
-    <color name="colorBackground">#eaeaea</color>
-    <color name="colorHint">#999999</color>
-    <color name="colorBackgroundAccent">#ffffff</color>
-    <!--blue-->
-    <color name="colorBluePrimary">#2196F3</color>
-    <color name="colorBluePrimaryDark">#1976D2</color>
-    <color name="colorBlueAccent">#FF4081</color>
-    <color name="colorBluePrimaryCenter">#062748</color>
-    <!--red-->
-    <color name="colorRedPrimary">#F44336</color>
-    <color name="colorRedPrimaryDark">#D32F2F</color>
-    <color name="colorRedAccent">#FF4081</color>
-    <color name="colorRedPrimaryCenter">#560d08</color>
-    <!--brown-->
-    <color name="colorBrownPrimary">#795548</color>
-    <color name="colorBrownPrimaryDark">#5D4037</color>
-    <color name="colorBrownAccent">#FF4081</color>
-    <color name="colorBrownPrimaryCenter">#431d12</color>
-    <!--green-->
-    <color name="colorGreenPrimary">#4CAF50</color>
-    <color name="colorGreenPrimaryDark">#388E3C</color>
-    <color name="colorGreenAccent">#FF4081</color>
-    <color name="colorGreenPrimaryCenter">#104813</color>
-    <!--purple-->
-    <color name="colorPurplePrimary">#9c27b0</color>
-    <color name="colorPurplePrimaryDark">#7B1FA2</color>
-    <color name="colorPurpleAccent">#FF4081</color>
-    <color name="colorPurplePrimaryCenter">#3f0f53</color>
-    <!--teal-->
-    <color name="colorTealPrimary">#009688</color>
-    <color name="colorTealPrimaryDark">#00796b</color>
-    <color name="colorTealAccent">#FF4081</color>
-    <color name="colorTealPrimaryCenter">#0c3d37</color>
-
-    <!--pink-->
-    <color name="colorPinkPrimary">#E91E63</color>
-    <color name="colorPinkPrimaryDark">#C2185B</color>
-    <color name="colorPinkAccent">#FF4081</color>
-    <color name="colorPinkPrimaryCenter">#580928</color>
-
-    <!--deepPurple-->
-    <color name="colorDeepPurplePrimary">#673AB7</color>
-    <color name="colorDeepPurplePrimaryDark">#512DA8</color>
-    <color name="colorDeepPurpleAccent">#FF4081</color>
-    <color name="colorDeepPurplePrimaryCenter">#240c5c</color>
+    <!-- ++++++++++++++++++++++++++++++ 华丽的分割线 ++++++++++++++++++++++++++++++ -->
 
     <!--orange-->
-    <color name="colorOrangePrimary">#FF9800</color>
-    <color name="colorOrangePrimaryDark">#F57C00</color>
-    <color name="colorOrangeAccent">#FF4081</color>
-    <color name="colorOrangePrimaryCenter">#582e03</color>
+    <color name="color_orange_primary">#FF9800</color>
+    <color name="color_orange_primary_dark">#F57C00</color>
+    <color name="color_orange_accent">#FF4081</color>
+    <color name="color_orange_primary_center">#582e03</color>
+    <!--deep_orange-->
+    <color name="color_deep_orange_primary">#FF5722</color>
+    <color name="color_deep_orange_primary_dark">#E64A19</color>
+    <color name="color_deep_orange_accent">#FF4081</color>
+    <color name="color_deep_orange_primary_center">#5c1e0a</color>
+    <!--pink-->
+    <color name="color_pink_primary">#E91E63</color>
+    <color name="color_pink_primary_dark">#C2185B</color>
+    <color name="color_pink_accent">#FF4081</color>
+    <color name="color_pink_primary_center">#580928</color>
+    <!--red-->
+    <color name="color_red_primary">#F44336</color>
+    <color name="color_red_primary_dark">#D32F2F</color>
+    <color name="color_red_accent">#FF4081</color>
+    <color name="color_red_primary_center">#560d08</color>
+    <!--brown-->
+    <color name="color_brown_primary">#795548</color>
+    <color name="color_brown_primary_dark">#5D4037</color>
+    <color name="color_brown_accent">#FF4081</color>
+    <color name="color_brown_primary_center">#431d12</color>
 
+    <!--blue-->
+    <color name="color_blue_primary">#2196F3</color>
+    <color name="color_blue_primary_dark">#1976D2</color>
+    <color name="color_blue_accent">#FF4081</color>
+    <color name="color_blue_primary_center">#062748</color>
     <!--indigo-->
-    <color name="colorIndigoPrimary">#3F51B5</color>
-    <color name="colorIndigoPrimaryDark">#303F9F</color>
-    <color name="colorIndigoAccent">#FF4081</color>
-    <color name="colorIndigoPrimaryCenter">#0d164d</color>
+    <color name="color_indigo_primary">#3F51B5</color>
+    <color name="color_indigo_primary_dark">#303F9F</color>
+    <color name="color_indigo_accent">#FF4081</color>
+    <color name="color_indigo_primary_center">#0d164d</color>
 
+    <!--light_green-->
+    <color name="color_light_green_primary">#8BC34A</color>
+    <color name="color_light_green_primary_dark">#689F38</color>
+    <color name="color_light_green_accent">#FF4081</color>
+    <color name="color_light_green_primary_center">#37581a</color>
+    <!--green-->
+    <color name="color_green_primary">#4CAF50</color>
+    <color name="color_green_primary_dark">#388E3C</color>
+    <color name="color_green_accent">#FF4081</color>
+    <color name="color_green_primary_center">#104813</color>
+
+    <!--purple-->
+    <color name="color_purple_primary">#9c27b0</color>
+    <color name="color_purple_primary_dark">#7B1FA2</color>
+    <color name="color_purple_accent">#FF4081</color>
+    <color name="color_purple_primary_center">#3f0f53</color>
+    <!--deep_purple-->
+    <color name="color_deep_purple_primary">#673AB7</color>
+    <color name="color_deep_purple_primary_dark">#512DA8</color>
+    <color name="color_deep_purple_accent">#FF4081</color>
+    <color name="color_deep_purple_primary_center">#240c5c</color>
+
+    <!--blue_grey-->
+    <color name="color_blue_grey_primary">#607D8B</color>
+    <color name="color_blue_grey_primary_dark">#455A64</color>
+    <color name="color_blue_grey_accent">#FF4081</color>
+    <color name="color_blue_grey_primary_center">#27373e</color>
     <!--cyan-->
-    <color name="colorCyanPrimary">#00BCD4</color>
-    <color name="colorCyanPrimaryDark">#0097A7</color>
-    <color name="colorCyanAccent">#FF4081</color>
-    <color name="colorCyanPrimaryCenter">#034148</color>
-
-    <!--lightGreen-->
-    <color name="colorLightGreenPrimary">#8BC34A</color>
-    <color name="colorLightGreenPrimaryDark">#689F38</color>
-    <color name="colorLightGreenAccent">#FF4081</color>
-    <color name="colorLightGreenPrimaryCenter">#37581a</color>
-
+    <color name="color_cyan_primary">#00BCD4</color>
+    <color name="color_cyan_primary_dark">#0097A7</color>
+    <color name="color_cyan_accent">#FF4081</color>
+    <color name="color_cyan_primary_center">#034148</color>
+    <!--teal-->
+    <color name="color_teal_primary">#008577</color>
+    <color name="color_teal_primary_dark">#00574B</color>
+    <color name="color_teal_accent">#FF4081</color>
+    <color name="color_teal_primary_center">#0c3d37</color>
     <!--lime-->
-    <color name="colorLimePrimary">#CDDC39</color>
-    <color name="colorLimePrimaryDark">#AFB42B</color>
-    <color name="colorLimeAccent">#FF4081</color>
-    <color name="colorLimePrimaryCenter">#52540c</color>
+    <color name="color_lime_primary">#CDDC39</color>
+    <color name="color_lime_primary_dark">#AFB42B</color>
+    <color name="color_lime_accent">#FF4081</color>
+    <color name="color_lime_primary_center">#52540c</color>
 
-    <!--deepOrange-->
-    <color name="colorDeepOrangePrimary">#FF5722</color>
-    <color name="colorDeepOrangePrimaryDark">#E64A19</color>
-    <color name="colorDeepOrangeAccent">#FF4081</color>
-    <color name="colorDeepOrangePrimaryCenter">#5c1e0a</color>
-
-    <!--blueGrey-->
-    <color name="colorBlueGreyPrimary">#607D8B</color>
-    <color name="colorBlueGreyPrimaryDark">#455A64</color>
-    <color name="colorBlueGreyAccent">#FF4081</color>
-    <color name="colorBlueGreyPrimaryCenter">#27373e</color>
+    <array name="colors">
+        <item>@color/color_orange_primary</item>
+        <item>@color/color_deep_orange_primary</item>
+        <item>@color/color_pink_primary</item>
+        <item>@color/color_red_primary</item>
+        <item>@color/color_brown_primary</item>
+        <item>@color/color_blue_primary</item>
+        <item>@color/color_indigo_primary</item>
+        <item>@color/color_light_green_primary</item>
+        <item>@color/color_green_primary</item>
+        <item>@color/color_purple_primary</item>
+        <item>@color/color_deep_purple_primary</item>
+        <item>@color/color_blue_grey_primary</item>
+        <item>@color/color_cyan_primary</item>
+        <item>@color/color_teal_primary</item>
+        <item>@color/color_lime_primary</item>
+    </array>
 </resources>

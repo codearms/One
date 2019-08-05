@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_text_title"
+    android:background="@color/color_title"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -15,7 +15,7 @@
         android:paddingTop="@dimen/twelve"
         android:paddingRight="@dimen/twenty"
         android:paddingBottom="@dimen/twelve"
-        android:textColor="@color/color_text_general"
+        android:textColor="@color/color_content_general"
         android:textSize="@dimen/text_size_small"
         tools:text="信息" />
 

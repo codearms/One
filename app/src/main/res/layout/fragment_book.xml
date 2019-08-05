@@ -31,7 +31,7 @@
                 android:layout_height="28dp"
                 android:layout_centerInParent="true"
                 app:tl_bar_color="@color/color_book"
-                app:tl_indicator_color="@color/color_text_title"
+                app:tl_indicator_color="@color/color_title"
                 app:tl_tab_padding="@dimen/sixteen"
                 app:tl_textBold="BOTH"
                 app:tl_textSelectColor="@color/color_book"

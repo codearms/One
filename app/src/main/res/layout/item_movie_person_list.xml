@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/twelve"
         android:singleLine="true"
-        android:textColor="@color/color_text_main"
+        android:textColor="@color/color_content_main"
         android:textSize="@dimen/text_size_small"
         tools:text="吴京" />
 
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/four"
-        android:textColor="@color/color_text_general"
+        android:textColor="@color/color_content_general"
         android:textSize="@dimen/text_size_smaller"
         tools:text="导演" />
 </LinearLayout>

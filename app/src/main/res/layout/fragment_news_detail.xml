@@ -48,7 +48,7 @@
                     android:layout_marginLeft="@dimen/sixteen"
                     android:layout_marginRight="@dimen/sixteen"
                     android:layout_marginBottom="@dimen/thirty_two"
-                    android:textColor="@color/color_text_title"
+                    android:textColor="@color/color_title"
                     android:textSize="@dimen/text_size_biggest" />
 
                 <TextView
@@ -59,7 +59,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="@dimen/eight"
-                    android:textColor="@color/color_news_source"
+                    android:textColor="@color/color_content_transparent"
                     android:textSize="@dimen/text_size_smaller" />
             </RelativeLayout>
 
@@ -83,7 +83,7 @@
                     android:focusableInTouchMode="true"
                     android:marqueeRepeatLimit="marquee_forever"
                     android:singleLine="true"
-                    android:textColor="@color/color_text_title"
+                    android:textColor="@color/color_title"
                     android:textSize="@dimen/text_size_bigger" />
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>

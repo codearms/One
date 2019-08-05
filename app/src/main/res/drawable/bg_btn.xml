@@ -9,7 +9,7 @@
     <item android:state_enabled="false">
         <shape>
             <corners android:radius="@dimen/four" />
-            <solid android:color="@color/bg_btn_disenabled" />
+            <solid android:color="@color/bg_btn_disabled" />
         </shape>
     </item>
     <item>

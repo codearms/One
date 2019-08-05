@@ -47,7 +47,7 @@
             android:layout_marginBottom="@dimen/sixteen"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal"
             app:layout_constraintEnd_toStartOf="@id/iv_collect"
             app:layout_constraintStart_toEndOf="@id/iv_project"
@@ -74,7 +74,7 @@
             android:layout_marginRight="@dimen/sixteen"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_smaller"
             app:layout_constraintBottom_toTopOf="@id/view"
             app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +147,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/color_text_secondary"
+                android:textColor="@color/color_content_secondary"
                 android:textSize="@dimen/text_size_smaller" />
 
             <TextView
@@ -160,7 +160,7 @@
                 android:drawableLeft="@drawable/ic_date"
                 android:drawablePadding="2dp"
                 android:gravity="center"
-                android:textColor="@color/color_text_secondary"
+                android:textColor="@color/color_content_secondary"
                 android:textSize="@dimen/text_size_smaller" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

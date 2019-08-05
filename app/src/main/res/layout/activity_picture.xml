@@ -45,7 +45,7 @@
         android:paddingTop="@dimen/four"
         android:paddingRight="@dimen/eight"
         android:paddingBottom="@dimen/four"
-        android:textColor="@color/color_text_title"
+        android:textColor="@color/color_title"
         android:textSize="@dimen/text_size_smaller"
         tools:text="1 / 0" />
 

@@ -8,11 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -110,18 +108,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
     // 将Toolbar 与 DrawerLayout 关联
     public void associateDrawerLayout(Toolbar toolbar) {
-        // ActionBar三个小点图标设置
-        toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.ic_menu_more));
-
-        // 定义drawerArrowDrawable
-        DrawerArrowDrawable drawerArrowDrawable = new DrawerArrowDrawable(this);
-        drawerArrowDrawable.setColor(ContextCompat.getColor(this, R.color.color_text_title));
-
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.drawer_open, R.string.drawer_close);
-        // 设置drawerArrowDrawable
-        toggle.setDrawerArrowDrawable(drawerArrowDrawable);
         toggle.syncState();
         drawerLayout.addDrawerListener(toggle);
     }

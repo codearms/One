@@ -18,7 +18,7 @@
             android:layout_marginStart="@dimen/sixteen"
             android:layout_marginLeft="@dimen/sixteen"
             android:layout_weight="1"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_small" />
 
         <ImageView
@@ -37,6 +37,6 @@
         android:layout_margin="@dimen/sixteen"
         android:ellipsize="end"
         android:lineSpacingExtra="@dimen/four"
-        android:textColor="@color/color_text_main"
+        android:textColor="@color/color_content_main"
         android:textSize="@dimen/text_size_small" />
 </LinearLayout>

@@ -15,9 +15,9 @@
         app:headerLayout="@layout/layout_navigation_header"
         app:insetForeground="@color/transparent"
         app:itemBackground="@drawable/bg_navigation_item"
-        app:itemIconTint="@color/color_text_main"
+        app:itemIconTint="@color/color_content_main"
         app:itemTextAppearance="@style/navigation_view"
-        app:itemTextColor="@color/color_text_main"
+        app:itemTextColor="@color/color_content_main"
         app:menu="@menu/menu_navigation" />
 
     <!--app:insetForeground="@color/transparent"去掉侧滑状态栏遮罩层-->

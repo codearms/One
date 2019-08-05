@@ -41,7 +41,7 @@
                 android:paddingRight="2dp"
                 android:paddingBottom="4dp"
                 android:singleLine="true"
-                android:textColor="@color/color_text_title"
+                android:textColor="@color/color_title"
                 android:textCursorDrawable="@drawable/text_cursor_search"
                 android:textSize="@dimen/text_size_normal" />
 

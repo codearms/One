@@ -22,6 +22,6 @@
         android:paddingTop="@dimen/eight"
         android:paddingRight="@dimen/sixteen"
         android:paddingBottom="@dimen/eight"
-        android:textColor="@color/color_text_title"
+        android:textColor="@color/color_title"
         tools:text="2019-05-04" />
 </FrameLayout>

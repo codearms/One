@@ -28,7 +28,7 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:textColor="@color/color_text_main"
+                android:textColor="@color/color_content_main"
                 android:textSize="@dimen/text_size_normal" />
 
             <ImageView
@@ -73,7 +73,7 @@
                 android:paddingTop="2dp"
                 android:paddingRight="4dp"
                 android:paddingBottom="2dp"
-                android:textColor="@color/color_text_title"
+                android:textColor="@color/color_title"
                 android:textSize="@dimen/text_size_smallest"
                 tools:text="前端.github" />
 
@@ -94,7 +94,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/color_text_secondary"
+                android:textColor="@color/color_content_secondary"
                 android:textSize="@dimen/text_size_smaller" />
 
             <TextView
@@ -107,7 +107,7 @@
                 android:drawableLeft="@drawable/ic_date"
                 android:drawablePadding="2dp"
                 android:gravity="center"
-                android:textColor="@color/color_text_secondary"
+                android:textColor="@color/color_content_secondary"
                 android:textSize="@dimen/text_size_smaller" />
         </LinearLayout>
     </LinearLayout>

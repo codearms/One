@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_text_title">
+    android:background="@color/color_title">
 
     <com.codearms.maoqiqi.one.view.StatusBarView
         android:id="@+id/status_bar"
@@ -36,7 +36,7 @@
         app:tabIndicatorColor="@color/color_news"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/color_news"
-        app:tabTextColor="@color/color_text_main" />
+        app:tabTextColor="@color/color_content_main" />
 
     <ImageButton
         android:id="@+id/iv_news_category"

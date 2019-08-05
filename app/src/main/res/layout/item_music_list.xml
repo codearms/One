@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/color_text_main"
+            android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_small"
             tools:text="歌曲名称|艺术家|2009年12月新歌速递|文件夹名称" />
 
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/four"
             android:maxLines="1"
-            android:textColor="@color/color_text_general"
+            android:textColor="@color/color_content_general"
             android:textSize="@dimen/text_size_smallest"
             tools:text="歌曲信息|艺术家信息|专辑信息|文件夹信息" />
     </LinearLayout>
