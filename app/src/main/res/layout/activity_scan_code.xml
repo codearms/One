@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/sixteen"
-            android:background="@drawable/bg_hint"
+            android:background="@drawable/bg_border_corners"
             android:lineSpacingExtra="2dp"
             android:padding="@dimen/sixteen"
             android:text="@string/download_content"

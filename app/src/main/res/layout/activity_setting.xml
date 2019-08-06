@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".navigation.activity.SettingActivity">
 
     <com.codearms.maoqiqi.one.view.StatusBarView
         android:id="@+id/status_bar"
@@ -23,126 +25,143 @@
         app:title="@string/setting"
         app:titleTextAppearance="@style/toolbar_appearance" />
 
-    <RelativeLayout
-        android:id="@+id/rlSystemAnimation"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/rl_system_animation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:padding="16dp">
+        android:padding="@dimen/sixteen">
 
         <TextView
-            android:id="@+id/tvSystemAnimationTitle"
+            android:id="@+id/tv_system_animation_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="系统动画"
+            android:text="@string/system_animation_title"
             android:textColor="@color/color_content_main"
-            android:textSize="14sp" />
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toTopOf="@id/tv_system_animation_desc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvSystemAnimationDesc"
+            android:id="@+id/tv_system_animation_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvSystemAnimationTitle"
-            android:layout_marginTop="4dp"
-            android:text="在整个应用中，应用系统动画"
+            android:layout_marginTop="@dimen/four"
+            android:text="@string/system_animation_desc"
             android:textColor="@color/color_content_general"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_size_smaller"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_system_animation_title" />
 
         <android.support.v7.widget.SwitchCompat
-            android:id="@+id/scSystemAnimation"
+            android:id="@+id/sc_system_animation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:background="@color/transparent"
             android:clickable="false"
-            android:theme="@style/CheckBoxAndSwitchTheme" />
-    </RelativeLayout>
+            android:theme="@style/check_box_switch"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_height"
         android:background="@color/color_divider" />
 
-    <RelativeLayout
-        android:id="@+id/rlLauncherPage"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/rl_launcher_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:padding="16dp">
+        android:padding="@dimen/sixteen">
 
         <TextView
-            android:id="@+id/tvLauncherPageTitle"
+            android:id="@+id/tv_launcher_page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="启动页妹子图"
+            android:text="@string/launcher_page_title"
             android:textColor="@color/color_content_main"
-            android:textSize="14sp" />
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toTopOf="@id/tv_launcher_page_desc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvLauncherPageDesc"
+            android:id="@+id/tv_launcher_page_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvLauncherPageTitle"
-            android:layout_marginTop="4dp"
-            android:text="基佬怎么会需要妹子"
+            android:layout_below="@id/tv_launcher_page_title"
+            android:layout_marginTop="@dimen/four"
+            android:text="@string/launcher_page_desc_1"
             android:textColor="@color/color_content_general"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_size_smaller"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_launcher_page_title" />
 
         <android.support.v7.widget.SwitchCompat
-            android:id="@+id/scLauncherPage"
+            android:id="@+id/sc_launcher_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:background="@color/transparent"
             android:clickable="false"
-            android:theme="@style/CheckBoxAndSwitchTheme" />
-    </RelativeLayout>
+            android:theme="@style/check_box_switch"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_height"
         android:background="@color/color_divider" />
 
-    <RelativeLayout
-        android:id="@+id/rlLauncherPageRandom"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/rl_launcher_page_random"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:clickable="true"
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/tvLauncherPageRandomTitle"
+            android:id="@+id/tv_launcher_page_random_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="随机出现"
+            android:text="@string/launcher_page_random_title"
             android:textColor="@color/color_content_main"
-            android:textSize="14sp" />
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toTopOf="@id/tv_launcher_page_random_desc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvLauncherPageRandomDesc"
+            android:id="@+id/tv_launcher_page_random_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvLauncherPageRandomTitle"
-            android:layout_marginTop="4dp"
-            android:text="我每次都要幸临，没毛病"
+            android:layout_below="@id/tv_launcher_page_random_title"
+            android:layout_marginTop="@dimen/four"
+            android:text="@string/launcher_page_random_desc_1"
             android:textColor="@color/color_content_general"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_size_smaller"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_launcher_page_random_title" />
 
         <android.support.v7.widget.SwitchCompat
-            android:id="@+id/scLauncherPageRandom"
+            android:id="@+id/sc_launcher_page_random"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
             android:background="@color/transparent"
             android:clickable="false"
-            android:theme="@style/CheckBoxAndSwitchTheme" />
-    </RelativeLayout>
+            android:theme="@style/check_box_switch"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <View
         android:layout_width="match_parent"

@@ -5,8 +5,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup;
 
+/**
+ * 主页面
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-06 10:20
+ */
 public abstract class FragmentCheckedChangeListener implements RadioGroup.OnCheckedChangeListener {
 
+    private final FragmentManager fm;
     private final int[] buttonIds;
     private final int resId;
     private final String[] tags;
@@ -15,11 +22,17 @@ public abstract class FragmentCheckedChangeListener implements RadioGroup.OnChec
     private int position;
     private Fragment previousFragment;
 
-    public FragmentCheckedChangeListener(int[] buttonIds, int resId) {
+    /**
+     * @param fm        FragmentManager
+     * @param buttonIds Array of button resource ids
+     * @param resId     View id
+     */
+    public FragmentCheckedChangeListener(FragmentManager fm, int[] buttonIds, int resId) {
+        this.fm = fm;
         this.buttonIds = buttonIds;
         this.resId = resId;
-        tags = new String[buttonIds.length];
-        fragments = new Fragment[buttonIds.length];
+        this.tags = new String[buttonIds.length];
+        this.fragments = new Fragment[buttonIds.length];
         for (int i = 0; i < buttonIds.length; i++) {
             tags[i] = "TAG_" + i;
         }
@@ -27,7 +40,7 @@ public abstract class FragmentCheckedChangeListener implements RadioGroup.OnChec
 
     public void findFragmentByTag() {
         for (int i = 0; i < buttonIds.length; i++) {
-            fragments[i] = getSupportFragmentManager().findFragmentByTag(tags[i]);
+            fragments[i] = fm.findFragmentByTag(tags[i]);
         }
     }
 
@@ -52,7 +65,7 @@ public abstract class FragmentCheckedChangeListener implements RadioGroup.OnChec
     private void switchFragment(Fragment from, Fragment to) {
         if (to != null && from != to) {// from != to 才切换
             previousFragment = to;
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction ft = fm.beginTransaction();
 
             // from隐藏
             if (from != null) ft.hide(from);
@@ -78,8 +91,6 @@ public abstract class FragmentCheckedChangeListener implements RadioGroup.OnChec
     public Fragment[] getFragments() {
         return fragments;
     }
-
-    protected abstract FragmentManager getSupportFragmentManager();
 
     protected abstract Fragment newFragment(int position);
 }

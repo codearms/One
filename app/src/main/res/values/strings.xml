@@ -1,20 +1,30 @@
 <resources>
     <string name="app_name">One</string>
 
+    <string name="jump">跳过</string>
+    <string name="jump_num">跳过 %d</string>
+    <string name="splash_title">干货集中营</string>
+    <string name="splash_des">每天都有新发现</string>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
     <string name="login">登录</string>
+    <string name="personal_description">这个人很懒,什么都没有留下~ O(∩_∩)O ~</string>
+    <string name="project_git">https://github.com/maoqiqi/One</string>
+
+    <!--登录-->
     <string name="user_name">用户名</string>
     <string name="password">密码</string>
     <string name="forget_password">忘记密码?</string>
     <string name="new_user_register">新用户注册</string>
 
+    <!--注册-->
     <string name="confirm_password">确认密码</string>
     <string name="register">注册</string>
     <string name="registration_agreement">《<u>点击“注册”按钮即表示同意注册协议</u>》</string>
 
-    <string name="project_git">https://github.com/maoqiqi/One</string>
+    <!--主页菜单-->
     <string name="project_introduction">项目介绍</string>
     <string name="update_description">更新说明</string>
     <string name="scan_code">扫码下载</string>
@@ -24,6 +34,65 @@
     <string name="logout">登出</string>
     <string name="setting">设置</string>
     <string name="mode_night">夜间</string>
+
+    <!--扫码下载-->
+    <string name="download_content">喜欢就推荐给你的小伙伴吧，扫描二维码直接下载，或者点击右上角分享链接地址。</string>
+    <string name="star_content">如果你觉得不错，请帮忙Star一下吧。你的支持将是我最大的动力与褒奖~ O(∩_∩)O ~</string>
+
+    <!--项目介绍-->
+    <string name="introduction_title">本案例主要演示安卓常用控件的使用。</string>
+    <string name="introduction_1">1. 技术点</string>
+    <string name="introduction_2">2. 依赖项目</string>
+    <string name="introduction_3">3. 参考项目</string>
+    <string name="introduction_4">4. 项目结构说明</string>
+    <string name="introduction_5">5. MainActivity(主页)</string>
+    <string name="introduction_1_text">该页面演示了FrameLayout和LinearLayout布局、ImageView和TextView控件的基本使用；以及解决了安卓Handler内存泄漏和全屏Activity进入下一个非全屏Activity出现下移的情况。</string>
+    <string name="introduction_2_text">该页面演示了Toolbar、EditText、Button控件的基本使用以及安卓新特性Tint着色功能；演示了使用imeOptions属性设置Enter键的状态，在代码中设置响应事件。</string>
+    <string name="introduction_3_text">该页面演示了Android Material Design风格控件中的TextInputLayout、TextInputEditText的基本使用。</string>
+    <string name="introduction_4_text">该页面演示了RadioGroup、RadioButton、CheckBox控件的基本使用；第三方控件CircleImageView的使用。</string>
+    <string name="introduction_5_text">该页面演示了Android v4 包中的DrawerLayout抽屉控件、Android Material Design风格控件中的BottomNavigationView、NavigationView的基本使用；以及如何解决状态栏透明问题。</string>
+    <string name="introduction_read_me">这里只是简单列举一些内容，详见README，如果感兴趣可以下载项目亲自体验一下。</string>
+
+    <!--更新说明-->
+
+    <!--问题反馈-->
+    <string name="problem_feedback_content">您好，如果在使用中发现了问题，可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我。很希望得到您的意见 ~ </string>
+    <string name="issues">Issues</string>
+    <string name="issues_url">https://github.com/maoqiqi/One/issues</string>
+    <string name="problems">常见问题</string>
+    <string name="problems_url">https://github.com/maoqiqi/One/issues</string>
+    <string name="contact_me">联系我</string>
+    <string name="qq">QQ</string>
+    <string name="email">Email</string>
+
+    <!--关于我们-->
+    <string name="current_version">当前版本 V%1$s</string>
+    <string name="check_update">检查更新</string>
+    <string name="give_a_star">给个Star吧</string>
+    <string name="gank">《<u>代码家 · 干货集中营</u>》</string>
+    <string name="gank_api">https://gank.io/api</string>
+    <string name="dou_ban">《<u>豆瓣开发者服务使用条款</u>》</string>
+    <string name="dou_ban_terms">https://www.douban.com/about/agreement</string>
+    <string name="copyright">©2019 https://github.com/maoqiqi/One</string>
+
+    <!--捐赠开发者-->
+    <string name="ali_pay">支付宝</string>
+    <string name="wx_pay">微信</string>
+
+    <!--设置-->
+    <string name="system_animation_title">系统动画</string>
+    <string name="system_animation_desc">在整个应用中，应用系统动画</string>
+    <string name="launcher_page_title">启动页妹子图</string>
+    <string name="launcher_page_desc_1">基佬怎么会需要妹子</string>
+    <string name="launcher_page_desc_2">没有妹子太寂寞</string>
+    <string name="launcher_page_random_title">随机出现</string>
+    <string name="launcher_page_random_desc_1">我每次都要幸临，没毛病</string>
+    <string name="launcher_page_random_desc_2">偶尔来个惊喜就行</string>
+
+    <string name="setting_cache">自动缓存</string>
+    <string name="setting_image">无图模式</string>
+    <string name="setting_night">夜间模式</string>
+    <string name="setting_clear">清除缓存</string>
 
     <!-- =====================================首页资源开始===================================== -->
 
@@ -83,52 +152,11 @@
 
     <!-- =====================================首页资源结束===================================== -->
 
-    <string name="download_content">喜欢就推荐给你的小伙伴吧，扫描二维码直接下载，或者点击右上角分享链接地址。</string>
-    <string name="star_content">喜欢的朋友请Star，欢迎一起学习讨论。你的支持将是我最大的动力与褒奖~ O(∩_∩)O ~</string>
-
-    <string name="problem_feedback_content">您好，很希望得到您的意见，您可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我 ~ </string>
-    <string name="issues">Issues</string>
-    <string name="faq_name">常见问题</string>
-    <string name="contact_me">联系我</string>
-    <string name="qq">QQ</string>
-    <string name="email">Email</string>
-
-    <string name="current_version">当前版本 V%1$s</string>
-    <string name="function_introduction">功能介绍</string>
-    <string name="check_update">检查更新</string>
-    <string name="give_a_star">给个Star吧</string>
-
-    <string name="alipay">支付宝</string>
-    <string name="wxpay">微信</string>
-
     <string name="preference">偏好设置</string>
 
     <string name="image_description">image description</string>
     <string name="http_error">网络异常</string>
     <string name="unKnown_error">未知错误</string>
-
-    <string name="setting_cache">自动缓存</string>
-    <string name="setting_image">无图模式</string>
-    <string name="setting_night">夜间模式</string>
-    <string name="setting_clear">清除缓存</string>
-
-    <string name="introduction_title">本案例主要演示安卓常用控件的使用。</string>
-    <string name="introduction_1">1. SplashActivity(过渡页面)</string>
-    <string name="introduction_2">2. LoginActivity(登录页面)</string>
-    <string name="introduction_3">3. RegisterActivity(注册页面)</string>
-    <string name="introduction_4">4. InformationActivity(信息页面)</string>
-    <string name="introduction_5">5. MainActivity(主页)</string>
-    <string name="introduction_1_text">该页面演示了FrameLayout和LinearLayout布局、ImageView和TextView控件的基本使用；以及解决了安卓Handler内存泄漏和全屏Activity进入下一个非全屏Activity出现下移的情况。</string>
-    <string name="introduction_2_text">该页面演示了Toolbar、EditText、Button控件的基本使用以及安卓新特性Tint着色功能；演示了使用imeOptions属性设置Enter键的状态，在代码中设置响应事件。</string>
-    <string name="introduction_3_text">该页面演示了Android Material Design风格控件中的TextInputLayout、TextInputEditText的基本使用。</string>
-    <string name="introduction_4_text">该页面演示了RadioGroup、RadioButton、CheckBox控件的基本使用；第三方控件CircleImageView的使用。</string>
-    <string name="introduction_5_text">该页面演示了Android v4 包中的DrawerLayout抽屉控件、Android Material Design风格控件中的BottomNavigationView、NavigationView的基本使用；以及如何解决状态栏透明问题。</string>
-    <string name="introduction_read_me">这里只是简单列举一些内容，详见README，如果感兴趣可以下载项目亲自体验一下。</string>
-
-    <string name="jump">跳过</string>
-    <string name="jump_num">跳过 %d</string>
-    <string name="splash_title">干货集中营</string>
-    <string name="splash_des">每天都有新发现</string>
 
     <string name="transition_book_img">transition_book_img</string>
     <string name="transition_music_img">transition_music_img</string>
@@ -190,11 +218,6 @@
     <string name="sort_number_of_songs">歌曲数</string>
     <string name="sort_number_of_albums">专辑数</string>
     <string name="star">star</string>
-    <string name="issues_url">https://github.com/maoqiqi/One/issues</string>
-    <string name="faq_url">https://github.com/maoqiqi/One/issues</string>
-
-    <string name="gank_api">http://gank.io/api</string>
-    <string name="dou_ban_terms">https://developers.douban.com/wiki/?title=terms</string>
 
     <string name="refresh">刷新</string>
     <string name="copy_success">复制成功</string>

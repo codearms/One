@@ -10,6 +10,12 @@ import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
+/**
+ * 扫码下载
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-06 10:30
+ */
 public class ScanCodeActivity extends BaseActivity {
 
     @Override
@@ -32,6 +38,7 @@ public class ScanCodeActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_share:
+                // TODO: 2019-08-06
                 return true;
             case R.id.menu_star:
                 WebViewActivity.start(this, getString(R.string.project_git));

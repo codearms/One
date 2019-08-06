@@ -44,7 +44,7 @@
                 app:indicator_height="6dp"
                 app:indicator_margin="2dp"
                 app:indicator_width="6dp"
-                app:title_background="@color/color_mask"
+                app:title_background="@color/bg_mask"
                 app:title_height="@dimen/thirty_two"
                 app:title_textcolor="@android:color/white"
                 app:title_textsize="@dimen/text_size_smaller" />

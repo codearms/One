@@ -10,7 +10,14 @@ import android.widget.TextView;
 import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
+import com.codearms.maoqiqi.utils.ActivityUtils;
 
+/**
+ * 关于我们
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-06 15:30
+ */
 public class AboutActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
@@ -21,10 +28,6 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView tvVersionName = findViewById(R.id.tv_version_name);
-        TextView tvFunctionIntroduction = findViewById(R.id.tv_function_introduction);
-        TextView tvCheckUpdate = findViewById(R.id.tv_check_update);
-        TextView tvUpdateDescription = findViewById(R.id.tv_update_description);
-        TextView tvStar = findViewById(R.id.tv_star);
 
         setSupportActionBar(toolbar);
 
@@ -35,40 +38,35 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
             e.printStackTrace();
         }
 
-//        String gankText = "<font color='#191919'>《<u>代码家 · 干货集中营</u>》</font>";
-//        tvGank.setText(Html.fromHtml(gankText));
-//
-//        String douBanText = "<font color='#191919'>《<u>豆瓣开发者服务使用条款</u>》</font>";
-//        tvDouBan.setText(Html.fromHtml(douBanText));
-
-        tvFunctionIntroduction.setOnClickListener(this);
-        tvCheckUpdate.setOnClickListener(this);
-        tvUpdateDescription.setOnClickListener(this);
-        tvStar.setOnClickListener(this);
+        findViewById(R.id.tv_project_introduction).setOnClickListener(this);
+        findViewById(R.id.tv_check_update).setOnClickListener(this);
+        findViewById(R.id.tv_update_description).setOnClickListener(this);
+        findViewById(R.id.tv_star).setOnClickListener(this);
+        findViewById(R.id.tv_gank).setOnClickListener(this);
+        findViewById(R.id.tv_dou_ban).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.tvProjectIntroduction:
-//                ActivityUtils.startActivity(activity, ProjectIntroductionActivity.class);
-//                break;
-//            case R.id.tvCheckUpdate:
-//                WebViewActivity.start(activity, R.color.colorNavigation, "", getString(R.string.project_url));
-//                break;
-//            case R.id.tvUpdateDescription:
-//                ActivityUtils.startActivity(activity, UpdateDescriptionActivity.class);
-//                break;
-//            case R.id.tvStar:
-//                WebViewActivity.start(activity, R.color.colorNavigation, "", getString(R.string.project_url));
-//                break;
-//            case R.id.tvGank:
-//                WebViewActivity.start(activity, R.color.colorNavigation, "", getString(R.string.gank_api));
-//                break;
-//            case R.id.tvDouBan:
-//                WebViewActivity.start(activity, R.color.colorNavigation, "", getString(R.string.dou_ban_terms));
-//                break;
-//
-//        }
+        switch (v.getId()) {
+            case R.id.tv_project_introduction:
+                ActivityUtils.startActivity(this, ProjectIntroductionActivity.class);
+                break;
+            case R.id.tv_check_update:
+                WebViewActivity.start(this, getString(R.string.project_git));
+                break;
+            case R.id.tv_update_description:
+                ActivityUtils.startActivity(this, UpdateDescriptionActivity.class);
+                break;
+            case R.id.tv_star:
+                WebViewActivity.start(this, getString(R.string.project_git));
+                break;
+            case R.id.tv_gank:
+                WebViewActivity.start(this, getString(R.string.gank_api));
+                break;
+            case R.id.tv_dou_ban:
+                WebViewActivity.start(this, getString(R.string.dou_ban_terms));
+                break;
+        }
     }
 }

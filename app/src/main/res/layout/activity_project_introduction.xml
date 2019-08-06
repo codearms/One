@@ -22,7 +22,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:contentScrim="@color/color_navigation"
             app:expandedTitleMargin="@dimen/sixteen"
-            app:expandedTitleTextAppearance="@style/project_introduction_expanded_title_text_appearance"
+            app:expandedTitleTextAppearance="@style/expanded_title_appearance"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@color/color_navigation">
 
@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_project_introduction"
-                android:contentDescription="@null"
+                android:contentDescription="@string/image_description"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"

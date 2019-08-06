@@ -32,16 +32,23 @@ import com.codearms.maoqiqi.one.navigation.activity.ProblemFeedbackActivity;
 import com.codearms.maoqiqi.one.navigation.activity.ProjectIntroductionActivity;
 import com.codearms.maoqiqi.one.navigation.activity.ScanCodeActivity;
 import com.codearms.maoqiqi.one.navigation.activity.SearchActivity;
+import com.codearms.maoqiqi.one.navigation.activity.SettingActivity;
 import com.codearms.maoqiqi.one.navigation.activity.UpdateDescriptionActivity;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.one.news.fragment.NewsFragment;
 import com.codearms.maoqiqi.one.utils.FragmentCheckedChangeListener;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
+import com.codearms.maoqiqi.one.utils.Utils;
 import com.codearms.maoqiqi.utils.ActivityUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener,
-        NavigationView.OnNavigationItemSelectedListener {
+/**
+ * 主页面
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-06 10:10
+ */
+public class MainActivity extends BaseActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private final int[] buttonIds = {R.id.rb_home, R.id.rb_news, R.id.rb_book, R.id.rb_music, R.id.rb_movie};
 
@@ -67,21 +74,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
         NavigationView navigationView = findViewById(R.id.navigation_view);
         TextView tvSetting = findViewById(R.id.tv_setting);
         TextView tvMode = findViewById(R.id.tv_mode);
+        TextView tvWeather = findViewById(R.id.tv_weather);
+
+        Utils.setWeather(tvWeather, "30°", "徐家汇");
 
         View navigationHeader = navigationView.getHeaderView(0);
+        // 头像
+        navigationHeader.findViewById(R.id.iv_avatar).setOnClickListener(this);
+        // 用户名
         tvUserName = navigationHeader.findViewById(R.id.tv_user_name);
-        navigationHeader.findViewById(R.id.iv_scan_code).setOnClickListener(this);
         tvUserName.setOnClickListener(this);
-        navigationHeader.findViewById(R.id.tv_project).setOnClickListener(this);
+        // 扫码
+        navigationHeader.findViewById(R.id.iv_scan_code).setOnClickListener(this);
+        // 退出
         navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
+        // 设置菜单点击事件
         navigationView.setNavigationItemSelectedListener(this);
 
         tvSetting.setOnClickListener(this);
         tvMode.setOnClickListener(this);
+        tvWeather.setOnClickListener(this);
 
         // 默认加载第一项
         int position = 0;
-        checkedChangeListener = new MyOnCheckedChangeListener(buttonIds, R.id.fl_content);
+        checkedChangeListener = new MyOnCheckedChangeListener(getSupportFragmentManager(), buttonIds, R.id.fl_content);
         if (savedInstanceState != null) {
             position = savedInstanceState.getInt("position", 0);
             checkedChangeListener.findFragmentByTag();
@@ -125,6 +141,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_avatar:
+                WebViewActivity.start(this, getString(R.string.project_git));
+                break;
             case R.id.iv_scan_code:
                 ActivityUtils.startActivity(this, ScanCodeActivity.class);
                 break;
@@ -135,14 +154,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
                     ActivityUtils.startActivity(this, CollectActivity.class);
                 }
                 break;
-            case R.id.tv_project:
-                WebViewActivity.start(this, getString(R.string.project_git));
-                break;
             case R.id.tv_setting:
-//                ActivityUtils.startActivity(this, SettingActivity.class);
+                ActivityUtils.startActivity(this, SettingActivity.class);
                 break;
             case R.id.tv_mode:
                 ToastUtils.show("开发中");
+                break;
+            case R.id.tv_weather:
                 break;
         }
     }
@@ -199,13 +217,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,
 
     private final class MyOnCheckedChangeListener extends FragmentCheckedChangeListener {
 
-        MyOnCheckedChangeListener(int[] buttonIds, int resId) {
-            super(buttonIds, resId);
-        }
-
-        @Override
-        protected FragmentManager getSupportFragmentManager() {
-            return MainActivity.this.getSupportFragmentManager();
+        MyOnCheckedChangeListener(FragmentManager fm, int[] buttonIds, int resId) {
+            super(fm, buttonIds, resId);
         }
 
         @Override

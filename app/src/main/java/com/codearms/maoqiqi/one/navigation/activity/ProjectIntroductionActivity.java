@@ -8,6 +8,12 @@ import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
+/**
+ * 项目介绍
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-06 14:30
+ */
 public class ProjectIntroductionActivity extends BaseActivity {
 
     @Override
@@ -18,5 +24,9 @@ public class ProjectIntroductionActivity extends BaseActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        findViewById(R.id.fab_share).setOnClickListener(v -> {
+            // TODO: 2019-08-06
+        });
     }
 }

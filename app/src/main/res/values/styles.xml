@@ -63,6 +63,33 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!--注意,Toolbar的标题在横竖屏下字体大小不一样。所以需要指定标题栏字体大小。-->
+    <style name="toolbar_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/text_size_bigger</item>
+        <item name="android:textColor">@color/color_title</item>
+    </style>
+
+    <!--主页菜单文字样式-->
+    <style name="navigation_appearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <!--项目介绍标题栏展开样式-->
+    <style name="expanded_title_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/text_size_biggest</item>
+        <item name="android:textColor">@color/transparent</item>
+    </style>
+
+    <!--CheckBox主题-->
+    <style name="check_box_switch" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--1-->
+        <item name="colorAccent">@color/color_navigation</item>
+        <!--2-->
+        <!--<item name="colorControlNormal">@color/colorTextGrayDark</item>-->
+        <!--<item name="colorControlActivated">@color/colorNavigation</item>-->
+    </style>
+
+
     <!-- Activity Dialog 主题-->
     <style name="OneAppDialog" parent="@style/Theme.AppCompat.Dialog">
         <!-- 无标题 -->
@@ -101,17 +128,6 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/text_size_smaller</item>
         <item name="android:textStyle">bold</item>
-    </style>
-
-    <!--android.support.design.widget.NavigationView-->
-    <style name="navigation_view" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/text_size_normal</item>
-    </style>
-
-    <!--注意,Toolbar的标题在横竖屏下字体大小不一样。所以需要指定标题栏字体大小。-->
-    <style name="toolbar_appearance" parent="@android:style/TextAppearance">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/color_title</item>
     </style>
 
     <!--ToolBar主题-->
@@ -166,11 +182,6 @@
         <item name="android:textSize">@dimen/text_size_smaller</item>
     </style>
 
-    <!--项目描述标题栏展开样式-->
-    <style name="project_introduction_expanded_title_text_appearance" parent="@android:style/TextAppearance">
-        <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/transparent</item>
-    </style>
 
     <!--水平分隔线-->
     <style name="horizontalLine">
@@ -184,12 +195,5 @@
         <item name="android:textSize">24sp</item>
     </style>
 
-    <!--CheckBox主题-->
-    <style name="CheckBoxAndSwitchTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--1-->
-        <item name="colorAccent">@color/color_navigation</item>
-        <!--2-->
-        <!--<item name="colorControlNormal">@color/colorTextGrayDark</item>-->
-        <!--<item name="colorControlActivated">@color/colorNavigation</item>-->
-    </style>
+
 </resources>

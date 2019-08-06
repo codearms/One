@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".navigation.activity.UpdateDescriptionActivity">
 
     <com.codearms.maoqiqi.one.view.StatusBarView
         android:id="@+id/status_bar"
@@ -22,9 +24,4 @@
         app:popupTheme="@style/navigation_popup_theme"
         app:title="@string/update_description"
         app:titleTextAppearance="@style/toolbar_appearance" />
-
-    <FrameLayout
-        android:id="@+id/fl_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </LinearLayout>

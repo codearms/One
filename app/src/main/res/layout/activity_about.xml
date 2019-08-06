@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".navigation.activity.AboutActivity">
 
     <com.codearms.maoqiqi.one.view.StatusBarView
         android:id="@+id/status_bar"
@@ -53,15 +55,15 @@
             android:background="@color/color_divider" />
 
         <TextView
-            android:id="@+id/tv_function_introduction"
+            android:id="@+id/tv_project_introduction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_navigation_item"
             android:gravity="center_vertical"
             android:minHeight="48dp"
-            android:paddingStart="@dimen/sixteen"
-            android:paddingEnd="@dimen/sixteen"
-            android:text="@string/function_introduction"
+            android:paddingLeft="@dimen/sixteen"
+            android:paddingRight="@dimen/sixteen"
+            android:text="@string/project_introduction"
             android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
 
@@ -79,8 +81,8 @@
             android:background="@drawable/bg_navigation_item"
             android:gravity="center_vertical"
             android:minHeight="48dp"
-            android:paddingStart="@dimen/sixteen"
-            android:paddingEnd="@dimen/sixteen"
+            android:paddingLeft="@dimen/sixteen"
+            android:paddingRight="@dimen/sixteen"
             android:text="@string/check_update"
             android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
@@ -99,8 +101,8 @@
             android:background="@drawable/bg_navigation_item"
             android:gravity="center_vertical"
             android:minHeight="48dp"
-            android:paddingStart="@dimen/sixteen"
-            android:paddingEnd="@dimen/sixteen"
+            android:paddingLeft="@dimen/sixteen"
+            android:paddingRight="@dimen/sixteen"
             android:text="@string/update_description"
             android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
@@ -119,8 +121,8 @@
             android:background="@drawable/bg_navigation_item"
             android:gravity="center_vertical"
             android:minHeight="48dp"
-            android:paddingStart="@dimen/sixteen"
-            android:paddingEnd="@dimen/sixteen"
+            android:paddingLeft="@dimen/sixteen"
+            android:paddingRight="@dimen/sixteen"
             android:text="@string/give_a_star"
             android:textColor="@color/color_content_main"
             android:textSize="@dimen/text_size_normal" />
@@ -131,48 +133,37 @@
             android:background="@color/color_divider" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/sixteen"
-        android:gravity="center_horizontal"
-        android:lineSpacingExtra="2dp"
-        android:padding="@dimen/sixteen"
-        android:text="@string/star_content"
-        android:textColor="@color/text_color_gray"
-        android:textSize="@dimen/text_size_small" />
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
     <TextView
-        android:id="@+id/tvGank"
+        android:id="@+id/tv_gank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp"
-        android:text="《代码家 · 干货集中营》"
-        android:textColor="@color/color_content_main"
-        android:textSize="12sp" />
+        android:layout_marginBottom="@dimen/eight"
+        android:text="@string/gank"
+        android:textColor="@color/selector_main"
+        android:textSize="@dimen/text_size_smaller" />
 
     <TextView
-        android:id="@+id/tvDouBan"
+        android:id="@+id/tv_dou_ban"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp"
-        android:text="《豆瓣开发者服务使用条款》"
-        android:textColor="@color/color_content_main"
-        android:textSize="12sp" />
+        android:layout_marginBottom="@dimen/eight"
+        android:text="@string/dou_ban"
+        android:textColor="@color/selector_main"
+        android:textSize="@dimen/text_size_smaller" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp"
-        android:text="©2017 干货营 github.com/maoqiqi"
+        android:layout_marginBottom="@dimen/eight"
+        android:text="@string/copyright"
         android:textColor="@color/color_content_secondary"
-        android:textSize="14sp" />
+        android:textSize="@dimen/text_size_smallest" />
 </LinearLayout>

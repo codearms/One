@@ -131,7 +131,7 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
 
     private void setTintList(ImageView imageView) {
         Drawable tintIcon = DrawableCompat.wrap(imageView.getDrawable());
-        ColorStateList csl = application.getResources().getColorStateList(R.color.color_collect_navigation);
+        ColorStateList csl = application.getResources().getColorStateList(R.color.selector_collect_navigation);
         DrawableCompat.setTintList(tintIcon, csl);
         imageView.setImageDrawable(tintIcon);
     }

@@ -60,7 +60,7 @@
             android:contentDescription="@string/image_description"
             android:padding="@dimen/twelve"
             android:src="@drawable/ic_un_collect"
-            android:tint="@color/color_collect_home"
+            android:tint="@color/selector_collect_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_title"
             app:layout_constraintTop_toTopOf="parent" />

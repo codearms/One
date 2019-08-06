@@ -6,7 +6,9 @@
 
     <!--basic color-->
     <color name="transparent">#00FFFFFF</color>
-    <color name="bg">#eaeaea</color>
+    <color name="bg">#f8f8f8</color>
+    <color name="bg_transparent">#88000000</color>
+    <color name="bg_mask">#33000000</color>
     <color name="white">#ffffff</color>
     <color name="black">#040404</color>
 
@@ -19,7 +21,6 @@
     <color name="color_content_transparent">#A1FFFFFF</color>
 
     <color name="color_divider">#1a000000</color>
-    <color name="color_mask">#33333333</color>
 
     <color name="bg_btn">#4CAF50</color>
     <color name="bg_btn_disabled">#4D4CAF50</color>

@@ -6,9 +6,20 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.graphics.Palette;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.AbsoluteSizeSpan;
 import android.view.View;
+import android.widget.TextView;
 
 public class Utils {
+
+    public static void setWeather(TextView textView, String str1, String str2) {
+        SpannableStringBuilder spannable = new SpannableStringBuilder(str1 + "\n" + str2);
+        // 改变字体大小
+        spannable.setSpan(new AbsoluteSizeSpan(18, true), 0, str1.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        textView.setText(spannable);
+    }
 
     public static void setTint(FloatingActionButton floatingActionButton, int color) {
         int[] colors = new int[]{color, color, color, color, color, color};

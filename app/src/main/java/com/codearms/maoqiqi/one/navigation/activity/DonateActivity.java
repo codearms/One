@@ -10,6 +10,12 @@ import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
+/**
+ * 捐赠开发者
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-06 15:55
+ */
 public class DonateActivity extends BaseActivity {
 
     @Override
@@ -24,13 +30,7 @@ public class DonateActivity extends BaseActivity {
 
         setSupportActionBar(toolbar);
 
-        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.rb_alipay) {
-                ivPay.setImageResource(R.drawable.ic_alipay);
-            } else {
-                ivPay.setImageResource(R.drawable.ic_wxpay);
-            }
-        });
-        // 谢谢，您没有安装支付宝客户端
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> ivPay.setImageResource(
+                checkedId == R.id.rb_ali_pay ? R.drawable.ic_ali_pay : R.drawable.ic_wx_pay));
     }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="start" >
+    android:layout_gravity="start">
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
@@ -16,7 +17,7 @@
         app:insetForeground="@color/transparent"
         app:itemBackground="@drawable/bg_navigation_item"
         app:itemIconTint="@color/color_content_main"
-        app:itemTextAppearance="@style/navigation_view"
+        app:itemTextAppearance="@style/navigation_appearance"
         app:itemTextColor="@color/color_content_main"
         app:menu="@menu/menu_navigation" />
 
@@ -26,16 +27,13 @@
         android:id="@+id/tv_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:drawableStart="@drawable/ic_nav_setting"
-        android:drawableLeft="@drawable/ic_nav_setting"
-        android:drawablePadding="@dimen/eight"
-        android:focusable="true"
+        android:drawableTop="@drawable/ic_nav_setting"
+        android:drawablePadding="@dimen/four"
         android:gravity="center"
         android:padding="@dimen/sixteen"
         android:text="@string/setting"
-        android:textColor="@color/text_color_setting"
-        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/selector_main"
+        android:textSize="@dimen/text_size_smallest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -43,18 +41,26 @@
         android:id="@+id/tv_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/tv_setting"
-        android:layout_toRightOf="@id/tv_setting"
-        android:clickable="true"
-        android:drawableStart="@drawable/ic_nav_night_mode"
-        android:drawableLeft="@drawable/ic_nav_night_mode"
-        android:drawablePadding="@dimen/eight"
-        android:focusable="true"
+        android:drawableTop="@drawable/ic_nav_night_mode"
+        android:drawablePadding="@dimen/four"
         android:gravity="center"
         android:padding="@dimen/sixteen"
         android:text="@string/mode_night"
-        android:textColor="@color/text_color_setting"
-        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/selector_main"
+        android:textSize="@dimen/text_size_smallest"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_setting" />
+
+    <TextView
+        android:id="@+id/tv_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/four"
+        android:padding="@dimen/sixteen"
+        android:textColor="@color/selector_main"
+        android:textSize="@dimen/text_size_smallest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_mode"
+        tools:text="30°\n徐家汇" />
 </android.support.constraint.ConstraintLayout>

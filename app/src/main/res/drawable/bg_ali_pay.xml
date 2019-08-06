@@ -5,7 +5,7 @@
             <item android:right="-2dp">
                 <shape>
                     <solid android:color="@color/color_news" />
-                    <corners android:bottomLeftRadius="32dp" android:topLeftRadius="32dp" />
+                    <corners android:bottomLeftRadius="@dimen/thirty_two" android:topLeftRadius="@dimen/thirty_two" />
                 </shape>
             </item>
         </layer-list>
@@ -15,7 +15,7 @@
             <item android:right="-2dp">
                 <shape>
                     <solid android:color="@color/transparent" />
-                    <corners android:bottomLeftRadius="32dp" android:topLeftRadius="32dp" />
+                    <corners android:bottomLeftRadius="@dimen/thirty_two" android:topLeftRadius="@dimen/thirty_two" />
                     <stroke android:width="2dp" android:color="@color/color_navigation" />
                 </shape>
             </item>

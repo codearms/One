@@ -20,7 +20,8 @@
         android:layout_height="wrap_content"
         android:background="@color/color_title"
         android:elevation="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="UnusedAttribute">
 
         <RadioButton
             android:id="@+id/rb_home"
