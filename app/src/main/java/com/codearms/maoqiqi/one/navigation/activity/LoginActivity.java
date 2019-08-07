@@ -9,6 +9,12 @@ import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.navigation.fragment.LoginFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
+/**
+ * 登录
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-07 14:10
+ */
 public class LoginActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.LoginFragment";
@@ -24,7 +30,7 @@ public class LoginActivity extends BaseActivity {
 
         LoginFragment fragment = (LoginFragment) getSupportFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
-            fragment = LoginFragment.newInstance();
+            fragment = LoginFragment.newInstance(false);
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
     }

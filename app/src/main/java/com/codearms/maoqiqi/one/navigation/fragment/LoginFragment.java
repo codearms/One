@@ -22,6 +22,12 @@ import com.codearms.maoqiqi.one.navigation.presenter.LoginPresenter;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.LoginContract;
 import com.codearms.maoqiqi.utils.ActivityUtils;
 
+/**
+ * 登录
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-07 14:10
+ */
 public class LoginFragment extends BaseFragment<LoginContract.Presenter> implements LoginContract.View, View.OnClickListener {
 
     private LoginContract.Presenter presenter;
@@ -30,13 +36,21 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
     private EditText etPassword;
     private Button btnLogin;
 
+    private boolean autoLogin;
+
+    private LoginCallBack loginCallBack;
+
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
      *
      * @return A new instance of fragment LoginFragment.
      */
-    public static LoginFragment newInstance() {
-        return new LoginFragment();
+    public static LoginFragment newInstance(boolean autoLogin) {
+        Bundle args = new Bundle();
+        args.putBoolean("autoLogin", autoLogin);
+        LoginFragment fragment = new LoginFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -65,11 +79,10 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
         btnLogin.setOnClickListener(this);
         btnNewUserRegister.setOnClickListener(this);
 
-       /* InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (inputMethodManager != null) {
-            mAccountEdit.requestFocus();
-            inputMethodManager.showSoftInput(mAccountEdit, 0);
-        }*/
+        if (getArguments() != null) {
+            autoLogin = getArguments().getBoolean("autoLogin");
+            if (autoLogin) presenter.login("maoqiqi", "123456");
+        }
     }
 
     @Override
@@ -87,7 +100,17 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
     @Override
     public void userInfo(UserBean userBean) {
         App.getInstance().setUserBean(userBean);
-        MainActivity.start(context);
+        if (loginCallBack != null) loginCallBack.loginStatus(true);
+        if (!autoLogin) MainActivity.start(context);
+    }
+
+    @Override
+    public void showErrorMsg(int resId) {
+        if (autoLogin) {
+            if (loginCallBack != null) loginCallBack.loginStatus(false);
+        } else {
+            super.showErrorMsg(resId);
+        }
     }
 
     private final class MyTextWatcher implements TextWatcher {
@@ -106,5 +129,14 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
         public void afterTextChanged(Editable s) {
             btnLogin.setEnabled(etUserName.getText().length() != 0 && etPassword.getText().length() != 0);
         }
+    }
+
+    public interface LoginCallBack {
+
+        void loginStatus(boolean status);
+    }
+
+    public void setCallBack(LoginCallBack callBack) {
+        this.loginCallBack = callBack;
     }
 }

@@ -84,6 +84,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         // 用户名
         tvUserName = navigationHeader.findViewById(R.id.tv_user_name);
         tvUserName.setOnClickListener(this);
+        setUserInfo();
         // 扫码
         navigationHeader.findViewById(R.id.iv_scan_code).setOnClickListener(this);
         // 退出
@@ -112,14 +113,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        if (App.getInstance().getUserBean() != null) {
-            tvUserName.setText(App.getInstance().getUserBean().getUserName());
-        }
+        setUserInfo();
     }
 
     // 更新用户信息
     public void setUserInfo() {
-        tvUserName.setText(App.getInstance().getUserBean().getUserName());
+        if (App.getInstance().getUserBean() != null) {
+            tvUserName.setText(App.getInstance().getUserBean().getUserName());
+        }
     }
 
     // 将Toolbar 与 DrawerLayout 关联

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">One</string>
 
+    <!--过渡页面-->
     <string name="jump">跳过</string>
     <string name="jump_num">跳过 %d</string>
     <string name="splash_title">干货集中营</string>
@@ -9,6 +10,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <!--菜单头部-->
     <string name="login">登录</string>
     <string name="personal_description">这个人很懒,什么都没有留下~ O(∩_∩)O ~</string>
     <string name="project_git">https://github.com/maoqiqi/One</string>
@@ -94,14 +96,14 @@
     <string name="setting_night">夜间模式</string>
     <string name="setting_clear">清除缓存</string>
 
-    <!-- =====================================首页资源开始===================================== -->
-
+    <!--主页面-->
     <string name="home">首页</string>
     <string name="news">新闻</string>
     <string name="music">音乐</string>
     <string name="book">图书</string>
     <string name="movie">影视</string>
 
+    <!-- =====================================首页资源开始===================================== -->
     <string name="useful_sites">常用网站</string>
     <string name="search">搜索</string>
     <string name="navigation">导航</string>

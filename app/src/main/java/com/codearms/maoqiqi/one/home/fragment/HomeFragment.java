@@ -38,6 +38,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 首页
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-07 11:15
+ */
 public class HomeFragment extends BaseFragment<HomeContract.Presenter> implements HomeContract.View {
 
     private static final String TAG = "com.codearms.maoqiqi.one.ArticlesFragment";
@@ -76,8 +82,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
         banner = rootView.findViewById(R.id.banner);
 
         if (savedInstanceState != null) {
-            if (context instanceof MainActivity)
-                ((MainActivity) context).associateDrawerLayout(toolbar);
+            ((MainActivity) context).associateDrawerLayout(toolbar);
             setBanner(bannerBeanList);
         }
 
@@ -91,10 +96,8 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
     @Override
     protected void loadData() {
         super.loadData();
-        if (context instanceof MainActivity)
-            ((MainActivity) context).associateDrawerLayout(toolbar);
-        presenter.getData();
-//        presenter.getBanner();
+        ((MainActivity) context).associateDrawerLayout(toolbar);
+        presenter.getBanner();
     }
 
     @Override
@@ -193,7 +196,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
             case R.id.menu_project:
                 // 项目
                 ActivityUtils.startActivity(context, ProjectActivity.class);
-                break;
+                return true;
         }
         return false;
     }

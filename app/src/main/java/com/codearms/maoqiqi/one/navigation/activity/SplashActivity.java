@@ -12,6 +12,7 @@ import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
+import com.codearms.maoqiqi.one.navigation.fragment.LoginFragment;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -26,11 +27,13 @@ import io.reactivex.disposables.CompositeDisposable;
  * Author: fengqi.mao.march@gmail.com
  * Date: 2019-08-05 15:58
  */
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity implements LoginFragment.LoginCallBack {
+
+    private static final String TAG = "com.codearms.maoqiqi.one.LoginFragment";
 
     private TextView tvJump;
 
-    private CompositeDisposable compositeDisposable;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private final int COUNT = 5;
     private volatile boolean isFirstStartMain = false;
@@ -47,10 +50,22 @@ public class SplashActivity extends BaseActivity {
         int i = new Random().nextInt(Constants.URLS.length);
         Glide.with(this).load(Constants.URLS[i]).placeholder(R.drawable.ic_splash_placeholder).into(ivSplash);
 
-        compositeDisposable = new CompositeDisposable();
+        LoginFragment fragment = (LoginFragment) getSupportFragmentManager().findFragmentByTag(TAG);
+        if (fragment == null) {
+            fragment = LoginFragment.newInstance(true);
+            fragment.setCallBack(this);
+            getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
+        }
+    }
+
+    @Override
+    public void loginStatus(boolean status) {
+        // 调用登录接口之后显示跳过按钮
+        showView();
+
         // 1s之后显示"跳过"按钮
-        compositeDisposable.add(Observable.timer(1000, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> showView()));
+//        compositeDisposable.add(Observable.timer(1000, TimeUnit.MILLISECONDS)
+//                .observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> showView()));
     }
 
     // 显示跳过按钮
