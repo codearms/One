@@ -20,7 +20,7 @@
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back"
         app:popupTheme="@style/navigation_popup_theme"
-        app:title="@string/loading"
+        app:title="@string/default_title"
         app:titleTextAppearance="@style/toolbar_appearance" />
 
     <FrameLayout

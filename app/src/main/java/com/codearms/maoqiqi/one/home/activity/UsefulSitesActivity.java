@@ -9,6 +9,12 @@ import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.UsefulSitesFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
+/**
+ * 常用网址
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-09 11:15
+ */
 public class UsefulSitesActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.UsefulSitesFragment";

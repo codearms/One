@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,11 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codearms.maoqiqi.base.BaseFragment;
-import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.BannerBean;
-import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.home.activity.KnowledgeActivity;
 import com.codearms.maoqiqi.one.home.activity.NavigationActivity;
 import com.codearms.maoqiqi.one.home.activity.PictureActivity;
@@ -49,6 +48,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
     private static final String TAG = "com.codearms.maoqiqi.one.ArticlesFragment";
 
     private Toolbar toolbar;
+    private SwipeRefreshLayout refreshLayout;
     private Banner banner;
 
     private List<BannerBean> bannerBeanList;
@@ -79,7 +79,12 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
         toolbar = rootView.findViewById(R.id.toolbar);
+        refreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         banner = rootView.findViewById(R.id.banner);
+
+        refreshLayout.setColorSchemeResources(R.color.color_home, R.color.color_news,
+                R.color.color_book, R.color.color_music, R.color.color_movie);
+        refreshLayout.setEnabled(false);
 
         if (savedInstanceState != null) {
             ((MainActivity) context).associateDrawerLayout(toolbar);
@@ -97,18 +102,14 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
     protected void loadData() {
         super.loadData();
         ((MainActivity) context).associateDrawerLayout(toolbar);
+        refreshLayout.setRefreshing(true);
         presenter.getBanner();
-    }
-
-    @Override
-    public void userInfo(UserBean userBean) {
-        App.getInstance().setUserBean(userBean);
-        ((MainActivity) context).setUserInfo();
     }
 
     @Override
     public void setBanner(List<BannerBean> bannerBeanList) {
         loadDataCompleted();
+        refreshLayout.setRefreshing(false);
         this.bannerBeanList = bannerBeanList;
 
         ArrayList<String> imageUrls = new ArrayList<>();
@@ -127,6 +128,12 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
                 // .setOnBannerListener(position -> PictureActivity.start(context, bannerBeanList.get(position).getImagePath(), null))
                 .setOnBannerListener(position -> PictureActivity.start(context, imageUrls, position, null))
                 .setDelayTime(3000).start();
+    }
+
+    @Override
+    public void showErrorMsg(int resId) {
+        super.showErrorMsg(resId);
+        refreshLayout.setRefreshing(false);
     }
 
     @Override

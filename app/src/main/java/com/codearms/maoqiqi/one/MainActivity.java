@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     // 更新用户信息
-    public void setUserInfo() {
+    private void setUserInfo() {
         if (App.getInstance().getUserBean() != null) {
             tvUserName.setText(App.getInstance().getUserBean().getUserName());
         }

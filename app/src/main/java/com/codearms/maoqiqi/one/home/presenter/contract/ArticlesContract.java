@@ -21,6 +21,8 @@ public interface ArticlesContract {
 
         void getCollect(boolean isRefresh);
 
+        void query(int page, String k);
+
         // 收藏
         void collect(int id);
 
@@ -29,8 +31,6 @@ public interface ArticlesContract {
 
         // 取消收藏
         void unCollect(int id, int originId);
-
-        void query(int page, String k);
     }
 
     interface View extends BaseView<Presenter> {

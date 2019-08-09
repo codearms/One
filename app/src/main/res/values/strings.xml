@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">One</string>
 
-    <!--过渡页面-->
+    <!-- 过渡页面 -->
     <string name="jump">跳过</string>
     <string name="jump_num">跳过 %d</string>
     <string name="splash_title">干货集中营</string>
@@ -10,23 +10,23 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-    <!--菜单头部-->
+    <!-- 菜单头部 -->
     <string name="login">登录</string>
     <string name="personal_description">这个人很懒,什么都没有留下~ O(∩_∩)O ~</string>
     <string name="project_git">https://github.com/maoqiqi/One</string>
 
-    <!--登录-->
+    <!-- 登录 -->
     <string name="user_name">用户名</string>
     <string name="password">密码</string>
     <string name="forget_password">忘记密码?</string>
     <string name="new_user_register">新用户注册</string>
 
-    <!--注册-->
+    <!-- 注册 -->
     <string name="confirm_password">确认密码</string>
     <string name="register">注册</string>
     <string name="registration_agreement">《<u>点击“注册”按钮即表示同意注册协议</u>》</string>
 
-    <!--主页菜单-->
+    <!-- 主页菜单 -->
     <string name="project_introduction">项目介绍</string>
     <string name="update_description">更新说明</string>
     <string name="scan_code">扫码下载</string>
@@ -37,11 +37,11 @@
     <string name="setting">设置</string>
     <string name="mode_night">夜间</string>
 
-    <!--扫码下载-->
+    <!-- 扫码下载 -->
     <string name="download_content">喜欢就推荐给你的小伙伴吧，扫描二维码直接下载，或者点击右上角分享链接地址。</string>
     <string name="star_content">如果你觉得不错，请帮忙Star一下吧。你的支持将是我最大的动力与褒奖~ O(∩_∩)O ~</string>
 
-    <!--项目介绍-->
+    <!-- 项目介绍 -->
     <string name="introduction_title">本案例主要演示安卓常用控件的使用。</string>
     <string name="introduction_1">1. 技术点</string>
     <string name="introduction_2">2. 依赖项目</string>
@@ -55,9 +55,9 @@
     <string name="introduction_5_text">该页面演示了Android v4 包中的DrawerLayout抽屉控件、Android Material Design风格控件中的BottomNavigationView、NavigationView的基本使用；以及如何解决状态栏透明问题。</string>
     <string name="introduction_read_me">这里只是简单列举一些内容，详见README，如果感兴趣可以下载项目亲自体验一下。</string>
 
-    <!--更新说明-->
+    <!-- 更新说明 -->
 
-    <!--问题反馈-->
+    <!-- 问题反馈 -->
     <string name="problem_feedback_content">您好，如果在使用中发现了问题，可以在GitHub的Issues处说明问题原因，也可以通过以下方式联系我。很希望得到您的意见 ~ </string>
     <string name="issues">Issues</string>
     <string name="issues_url">https://github.com/maoqiqi/One/issues</string>
@@ -67,7 +67,7 @@
     <string name="qq">QQ</string>
     <string name="email">Email</string>
 
-    <!--关于我们-->
+    <!-- 关于我们 -->
     <string name="current_version">当前版本 V%1$s</string>
     <string name="check_update">检查更新</string>
     <string name="give_a_star">给个Star吧</string>
@@ -77,11 +77,11 @@
     <string name="dou_ban_terms">https://www.douban.com/about/agreement</string>
     <string name="copyright">©2019 https://github.com/maoqiqi/One</string>
 
-    <!--捐赠开发者-->
+    <!-- 捐赠开发者 -->
     <string name="ali_pay">支付宝</string>
     <string name="wx_pay">微信</string>
 
-    <!--设置-->
+    <!-- 设置 -->
     <string name="system_animation_title">系统动画</string>
     <string name="system_animation_desc">在整个应用中，应用系统动画</string>
     <string name="launcher_page_title">启动页妹子图</string>
@@ -96,14 +96,30 @@
     <string name="setting_night">夜间模式</string>
     <string name="setting_clear">清除缓存</string>
 
-    <!--主页面-->
+    <!-- WebView -->
+    <string name="default_title">加载中…</string>
+    <string name="refresh">刷新</string>
+    <string name="share">分享</string>
+    <string name="copy_url">复制链接</string>
+    <string name="browser_open">浏览器打开</string>
+    <string name="collect">收藏列表</string>
+    <string name="copy_success">复制成功</string>
+
+    <!-- 图片预览 -->
+    <string name="transition_picture">transition_picture</string>
+    <string name="save">保存</string>
+    <string name="collection">收藏</string>
+    <string name="wallpaper">设为壁纸</string>
+    <string name="save_folder">图片已保存至 %s 文件夹</string>
+
+    <!-- 主页面 -->
     <string name="home">首页</string>
     <string name="news">新闻</string>
     <string name="music">音乐</string>
     <string name="book">图书</string>
     <string name="movie">影视</string>
 
-    <!-- =====================================首页资源开始===================================== -->
+    <!-- =========================== 首页资源开始 =========================== -->
     <string name="useful_sites">常用网站</string>
     <string name="search">搜索</string>
     <string name="navigation">导航</string>
@@ -118,111 +134,16 @@
     <string name="one_day">1天</string>
 
     <string name="please_login">请先登录</string>
-
-    <string name="failed_to_banner">获取广告数据失败</string>
-    <string name="failed_to_common">获取常用网站数据失败</string>
-    <string name="failed_to_hot_key">获取热门关键词数据失败</string>
-    <string name="failed_to_top_articles">获取置顶文章数据失败</string>
-    <string name="failed_to_articles">获取文章列表数据失败</string>
-    <string name="failed_to_navigation">获取导航数据失败</string>
-    <string name="failed_to_wx_chat">获取公众号数据失败</string>
-    <string name="failed_to_wx_articles">获取公众号历史数据失败</string>
-    <string name="failed_to_wx_search_articles">搜索公众号数据失败</string>
-    <string name="failed_to_knowledge">获取知识体系数据失败</string>
-    <string name="failed_to_knowledge_articles">获取知识体系下的文章数据失败</string>
-    <string name="failed_to_project">获取项目类别数据失败</string>
-    <string name="failed_to_project_articles">获取项目数据失败</string>
-    <string name="failed_to_login">登录失败</string>
-    <string name="failed_to_register">注册失败</string>
-    <string name="failed_to_logout">退出失败</string>
-    <string name="failed_to_collect_data">获取收藏文章数据失败</string>
-    <string name="failed_to_collect">收藏失败</string>
-    <string name="failed_to_un_collect">取消收藏失败</string>
-    <string name="failed_to_query">搜索数据失败</string>
-
     <string name="success_to_collect">收藏成功</string>
     <string name="success_to_un_collect">取消收藏成功</string>
 
-    <string name="loading">加载中…</string>
-    <string name="share">分享</string>
-    <string name="copy_url">复制链接</string>
-    <string name="browser_open">浏览器打开</string>
-    <string name="collect">收藏列表</string>
-
     <string name="top_search">热门搜索</string>
     <string name="search_clean">清空搜索历史</string>
+    <!-- =========================== 首页资源结束 =========================== -->
 
-    <!-- =====================================首页资源结束===================================== -->
 
+    <!-- =========================== 新闻资源开始 =========================== -->
     <string name="preference">偏好设置</string>
-
-    <string name="image_description">image description</string>
-    <string name="http_error">网络异常</string>
-    <string name="unKnown_error">未知错误</string>
-
-    <string name="transition_book_img">transition_book_img</string>
-    <string name="transition_music_img">transition_music_img</string>
-    <string name="transition_movie_img">transition_movie_img</string>
-
-    <string name="movie_director_">导演：%s</string>
-    <string name="movie_star_">主演：%s</string>
-    <string name="movie_classify">类型：%s</string>
-    <string name="movie_detail">电影详情</string>
-    <string name="actor"><![CDATA[导演 & 主演]]></string>
-    <string name="movie_genre">类型：%s</string>
-    <string name="movie_duration">时长：%s</string>
-    <string name="movie_year">上映日期：%s</string>
-    <string name="country">制片国家/地区：%s</string>
-    <string name="dou_ban_score">豆瓣评分</string>
-    <string name="introduction">简介</string>
-    <string name="num_raters">%d人</string>
-    <string name="movie_director">导演</string>
-    <string name="movie_star">主演</string>
-    <string name="trailers_and_photos">预告片/剧照</string>
-    <string name="more">更多信息</string>
-    <string name="book_detail">图书详情</string>
-    <string name="author">作者</string>
-    <string name="catalog">目录</string>
-
-    <string name="book_author">作者：%s</string>
-    <string name="book_publish">发行：%s / %s</string>
-    <string name="book_publisher">出版社：%s</string>
-    <string name="book_publish_date">出版时间：%s</string>
-    <string name="book_price">价格：%s</string>
-
-    <string name="read_external_storage">ONE将读取外部存储以在您的设备上显示歌曲。</string>
-    <string name="no_authorization">没有权限读取外部存储，以在您的设备上显示歌曲。</string>
-    <string name="to_settings">去应用程序详情设置，授权读取外部存储以在设备上显示歌曲。</string>
-    <string name="ok">确定</string>
-    <string name="cancel">取消</string>
-
-    <string name="music_song_info">%1$s · %2$s</string>
-    <string name="music_artist_info">%1$d 张专辑 | %2$d 首歌</string>
-    <string name="music_album_info">%1$s | %2$d 首歌</string>
-    <string name="music_folder_info">%1$d首 %2$s</string>
-
-    <string name="song_info">歌曲 ：%s</string>
-    <string name="artist_info">艺术家 ：%s</string>
-    <string name="album_info">专辑 ：%s</string>
-    <string name="folder_info">文件夹 ：%s</string>
-    <string name="play_next">下一首播放</string>
-    <string name="collect_song_list">收藏到歌单</string>
-    <string name="set_ring">设为铃声</string>
-    <string name="song_information">查看歌曲信息</string>
-    <string name="delete">删除</string>
-
-    <string name="sort">排序</string>
-    <string name="sort_az">A-Z</string>
-    <string name="sort_za">Z-A</string>
-    <string name="sort_artist">艺术家</string>
-    <string name="sort_album">专辑</string>
-    <string name="sort_duration">时长</string>
-    <string name="sort_number_of_songs">歌曲数</string>
-    <string name="sort_number_of_albums">专辑数</string>
-    <string name="star">star</string>
-
-    <string name="refresh">刷新</string>
-    <string name="copy_success">复制成功</string>
 
     <string-array name="news_titles">
         <item>推荐</item>
@@ -247,12 +168,64 @@
         <item>美食</item>
         <item>旅行</item>
     </string-array>
+    <!-- =========================== 新闻资源结束 =========================== -->
+
+
+    <!-- =========================== 图书资源开始 =========================== -->
+    <string name="book_author">作者：%s</string>
+    <string name="book_publish">发行：%s / %s</string>
+    <string name="book_publisher">出版社：%s</string>
+    <string name="book_publish_date">出版时间：%s</string>
+    <string name="book_price">价格：%s</string>
+
+    <string name="transition_book_img">transition_book_img</string>
+    <string name="book_detail">图书详情</string>
+
+    <string name="author">作者</string>
+    <string name="catalog">目录</string>
 
     <string-array name="book_titles">
         <item>文学</item>
         <item>生活</item>
         <item>名著</item>
     </string-array>
+    <!-- =========================== 图书资源结束 =========================== -->
+
+
+    <!-- =========================== 音乐资源开始 =========================== -->
+    <string name="sort">排序</string>
+    <string name="sort_az">A-Z</string>
+    <string name="sort_za">Z-A</string>
+    <string name="sort_artist">艺术家</string>
+    <string name="sort_album">专辑</string>
+    <string name="sort_duration">时长</string>
+    <string name="sort_number_of_songs">歌曲数</string>
+    <string name="sort_number_of_albums">专辑数</string>
+
+    <string name="read_external_storage">ONE将读取外部存储以在您的设备上显示歌曲。</string>
+    <string name="no_authorization">没有权限读取外部存储，以在您的设备上显示歌曲。</string>
+    <string name="to_settings">去应用程序详情设置，授权读取外部存储以在设备上显示歌曲。</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+
+    <string name="music_song_info">%1$s · %2$s</string>
+    <string name="music_artist_info">%1$d 张专辑 | %2$d 首歌</string>
+    <string name="music_album_info">%1$s | %2$d 首歌</string>
+    <string name="music_folder_info">%1$d首 %2$s</string>
+
+    <string name="star">star</string>
+
+    <string name="song_info">歌曲 ：%s</string>
+    <string name="artist_info">艺术家 ：%s</string>
+    <string name="album_info">专辑 ：%s</string>
+    <string name="folder_info">文件夹 ：%s</string>
+    <string name="play_next">下一首播放</string>
+    <string name="collect_song_list">收藏到歌单</string>
+    <string name="set_ring">设为铃声</string>
+    <string name="song_information">查看歌曲信息</string>
+    <string name="delete">删除</string>
+
+    <string name="transition_music_img">transition_music_img</string>
 
     <string-array name="music_titles">
         <item>歌曲</item>
@@ -260,13 +233,66 @@
         <item>专辑</item>
         <item>文件夹</item>
     </string-array>
+    <!-- =========================== 音乐资源结束 =========================== -->
+
+
+    <string name="dou_ban_score">豆瓣评分</string>
+    <string name="num_raters">%d人</string>
+    <string name="introduction">简介</string>
+
+
+    <!-- =========================== 电影资源开始 =========================== -->
+    <string name="movie_director_">导演：%s</string>
+    <string name="movie_star_">主演：%s</string>
+    <string name="movie_classify">类型：%s</string>
+
+    <string name="transition_movie_img">transition_movie_img</string>
+    <string name="movie_detail">电影详情</string>
+
+    <string name="actor"><![CDATA[导演 & 主演]]></string>
+    <string name="movie_genre">类型：%s</string>
+    <string name="movie_duration">时长：%s</string>
+    <string name="movie_year">上映日期：%s</string>
+    <string name="country">制片国家/地区：%s</string>
+
+    <string name="movie_director">导演</string>
+    <string name="movie_star">主演</string>
+    <string name="trailers_and_photos">预告片/剧照</string>
+    <string name="more">更多信息</string>
 
     <string-array name="movie_titles">
         <item>正在热映</item>
         <item>即将上映</item>
     </string-array>
+    <!-- =========================== 电影资源结束 =========================== -->
 
-    <!-- =====================================干货资源===================================== -->
+
+    <string name="image_description">image description</string>
+    <string name="http_error">网络异常</string>
+    <string name="unKnown_error">未知错误</string>
+
+    <string name="failed_to_banner">获取广告数据失败</string>
+    <string name="failed_to_articles">获取文章列表数据失败</string>
+    <string name="failed_to_collect">收藏失败</string>
+    <string name="failed_to_un_collect">取消收藏失败</string>
+
+    <string name="failed_to_common">获取常用网站数据失败</string>
+    <string name="failed_to_hot_key">获取热门关键词数据失败</string>
+    <string name="failed_to_navigation">获取导航数据失败</string>
+    <string name="failed_to_wx_chat">获取公众号数据失败</string>
+    <string name="failed_to_wx_articles">获取公众号历史数据失败</string>
+    <string name="failed_to_wx_search_articles">搜索公众号数据失败</string>
+    <string name="failed_to_knowledge">获取知识体系数据失败</string>
+    <string name="failed_to_knowledge_articles">获取知识体系下的文章数据失败</string>
+    <string name="failed_to_project">获取项目类别数据失败</string>
+    <string name="failed_to_project_articles">获取项目数据失败</string>
+    <string name="failed_to_login">登录失败</string>
+    <string name="failed_to_register">注册失败</string>
+    <string name="failed_to_logout">退出失败</string>
+    <string name="failed_to_collect_data">获取收藏文章数据失败</string>
+    <string name="failed_to_query">搜索数据失败</string>
+
+    <!-- 干货资源 -->
     <string name="search_gank">搜索干货</string>
 
     <string-array name="gank_classify">
@@ -279,12 +305,6 @@
         <item>瞎推荐</item>
         <item>福利</item>
     </string-array>
-
-    <string name="transition_picture">transition_picture</string>
-    <string name="save">保存</string>
-    <string name="collection">收藏</string>
-    <string name="wallpaper">设为壁纸</string>
-    <string name="save_folder">图片已保存至 %s 文件夹</string>
 
     <item name="tag" type="id" />
 </resources>

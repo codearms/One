@@ -19,6 +19,12 @@ import com.codearms.maoqiqi.one.home.presenter.contract.NavigationContract;
 
 import java.util.List;
 
+/**
+ * 导航
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-09 14:15
+ */
 public class NavigationFragment extends BaseFragment<NavigationContract.Presenter> implements
         NavigationContract.View, FlowLayoutFragment.SmoothScrollListener {
 

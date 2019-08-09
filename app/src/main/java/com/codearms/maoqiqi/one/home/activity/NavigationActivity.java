@@ -12,6 +12,12 @@ import com.codearms.maoqiqi.one.home.fragment.NavigationFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
+/**
+ * 导航
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-09 14:15
+ */
 public class NavigationActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.NavigationFragment";
