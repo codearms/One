@@ -19,6 +19,12 @@ import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.view.StatusBarView;
 import com.codearms.maoqiqi.utils.KeyboardUtils;
 
+/**
+ * 搜索
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-07 15:15
+ */
 public class SearchActivity extends BaseActivity implements SearchFragment.SearchListener {
 
     private static final String TAG_SEARCH = "com.codearms.maoqiqi.one.SearchFragment";

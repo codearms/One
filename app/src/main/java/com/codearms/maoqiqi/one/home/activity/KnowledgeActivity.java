@@ -12,6 +12,12 @@ import com.codearms.maoqiqi.one.home.fragment.FlowLayoutFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
+/**
+ * 知识体系
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-12 14:15
+ */
 public class KnowledgeActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.FlowLayoutFragment";

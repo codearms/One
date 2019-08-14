@@ -34,7 +34,7 @@ public class HeaderImagePresenter extends RxPresenterImpl<HeaderImageContract.Vi
         addSubscribe(observable.subscribeWith(new BaseObserver<DataBean>(view) {
             @Override
             public void onNext(DataBean dataBean) {
-                if (!view.isActive()) return;
+                super.onNext(dataBean);
                 if (dataBean != null && dataBean.getResultList() != null && dataBean.getResultList().size() > 0) {
                     view.setHeaderImage(dataBean.getResultList().get(0).getUrl());
                 }

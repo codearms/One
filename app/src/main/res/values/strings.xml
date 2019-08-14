@@ -286,8 +286,6 @@
     <string name="failed_to_knowledge_articles">获取知识体系下的文章数据失败</string>
     <string name="failed_to_project">获取项目类别数据失败</string>
     <string name="failed_to_project_articles">获取项目数据失败</string>
-    <string name="failed_to_login">登录失败</string>
-    <string name="failed_to_register">注册失败</string>
     <string name="failed_to_logout">退出失败</string>
     <string name="failed_to_collect_data">获取收藏文章数据失败</string>
     <string name="failed_to_query">搜索数据失败</string>

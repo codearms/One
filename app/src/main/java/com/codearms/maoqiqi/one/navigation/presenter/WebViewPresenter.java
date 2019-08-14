@@ -23,7 +23,6 @@ public class WebViewPresenter extends RxPresenterImpl<WebViewContract.View> impl
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        if (!view.isActive()) return;
                         view.collectSuccess(null);
                     }
                 }));
@@ -35,7 +34,7 @@ public class WebViewPresenter extends RxPresenterImpl<WebViewContract.View> impl
                 new BaseObserver<ArticleBean>(view, R.string.failed_to_collect) {
                     @Override
                     public void onNext(ArticleBean articleBean) {
-                        if (!view.isActive()) return;
+                        super.onNext(articleBean);
                         view.collectSuccess(articleBean);
                     }
                 }));
@@ -48,7 +47,6 @@ public class WebViewPresenter extends RxPresenterImpl<WebViewContract.View> impl
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        if (!view.isActive()) return;
                         view.unCollectSuccess();
                     }
                 }));
@@ -61,7 +59,6 @@ public class WebViewPresenter extends RxPresenterImpl<WebViewContract.View> impl
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        if (!view.isActive()) return;
                         view.unCollectSuccess();
                     }
                 }));
@@ -73,8 +70,7 @@ public class WebViewPresenter extends RxPresenterImpl<WebViewContract.View> impl
                 new BaseObserver<Object>(view, R.string.failed_to_collect_data) {
                     @Override
                     public void onNext(Object object) {
-                        if (!view.isActive()) return;
-
+                        super.onNext(object);
                     }
                 }));
     }
@@ -86,8 +82,7 @@ public class WebViewPresenter extends RxPresenterImpl<WebViewContract.View> impl
                 new BaseObserver<Object>(view, R.string.failed_to_collect) {
                     @Override
                     public void onNext(Object object) {
-                        if (!view.isActive()) return;
-
+                        super.onNext(object);
                     }
                 }));
     }
@@ -98,8 +93,7 @@ public class WebViewPresenter extends RxPresenterImpl<WebViewContract.View> impl
                 new BaseObserver<Object>(view, R.string.failed_to_un_collect) {
                     @Override
                     public void onNext(Object object) {
-                        if (!view.isActive()) return;
-
+                        super.onNext(object);
                     }
                 }));
     }

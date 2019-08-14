@@ -111,16 +111,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
+    protected void onRestart() {
+        super.onRestart();
         setUserInfo();
     }
 
     // 更新用户信息
     private void setUserInfo() {
-        if (App.getInstance().getUserBean() != null) {
-            tvUserName.setText(App.getInstance().getUserBean().getUserName());
-        }
+        if (App.getInstance().isLogin()) tvUserName.setText(App.getInstance().getUserName());
     }
 
     // 将Toolbar 与 DrawerLayout 关联
@@ -149,7 +147,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 ActivityUtils.startActivity(this, ScanCodeActivity.class);
                 break;
             case R.id.tv_user_name:
-                if (App.getInstance().getUserBean() == null) {
+                if (!App.getInstance().isLogin()) {
                     ActivityUtils.startActivity(this, LoginActivity.class);
                 } else {
                     ActivityUtils.startActivity(this, CollectActivity.class);
@@ -211,9 +209,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        else super.onBackPressed();
+        } else {
+            super.onBackPressed();
+            System.exit(0);
+        }
     }
 
     private final class MyOnCheckedChangeListener extends FragmentCheckedChangeListener {

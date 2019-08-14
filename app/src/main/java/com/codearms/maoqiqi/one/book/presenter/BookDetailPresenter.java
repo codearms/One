@@ -26,7 +26,7 @@ public class BookDetailPresenter extends RxPresenterImpl<BookDetailContract.View
                 .subscribeWith(new BaseObserver<BookDetailBean>(view) {
                     @Override
                     public void onNext(BookDetailBean bookDetailBean) {
-                        if (!view.isActive()) return;
+                        super.onNext(bookDetailBean);
                         view.setBookDetail(bookDetailBean);
                     }
                 }));

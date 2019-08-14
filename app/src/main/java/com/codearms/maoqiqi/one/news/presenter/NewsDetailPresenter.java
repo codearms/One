@@ -26,7 +26,7 @@ public class NewsDetailPresenter extends RxPresenterImpl<NewsDetailContract.View
                 .subscribeWith(new BaseObserver<NewsDetailBean>(view) {
                     @Override
                     public void onNext(NewsDetailBean newsDetailBean) {
-                        if (!view.isActive()) return;
+                        super.onNext(newsDetailBean);
                         view.setNewsDetail(newsDetailBean);
                     }
                 }));

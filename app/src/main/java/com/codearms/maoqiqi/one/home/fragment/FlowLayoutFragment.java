@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,7 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
     public static final String FROM_NAVIGATION = "FROM_NAVIGATION";
     public static final String FROM_KNOWLEDGE = "FROM_KNOWLEDGE";
 
+    private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private LinearLayoutManager manager;
 
@@ -75,7 +77,13 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
+        refreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         recyclerView = rootView.findViewById(R.id.recycler_view);
+
+        refreshLayout.setColorSchemeResources(R.color.color_home, R.color.color_news,
+                R.color.color_book, R.color.color_music, R.color.color_movie);
+        refreshLayout.setEnabled(false);
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             from = bundle.getString("from", FROM_NAVIGATION);
@@ -120,6 +128,7 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
                 addOnScrollListener();
                 break;
             case FROM_KNOWLEDGE:
+                refreshLayout.setRefreshing(true);
                 presenter.getKnowledge();
                 break;
         }
@@ -127,6 +136,8 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
 
     @Override
     public void setKnowledge(List<ParentClassifyBean> parentClassifyBeans) {
+        loadDataCompleted();
+        refreshLayout.setRefreshing(false);
         recyclerView.setAdapter(new RecyclerViewAdapter(null, parentClassifyBeans));
     }
 

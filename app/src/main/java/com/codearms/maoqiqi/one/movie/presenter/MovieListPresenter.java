@@ -22,7 +22,7 @@ public class MovieListPresenter extends RxPresenterImpl<MovieListContract.View> 
 
                     @Override
                     public void onNext(MovieListBean movieListBean) {
-                        if (!view.isActive()) return;
+                        super.onNext(movieListBean);
                         view.setData(movieListBean);
                     }
                 }));
@@ -35,7 +35,7 @@ public class MovieListPresenter extends RxPresenterImpl<MovieListContract.View> 
 
                     @Override
                     public void onNext(MovieListBean movieListBean) {
-                        if (!view.isActive()) return;
+                        super.onNext(movieListBean);
                         view.setData(movieListBean);
                     }
                 }));
@@ -48,7 +48,7 @@ public class MovieListPresenter extends RxPresenterImpl<MovieListContract.View> 
 
                     @Override
                     public void onNext(MovieListBean movieListBean) {
-                        if (!view.isActive()) return;
+                        super.onNext(movieListBean);
                         view.setData(movieListBean);
                     }
                 }));

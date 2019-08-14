@@ -24,7 +24,7 @@ public class HomePresenter extends RxPresenterImpl<HomeContract.View> implements
                 new BaseObserver<List<BannerBean>>(view, R.string.failed_to_banner) {
                     @Override
                     public void onNext(List<BannerBean> bannerBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(bannerBeans);
                         view.setBanner(bannerBeans);
                     }
                 }));

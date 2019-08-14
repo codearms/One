@@ -30,8 +30,6 @@ import com.codearms.maoqiqi.utils.ToastUtils;
 
 public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> implements WebViewContract.View {
 
-    private WebViewContract.Presenter presenter;
-
     private ObservableWebView webView;
     private ProgressBar progressBar;
     private FloatingActionButton fabCollection;
@@ -149,7 +147,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         fabCollection.setBackgroundTintList(ContextCompat.getColorStateList(context, bgResId));
         fabCollection.setImageResource(isCollect ? R.drawable.ic_collect : R.drawable.ic_un_collect);
         fabCollection.setOnClickListener(v -> {
-            if (App.getInstance().getUserBean() == null) {
+            if (!App.getInstance().isLogin()) {
                 ToastUtils.show(getString(R.string.please_login));
                 return;
             }
@@ -164,7 +162,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
             } else {
                 // 自定义收藏内容
                 if (from == null) {
-                    presenter.collect(titleText, App.getInstance().getUserBean().getUserName(), url);
+                    presenter.collect(titleText, App.getInstance().getUserName(), url);
                 } else {
                     presenter.collect(articleBean.getId());
                 }

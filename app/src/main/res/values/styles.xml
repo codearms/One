@@ -58,6 +58,12 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="AppTheme.Fullscreen.Splash">
+        <item name="android:windowBackground">@drawable/ic_splash_placeholder</item>
+        <!--禁止加载Preview Window-->
+        <!--<item name="android:windowDisablePreview">true</item>-->
+    </style>
+
     <!--透明-->
     <style name="AppTheme.Fullscreen.Translucent">
         <item name="android:windowIsTranslucent">true</item>

@@ -46,7 +46,7 @@ public class PictureOperationPresenter extends RxPresenterImpl<PictureOperationC
 
                     @Override
                     public void onNext(File file) {
-                        if (!view.isActive()) return;
+                        super.onNext(file);
                         view.saveSuccess(file);
                     }
                 }));

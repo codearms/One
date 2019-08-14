@@ -3,6 +3,7 @@ package com.codearms.maoqiqi.one.home.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,9 +31,12 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
 
     private static final String TAG = "com.codearms.maoqiqi.one.FlowLayoutFragment";
 
+    private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private LinearLayoutManager manager;
     private RecyclerViewAdapter adapter;
+
+    private List<NavigationBean> navigationBeanList;
 
     private FlowLayoutFragment fragment;
     // 当前选中项
@@ -61,29 +65,43 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
+        refreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
         recyclerView = rootView.findViewById(R.id.recycler_view);
+
+        refreshLayout.setColorSchemeResources(R.color.color_home, R.color.color_news,
+                R.color.color_book, R.color.color_music, R.color.color_movie);
+        refreshLayout.setEnabled(false);
 
         manager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(manager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
+
+        if (savedInstanceState != null) {
+            setNavigation(navigationBeanList);
+        }
     }
 
     @Override
     protected void loadData() {
         super.loadData();
+        refreshLayout.setRefreshing(true);
         presenter.getNavigation();
     }
 
     @Override
-    public void setNavigation(List<NavigationBean> navigationBeans) {
-        adapter = new RecyclerViewAdapter(navigationBeans);
+    public void setNavigation(List<NavigationBean> navigationBeanList) {
+        loadDataCompleted();
+        refreshLayout.setRefreshing(false);
+        this.navigationBeanList = navigationBeanList;
+
+        adapter = new RecyclerViewAdapter(navigationBeanList);
         recyclerView.setAdapter(adapter);
 
         fragment = (FlowLayoutFragment) getChildFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
             fragment = FlowLayoutFragment.newInstance(FlowLayoutFragment.FROM_NAVIGATION);
-            fragment.setNavigationBeans(navigationBeans);
+            fragment.setNavigationBeans(navigationBeanList);
             fragment.setSmoothScrollListener(this);
             getChildFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }

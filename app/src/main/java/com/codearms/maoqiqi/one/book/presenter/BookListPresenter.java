@@ -22,7 +22,7 @@ public class BookListPresenter extends RxPresenterImpl<BookListContract.View> im
 
                     @Override
                     public void onNext(BookListBean bookListBean) {
-                        if (!view.isActive()) return;
+                        super.onNext(bookListBean);
                         view.setBook(bookListBean);
                     }
                 }));

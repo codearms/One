@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".navigation.activity.SplashActivity"
-            android:theme="@style/AppTheme.Fullscreen">
+            android:theme="@style/AppTheme.Fullscreen.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,31 +28,52 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop" />
-        <!--home-->
-        <activity android:name=".home.activity.UsefulSitesActivity" />
-        <activity android:name=".home.activity.NavigationActivity" />
-        <activity android:name=".home.activity.WeChatActivity" />
-        <activity android:name=".home.activity.KnowledgeActivity" />
-        <activity android:name=".home.activity.ProjectActivity" />
-        <activity android:name=".home.activity.ClassifyActivity" />
-        <!--navigation-->
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <!--导航-->
+        <!--登录-->
         <activity
             android:name=".navigation.activity.LoginActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
+        <!--收藏列表-->
         <activity
             android:name=".navigation.activity.CollectActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".navigation.activity.RegisterActivity" />
+        <!--注册-->
+        <activity
+            android:name=".navigation.activity.RegisterActivity"
+            android:windowSoftInputMode="stateAlwaysVisible" />
+        <!--项目介绍-->
         <activity android:name=".navigation.activity.ProjectIntroductionActivity" />
+        <!--更新说明-->
         <activity android:name=".navigation.activity.UpdateDescriptionActivity" />
+        <!--扫码下载-->
         <activity android:name=".navigation.activity.ScanCodeActivity" />
+        <!--问题反馈-->
         <activity android:name=".navigation.activity.ProblemFeedbackActivity" />
+        <!--关于我们-->
         <activity android:name=".navigation.activity.AboutActivity" />
+        <!--捐赠开发者-->
         <activity android:name=".navigation.activity.DonateActivity" />
+        <!--设置-->
         <activity android:name=".navigation.activity.SettingActivity" />
+
+        <!--首页-->
+        <!--常用网址-->
+        <activity android:name=".home.activity.UsefulSitesActivity" />
+        <!--导航-->
+        <activity android:name=".home.activity.NavigationActivity" />
+        <!--公众号-->
+        <activity android:name=".home.activity.WeChatActivity" />
+        <!--知识体系-->
+        <activity android:name=".home.activity.KnowledgeActivity" />
+        <!--项目-->
+        <activity android:name=".home.activity.ProjectActivity" />
+        <!--二级分类-->
+        <activity android:name=".home.activity.ClassifyActivity" />
+
         <activity
             android:name=".navigation.activity.WebViewActivity"
             android:launchMode="singleTask"
@@ -77,14 +98,24 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Fullscreen.Translucent" />
-        <!--news-->
+
+        <!--新闻详情-->
         <activity android:name=".news.activity.NewsDetailActivity" />
+
+        <!--图书详情-->
         <activity android:name=".book.activity.BookDetailActivity" />
+
+        <!--音乐列表-->
         <activity android:name=".music.activity.MusicListActivity" />
+        <!--更多音乐操作选项-->
         <activity
             android:name=".music.activity.MusicMoreActivity"
             android:theme="@style/OneAppDialog" />
+
+        <!--影视详情-->
         <activity android:name=".movie.activity.MovieDetailActivity" />
+
+        <!--干货-->
         <activity android:name=".gank.activity.GankActivity" />
     </application>
 

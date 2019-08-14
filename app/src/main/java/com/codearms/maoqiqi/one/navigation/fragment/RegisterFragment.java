@@ -21,17 +21,18 @@ import com.codearms.maoqiqi.one.navigation.presenter.contract.RegisterContract;
 
 public class RegisterFragment extends BaseFragment<RegisterContract.Presenter> implements RegisterContract.View {
 
-    private RegisterContract.Presenter presenter;
-
     private EditText etUserName;
     private EditText etPassword;
     private EditText etConfirmPassword;
     private Button btnRegister;
 
+    private String userName;
+    private String password;
+
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
      *
-     * @return A new instance of fragment LoginFragment.
+     * @return A new instance of fragment RegisterFragment.
      */
     public static RegisterFragment newInstance() {
         return new RegisterFragment();
@@ -40,6 +41,7 @@ public class RegisterFragment extends BaseFragment<RegisterContract.Presenter> i
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         presenter = new RegisterPresenter(this);
     }
 
@@ -61,13 +63,20 @@ public class RegisterFragment extends BaseFragment<RegisterContract.Presenter> i
         etPassword.addTextChangedListener(textWatcher);
         etConfirmPassword.addTextChangedListener(textWatcher);
 
-        btnRegister.setOnClickListener(v -> presenter.register(etUserName.getText().toString(),
-                etPassword.getText().toString(), etConfirmPassword.getText().toString()));
+        btnRegister.setOnClickListener(v -> {
+            showLoading();
+            userName = etUserName.getText().toString();
+            password = etPassword.getText().toString();
+            presenter.register(userName, password, etConfirmPassword.getText().toString());
+        });
     }
 
     @Override
     public void userInfo(UserBean userBean) {
-        App.getInstance().setUserBean(userBean);
+        hideLoading();
+        App.getInstance().setIsLogin(true);
+        App.getInstance().setUserName(userName);
+        App.getInstance().setPassword(password);
         MainActivity.start(context);
     }
 

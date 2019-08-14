@@ -24,7 +24,7 @@ public class NavigationPresenter extends RxPresenterImpl<NavigationContract.View
                 new BaseObserver<List<NavigationBean>>(view, R.string.failed_to_navigation) {
                     @Override
                     public void onNext(List<NavigationBean> navigationBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(navigationBeans);
                         view.setNavigation(navigationBeans);
                     }
                 }));

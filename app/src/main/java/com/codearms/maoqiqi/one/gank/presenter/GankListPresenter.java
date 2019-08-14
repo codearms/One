@@ -27,7 +27,7 @@ public class GankListPresenter extends RxPresenterImpl<GankListContract.View> im
                 .subscribeWith(new BaseObserver<DataBean>(view) {
                     @Override
                     public void onNext(DataBean dataBean) {
-                        if (!view.isActive()) return;
+                        super.onNext(dataBean);
                         view.setData(dataBean.getResultList());
                     }
                 }));

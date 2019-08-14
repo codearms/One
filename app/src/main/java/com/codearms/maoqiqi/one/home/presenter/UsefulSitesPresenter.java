@@ -23,7 +23,7 @@ public class UsefulSitesPresenter extends RxPresenterImpl<UsefulSitesContract.Vi
                 .subscribeWith(new BaseObserver<List<UsefulSitesBean>>(view) {
                     @Override
                     public void onNext(List<UsefulSitesBean> usefulSitesBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(usefulSitesBeans);
                         view.setUsefulSites(usefulSitesBeans);
                     }
                 }));

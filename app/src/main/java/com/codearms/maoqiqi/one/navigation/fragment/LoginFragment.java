@@ -30,13 +30,14 @@ import com.codearms.maoqiqi.utils.ActivityUtils;
  */
 public class LoginFragment extends BaseFragment<LoginContract.Presenter> implements LoginContract.View, View.OnClickListener {
 
-    private LoginContract.Presenter presenter;
-
     private EditText etUserName;
     private EditText etPassword;
     private Button btnLogin;
 
     private boolean autoLogin;
+
+    private String userName;
+    private String password;
 
     private LoginCallBack loginCallBack;
 
@@ -81,7 +82,9 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
 
         if (getArguments() != null) {
             autoLogin = getArguments().getBoolean("autoLogin");
-            if (autoLogin) presenter.login("maoqiqi", "123456");
+            if (autoLogin) {
+                presenter.login(App.getInstance().getUserName(), App.getInstance().getPassword());
+            }
         }
     }
 
@@ -89,7 +92,10 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-                presenter.login(etUserName.getText().toString(), etPassword.getText().toString());
+                showLoading();
+                userName = etUserName.getText().toString();
+                password = etPassword.getText().toString();
+                presenter.login(userName, password);
                 break;
             case R.id.btn_new_user_register:
                 ActivityUtils.startActivity(context, RegisterActivity.class);
@@ -99,9 +105,15 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
 
     @Override
     public void userInfo(UserBean userBean) {
-        App.getInstance().setUserBean(userBean);
-        if (loginCallBack != null) loginCallBack.loginStatus(true);
-        if (!autoLogin) MainActivity.start(context);
+        hideLoading();
+        App.getInstance().setIsLogin(true);
+        if (autoLogin) {
+            if (loginCallBack != null) loginCallBack.loginStatus(true);
+        } else {
+            App.getInstance().setUserName(userName);
+            App.getInstance().setPassword(password);
+            MainActivity.start(context);
+        }
     }
 
     @Override
@@ -136,7 +148,8 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
         void loginStatus(boolean status);
     }
 
-    public void setCallBack(LoginCallBack callBack) {
+    public LoginFragment setCallBack(LoginCallBack callBack) {
         this.loginCallBack = callBack;
+        return this;
     }
 }

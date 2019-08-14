@@ -45,4 +45,12 @@ public class BaseObserver<T> extends ResourceObserver<T> {
     public void onComplete() {
         Log.e("info", "onComplete()");
     }
+
+    protected boolean isActive() {
+        if (view != null && view.isActive()) {
+            return true;
+        }
+        Log.e("info", "Cannot update view.");
+        return false;
+    }
 }

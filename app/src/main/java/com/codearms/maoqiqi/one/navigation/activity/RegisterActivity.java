@@ -1,31 +1,33 @@
 package com.codearms.maoqiqi.one.navigation.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
 
-import com.codearms.maoqiqi.base.BaseActivity;
+import com.codearms.maoqiqi.one.FragmentActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.navigation.fragment.RegisterFragment;
-import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
-public class RegisterActivity extends BaseActivity {
+/**
+ * 注册
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-07 15:15
+ */
+public class RegisterActivity extends FragmentActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.RegisterFragment";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        StatusBarUtils.setFullScreen(this);
-        setContentView(R.layout.activity_register);
+    protected int getLayoutId() {
+        return R.layout.activity_register;
+    }
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    @Override
+    protected String getTag() {
+        return TAG;
+    }
 
-        RegisterFragment fragment = (RegisterFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-        if (fragment == null) {
-            fragment = RegisterFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
-        }
+    @Override
+    protected Fragment getFragment() {
+        return RegisterFragment.newInstance();
     }
 }

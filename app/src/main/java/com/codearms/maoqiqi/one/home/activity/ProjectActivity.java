@@ -12,6 +12,12 @@ import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
+/**
+ * 项目
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-12 15:15
+ */
 public class ProjectActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.ClassifyFragment";

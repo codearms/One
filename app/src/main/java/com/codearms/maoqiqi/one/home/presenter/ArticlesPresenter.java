@@ -30,7 +30,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<Data>(view, R.string.failed_to_articles) {
                     @Override
                     public void onNext(Data data) {
-                        if (!view.isActive()) return;
+                        super.onNext(data);
                         view.setHomeArticles(data.getTopArticleBeans(), data.getArticleBeans());
                     }
                 }));
@@ -43,7 +43,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_wx_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(articleBeans);
                         view.setArticles(articleBeans, isRefresh);
                     }
                 }));
@@ -56,7 +56,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_knowledge_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(articleBeans);
                         view.setArticles(articleBeans, isRefresh);
                     }
                 }));
@@ -69,7 +69,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_project_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(articleBeans);
                         view.setArticles(articleBeans, isRefresh);
                     }
                 }));
@@ -82,7 +82,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_collect_data) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(articleBeans);
                         view.setArticles(articleBeans, isRefresh);
                     }
                 }));
@@ -94,7 +94,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 new BaseObserver<ArticleBeans>(view, R.string.failed_to_query) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(articleBeans);
                         view.setArticles(articleBeans, true);
                     }
                 }
@@ -108,7 +108,6 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        if (!view.isActive()) return;
                         view.collectSuccess();
                     }
                 }));
@@ -121,7 +120,6 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        if (!view.isActive()) return;
                         view.unCollectSuccess();
                     }
                 }));
@@ -134,7 +132,6 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        if (!view.isActive()) return;
                         view.unCollectSuccess();
                     }
                 }));

@@ -27,7 +27,7 @@ public class MovieDetailPresenter extends RxPresenterImpl<MovieDetailContract.Vi
 
                     @Override
                     public void onNext(MovieDetailBean movieDetailBean) {
-                        if (!view.isActive()) return;
+                        super.onNext(movieDetailBean);
                         view.setMovieDetail(movieDetailBean);
                     }
                 }));

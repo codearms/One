@@ -3,13 +3,14 @@ package com.codearms.maoqiqi.one.navigation.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.Constants;
+import com.codearms.maoqiqi.one.FragmentActivity;
 import com.codearms.maoqiqi.one.MainActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.navigation.fragment.LoginFragment;
@@ -27,7 +28,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Author: fengqi.mao.march@gmail.com
  * Date: 2019-08-05 15:58
  */
-public class SplashActivity extends BaseActivity implements LoginFragment.LoginCallBack {
+public class SplashActivity extends FragmentActivity implements LoginFragment.LoginCallBack {
 
     private static final String TAG = "com.codearms.maoqiqi.one.LoginFragment";
 
@@ -39,23 +40,36 @@ public class SplashActivity extends BaseActivity implements LoginFragment.LoginC
     private volatile boolean isFirstStartMain = false;
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
+    protected String getTag() {
+        return TAG;
+    }
+
+    @Override
+    protected Fragment getFragment() {
+        return LoginFragment.newInstance(true).setCallBack(this);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        // 将window的背景图设置为空
+        getWindow().setBackgroundDrawable(null);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
 
         ImageView ivSplash = findViewById(R.id.iv_splash);
         tvJump = findViewById(R.id.tv_jump);
 
-        // 随机加载图片
-        int i = new Random().nextInt(Constants.URLS.length);
-        Glide.with(this).load(Constants.URLS[i]).placeholder(R.drawable.ic_splash_placeholder).into(ivSplash);
-
-        LoginFragment fragment = (LoginFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-        if (fragment == null) {
-            fragment = LoginFragment.newInstance(true);
-            fragment.setCallBack(this);
-            getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
-        }
+        ivSplash.post(() -> {
+            // 随机加载图片
+            int i = new Random().nextInt(Constants.URLS.length);
+            Glide.with(SplashActivity.this).load(Constants.URLS[i])
+                    .placeholder(R.drawable.ic_splash_placeholder).into(ivSplash);
+        });
+        loginStatus(true);
     }
 
     @Override

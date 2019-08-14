@@ -38,7 +38,7 @@ public class MusicListPresenter extends RxPresenterImpl<MusicListContract.View> 
                 .subscribeWith(new BaseObserver<List<MusicSongBean>>(view) {
                     @Override
                     public void onNext(List<MusicSongBean> musicSongBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(musicSongBeans);
                         view.setSongList(musicSongBeans);
                     }
                 }));
@@ -50,7 +50,7 @@ public class MusicListPresenter extends RxPresenterImpl<MusicListContract.View> 
                 .subscribeWith(new BaseObserver<List<MusicArtistBean>>(view) {
                     @Override
                     public void onNext(List<MusicArtistBean> musicArtistBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(musicArtistBeans);
                         view.setArtistList(musicArtistBeans);
                     }
                 }));
@@ -62,7 +62,7 @@ public class MusicListPresenter extends RxPresenterImpl<MusicListContract.View> 
                 .subscribeWith(new BaseObserver<List<MusicAlbumBean>>(view) {
                     @Override
                     public void onNext(List<MusicAlbumBean> musicAlbumBeans) {
-                        if (!view.isActive()) return;
+                        super.onNext(musicAlbumBeans);
                         view.setAlbumList(musicAlbumBeans);
                     }
                 }));

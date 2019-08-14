@@ -135,7 +135,7 @@ public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> i
                 break;
             case R.id.iv_collect:
                 // 判断是否登录
-                if (App.getInstance().getUserBean() == null) {
+                if (!App.getInstance().isLogin()) {
                     showErrorMsg(getString(R.string.please_login));
                     return;
                 }
