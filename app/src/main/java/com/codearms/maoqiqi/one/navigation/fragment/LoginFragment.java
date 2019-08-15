@@ -57,6 +57,7 @@ public class LoginFragment extends BaseFragment<LoginContract.Presenter> impleme
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         presenter = new LoginPresenter(this);
     }
 

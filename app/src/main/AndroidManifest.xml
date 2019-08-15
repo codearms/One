@@ -29,13 +29,13 @@
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <!--导航-->
         <!--登录-->
         <activity
             android:name=".navigation.activity.LoginActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <!--收藏列表-->
         <activity

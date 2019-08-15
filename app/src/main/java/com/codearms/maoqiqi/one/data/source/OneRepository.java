@@ -127,7 +127,7 @@ public class OneRepository implements OneDataSource {
 
     @Override
     public Observable<UserBean> login(String username, String password) {
-        return api.login(username, password).compose(RxUtils.rxSchedulerHelper()).compose(RxUtils.handleResult());
+        return api.login(username, password).delay(8000, TimeUnit.MILLISECONDS).compose(RxUtils.rxSchedulerHelper()).compose(RxUtils.handleResult());
     }
 
     @Override

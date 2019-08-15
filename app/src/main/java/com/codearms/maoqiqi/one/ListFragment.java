@@ -47,12 +47,10 @@ public abstract class ListFragment<T extends BasePresenter> extends BaseFragment
             isRefresh = false;
             getData();
         });
-
     }
 
     @Override
     public void showLoading() {
-        super.showLoading();
         refreshLayout.setEnableAutoLoadMore(true);
         // 触发自动刷新
         refreshLayout.autoRefresh();
@@ -60,7 +58,6 @@ public abstract class ListFragment<T extends BasePresenter> extends BaseFragment
 
     @Override
     public void hideLoading() {
-        super.hideLoading();
         refreshLayout.finishRefresh(false);
         refreshLayout.finishLoadMore(false);
     }
