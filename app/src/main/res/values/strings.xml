@@ -276,15 +276,18 @@
     <string name="failed_to_collect">收藏失败</string>
     <string name="failed_to_un_collect">取消收藏失败</string>
 
+    <string name="failed_to_useful_sites">获取常用网站数据失败</string>
+    <string name="failed_to_navigation">获取导航数据失败</string>
+    <string name="failed_to_wx_chat">获取公众号列表数据失败</string>
+    <string name="failed_to_knowledge">获取知识体系数据失败</string>
+    <string name="failed_to_project">获取项目类别数据失败</string>
+
     <string name="failed_to_common">获取常用网站数据失败</string>
     <string name="failed_to_hot_key">获取热门关键词数据失败</string>
-    <string name="failed_to_navigation">获取导航数据失败</string>
-    <string name="failed_to_wx_chat">获取公众号数据失败</string>
+
     <string name="failed_to_wx_articles">获取公众号历史数据失败</string>
     <string name="failed_to_wx_search_articles">搜索公众号数据失败</string>
-    <string name="failed_to_knowledge">获取知识体系数据失败</string>
     <string name="failed_to_knowledge_articles">获取知识体系下的文章数据失败</string>
-    <string name="failed_to_project">获取项目类别数据失败</string>
     <string name="failed_to_project_articles">获取项目数据失败</string>
     <string name="failed_to_logout">退出失败</string>
     <string name="failed_to_collect_data">获取收藏文章数据失败</string>

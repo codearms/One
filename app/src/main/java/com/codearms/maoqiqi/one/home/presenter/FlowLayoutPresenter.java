@@ -24,8 +24,7 @@ public class FlowLayoutPresenter extends RxPresenterImpl<FlowLayoutContract.View
                 new BaseObserver<List<ParentClassifyBean>>(view, R.string.failed_to_knowledge) {
                     @Override
                     public void onNext(List<ParentClassifyBean> parentClassifyBeans) {
-                        super.onNext(parentClassifyBeans);
-                        view.setKnowledge(parentClassifyBeans);
+                        if (isActive()) view.setKnowledge(parentClassifyBeans);
                     }
                 }));
     }

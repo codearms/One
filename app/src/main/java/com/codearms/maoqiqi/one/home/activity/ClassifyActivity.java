@@ -16,11 +16,17 @@ import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
+/**
+ * 分类
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-12 11:30
+ */
 public class ClassifyActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.ClassifyFragment";
 
-    // 从知识体系跳转过来
+    // 从知识体系跳转
     public static void start(@NonNull Context context, @NonNull ParentClassifyBean parentClassifyBean, int position) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("parentClassifyBean", parentClassifyBean);

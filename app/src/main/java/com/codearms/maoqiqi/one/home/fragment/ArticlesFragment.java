@@ -24,6 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * 文章列表
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-07 11:30
+ */
 public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> implements ArticlesContract.View {
 
     public static final String FROM_HOME = "FROM_HOME";

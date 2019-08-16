@@ -18,6 +18,7 @@ import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.home.presenter.NavigationPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.NavigationContract;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,8 +27,7 @@ import java.util.List;
  * Author: fengqi.mao.march@gmail.com
  * Date: 2019-08-09 14:15
  */
-public class NavigationFragment extends BaseFragment<NavigationContract.Presenter> implements
-        NavigationContract.View, FlowLayoutFragment.SmoothScrollListener {
+public class NavigationFragment extends BaseFragment<NavigationContract.Presenter> implements NavigationContract.View, FlowLayoutFragment.SmoothScrollListener {
 
     private static final String TAG = "com.codearms.maoqiqi.one.FlowLayoutFragment";
 
@@ -36,7 +36,7 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
     private LinearLayoutManager manager;
     private RecyclerViewAdapter adapter;
 
-    private List<NavigationBean> navigationBeanList;
+    private List<NavigationBean> navigationBeanList = new ArrayList<>();
 
     private FlowLayoutFragment fragment;
     // 当前选中项
@@ -54,6 +54,7 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         presenter = new NavigationPresenter(this);
     }
 
@@ -73,13 +74,12 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
         refreshLayout.setEnabled(false);
 
         manager = new LinearLayoutManager(context);
+        adapter = new RecyclerViewAdapter(navigationBeanList);
+
         recyclerView.setLayoutManager(manager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
-
-        if (savedInstanceState != null) {
-            setNavigation(navigationBeanList);
-        }
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -95,8 +95,7 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
         refreshLayout.setRefreshing(false);
         this.navigationBeanList = navigationBeanList;
 
-        adapter = new RecyclerViewAdapter(navigationBeanList);
-        recyclerView.setAdapter(adapter);
+        adapter.replaceData(navigationBeanList);
 
         fragment = (FlowLayoutFragment) getChildFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
@@ -110,10 +109,11 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
     @Override
     public void onSmoothScrollToPosition(int i) {
         if (position != i) {
+            // 更新选中项
             position = i;
             adapter.notifyDataSetChanged();
 
-            // 如果选中项不可见
+            // 如果选中项不可见,需要滚动到选中项位置
             int firstPosition = manager.findFirstVisibleItemPosition();
             int lastPosition = manager.findLastVisibleItemPosition();
             if (position < firstPosition || position > lastPosition) {
@@ -156,10 +156,14 @@ public class NavigationFragment extends BaseFragment<NavigationContract.Presente
         public int getItemCount() {
             return navigationBeans.size();
         }
+
+        private void replaceData(List<NavigationBean> navigationBeans) {
+            this.navigationBeans = navigationBeans;
+            notifyDataSetChanged();
+        }
     }
 
     private final class ViewHolder extends RecyclerView.ViewHolder {
-
         View view;
         TextView tvName;
 

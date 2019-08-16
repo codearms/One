@@ -29,9 +29,8 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
         addSubscribe(Observable.zip(topArticleObservable, articleObservable, Data::new)
                 .subscribeWith(new BaseObserver<Data>(view, R.string.failed_to_articles) {
                     @Override
-                    public void onNext(Data data) {
-                        super.onNext(data);
-                        view.setHomeArticles(data.getTopArticleBeans(), data.getArticleBeans());
+                    public void onNext(Data d) {
+                        if (isActive()) view.setHomeArticles(d.getTopArticles(), d.getArticles());
                     }
                 }));
     }
@@ -43,8 +42,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_wx_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        super.onNext(articleBeans);
-                        view.setArticles(articleBeans, isRefresh);
+                        if (isActive()) view.setArticles(articleBeans, isRefresh);
                     }
                 }));
     }
@@ -56,8 +54,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_knowledge_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        super.onNext(articleBeans);
-                        view.setArticles(articleBeans, isRefresh);
+                        if (isActive()) view.setArticles(articleBeans, isRefresh);
                     }
                 }));
     }
@@ -69,8 +66,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_project_articles) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        super.onNext(articleBeans);
-                        view.setArticles(articleBeans, isRefresh);
+                        if (isActive()) view.setArticles(articleBeans, isRefresh);
                     }
                 }));
     }
@@ -94,8 +90,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 new BaseObserver<ArticleBeans>(view, R.string.failed_to_query) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        super.onNext(articleBeans);
-                        view.setArticles(articleBeans, true);
+                        if (isActive()) view.setArticles(articleBeans, true);
                     }
                 }
         ));
@@ -107,8 +102,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<Object>(view, R.string.failed_to_collect) {
                     @Override
                     public void onComplete() {
-                        super.onComplete();
-                        view.collectSuccess();
+                        if (isActive()) view.collectSuccess();
                     }
                 }));
     }
@@ -119,8 +113,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<Object>(view, R.string.failed_to_un_collect) {
                     @Override
                     public void onComplete() {
-                        super.onComplete();
-                        view.unCollectSuccess();
+                        if (isActive()) view.unCollectSuccess();
                     }
                 }));
     }
@@ -131,27 +124,26 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<Object>(view, R.string.failed_to_un_collect) {
                     @Override
                     public void onComplete() {
-                        super.onComplete();
-                        view.unCollectSuccess();
+                        if (isActive()) view.unCollectSuccess();
                     }
                 }));
     }
 
     private final class Data {
-        private List<ArticleBean> topArticleBeans;
-        private ArticleBeans articleBeans;
+        private List<ArticleBean> topArticles;
+        private ArticleBeans articles;
 
-        Data(List<ArticleBean> topArticleBeans, ArticleBeans articleBeans) {
-            this.topArticleBeans = topArticleBeans;
-            this.articleBeans = articleBeans;
+        Data(List<ArticleBean> topArticles, ArticleBeans articles) {
+            this.topArticles = topArticles;
+            this.articles = articles;
         }
 
-        List<ArticleBean> getTopArticleBeans() {
-            return topArticleBeans;
+        List<ArticleBean> getTopArticles() {
+            return topArticles;
         }
 
-        ArticleBeans getArticleBeans() {
-            return articleBeans;
+        ArticleBeans getArticles() {
+            return articles;
         }
     }
 }

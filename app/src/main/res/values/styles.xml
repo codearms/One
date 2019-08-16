@@ -168,6 +168,7 @@
         <item name="android:textColorPrimary">@color/color_navigation</item>
     </style>
 
+    <!--Chip字体样式-->
     <style name="chip_text_appearance" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textSize">@dimen/text_size_smaller</item>
     </style>

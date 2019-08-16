@@ -1,37 +1,33 @@
 package com.codearms.maoqiqi.one.home.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
 
-import com.codearms.maoqiqi.base.BaseActivity;
+import com.codearms.maoqiqi.one.FragmentActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.UsefulSitesFragment;
-import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
 /**
- * 常用网址
+ * 常用网站
  * Link: https://github.com/maoqiqi/AndroidUtils
  * Author: fengqi.mao.march@gmail.com
  * Date: 2019-08-09 11:15
  */
-public class UsefulSitesActivity extends BaseActivity {
+public class UsefulSitesActivity extends FragmentActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.UsefulSitesFragment";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        StatusBarUtils.setFullScreen(this);
-        setContentView(R.layout.activity_useful_sites);
+    protected int getLayoutId() {
+        return R.layout.activity_useful_sites;
+    }
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    @Override
+    protected String getTag() {
+        return TAG;
+    }
 
-        UsefulSitesFragment fragment = (UsefulSitesFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-        if (fragment == null) {
-            fragment = UsefulSitesFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
-        }
+    @Override
+    protected Fragment getFragment() {
+        return UsefulSitesFragment.newInstance();
     }
 }

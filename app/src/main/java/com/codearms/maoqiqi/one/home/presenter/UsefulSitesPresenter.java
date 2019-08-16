@@ -1,6 +1,7 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.base.BaseObserver;
+import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.UsefulSitesBean;
 import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.home.presenter.contract.UsefulSitesContract;
@@ -20,11 +21,10 @@ public class UsefulSitesPresenter extends RxPresenterImpl<UsefulSitesContract.Vi
     @Override
     public void getUsefulSites() {
         addSubscribe(repository.getUsefulSites()
-                .subscribeWith(new BaseObserver<List<UsefulSitesBean>>(view) {
+                .subscribeWith(new BaseObserver<List<UsefulSitesBean>>(view, R.string.failed_to_useful_sites) {
                     @Override
                     public void onNext(List<UsefulSitesBean> usefulSitesBeans) {
-                        super.onNext(usefulSitesBeans);
-                        view.setUsefulSites(usefulSitesBeans);
+                        if (isActive()) view.setUsefulSites(usefulSitesBeans);
                     }
                 }));
     }

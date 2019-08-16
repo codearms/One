@@ -18,10 +18,11 @@ import com.codearms.maoqiqi.one.home.presenter.contract.UsefulSitesContract;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.utils.ColorUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 常用网址
+ * 常用网站
  * Link: https://github.com/maoqiqi/AndroidUtils
  * Author: fengqi.mao.march@gmail.com
  * Date: 2019-08-09 11:15
@@ -31,7 +32,7 @@ public class UsefulSitesFragment extends BaseFragment<UsefulSitesContract.Presen
     private SwipeRefreshLayout refreshLayout;
     private ChipGroup chipGroup;
 
-    private List<UsefulSitesBean> usefulSitesBeanList;
+    private List<UsefulSitesBean> usefulSitesBeanList = new ArrayList<>();
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.

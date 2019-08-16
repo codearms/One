@@ -1,15 +1,12 @@
 package com.codearms.maoqiqi.one.home.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.codearms.maoqiqi.base.BaseActivity;
+import com.codearms.maoqiqi.one.FragmentActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.NavigationFragment;
-import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
 /**
@@ -18,24 +15,23 @@ import com.codearms.maoqiqi.utils.ToastUtils;
  * Author: fengqi.mao.march@gmail.com
  * Date: 2019-08-09 14:15
  */
-public class NavigationActivity extends BaseActivity {
+public class NavigationActivity extends FragmentActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.NavigationFragment";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        StatusBarUtils.setFullScreen(this);
-        setContentView(R.layout.activity_navigation);
+    protected int getLayoutId() {
+        return R.layout.activity_navigation;
+    }
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    @Override
+    protected String getTag() {
+        return TAG;
+    }
 
-        NavigationFragment fragment = (NavigationFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-        if (fragment == null) {
-            fragment = NavigationFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
-        }
+    @Override
+    protected Fragment getFragment() {
+        return NavigationFragment.newInstance();
     }
 
     @Override

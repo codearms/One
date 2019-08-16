@@ -1,15 +1,13 @@
 package com.codearms.maoqiqi.one.home.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.codearms.maoqiqi.base.BaseActivity;
+import com.codearms.maoqiqi.one.FragmentActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.ArticlesFragment;
 import com.codearms.maoqiqi.one.home.fragment.ClassifyFragment;
-import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
 /**
@@ -18,21 +16,23 @@ import com.codearms.maoqiqi.utils.ToastUtils;
  * Author: fengqi.mao.march@gmail.com
  * Date: 2019-08-12 15:15
  */
-public class ProjectActivity extends BaseActivity {
+public class ProjectActivity extends FragmentActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.ClassifyFragment";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        StatusBarUtils.setFullScreen(this);
-        setContentView(R.layout.activity_project);
+    protected int getLayoutId() {
+        return R.layout.activity_project;
+    }
 
-        ClassifyFragment fragment = (ClassifyFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-        if (fragment == null) {
-            fragment = ClassifyFragment.newInstance(ArticlesFragment.FROM_PROJECT);
-            getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
-        }
+    @Override
+    protected String getTag() {
+        return TAG;
+    }
+
+    @Override
+    protected Fragment getFragment() {
+        return ClassifyFragment.newInstance(ArticlesFragment.FROM_PROJECT);
     }
 
     @Override

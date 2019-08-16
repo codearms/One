@@ -3,7 +3,6 @@ package com.codearms.maoqiqi.one.home.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,14 +19,22 @@ import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.NavigationBean;
 import com.codearms.maoqiqi.one.data.bean.ParentClassifyBean;
+import com.codearms.maoqiqi.one.decoration.MarginItemDecoration;
 import com.codearms.maoqiqi.one.home.activity.ClassifyActivity;
 import com.codearms.maoqiqi.one.home.presenter.FlowLayoutPresenter;
 import com.codearms.maoqiqi.one.home.presenter.contract.FlowLayoutContract;
 import com.codearms.maoqiqi.one.navigation.activity.WebViewActivity;
 import com.codearms.maoqiqi.utils.ColorUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 流布局列表
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-09 14:30
+ */
 public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presenter> implements FlowLayoutContract.View {
 
     public static final String FROM_NAVIGATION = "FROM_NAVIGATION";
@@ -36,9 +43,11 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
     private SwipeRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private LinearLayoutManager manager;
+    private RecyclerViewAdapter adapter;
 
     private String from;
-    private List<NavigationBean> navigationBeans;
+    private List<NavigationBean> navigationBeans = new ArrayList<>();
+    private List<ParentClassifyBean> parentClassifyBeans = new ArrayList<>();
 
     private boolean isClick;
     // 记录需要滚动的位置
@@ -66,6 +75,7 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         presenter = new FlowLayoutPresenter(this);
     }
 
@@ -90,9 +100,13 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
         }
 
         manager = new LinearLayoutManager(context);
+        adapter = new RecyclerViewAdapter(navigationBeans, parentClassifyBeans);
+
         recyclerView.setLayoutManager(manager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.addItemDecoration(new MarginItemDecoration(getResources().getDimensionPixelSize(R.dimen.sixteen)));
+        recyclerView.setAdapter(adapter);
     }
 
     private void addOnScrollListener() {
@@ -124,7 +138,6 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
         super.loadData();
         switch (from) {
             case FROM_NAVIGATION:
-                recyclerView.setAdapter(new RecyclerViewAdapter(navigationBeans, null));
                 addOnScrollListener();
                 break;
             case FROM_KNOWLEDGE:
@@ -138,7 +151,9 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
     public void setKnowledge(List<ParentClassifyBean> parentClassifyBeans) {
         loadDataCompleted();
         refreshLayout.setRefreshing(false);
-        recyclerView.setAdapter(new RecyclerViewAdapter(null, parentClassifyBeans));
+        this.parentClassifyBeans = parentClassifyBeans;
+
+        adapter.replaceData(parentClassifyBeans);
     }
 
     // 滚动到顶部
@@ -224,11 +239,6 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
                 chip.setOnClickListener(v -> WebViewActivity.start(context, 0, from, articleBean));
                 viewHolder.chipGroup.addView(chip);
             }
-
-            if (i == navigationBeans.size() - 1) {
-                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewHolder.chipGroup.getLayoutParams();
-                params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
-            }
         }
 
         private void setKnowledge(@NonNull ViewHolder viewHolder, int i) {
@@ -247,11 +257,11 @@ public class FlowLayoutFragment extends BaseFragment<FlowLayoutContract.Presente
                 });
                 viewHolder.chipGroup.addView(chip);
             }
+        }
 
-            if (i == parentClassifyBeans.size() - 1) {
-                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) viewHolder.chipGroup.getLayoutParams();
-                params.bottomMargin = getResources().getDimensionPixelSize(R.dimen.sixteen);
-            }
+        private void replaceData(List<ParentClassifyBean> parentClassifyBeans) {
+            this.parentClassifyBeans = parentClassifyBeans;
+            notifyDataSetChanged();
         }
     }
 

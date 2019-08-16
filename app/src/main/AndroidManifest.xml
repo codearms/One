@@ -62,15 +62,25 @@
 
         <!--首页-->
         <!--常用网址-->
-        <activity android:name=".home.activity.UsefulSitesActivity" />
+        <activity
+            android:name=".home.activity.UsefulSitesActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--导航-->
-        <activity android:name=".home.activity.NavigationActivity" />
+        <activity
+            android:name=".home.activity.NavigationActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--公众号-->
-        <activity android:name=".home.activity.WeChatActivity" />
+        <activity
+            android:name=".home.activity.WeChatActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--知识体系-->
-        <activity android:name=".home.activity.KnowledgeActivity" />
+        <activity
+            android:name=".home.activity.KnowledgeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--项目-->
-        <activity android:name=".home.activity.ProjectActivity" />
+        <activity
+            android:name=".home.activity.ProjectActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--二级分类-->
         <activity android:name=".home.activity.ClassifyActivity" />
 

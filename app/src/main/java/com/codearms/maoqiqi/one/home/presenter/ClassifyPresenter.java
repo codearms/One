@@ -25,8 +25,7 @@ public class ClassifyPresenter extends RxPresenterImpl<ClassifyContract.View> im
                 new BaseObserver<List<ChildClassifyBean>>(view, R.string.failed_to_wx_chat) {
                     @Override
                     public void onNext(List<ChildClassifyBean> childClassifyBeans) {
-                        super.onNext(childClassifyBeans);
-                        view.setClassifies(childClassifyBeans);
+                        if (isActive()) view.setClassifies(childClassifyBeans);
                     }
                 }));
     }
@@ -37,8 +36,7 @@ public class ClassifyPresenter extends RxPresenterImpl<ClassifyContract.View> im
                 new BaseObserver<List<ChildClassifyBean>>(view, R.string.failed_to_project) {
                     @Override
                     public void onNext(List<ChildClassifyBean> childClassifyBeans) {
-                        super.onNext(childClassifyBeans);
-                        view.setClassifies(childClassifyBeans);
+                        if (isActive()) view.setClassifies(childClassifyBeans);
                     }
                 }));
     }
@@ -49,8 +47,7 @@ public class ClassifyPresenter extends RxPresenterImpl<ClassifyContract.View> im
                 new BaseObserver<List<ParentClassifyBean>>(view, R.string.failed_to_knowledge) {
                     @Override
                     public void onNext(List<ParentClassifyBean> parentClassifyBeans) {
-                        super.onNext(parentClassifyBeans);
-                        view.setKnowledge(parentClassifyBeans);
+                        if (isActive()) view.setKnowledge(parentClassifyBeans);
                     }
                 }));
     }

@@ -62,7 +62,7 @@ public class OneRepository implements OneDataSource {
 
     @Override
     public Observable<List<BannerBean>> getBanner() {
-        return api.getBanner().compose(RxUtils.rxSchedulerHelper()).compose(RxUtils.handleResult());
+        return api.getBanner().delay(3000, TimeUnit.MILLISECONDS).compose(RxUtils.rxSchedulerHelper()).compose(RxUtils.handleResult());
     }
 
     @Override

@@ -25,6 +25,12 @@ import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 分类
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-12 11:30
+ */
 public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> implements ClassifyContract.View {
 
     private TabLayout tabLayout;
@@ -42,6 +48,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
      *
      * @return A new instance of fragment ClassifyFragment.
      */
+    // 从公众号或者项目跳转
     public static ClassifyFragment newInstance(String from) {
         Bundle bundle = new Bundle();
         bundle.putString("from", from);
@@ -50,6 +57,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
         return fragment;
     }
 
+    // 从知识体系跳转
     public static ClassifyFragment newInstance(ParentClassifyBean parentClassifyBean, int position) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("parentClassifyBean", parentClassifyBean);
@@ -59,6 +67,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
         return fragment;
     }
 
+    // 从文章列表跳转
     public static ClassifyFragment newInstance(String from, ArticleBean articleBean) {
         Bundle bundle = new Bundle();
         bundle.putString("from", from);
@@ -142,6 +151,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
     public void setClassifies(List<ChildClassifyBean> childClassifyBeans) {
         loadDataCompleted();
         this.childClassifyBeans = childClassifyBeans;
+
         List<String> fragmentTitles = new ArrayList<>();
         for (int i = 0; i < childClassifyBeans.size(); i++) {
             fragmentTitles.add(childClassifyBeans.get(i).getName());
@@ -157,10 +167,11 @@ public class ClassifyFragment extends BaseFragment<ClassifyContract.Presenter> i
     @Override
     public void setKnowledge(List<ParentClassifyBean> parentClassifyBeans) {
         loadDataCompleted();
+
         ParentClassifyBean parentClassifyBean = null;
-        for (int i = 0; i < parentClassifyBeans.size(); i++) {
-            if (parentClassifyBeans.get(i).getChildClassifyBeanList().get(0).getId() == articleBean.getSuperChapterId()) {
-                parentClassifyBean = parentClassifyBeans.get(i);
+        for (ParentClassifyBean bean : parentClassifyBeans) {
+            if (bean.getChildClassifyBeanList().get(0).getId() == articleBean.getSuperChapterId()) {
+                parentClassifyBean = bean;
                 break;
             }
         }
