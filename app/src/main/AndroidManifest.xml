@@ -19,7 +19,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".navigation.activity.SplashActivity"
-            android:theme="@style/AppTheme.Fullscreen.Splash">
+            android:theme="@style/AppTheme.Fullscreen.Splash"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

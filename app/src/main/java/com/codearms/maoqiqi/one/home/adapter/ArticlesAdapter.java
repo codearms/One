@@ -65,7 +65,7 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
 
         // 标题
         helper.tvTitle.setText(Html.fromHtml(articleBean.getTitle()));
-        // 是否收藏
+        // 是否来自收藏页面
         if (from.equals(ArticlesFragment.FROM_COLLECT)) {
             helper.ivCollect.setImageResource(R.drawable.ic_collect);
             setTintList(helper.ivCollect);

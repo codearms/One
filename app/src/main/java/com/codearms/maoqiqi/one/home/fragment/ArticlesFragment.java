@@ -142,7 +142,7 @@ public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> i
             case R.id.iv_collect:
                 // 判断是否登录
                 if (!App.getInstance().isLogin()) {
-                    showErrorMsg(getString(R.string.please_login));
+                    showErrorMsg(R.string.please_login);
                     return;
                 }
 
@@ -264,23 +264,23 @@ public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> i
         ArticleBean bean = adapter.getData().get(operationPosition);
         bean.setCollect(true);
         adapter.setData(operationPosition, bean);
-        showErrorMsg(getString(R.string.success_to_collect));
+        showErrorMsg(R.string.success_to_collect);
     }
 
     @Override
     public void unCollectSuccess() {
         if (from.equals(FROM_COLLECT)) {
             // 移除
-            adapter.remove(operationPosition);
-            if (operationPosition == adapter.getData().size()) {
-                adapter.notifyItemChanged(operationPosition - 1);
-            }
+            list.remove(operationPosition);
+            // adapter.remove(operationPosition);
+            // 不使用这个方法,删除以后RecyclerView的高度没有变化
+            adapter.replaceData(list);
         } else {
             // 更新
-            ArticleBean bean = adapter.getData().get(operationPosition);
+            ArticleBean bean = list.get(operationPosition);
             bean.setCollect(false);
             adapter.setData(operationPosition, bean);
         }
-        showErrorMsg(getString(R.string.success_to_un_collect));
+        showErrorMsg(R.string.success_to_un_collect);
     }
 }

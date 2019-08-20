@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     private DrawerLayout drawerLayout;
     private TextView tvUserName;
+    private MenuItem logoutMenu;
 
     private MyOnCheckedChangeListener checkedChangeListener;
 
@@ -76,22 +77,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         TextView tvMode = findViewById(R.id.tv_mode);
         TextView tvWeather = findViewById(R.id.tv_weather);
 
-        Utils.setWeather(tvWeather, "30°", "徐家汇");
-
         View navigationHeader = navigationView.getHeaderView(0);
         // 头像
         navigationHeader.findViewById(R.id.iv_avatar).setOnClickListener(this);
         // 用户名
         tvUserName = navigationHeader.findViewById(R.id.tv_user_name);
-        tvUserName.setOnClickListener(this);
-        setUserInfo();
         // 扫码
         navigationHeader.findViewById(R.id.iv_scan_code).setOnClickListener(this);
-        // 退出
-        navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
+
+        // 登出
+        logoutMenu = navigationView.getMenu().findItem(R.id.nav_logout);
         // 设置菜单点击事件
         navigationView.setNavigationItemSelectedListener(this);
 
+        setUserInfo();
+        Utils.setWeather(tvWeather, "30°", "徐家汇");
+
+        tvUserName.setOnClickListener(this);
         tvSetting.setOnClickListener(this);
         tvMode.setOnClickListener(this);
         tvWeather.setOnClickListener(this);
@@ -113,12 +115,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void onRestart() {
         super.onRestart();
+        // 从新进入都需要更新信息
         setUserInfo();
+        Fragment fragment = checkedChangeListener.getFragments()[0];
+        if (fragment instanceof HomeFragment) {
+            ((HomeFragment) fragment).updateData();
+        }
     }
 
     // 更新用户信息
     private void setUserInfo() {
-        if (App.getInstance().isLogin()) tvUserName.setText(App.getInstance().getUserName());
+        if (App.getInstance().isLogin()) {
+            tvUserName.setText(App.getInstance().getUserName());
+            logoutMenu.setVisible(true);
+        } else {
+            tvUserName.setText(R.string.login);
+            logoutMenu.setVisible(false);
+        }
     }
 
     // 将Toolbar 与 DrawerLayout 关联
@@ -186,6 +199,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 ActivityUtils.startActivity(this, DonateActivity.class);
                 return true;
             case R.id.nav_logout:
+                // App.getInstance().setUserName("");
+                // App.getInstance().setPassword("");
+                // App.getInstance().setIsLogin(false);
+                ToastUtils.show("开发中");
                 return true;
         }
         return false;

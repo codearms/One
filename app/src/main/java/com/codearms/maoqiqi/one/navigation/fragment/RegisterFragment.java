@@ -19,6 +19,12 @@ import com.codearms.maoqiqi.one.data.bean.UserBean;
 import com.codearms.maoqiqi.one.navigation.presenter.RegisterPresenter;
 import com.codearms.maoqiqi.one.navigation.presenter.contract.RegisterContract;
 
+/**
+ * 注册
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-07 15:15
+ */
 public class RegisterFragment extends BaseFragment<RegisterContract.Presenter> implements RegisterContract.View {
 
     private EditText etUserName;

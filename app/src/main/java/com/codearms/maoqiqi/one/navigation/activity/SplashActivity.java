@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codearms.maoqiqi.one.App;
 import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.FragmentActivity;
 import com.codearms.maoqiqi.one.MainActivity;
@@ -51,6 +52,7 @@ public class SplashActivity extends FragmentActivity implements LoginFragment.Lo
 
     @Override
     protected Fragment getFragment() {
+        if (App.getInstance().getUserName().equals("")) return null;
         return LoginFragment.newInstance(true).setCallBack(this);
     }
 
@@ -69,7 +71,6 @@ public class SplashActivity extends FragmentActivity implements LoginFragment.Lo
             Glide.with(SplashActivity.this).load(Constants.URLS[i])
                     .placeholder(R.drawable.ic_splash_placeholder).into(ivSplash);
         });
-        loginStatus(true);
     }
 
     @Override
@@ -78,8 +79,8 @@ public class SplashActivity extends FragmentActivity implements LoginFragment.Lo
         showView();
 
         // 1s之后显示"跳过"按钮
-//        compositeDisposable.add(Observable.timer(1000, TimeUnit.MILLISECONDS)
-//                .observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> showView()));
+        // compositeDisposable.add(Observable.timer(1000, TimeUnit.MILLISECONDS)
+        // .observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> showView()));
     }
 
     // 显示跳过按钮

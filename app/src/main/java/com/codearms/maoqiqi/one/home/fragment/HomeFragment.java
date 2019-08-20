@@ -53,6 +53,8 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
 
     private List<BannerBean> bannerBeanList;
 
+    private ArticlesFragment fragment;
+
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
      *
@@ -91,7 +93,7 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
             setBanner(bannerBeanList);
         }
 
-        ArticlesFragment fragment = (ArticlesFragment) getChildFragmentManager().findFragmentByTag(TAG);
+        fragment = (ArticlesFragment) getChildFragmentManager().findFragmentByTag(TAG);
         if (fragment == null) {
             fragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_HOME, 0, true);
             getChildFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
@@ -104,6 +106,11 @@ public class HomeFragment extends BaseFragment<HomeContract.Presenter> implement
         ((MainActivity) context).associateDrawerLayout(toolbar);
         refreshLayout.setRefreshing(true);
         presenter.getBanner();
+    }
+
+    // 用于用户登录之后更新数据
+    public void updateData() {
+        if (fragment != null) fragment.loadData();
     }
 
     @Override

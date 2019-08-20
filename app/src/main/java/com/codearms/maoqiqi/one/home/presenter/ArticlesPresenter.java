@@ -118,6 +118,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 }));
     }
 
+    // 收藏页面取消收藏
     @Override
     public void unCollect(int id, int originId) {
         addSubscribe(repository.unCollect(id, originId)

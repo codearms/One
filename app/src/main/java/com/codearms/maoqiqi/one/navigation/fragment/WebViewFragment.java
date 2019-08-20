@@ -179,7 +179,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         if (articleBean != null) this.articleBean = articleBean;
         isCollect = true;
         fabCollection.setImageResource(R.drawable.ic_collect);
-        showErrorMsg(getString(R.string.success_to_collect));
+        showErrorMsg(R.string.success_to_collect);
     }
 
     @Override
@@ -192,7 +192,7 @@ public class WebViewFragment extends BaseFragment<WebViewContract.Presenter> imp
         } else {
             fabCollection.setImageResource(R.drawable.ic_un_collect);
         }
-        showErrorMsg(getString(R.string.success_to_un_collect));
+        showErrorMsg(R.string.success_to_un_collect);
     }
 
     @Override

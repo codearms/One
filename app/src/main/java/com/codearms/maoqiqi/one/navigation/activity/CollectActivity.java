@@ -1,31 +1,33 @@
 package com.codearms.maoqiqi.one.navigation.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.Fragment;
 
-import com.codearms.maoqiqi.base.BaseActivity;
+import com.codearms.maoqiqi.one.FragmentActivity;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.ArticlesFragment;
-import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
-public class CollectActivity extends BaseActivity {
+/**
+ * 收藏列表
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-06 11:30
+ */
+public class CollectActivity extends FragmentActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.ArticlesFragment";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        StatusBarUtils.setFullScreen(this);
-        setContentView(R.layout.activity_collect);
+    protected int getLayoutId() {
+        return R.layout.activity_collect;
+    }
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    @Override
+    protected String getTag() {
+        return TAG;
+    }
 
-        ArticlesFragment fragment = (ArticlesFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-        if (fragment == null) {
-            fragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_COLLECT, 0, false);
-            getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
-        }
+    @Override
+    protected Fragment getFragment() {
+        return ArticlesFragment.newInstance(ArticlesFragment.FROM_COLLECT, 0, false);
     }
 }
