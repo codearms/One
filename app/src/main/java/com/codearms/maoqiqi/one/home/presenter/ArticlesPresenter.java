@@ -78,19 +78,19 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_collect_data) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        super.onNext(articleBeans);
-                        view.setArticles(articleBeans, isRefresh);
+                        if (isActive()) view.setArticles(articleBeans, isRefresh);
                     }
                 }));
     }
 
     @Override
-    public void query(int page, String k) {
-        addSubscribe(repository.query(page, k).subscribeWith(
+    public void query(String k, boolean isRefresh) {
+        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        addSubscribe(repository.query(pageIndex, k).subscribeWith(
                 new BaseObserver<ArticleBeans>(view, R.string.failed_to_query) {
                     @Override
                     public void onNext(ArticleBeans articleBeans) {
-                        if (isActive()) view.setArticles(articleBeans, true);
+                        if (isActive()) view.setArticles(articleBeans, isRefresh);
                     }
                 }
         ));

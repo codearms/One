@@ -35,6 +35,7 @@
             android:layout_height="@dimen/line_height"
             android:layout_marginTop="@dimen/sixteen"
             android:background="@color/color_divider"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group" />
 

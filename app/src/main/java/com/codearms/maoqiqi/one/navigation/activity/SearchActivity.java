@@ -12,12 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.codearms.maoqiqi.base.BaseActivity;
+import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.home.fragment.ArticlesFragment;
 import com.codearms.maoqiqi.one.navigation.fragment.SearchFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
-import com.codearms.maoqiqi.one.view.StatusBarView;
 import com.codearms.maoqiqi.utils.KeyboardUtils;
+import com.codearms.maoqiqi.utils.ToastUtils;
 
 /**
  * 搜索
@@ -29,13 +30,6 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
 
     private static final String TAG_SEARCH = "com.codearms.maoqiqi.one.SearchFragment";
     private static final String TAG_ARTICLES = "com.codearms.maoqiqi.one.ArticlesFragment";
-    private static final int DEFAULT_POSITION = 5;
-
-    private final int[] bgResIds = {R.color.color_home, R.color.color_news, R.color.color_book,
-            R.color.color_music, R.color.color_movie, R.color.color_navigation};
-    private final int[] themeIds = {R.style.home_popup_theme, R.style.news_popup_theme,
-            R.style.book_popup_theme, R.style.music_popup_theme,
-            R.style.movie_popup_theme, R.style.navigation_popup_theme};
 
     private EditText etSearch;
 
@@ -52,10 +46,8 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtils.setFullScreen(this);
         setContentView(R.layout.activity_search);
 
-        StatusBarView statusBarView = findViewById(R.id.status_bar);
         Toolbar toolbar = findViewById(R.id.toolbar);
         etSearch = findViewById(R.id.et_search);
         ImageView ivSearch = findViewById(R.id.iv_search);
@@ -63,11 +55,11 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) return;
 
-        int position = bundle.getInt("position", DEFAULT_POSITION);
+        int position = bundle.getInt("position", Constants.DEFAULT_POSITION);
 
-        statusBarView.setBackgroundResource(bgResIds[position]);
-        toolbar.setBackgroundResource(bgResIds[position]);
-        toolbar.setPopupTheme(themeIds[position]);
+        StatusBarUtils.setStatusColor(this, getResources().getColor(Constants.BG_RES_IDS[position]));
+        toolbar.setBackgroundResource(Constants.BG_RES_IDS[position]);
+        toolbar.setPopupTheme(Constants.THEME_RES_IDS[position]);
         setSupportActionBar(toolbar);
         ivSearch.setOnClickListener(v -> onSearch(etSearch.getText().toString(), false));
 
@@ -81,6 +73,10 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
 
     @Override
     public void onSearch(String k, boolean setText) {
+        if (k == null || k.equals("")) {
+            ToastUtils.show(getString(R.string.prompt_search_empty));
+            return;
+        }
         // 赋值
         if (setText) {
             etSearch.setText(k);
@@ -99,6 +95,7 @@ public class SearchActivity extends BaseActivity implements SearchFragment.Searc
         ArticlesFragment articlesFragment = (ArticlesFragment) getSupportFragmentManager().findFragmentByTag(TAG_ARTICLES);
         if (articlesFragment == null) {
             articlesFragment = ArticlesFragment.newInstance(ArticlesFragment.FROM_SEARCH, k);
+            // TODO: 2019-08-21 会有bug存在,java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
             ft.add(R.id.fl_content, articlesFragment, TAG_ARTICLES).addToBackStack(null).commit();
         } else {
             articlesFragment.setSearchData(k);

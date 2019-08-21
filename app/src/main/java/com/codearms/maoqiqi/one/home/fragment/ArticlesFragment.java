@@ -210,7 +210,7 @@ public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> i
                 break;
             case FROM_SEARCH:
                 // 搜索
-                presenter.query(0, k);
+                presenter.query(k, isRefresh);
                 break;
         }
     }
@@ -219,7 +219,8 @@ public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> i
         // 内容相同,不去搜索
         if (this.k.equals(k)) return;
         this.k = k;
-        presenter.query(0, k);
+        isRefresh = true;
+        presenter.query(k, true);
     }
 
     @Override

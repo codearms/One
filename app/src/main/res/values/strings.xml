@@ -139,6 +139,7 @@
 
     <string name="top_search">热门搜索</string>
     <string name="search_clean">清空搜索历史</string>
+    <string name="prompt_search_empty">搜素内容不能为空</string>
     <!-- =========================== 首页资源结束 =========================== -->
 
 
@@ -281,6 +282,7 @@
     <string name="failed_to_wx_chat">获取公众号列表数据失败</string>
     <string name="failed_to_knowledge">获取知识体系数据失败</string>
     <string name="failed_to_project">获取项目类别数据失败</string>
+    <string name="failed_to_query">搜索数据失败</string>
 
     <string name="failed_to_common">获取常用网站数据失败</string>
     <string name="failed_to_hot_key">获取热门关键词数据失败</string>
@@ -291,7 +293,6 @@
     <string name="failed_to_project_articles">获取项目数据失败</string>
     <string name="failed_to_logout">退出失败</string>
     <string name="failed_to_collect_data">获取收藏文章数据失败</string>
-    <string name="failed_to_query">搜索数据失败</string>
 
     <!-- 干货资源 -->
     <string name="search_gank">搜索干货</string>

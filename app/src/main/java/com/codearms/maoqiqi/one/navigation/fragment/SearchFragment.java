@@ -26,11 +26,23 @@ import com.codearms.maoqiqi.one.navigation.presenter.contract.SearchContract;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 搜索
+ * <p>
+ * 关于Fragment中软键盘遮挡内容问题?
+ * 给相关Activity设置android:windowSoftInputMode="adjustResize",然后在根视图设置android:fitsSystemWindows="true"
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-07 15:15
+ */
 public class SearchFragment extends BaseFragment<SearchContract.Presenter> implements SearchContract.View {
 
     private ChipGroup chipGroup;
+    private View line;
     private Button btnClean;
     private RecyclerViewAdapter adapter;
+    private List<HotKeyBean> hotKeyBeanList = new ArrayList<>();
+    private List<HotKeyBean> historyList = new ArrayList<>();
 
     private SearchListener listener;
 
@@ -46,6 +58,7 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         presenter = new SearchPresenter(this);
     }
 
@@ -58,17 +71,17 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
         chipGroup = rootView.findViewById(R.id.chip_group);
+        line = rootView.findViewById(R.id.line);
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
         btnClean = rootView.findViewById(R.id.btn_clean);
         btnClean.setOnClickListener(v -> {
-            adapter.getData().clear();
-            adapter.notifyDataSetChanged();
-            if (adapter.getData().size() == 0) {
-                btnClean.setVisibility(View.GONE);
-            }
+            historyList.clear();
+            adapter.replaceData(historyList);
+            line.setVisibility(View.GONE);
+            btnClean.setVisibility(View.GONE);
         });
 
-        adapter = new RecyclerViewAdapter(R.layout.item_history, new ArrayList<>());
+        adapter = new RecyclerViewAdapter(R.layout.item_history, historyList);
         adapter.setOnItemChildClickListener((adapter, view, position) -> itemChildClick(view, position));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -76,19 +89,28 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+
+        if (savedInstanceState != null) {
+            setHotKey(hotKeyBeanList);
+            if (historyList.size() > 0) {
+                line.setVisibility(View.VISIBLE);
+                btnClean.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void itemChildClick(View view, int position) {
         switch (view.getId()) {
             case R.id.view:
                 if (listener != null) {
-                    listener.onSearch(adapter.getData().get(position).getName(), true);
+                    listener.onSearch(historyList.get(position).getName(), true);
                 }
                 break;
             case R.id.iv_delete:
-                adapter.getData().remove(position);
-                adapter.notifyDataSetChanged();
+                historyList.remove(position);
+                adapter.replaceData(historyList);
                 if (adapter.getData().size() == 0) {
+                    line.setVisibility(View.GONE);
                     btnClean.setVisibility(View.GONE);
                 }
                 break;
@@ -103,6 +125,10 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
 
     @Override
     public void setHotKey(List<HotKeyBean> hotKeyBeanList) {
+        loadDataCompleted();
+        if (this.hotKeyBeanList != hotKeyBeanList)
+            this.hotKeyBeanList.addAll(hotKeyBeanList);
+
         chipGroup.removeAllViews();
         Chip chip;
         for (int i = 0; i < hotKeyBeanList.size(); i++) {
@@ -114,9 +140,15 @@ public class SearchFragment extends BaseFragment<SearchContract.Presenter> imple
             });
             chipGroup.addView(chip);
         }
+    }
 
-        if (hotKeyBeanList.size() > 0) {
-            adapter.replaceData(hotKeyBeanList);
+    @Override
+    public void setHistory(List<HotKeyBean> historyList) {
+        this.historyList.addAll(historyList);
+
+        if (historyList.size() > 0) {
+            adapter.replaceData(historyList);
+            line.setVisibility(View.VISIBLE);
             btnClean.setVisibility(View.VISIBLE);
         }
     }

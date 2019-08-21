@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.App;
+import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.navigation.fragment.WebViewFragment;
@@ -30,13 +31,6 @@ import java.lang.reflect.Method;
 public class WebViewActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.WebViewFragment";
-    private static final int DEFAULT_POSITION = 5;
-
-    private final int[] bgResIds = {R.color.color_home, R.color.color_news, R.color.color_book,
-            R.color.color_music, R.color.color_movie, R.color.color_navigation};
-    private final int[] themeIds = {R.style.home_popup_theme, R.style.news_popup_theme,
-            R.style.book_popup_theme, R.style.music_popup_theme,
-            R.style.movie_popup_theme, R.style.navigation_popup_theme};
 
     private Toolbar toolbar;
 
@@ -45,7 +39,7 @@ public class WebViewActivity extends BaseActivity {
     private WebViewFragment fragment;
 
     public static void start(@NonNull Context context, @NonNull String url) {
-        start(context, DEFAULT_POSITION, url);
+        start(context, Constants.DEFAULT_POSITION, url);
     }
 
     public static void start(@NonNull Context context, int position, @NonNull String url) {
@@ -59,7 +53,7 @@ public class WebViewActivity extends BaseActivity {
     }
 
     public static void start(@NonNull Context context, String from, @NonNull ArticleBean articleBean) {
-        start(context, DEFAULT_POSITION, from, articleBean);
+        start(context, Constants.DEFAULT_POSITION, from, articleBean);
     }
 
     public static void start(@NonNull Context context, int position, String from, @NonNull ArticleBean articleBean) {
@@ -86,11 +80,11 @@ public class WebViewActivity extends BaseActivity {
         if (bundle == null) return;
 
         int type = bundle.getInt("type");
-        position = bundle.getInt("position", DEFAULT_POSITION);
+        position = bundle.getInt("position", Constants.DEFAULT_POSITION);
 
-        statusBarView.setBackgroundResource(bgResIds[position]);
-        toolbar.setBackgroundResource(bgResIds[position]);
-        toolbar.setPopupTheme(themeIds[position]);
+        statusBarView.setBackgroundResource(Constants.BG_RES_IDS[position]);
+        toolbar.setBackgroundResource(Constants.BG_RES_IDS[position]);
+        toolbar.setPopupTheme(Constants.THEME_RES_IDS[position]);
         // if (!title.equals("")) toolbar.setTitle(title);
         setSupportActionBar(toolbar);
 
@@ -98,11 +92,11 @@ public class WebViewActivity extends BaseActivity {
         if (fragment == null) {
             if (type == 1) {
                 String url = bundle.getString("url", "");
-                fragment = WebViewFragment.newInstance(bgResIds[position], url);
+                fragment = WebViewFragment.newInstance(Constants.BG_RES_IDS[position], url);
             } else {
                 String from = bundle.getString("from", "");
                 ArticleBean articleBean = bundle.getParcelable("articleBean");
-                fragment = WebViewFragment.newInstance(bgResIds[position], from, articleBean);
+                fragment = WebViewFragment.newInstance(Constants.BG_RES_IDS[position], from, articleBean);
             }
             getSupportFragmentManager().beginTransaction().add(R.id.fl_content, fragment, TAG).commit();
         }
@@ -129,7 +123,7 @@ public class WebViewActivity extends BaseActivity {
                 for (int i = 0; i < menu.size(); i++) {
                     Drawable drawable = menu.getItem(i).getIcon();
                     if (drawable != null)
-                        drawable.setTint(getResources().getColor(bgResIds[position]));
+                        drawable.setTint(getResources().getColor(Constants.BG_RES_IDS[position]));
                 }
             }
         }

@@ -31,4 +31,13 @@ public interface Constants {
             "http://f1.haiqq.com/allimg/3547466170/1439188363.jpg",
             "http://f1.haiqq.com/allimg/351408267/1438664910.jpg",
     };
+
+    int DEFAULT_POSITION = 5;
+
+    int[] BG_RES_IDS = {R.color.color_home, R.color.color_news, R.color.color_book,
+            R.color.color_music, R.color.color_movie, R.color.color_navigation};
+
+    int[] THEME_RES_IDS = {R.style.home_popup_theme, R.style.news_popup_theme,
+            R.style.book_popup_theme, R.style.music_popup_theme,
+            R.style.movie_popup_theme, R.style.navigation_popup_theme};
 }

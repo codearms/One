@@ -24,8 +24,10 @@ public class SearchPresenter extends RxPresenterImpl<SearchContract.View> implem
                 new BaseObserver<List<HotKeyBean>>(view, R.string.failed_to_hot_key) {
                     @Override
                     public void onNext(List<HotKeyBean> hotKeyBeans) {
-                        super.onNext(hotKeyBeans);
-                        view.setHotKey(hotKeyBeans);
+                        if (isActive()) {
+                            view.setHotKey(hotKeyBeans);
+                            view.setHistory(hotKeyBeans);
+                        }
                     }
                 }));
     }

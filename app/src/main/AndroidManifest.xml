@@ -19,6 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".navigation.activity.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Fullscreen.Splash"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
@@ -37,29 +38,44 @@
         <!--登录-->
         <activity
             android:name=".navigation.activity.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="stateVisible" />
         <!--收藏列表-->
         <activity
             android:name=".navigation.activity.CollectActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--注册-->
         <activity
             android:name=".navigation.activity.RegisterActivity"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="stateVisible" />
         <!--项目介绍-->
-        <activity android:name=".navigation.activity.ProjectIntroductionActivity" />
+        <activity
+            android:name=".navigation.activity.ProjectIntroductionActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--更新说明-->
-        <activity android:name=".navigation.activity.UpdateDescriptionActivity" />
+        <activity
+            android:name=".navigation.activity.UpdateDescriptionActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--扫码下载-->
-        <activity android:name=".navigation.activity.ScanCodeActivity" />
+        <activity
+            android:name=".navigation.activity.ScanCodeActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--问题反馈-->
-        <activity android:name=".navigation.activity.ProblemFeedbackActivity" />
+        <activity
+            android:name=".navigation.activity.ProblemFeedbackActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--关于我们-->
-        <activity android:name=".navigation.activity.AboutActivity" />
+        <activity
+            android:name=".navigation.activity.AboutActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--捐赠开发者-->
-        <activity android:name=".navigation.activity.DonateActivity" />
+        <activity
+            android:name=".navigation.activity.DonateActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <!--设置-->
-        <activity android:name=".navigation.activity.SettingActivity" />
+        <activity
+            android:name=".navigation.activity.SettingActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <!--首页-->
         <!--常用网址-->
@@ -83,7 +99,9 @@
             android:name=".home.activity.ProjectActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!--二级分类-->
-        <activity android:name=".home.activity.ClassifyActivity" />
+        <activity
+            android:name=".home.activity.ClassifyActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name=".navigation.activity.WebViewActivity"
@@ -102,7 +120,6 @@
         <activity
             android:name=".navigation.activity.SearchActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
         <activity
             android:name=".home.activity.PictureActivity"

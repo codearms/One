@@ -17,5 +17,7 @@ public interface SearchContract {
     interface View extends BaseView<Presenter> {
 
         void setHotKey(List<HotKeyBean> hotKeyBeanList);
+
+        void setHistory(List<HotKeyBean> historyList);
     }
 }

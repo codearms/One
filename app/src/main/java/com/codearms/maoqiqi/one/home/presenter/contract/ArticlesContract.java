@@ -21,7 +21,7 @@ public interface ArticlesContract {
 
         void getCollect(boolean isRefresh);
 
-        void query(int page, String k);
+        void query(String k, boolean isRefresh);
 
         // 收藏
         void collect(int id);
