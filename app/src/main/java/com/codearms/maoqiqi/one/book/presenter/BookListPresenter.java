@@ -20,7 +20,7 @@ public class BookListPresenter extends RxPresenterImpl<BookListContract.View> im
     @Override
     public void getBook(String q, String tag, boolean isRefresh) {
         pageIndex = isRefresh ? 0 : pageIndex + 1;
-        addSubscribe(repository.getBook(q, tag, pageIndex, Constants.PAGE_COUNT)
+        addSubscribe(repository.getBook(q, tag, pageIndex * Constants.PAGE_COUNT, Constants.PAGE_COUNT)
                 .subscribeWith(new BaseObserver<BookListBean>(view) {
                     @Override
                     public void onNext(BookListBean bookListBean) {

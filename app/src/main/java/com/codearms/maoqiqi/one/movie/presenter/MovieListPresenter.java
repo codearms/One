@@ -20,7 +20,7 @@ public class MovieListPresenter extends RxPresenterImpl<MovieListContract.View> 
     @Override
     public void getInTheatersMovies(String city, boolean isRefresh) {
         pageIndex = isRefresh ? 0 : pageIndex + 1;
-        addSubscribe(repository.inTheatersMovies(city, pageIndex, Constants.PAGE_COUNT)
+        addSubscribe(repository.inTheatersMovies(city, pageIndex * Constants.PAGE_COUNT, Constants.PAGE_COUNT)
                 .subscribeWith(new BaseObserver<MovieListBean>(view) {
                     @Override
                     public void onNext(MovieListBean movieListBean) {
@@ -32,7 +32,7 @@ public class MovieListPresenter extends RxPresenterImpl<MovieListContract.View> 
     @Override
     public void getComingSoonMovies(boolean isRefresh) {
         pageIndex = isRefresh ? 0 : pageIndex + 1;
-        addSubscribe(repository.comingSoonMovies(pageIndex, Constants.PAGE_COUNT)
+        addSubscribe(repository.comingSoonMovies(pageIndex * Constants.PAGE_COUNT, Constants.PAGE_COUNT)
                 .subscribeWith(new BaseObserver<MovieListBean>(view) {
                     @Override
                     public void onNext(MovieListBean movieListBean) {
@@ -44,7 +44,7 @@ public class MovieListPresenter extends RxPresenterImpl<MovieListContract.View> 
     @Override
     public void searchMovie(String q, boolean isRefresh) {
         pageIndex = isRefresh ? 0 : pageIndex + 1;
-        addSubscribe(repository.searchMovie(q, pageIndex, Constants.PAGE_COUNT)
+        addSubscribe(repository.searchMovie(q, pageIndex * Constants.PAGE_COUNT, Constants.PAGE_COUNT)
                 .subscribeWith(new BaseObserver<MovieListBean>(view) {
                     @Override
                     public void onNext(MovieListBean movieListBean) {

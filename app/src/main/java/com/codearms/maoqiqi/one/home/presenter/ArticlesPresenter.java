@@ -1,6 +1,7 @@
 package com.codearms.maoqiqi.one.home.presenter;
 
 import com.codearms.maoqiqi.base.BaseObserver;
+import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.ArticleBean;
 import com.codearms.maoqiqi.one.data.bean.ArticleBeans;
@@ -37,7 +38,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
 
     @Override
     public void getWxArticles(int id, boolean isRefresh) {
-        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        pageIndex = isRefresh ? Constants.PAGE_START : pageIndex + 1;
         addSubscribe(repository.getWxArticles(id, pageIndex)
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_wx_articles) {
                     @Override
@@ -49,7 +50,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
 
     @Override
     public void getKnowledgeArticles(int cid, boolean isRefresh) {
-        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        pageIndex = isRefresh ? Constants.PAGE_START : pageIndex + 1;
         addSubscribe(repository.getKnowledgeArticles(pageIndex, cid)
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_knowledge_articles) {
                     @Override
@@ -61,7 +62,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
 
     @Override
     public void getProjectArticles(int cid, boolean isRefresh) {
-        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        pageIndex = isRefresh ? Constants.PAGE_START : pageIndex + 1;
         addSubscribe(repository.getProjectArticles(pageIndex, cid)
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_project_articles) {
                     @Override
@@ -73,7 +74,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
 
     @Override
     public void getCollect(boolean isRefresh) {
-        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        pageIndex = isRefresh ? Constants.PAGE_START : pageIndex + 1;
         addSubscribe(repository.getCollect(pageIndex)
                 .subscribeWith(new BaseObserver<ArticleBeans>(view, R.string.failed_to_collect_data) {
                     @Override
@@ -85,7 +86,7 @@ public class ArticlesPresenter extends RxPresenterImpl<ArticlesContract.View> im
 
     @Override
     public void query(String k, boolean isRefresh) {
-        pageIndex = isRefresh ? 0 : pageIndex + 1;
+        pageIndex = isRefresh ? Constants.PAGE_START : pageIndex + 1;
         addSubscribe(repository.query(pageIndex, k).subscribeWith(
                 new BaseObserver<ArticleBeans>(view, R.string.failed_to_query) {
                     @Override

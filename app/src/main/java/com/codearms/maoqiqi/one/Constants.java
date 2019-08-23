@@ -8,7 +8,7 @@ package com.codearms.maoqiqi.one;
 public interface Constants {
 
     // 默认加载数据起始页
-    int PAGE_INDEX = 1;
+    int PAGE_START = 0;
 
     // 默认加载数据条数
     int PAGE_COUNT = 10;
