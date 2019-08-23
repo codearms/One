@@ -7,10 +7,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -19,8 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.codearms.maoqiqi.base.BaseFragment;
-import com.codearms.maoqiqi.one.Constants;
+import com.codearms.maoqiqi.one.ListFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.MovieListBean;
 import com.codearms.maoqiqi.one.decoration.DividerItemDecoration;
@@ -29,15 +25,22 @@ import com.codearms.maoqiqi.one.movie.presenter.MovieListPresenter;
 import com.codearms.maoqiqi.one.movie.presenter.contract.MovieListContract;
 import com.codearms.maoqiqi.one.utils.MovieUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MovieListFragment extends BaseFragment<MovieListContract.Presenter> implements MovieListContract.View {
+/**
+ * 影视列表
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-27 14:00
+ */
+public class MovieListFragment extends ListFragment<MovieListContract.Presenter> implements MovieListContract.View {
 
     private int type;
     private String city;
     private String keyword;
 
-    private List<MovieListBean.MovieBean> list;
+    private List<MovieListBean.MovieBean> list = new ArrayList<>();
     private RecyclerAdapter adapter;
 
     /**
@@ -58,18 +61,13 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         presenter = new MovieListPresenter(this);
-    }
-
-    @Override
-    protected View createView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_movie_list, container, false);
     }
 
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
 
         Bundle bundle = getArguments();
         if (bundle == null) return;
@@ -97,19 +95,48 @@ public class MovieListFragment extends BaseFragment<MovieListContract.Presenter>
     @Override
     protected void loadData() {
         super.loadData();
+        refreshLayout.setEnableAutoLoadMore(true);
+        // 触发自动刷新
+        refreshLayout.autoRefresh();
+    }
+
+    @Override
+    protected void getData() {
         if (type == 0) {
-            presenter.getInTheatersMovies(city, Constants.PAGE_INDEX, Constants.PAGE_COUNT);
+            presenter.getInTheatersMovies(city, isRefresh);
         } else if (type == 1) {
-            presenter.getComingSoonMovies(Constants.PAGE_INDEX, Constants.PAGE_COUNT);
+            presenter.getComingSoonMovies(isRefresh);
         } else if (type == 2) {
-            presenter.searchMovie(keyword, Constants.PAGE_INDEX, Constants.PAGE_COUNT);
+            presenter.searchMovie(keyword, isRefresh);
         }
     }
 
     @Override
     public void setData(MovieListBean movieListBean) {
-        list = movieListBean.getMovieBeanList();
-        adapter.replaceData(list);
+        loadDataCompleted();
+        if (isRefresh) {
+            list.clear();
+            list.addAll(movieListBean.getMovieBeanList());
+            adapter.replaceData(list);
+
+            // 完成刷新
+            // Math.ceil两个整数相除,有余数向上取整
+            if ((int) Math.ceil((float) movieListBean.getTotal()) / movieListBean.getCount() <= movieListBean.getStart()) {
+                refreshLayout.finishRefreshWithNoMoreData();
+            } else {
+                refreshLayout.finishRefresh();
+            }
+        } else {
+            list.addAll(movieListBean.getMovieBeanList());
+            adapter.replaceData(list);
+
+            // 完成加载
+            if ((int) Math.ceil((float) movieListBean.getTotal()) / movieListBean.getCount() <= movieListBean.getStart()) {
+                refreshLayout.finishLoadMoreWithNoMoreData();
+            } else {
+                refreshLayout.finishLoadMore();
+            }
+        }
     }
 
     final class RecyclerAdapter extends BaseQuickAdapter<MovieListBean.MovieBean, ViewHolder> {

@@ -8,11 +8,11 @@ public interface MovieListContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void getInTheatersMovies(String city, int start, int count);
+        void getInTheatersMovies(String city, boolean isRefresh);
 
-        void getComingSoonMovies(int start, int count);
+        void getComingSoonMovies(boolean isRefresh);
 
-        void searchMovie(String q, int start, int count);
+        void searchMovie(String q, boolean isRefresh);
     }
 
     interface View extends BaseView<Presenter> {

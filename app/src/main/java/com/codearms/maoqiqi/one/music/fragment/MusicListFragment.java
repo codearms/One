@@ -32,12 +32,14 @@ import com.codearms.maoqiqi.one.utils.PermissionManager;
 import com.codearms.maoqiqi.one.utils.SortOrder;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 音乐列表
  * Link: https://github.com/maoqiqi/AndroidUtils
  * Author: fengqi.mao.march@gmail.com
- * Date: 2019-07-03 14:21
+ * Date: 2019-08-23 14:10
  */
 public class MusicListFragment extends BaseFragment<MusicListContract.Presenter> implements MusicListContract.View, PermissionManager.PermissionCallBack {
 
@@ -52,7 +54,12 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
 
     private int type;
 
-    private RecyclerView recyclerView;
+    private MusicAdapter adapter;
+    private List<MusicSongBean> musicSongBeanList = new ArrayList<>();
+    private List<MusicArtistBean> musicArtistBeanList = new ArrayList<>();
+    private List<MusicAlbumBean> musicAlbumBeanList = new ArrayList<>();
+    private List<String> folderList = new ArrayList<>();
+    private List<Integer> integers = new ArrayList<>();
 
     private PermissionManager permissionManager;
 
@@ -70,6 +77,7 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
         Bundle bundle = new Bundle();
         bundle.putInt("type", type);
         MusicListFragment fragment = new MusicListFragment();
+        fragment.setTag("MusicListFragment-" + type);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -88,6 +96,7 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         setHasOptionsMenu(true);
         presenter = new MusicListPresenter(this);
     }
@@ -109,13 +118,20 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
         albumId = bundle.getLong("albumId");
         folderPath = bundle.getString("folderPath");
 
-        recyclerView = rootView.findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+
+        adapter = new MusicAdapter(getActivity(), type);
+        adapter.setSongList(musicSongBeanList);
+        adapter.setArtistList(musicArtistBeanList);
+        adapter.setAlbumList(musicAlbumBeanList);
+        adapter.setFolderList(folderList, integers);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(context));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -242,26 +258,31 @@ public class MusicListFragment extends BaseFragment<MusicListContract.Presenter>
 
     @Override
     public void setSongList(List<MusicSongBean> musicSongBeanList) {
-        MusicAdapter<MusicSongBean> adapter = new MusicAdapter<>(R.layout.item_music_list, musicSongBeanList, getActivity(), type, null);
-        recyclerView.setAdapter(adapter);
+        loadDataCompleted();
+        this.musicSongBeanList = musicSongBeanList;
+        adapter.setSongList(musicSongBeanList);
     }
 
     @Override
     public void setArtistList(List<MusicArtistBean> musicArtistBeanList) {
-        MusicAdapter<MusicArtistBean> adapter = new MusicAdapter<>(R.layout.item_music_list, musicArtistBeanList, getActivity(), type, null);
-        recyclerView.setAdapter(adapter);
+        loadDataCompleted();
+        this.musicArtistBeanList = musicArtistBeanList;
+        adapter.setArtistList(musicArtistBeanList);
     }
 
     @Override
     public void setAlbumList(List<MusicAlbumBean> musicAlbumBeanList) {
-        MusicAdapter<MusicAlbumBean> adapter = new MusicAdapter<>(R.layout.item_music_list, musicAlbumBeanList, getActivity(), type, null);
-        recyclerView.setAdapter(adapter);
+        loadDataCompleted();
+        this.musicAlbumBeanList = musicAlbumBeanList;
+        adapter.setAlbumList(musicAlbumBeanList);
     }
 
     @Override
     public void setFolderList(List<String> folderList, List<Integer> integers) {
-        MusicAdapter<String> adapter = new MusicAdapter<>(R.layout.item_music_list, folderList, getActivity(), type, integers);
-        recyclerView.setAdapter(adapter);
+        loadDataCompleted();
+        this.folderList = folderList;
+        this.integers = integers;
+        adapter.setFolderList(folderList, integers);
     }
 
     @Override

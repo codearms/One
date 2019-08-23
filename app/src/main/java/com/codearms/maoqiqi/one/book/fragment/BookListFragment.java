@@ -36,6 +36,9 @@ import java.util.List;
  */
 public class BookListFragment extends ListFragment<BookListContract.Presenter> implements BookListContract.View {
 
+    private String keyword;
+    private String bookTag;
+
     private List<BookListBean.BookBean> list = new ArrayList<>();
     private RecyclerAdapter adapter;
 
@@ -65,6 +68,12 @@ public class BookListFragment extends ListFragment<BookListContract.Presenter> i
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
 
+        Bundle bundle = getArguments();
+        if (bundle == null) return;
+
+        keyword = bundle.getString("keyword");
+        bookTag = bundle.getString("bookTag");
+
         adapter = new RecyclerAdapter(R.layout.item_book_list, list);
         adapter.setOnItemClickListener((adapter, view, position) -> {
             BookListBean.BookBean item = list.get(position);
@@ -92,12 +101,6 @@ public class BookListFragment extends ListFragment<BookListContract.Presenter> i
 
     @Override
     protected void getData() {
-        Bundle bundle = getArguments();
-        if (bundle == null) return;
-
-        String keyword = bundle.getString("keyword");
-        String bookTag = bundle.getString("bookTag");
-
         presenter.getBook(keyword, bookTag, isRefresh);
     }
 

@@ -1,19 +1,19 @@
 package com.codearms.maoqiqi.one.music.adapter;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.util.Pair;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.codearms.maoqiqi.one.Constants;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.MusicAlbumBean;
@@ -28,42 +28,67 @@ import com.codearms.maoqiqi.one.utils.MusicUtils;
 
 import java.util.List;
 
-/**
- * Link: https://github.com/maoqiqi/AndroidUtils
- * Author: fengqi.mao.march@gmail.com
- * Date: 2019-07-04 15:04
- */
-public class MusicAdapter<T> extends BaseQuickAdapter<T, MusicAdapter.ViewHolder> {
+public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> {
 
     private static final String TAG_SONG = "com.codearms.maoqiqi.one.SONG";
 
     private FragmentActivity activity;
     private int type;
-    private final List<Integer> integers;
 
-    public MusicAdapter(int layoutResId, @Nullable List<T> data, FragmentActivity activity, int type, List<Integer> integers) {
-        super(layoutResId, data);
+    private List<MusicSongBean> musicSongBeanList;
+    private List<MusicArtistBean> musicArtistBeanList;
+    private List<MusicAlbumBean> musicAlbumBeanList;
+    private List<String> folderList;
+    private List<Integer> integers;
+
+    public MusicAdapter(FragmentActivity activity, int type) {
         this.activity = activity;
         this.type = type;
+    }
+
+    public void setSongList(List<MusicSongBean> musicSongBeanList) {
+        this.musicSongBeanList = musicSongBeanList;
+        notifyDataSetChanged();
+    }
+
+    public void setArtistList(List<MusicArtistBean> musicArtistBeanList) {
+        this.musicArtistBeanList = musicArtistBeanList;
+        notifyDataSetChanged();
+    }
+
+    public void setAlbumList(List<MusicAlbumBean> musicAlbumBeanList) {
+        this.musicAlbumBeanList = musicAlbumBeanList;
+        notifyDataSetChanged();
+    }
+
+    public void setFolderList(List<String> folderList, List<Integer> integers) {
+        this.folderList = folderList;
         this.integers = integers;
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new ViewHolder(LayoutInflater.from(activity).inflate(R.layout.item_music_list, viewGroup, false));
     }
 
     @Override
-    protected void convert(ViewHolder helper, T item) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         String name;
         String imageUrl;
         switch (type) {
             case MusicListFragment.TYPE_SONG:// 歌曲
-                MusicSongBean songBean = (MusicSongBean) item;
+                MusicSongBean songBean = musicSongBeanList.get(i);
                 imageUrl = MediaLoader.getAlbumArt(songBean.getAlbumId());
                 if (imageUrl == null || imageUrl.equals("")) {
-                    imageUrl = Constants.MUSICS[helper.getLayoutPosition() % Constants.MUSICS.length];
+                    imageUrl = Constants.MUSICS[viewHolder.getLayoutPosition() % Constants.MUSICS.length];
                 }
 
-                Glide.with(activity).load(imageUrl).placeholder(R.drawable.ic_song_placeholder).into(helper.ivMusic);
-                helper.tvName.setText(songBean.getTitle());
-                helper.tvInfo.setText(activity.getString(R.string.music_song_info, MusicUtils.getArtist(songBean.getArtist()), MusicUtils.getAlbum(songBean.getAlbum())));
-                helper.ivMore.setOnClickListener(v -> {
+                Glide.with(activity).load(imageUrl).placeholder(R.drawable.ic_song_placeholder).into(viewHolder.ivMusic);
+                viewHolder.tvName.setText(songBean.getTitle());
+                viewHolder.tvInfo.setText(activity.getString(R.string.music_song_info, MusicUtils.getArtist(songBean.getArtist()), MusicUtils.getAlbum(songBean.getAlbum())));
+                viewHolder.ivMore.setOnClickListener(v -> {
                     // 可以使用DialogFragment展示(下面将Activity设置为Dialog模式)
                     FragmentManager manager = activity.getSupportFragmentManager();
                     MusicMoreFragment fragment = (MusicMoreFragment) manager.findFragmentByTag(TAG_SONG);
@@ -72,58 +97,73 @@ public class MusicAdapter<T> extends BaseQuickAdapter<T, MusicAdapter.ViewHolder
                         fragment.show(manager, TAG_SONG);
                     }
                 });
-                helper.llItem.setOnClickListener(v -> {
+                viewHolder.llItem.setOnClickListener(v -> {
 
                 });
                 break;
             case MusicListFragment.TYPE_ARTIST:// 艺术家
-                MusicArtistBean artistBean = (MusicArtistBean) item;
+                MusicArtistBean artistBean = musicArtistBeanList.get(i);
                 name = MusicUtils.getArtist(artistBean.getArtist());
-                imageUrl = Constants.MUSICS[helper.getLayoutPosition() % Constants.MUSICS.length];
+                imageUrl = Constants.MUSICS[viewHolder.getLayoutPosition() % Constants.MUSICS.length];
 
-                Glide.with(activity).load(imageUrl).placeholder(R.drawable.ic_artist_placeholder).into(helper.ivMusic);
-                helper.tvName.setText(MusicUtils.getArtist(artistBean.getArtist()));
-                helper.tvInfo.setText(activity.getString(R.string.music_artist_info, artistBean.getNumberOfAlbums(), artistBean.getNumberOfTracks()));
-                helper.ivMore.setOnClickListener(v -> MusicMoreActivity.start(activity, artistBean));
-                helper.llItem.setTag(imageUrl);
-                helper.llItem.setOnClickListener(v -> {
-                    Pair<View, String> ivMusicPair = new Pair<>(helper.ivMusic, activity.getString(R.string.transition_music_img));
+                Glide.with(activity).load(imageUrl).placeholder(R.drawable.ic_artist_placeholder).into(viewHolder.ivMusic);
+                viewHolder.tvName.setText(MusicUtils.getArtist(artistBean.getArtist()));
+                viewHolder.tvInfo.setText(activity.getString(R.string.music_artist_info, artistBean.getNumberOfAlbums(), artistBean.getNumberOfTracks()));
+                viewHolder.ivMore.setOnClickListener(v -> MusicMoreActivity.start(activity, artistBean));
+                viewHolder.llItem.setTag(imageUrl);
+                viewHolder.llItem.setOnClickListener(v -> {
+                    Pair<View, String> ivMusicPair = new Pair<>(viewHolder.ivMusic, activity.getString(R.string.transition_music_img));
                     ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, ivMusicPair);
-                    MusicListActivity.start(activity, name, (String) helper.llItem.getTag(), options.toBundle(), artistBean.get_id(), 0, null);
+                    MusicListActivity.start(activity, name, (String) viewHolder.llItem.getTag(), options.toBundle(), artistBean.get_id(), 0, null);
                 });
                 break;
             case MusicListFragment.TYPE_ALBUM:// 专辑
-                MusicAlbumBean albumBean = (MusicAlbumBean) item;
+                MusicAlbumBean albumBean = musicAlbumBeanList.get(i);
                 name = MusicUtils.getAlbum(albumBean.getAlbum());
                 imageUrl = albumBean.getAlbumArt();
                 if (imageUrl == null || imageUrl.equals("")) {
-                    imageUrl = Constants.MUSICS[helper.getLayoutPosition() % Constants.MUSICS.length];
+                    imageUrl = Constants.MUSICS[viewHolder.getLayoutPosition() % Constants.MUSICS.length];
                 }
 
-                Glide.with(activity).load(imageUrl).placeholder(R.drawable.ic_album_placeholder).into(helper.ivMusic);
-                helper.tvName.setText(name);
-                helper.tvInfo.setText(activity.getString(R.string.music_album_info, MusicUtils.getArtist(albumBean.getArtist()), albumBean.getNumberOfSongs()));
-                helper.ivMore.setOnClickListener(v -> MusicMoreActivity.start(activity, albumBean));
-                helper.llItem.setTag(imageUrl);
-                helper.llItem.setOnClickListener(v -> {
-                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, Pair.create(helper.ivMusic, activity.getString(R.string.transition_music_img)));
-                    MusicListActivity.start(activity, name, (String) helper.llItem.getTag(), options.toBundle(), 0, albumBean.get_id(), null);
+                Glide.with(activity).load(imageUrl).placeholder(R.drawable.ic_album_placeholder).into(viewHolder.ivMusic);
+                viewHolder.tvName.setText(name);
+                viewHolder.tvInfo.setText(activity.getString(R.string.music_album_info, MusicUtils.getArtist(albumBean.getArtist()), albumBean.getNumberOfSongs()));
+                viewHolder.ivMore.setOnClickListener(v -> MusicMoreActivity.start(activity, albumBean));
+                viewHolder.llItem.setTag(imageUrl);
+                viewHolder.llItem.setOnClickListener(v -> {
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, Pair.create(viewHolder.ivMusic, activity.getString(R.string.transition_music_img)));
+                    MusicListActivity.start(activity, name, (String) viewHolder.llItem.getTag(), options.toBundle(), 0, albumBean.get_id(), null);
                 });
                 break;
             case MusicListFragment.TYPE_FOLDER:// 文件夹
-                String folderPath = (String) item;
+                String folderPath = folderList.get(i);
                 name = MusicUtils.getFolderName(folderPath);
 
-                helper.ivMusic.setImageResource(R.drawable.ic_folder_placeholder);
-                helper.tvName.setText(MusicUtils.getFolderName(folderPath));
-                helper.tvInfo.setText(activity.getString(R.string.music_folder_info, integers.get(helper.getLayoutPosition()), MusicUtils.getPath(folderPath)));
-                helper.ivMore.setOnClickListener(v -> MusicMoreActivity.start(activity, folderPath));
-                helper.llItem.setOnClickListener(v -> MusicListActivity.start(activity, name, "", null, 0, 0, folderPath));
+                viewHolder.ivMusic.setImageResource(R.drawable.ic_folder_placeholder);
+                viewHolder.tvName.setText(MusicUtils.getFolderName(folderPath));
+                viewHolder.tvInfo.setText(activity.getString(R.string.music_folder_info, integers.get(viewHolder.getLayoutPosition()), MusicUtils.getPath(folderPath)));
+                viewHolder.ivMore.setOnClickListener(v -> MusicMoreActivity.start(activity, folderPath));
+                viewHolder.llItem.setOnClickListener(v -> MusicListActivity.start(activity, name, "", null, 0, 0, folderPath));
                 break;
         }
     }
 
-    static final class ViewHolder extends BaseViewHolder {
+    @Override
+    public int getItemCount() {
+        switch (type) {
+            case MusicListFragment.TYPE_SONG:
+                return musicSongBeanList.size();
+            case MusicListFragment.TYPE_ARTIST:
+                return musicArtistBeanList.size();
+            case MusicListFragment.TYPE_ALBUM:
+                return musicAlbumBeanList.size();
+            case MusicListFragment.TYPE_FOLDER:
+                return folderList.size();
+        }
+        return 0;
+    }
+
+    static final class ViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout llItem;
         ImageView ivMusic;

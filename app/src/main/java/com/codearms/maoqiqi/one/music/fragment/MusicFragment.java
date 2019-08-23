@@ -20,6 +20,12 @@ import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 音乐
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-23 14:00
+ */
 public class MusicFragment extends BaseFragment {
 
     private Toolbar toolbar;
@@ -38,6 +44,7 @@ public class MusicFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         setHasOptionsMenu(true);
     }
 
@@ -52,6 +59,10 @@ public class MusicFragment extends BaseFragment {
         toolbar = rootView.findViewById(R.id.toolbar);
         tabLayout = rootView.findViewById(R.id.tab_layout);
         viewPager = rootView.findViewById(R.id.view_pager);
+
+        if (savedInstanceState != null) {
+            loadData();
+        }
     }
 
     @Override
@@ -65,6 +76,8 @@ public class MusicFragment extends BaseFragment {
         viewPager.setCurrentItem(0);
 
         tabLayout.setupWithViewPager(viewPager);
+
+        loadDataCompleted();
     }
 
     @Override

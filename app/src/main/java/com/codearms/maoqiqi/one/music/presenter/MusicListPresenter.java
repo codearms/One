@@ -18,11 +18,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Link: https://github.com/maoqiqi/AndroidUtils
- * Author: fengqi.mao.march@gmail.com
- * Date: 2019-07-03 14:58
- */
 public class MusicListPresenter extends RxPresenterImpl<MusicListContract.View> implements MusicListContract.Presenter {
 
     private OneRepository repository;
@@ -38,8 +33,7 @@ public class MusicListPresenter extends RxPresenterImpl<MusicListContract.View> 
                 .subscribeWith(new BaseObserver<List<MusicSongBean>>(view) {
                     @Override
                     public void onNext(List<MusicSongBean> musicSongBeans) {
-                        super.onNext(musicSongBeans);
-                        view.setSongList(musicSongBeans);
+                        if (isActive()) view.setSongList(musicSongBeans);
                     }
                 }));
     }
@@ -50,8 +44,7 @@ public class MusicListPresenter extends RxPresenterImpl<MusicListContract.View> 
                 .subscribeWith(new BaseObserver<List<MusicArtistBean>>(view) {
                     @Override
                     public void onNext(List<MusicArtistBean> musicArtistBeans) {
-                        super.onNext(musicArtistBeans);
-                        view.setArtistList(musicArtistBeans);
+                        if (isActive()) view.setArtistList(musicArtistBeans);
                     }
                 }));
     }
@@ -62,8 +55,7 @@ public class MusicListPresenter extends RxPresenterImpl<MusicListContract.View> 
                 .subscribeWith(new BaseObserver<List<MusicAlbumBean>>(view) {
                     @Override
                     public void onNext(List<MusicAlbumBean> musicAlbumBeans) {
-                        super.onNext(musicAlbumBeans);
-                        view.setAlbumList(musicAlbumBeans);
+                        if (isActive()) view.setAlbumList(musicAlbumBeans);
                     }
                 }));
     }

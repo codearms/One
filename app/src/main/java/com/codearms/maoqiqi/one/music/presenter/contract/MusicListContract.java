@@ -8,11 +8,6 @@ import com.codearms.maoqiqi.one.data.bean.MusicSongBean;
 
 import java.util.List;
 
-/**
- * Link: https://github.com/maoqiqi/AndroidUtils
- * Author: fengqi.mao.march@gmail.com
- * Date: 2019-07-03 14:58
- */
 public interface MusicListContract {
 
     interface Presenter extends BasePresenter<View> {
