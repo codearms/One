@@ -51,15 +51,12 @@ public abstract class ListFragment<T extends BasePresenter> extends BaseFragment
 
     @Override
     public void showLoading() {
-        refreshLayout.setEnableAutoLoadMore(true);
-        // 触发自动刷新
-        refreshLayout.autoRefresh();
+
     }
 
     @Override
     public void hideLoading() {
-        refreshLayout.finishRefresh(false);
-        refreshLayout.finishLoadMore(false);
+
     }
 
     protected abstract void getData();

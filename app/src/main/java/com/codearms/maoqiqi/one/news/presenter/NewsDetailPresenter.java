@@ -6,11 +6,6 @@ import com.codearms.maoqiqi.one.data.source.OneRepository;
 import com.codearms.maoqiqi.one.news.presenter.contract.NewsDetailContract;
 import com.codearms.maoqiqi.rx.RxPresenterImpl;
 
-/**
- * Link: https://github.com/maoqiqi/AndroidUtils
- * Author: fengqi.mao.march@gmail.com
- * Date: 2019-06-27 18:30
- */
 public class NewsDetailPresenter extends RxPresenterImpl<NewsDetailContract.View> implements NewsDetailContract.Presenter {
 
     private OneRepository repository;
@@ -26,8 +21,7 @@ public class NewsDetailPresenter extends RxPresenterImpl<NewsDetailContract.View
                 .subscribeWith(new BaseObserver<NewsDetailBean>(view) {
                     @Override
                     public void onNext(NewsDetailBean newsDetailBean) {
-                        super.onNext(newsDetailBean);
-                        view.setNewsDetail(newsDetailBean);
+                        if (isActive()) view.setNewsDetail(newsDetailBean);
                     }
                 }));
     }

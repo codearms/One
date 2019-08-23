@@ -169,6 +169,8 @@
         <item>美食</item>
         <item>旅行</item>
     </string-array>
+
+    <string name="transition_news_img">transition_news_img</string>
     <!-- =========================== 新闻资源结束 =========================== -->
 
 

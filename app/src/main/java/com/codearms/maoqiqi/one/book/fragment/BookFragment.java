@@ -21,6 +21,12 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 图书
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-20 11:15
+ */
 public class BookFragment extends BaseFragment {
 
     private Toolbar toolbar;
@@ -37,6 +43,12 @@ public class BookFragment extends BaseFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    @Override
     protected View createView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.fragment_book, container, false);
     }
@@ -47,6 +59,10 @@ public class BookFragment extends BaseFragment {
         toolbar = rootView.findViewById(R.id.toolbar);
         tabLayout = rootView.findViewById(R.id.tab_layout);
         viewPager = rootView.findViewById(R.id.view_pager);
+
+        if (savedInstanceState != null) {
+            loadData();
+        }
     }
 
     @Override
@@ -56,12 +72,14 @@ public class BookFragment extends BaseFragment {
 
         String[] arr = getResources().getStringArray(R.array.book_titles);
         viewPager.setAdapter(new MyPagerAdapter(Arrays.asList(arr), getChildFragmentManager()));
-        viewPager.setOffscreenPageLimit(1);
+        viewPager.setOffscreenPageLimit(arr.length - 1);
         viewPager.setCurrentItem(0);
         viewPager.addOnPageChangeListener(new MyPageChangeListener());
 
         tabLayout.setTabData(arr);
         tabLayout.setOnTabSelectListener(new MyTabSelectListener());
+
+        loadDataCompleted();
     }
 
     private final class MyPagerAdapter extends SectionsPagerAdapter {

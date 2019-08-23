@@ -24,9 +24,10 @@ import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 import com.codearms.maoqiqi.one.utils.Utils;
 
 /**
+ * 图书详情
  * Link: https://github.com/maoqiqi/AndroidUtils
  * Author: fengqi.mao.march@gmail.com
- * Date: 2019-06-28 10:38
+ * Date: 2019-08-20 17:15
  */
 public class BookDetailActivity extends BaseActivity {
 

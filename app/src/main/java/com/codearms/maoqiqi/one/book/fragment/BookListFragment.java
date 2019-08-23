@@ -7,10 +7,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -18,8 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.codearms.maoqiqi.base.BaseFragment;
-import com.codearms.maoqiqi.one.Constants;
+import com.codearms.maoqiqi.one.ListFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.book.activity.BookDetailActivity;
 import com.codearms.maoqiqi.one.book.presenter.BookListPresenter;
@@ -29,11 +25,18 @@ import com.codearms.maoqiqi.one.decoration.DividerItemDecoration;
 import com.codearms.maoqiqi.one.utils.BookUtils;
 import com.codearms.maoqiqi.one.utils.RecyclerViewScrollListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class BookListFragment extends BaseFragment<BookListContract.Presenter> implements BookListContract.View {
+/**
+ * 图书列表
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-20 14:15
+ */
+public class BookListFragment extends ListFragment<BookListContract.Presenter> implements BookListContract.View {
 
-    private List<BookListBean.BookBean> list;
+    private List<BookListBean.BookBean> list = new ArrayList<>();
     private RecyclerAdapter adapter;
 
     /**
@@ -46,6 +49,7 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
         bundle.putString("keyword", keyword);
         bundle.putString("bookTag", bookTag);
         BookListFragment fragment = new BookListFragment();
+        fragment.setTag("BookListFragment-" + bookTag);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -53,18 +57,13 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         presenter = new BookListPresenter(this);
-    }
-
-    @Override
-    protected View createView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_book_list, container, false);
     }
 
     @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
 
         adapter = new RecyclerAdapter(R.layout.item_book_list, list);
         adapter.setOnItemClickListener((adapter, view, position) -> {
@@ -86,19 +85,48 @@ public class BookListFragment extends BaseFragment<BookListContract.Presenter> i
     @Override
     protected void loadData() {
         super.loadData();
+        refreshLayout.setEnableAutoLoadMore(true);
+        // 触发自动刷新
+        refreshLayout.autoRefresh();
+    }
+
+    @Override
+    protected void getData() {
         Bundle bundle = getArguments();
         if (bundle == null) return;
 
         String keyword = bundle.getString("keyword");
         String bookTag = bundle.getString("bookTag");
 
-        presenter.getBook(keyword, bookTag, Constants.PAGE_INDEX, Constants.PAGE_COUNT);
+        presenter.getBook(keyword, bookTag, isRefresh);
     }
 
     @Override
-    public void setBook(BookListBean bookListBean) {
-        list = bookListBean.getBookBeanList();
-        adapter.replaceData(list);
+    public void setBook(BookListBean bookListBean, boolean isRefresh) {
+        loadDataCompleted();
+        if (isRefresh) {
+            list.clear();
+            list.addAll(bookListBean.getBookBeanList());
+            adapter.replaceData(list);
+
+            // 完成刷新
+            // Math.ceil两个整数相除,有余数向上取整
+            if ((int) Math.ceil((float) bookListBean.getTotal()) / bookListBean.getCount() <= bookListBean.getStart()) {
+                refreshLayout.finishRefreshWithNoMoreData();
+            } else {
+                refreshLayout.finishRefresh();
+            }
+        } else {
+            list.addAll(bookListBean.getBookBeanList());
+            adapter.replaceData(list);
+
+            // 完成加载
+            if ((int) Math.ceil((float) bookListBean.getTotal()) / bookListBean.getCount() <= bookListBean.getStart()) {
+                refreshLayout.finishLoadMoreWithNoMoreData();
+            } else {
+                refreshLayout.finishLoadMore();
+            }
+        }
     }
 
     final class RecyclerAdapter extends BaseQuickAdapter<BookListBean.BookBean, ViewHolder> {

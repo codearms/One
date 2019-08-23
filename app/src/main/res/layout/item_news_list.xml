@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_view"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/twelve"
-    android:layout_marginTop="@dimen/twelve"
-    android:layout_marginRight="@dimen/twelve"
-    android:clickable="true"
-    android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/color_title"
     app:cardCornerRadius="5dp"
     app:cardElevation="2dp">
 
@@ -39,9 +33,11 @@
             android:contentDescription="@string/image_description"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_news_placeholder"
+            android:transitionName="@string/transition_news_img"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
 
         <TextView
             android:id="@+id/tv_title"

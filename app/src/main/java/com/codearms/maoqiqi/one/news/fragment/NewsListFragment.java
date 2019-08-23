@@ -1,26 +1,23 @@
 package com.codearms.maoqiqi.one.news.fragment;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.codearms.maoqiqi.base.BaseFragment;
-import com.codearms.maoqiqi.one.App;
+import com.codearms.maoqiqi.one.ListFragment;
 import com.codearms.maoqiqi.one.R;
 import com.codearms.maoqiqi.one.data.bean.NewsBean;
+import com.codearms.maoqiqi.one.decoration.MarginItemDecoration;
 import com.codearms.maoqiqi.one.news.activity.NewsDetailActivity;
 import com.codearms.maoqiqi.one.news.presenter.NewsListPresenter;
 import com.codearms.maoqiqi.one.news.presenter.contract.NewsListContract;
@@ -29,11 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 新闻列表
  * Link: https://github.com/maoqiqi/AndroidUtils
  * Author: fengqi.mao.march@gmail.com
- * Date: 2019-06-27 14:20
+ * Date: 2019-08-17 14:20
  */
-public class NewsListFragment extends BaseFragment<NewsListContract.Presenter> implements NewsListContract.View {
+public class NewsListFragment extends ListFragment<NewsListContract.Presenter> implements NewsListContract.View {
 
     private List<NewsBean.NewsItemBean> list = new ArrayList<>();
     private int topNews;
@@ -48,6 +46,7 @@ public class NewsListFragment extends BaseFragment<NewsListContract.Presenter> i
         Bundle bundle = new Bundle();
         bundle.putString("category", category);
         NewsListFragment fragment = new NewsListFragment();
+        fragment.setTag("NewsListFragment-" + category);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -60,51 +59,63 @@ public class NewsListFragment extends BaseFragment<NewsListContract.Presenter> i
     }
 
     @Override
-    protected View createView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_news_list, container, false);
-    }
-
-    @Override
     protected void initViews(@Nullable Bundle savedInstanceState) {
         super.initViews(savedInstanceState);
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
 
         adapter = new RecyclerAdapter(R.layout.item_news_list, list);
         adapter.setTopNews(topNews);
+        adapter.setOnItemClickListener((adapter, view, position) -> {
+            NewsBean.NewsItemBean item = list.get(position);
+            ImageView ivNews = (ImageView) adapter.getViewByPosition(recyclerView, position, R.id.iv_news);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ivNews, ViewCompat.getTransitionName(ivNews));
+            NewsDetailActivity.start(context, item.getId(), item.getTitle(), options.toBundle());
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new MarginItemDecoration(getResources().getDimensionPixelSize(R.dimen.twelve)));
     }
 
     @Override
     protected void loadData() {
         super.loadData();
-        presenter.getLatestNews();
+        refreshLayout.setEnableAutoLoadMore(true);
+        // 触发自动刷新
+        refreshLayout.autoRefresh();
     }
 
     @Override
-    public void setLatestNews(NewsBean newsBean) {
-        topNews = newsBean.getTopNewsItemBeans().size();
-
-        list.clear();
-        list.addAll(newsBean.getTopNewsItemBeans());
-        list.addAll(newsBean.getNewsItemBeans());
-
-        adapter.setTopNews(topNews);
-        adapter.replaceData(list);
+    protected void getData() {
+        presenter.getLatestNews(isRefresh);
     }
 
-    static final class RecyclerAdapter extends BaseQuickAdapter<NewsBean.NewsItemBean, ViewHolder> {
+    @Override
+    public void setLatestNews(NewsBean newsBean, boolean isRefresh) {
+        loadDataCompleted();
+        if (isRefresh) {
+            topNews = newsBean.getTopNewsItemBeans().size();
+
+            list.clear();
+            list.addAll(newsBean.getTopNewsItemBeans());
+            list.addAll(newsBean.getNewsItemBeans());
+
+            adapter.setTopNews(topNews);
+            adapter.replaceData(list);
+
+            // 完成刷新,没有更多数据
+            refreshLayout.finishRefreshWithNoMoreData();
+        }
+    }
+
+    final class RecyclerAdapter extends BaseQuickAdapter<NewsBean.NewsItemBean, ViewHolder> {
 
         private int topNews;
-        private final Application application;
 
         RecyclerAdapter(int layoutResId, @Nullable List<NewsBean.NewsItemBean> data) {
             super(layoutResId, data);
-            this.application = App.getInstance();
         }
 
         @Override
@@ -117,13 +128,6 @@ public class NewsListFragment extends BaseFragment<NewsListContract.Presenter> i
             }
             Glide.with(helper.ivNews).load(url).placeholder(R.drawable.ic_news_placeholder).into(helper.ivNews);
             helper.tvTitle.setText(item.getTitle());
-            helper.cardView.setOnClickListener(v -> NewsDetailActivity.start(v.getContext(), item.getId(), item.getTitle()));
-
-            // 设置间距
-            if (helper.getLayoutPosition() == getItemCount() - 1) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) helper.cardView.getLayoutParams();
-                params.bottomMargin = application.getResources().getDimensionPixelSize(R.dimen.sixteen);
-            }
         }
 
         void setTopNews(int topNews) {
@@ -133,14 +137,12 @@ public class NewsListFragment extends BaseFragment<NewsListContract.Presenter> i
 
     static final class ViewHolder extends BaseViewHolder {
 
-        CardView cardView;
         ImageView ivTop;
         ImageView ivNews;
         TextView tvTitle;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.card_view);
             ivTop = itemView.findViewById(R.id.iv_top);
             ivNews = itemView.findViewById(R.id.iv_news);
             tvTitle = itemView.findViewById(R.id.tv_title);

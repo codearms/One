@@ -22,6 +22,12 @@ import com.codearms.maoqiqi.one.utils.SectionsPagerAdapter;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 新闻
+ * Link: https://github.com/maoqiqi/AndroidUtils
+ * Author: fengqi.mao.march@gmail.com
+ * Date: 2019-08-17 10:45
+ */
 public class NewsFragment extends BaseFragment {
 
     private Toolbar toolbar;
@@ -40,6 +46,7 @@ public class NewsFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         setHasOptionsMenu(true);
     }
 
@@ -54,6 +61,10 @@ public class NewsFragment extends BaseFragment {
         toolbar = rootView.findViewById(R.id.toolbar);
         tabLayout = rootView.findViewById(R.id.tab_layout);
         viewPager = rootView.findViewById(R.id.view_pager);
+
+        if (savedInstanceState != null) {
+            loadData();
+        }
     }
 
     @Override
@@ -67,6 +78,7 @@ public class NewsFragment extends BaseFragment {
         viewPager.setCurrentItem(0);
 
         tabLayout.setupWithViewPager(viewPager);
+        loadDataCompleted();
     }
 
     @Override

@@ -36,6 +36,7 @@ import io.reactivex.Observable;
 public class OneRepository implements OneDataSource {
 
     private static volatile OneRepository INSTANCE = null;
+    private static final String apiKey = "0df993c66c0c636e29ecbb5344252a4a";
 
     private ServerApi api;
     private NewsAPI newsAPI;
@@ -202,32 +203,32 @@ public class OneRepository implements OneDataSource {
 
     @Override
     public Observable<BookListBean> getBook(String q, String tag, int start, int count) {
-        return douBanApi.getBook("0df993c66c0c636e29ecbb5344252a4a", q, tag, start, count).compose(RxUtils.rxSchedulerHelper());
+        return douBanApi.getBook(apiKey, q, tag, start, count).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
     public Observable<BookDetailBean> getBookDetail(String id) {
-        return douBanApi.getBookDetail(id, "0df993c66c0c636e29ecbb5344252a4a").compose(RxUtils.rxSchedulerHelper());
+        return douBanApi.getBookDetail(id, apiKey).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
     public Observable<MovieListBean> inTheatersMovies(String city, int start, int count) {
-        return douBanApi.inTheatersMovies("0df993c66c0c636e29ecbb5344252a4a", city, start, count).compose(RxUtils.rxSchedulerHelper());
+        return douBanApi.inTheatersMovies(apiKey, city, start, count).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
     public Observable<MovieListBean> comingSoonMovies(int start, int count) {
-        return douBanApi.comingSoonMovies("0df993c66c0c636e29ecbb5344252a4a", start, count).compose(RxUtils.rxSchedulerHelper());
+        return douBanApi.comingSoonMovies(apiKey, start, count).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
     public Observable<MovieDetailBean> getMovieDetail(String id) {
-        return douBanApi.getMovieDetail(id, "0df993c66c0c636e29ecbb5344252a4a").compose(RxUtils.rxSchedulerHelper());
+        return douBanApi.getMovieDetail(id, apiKey).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override
     public Observable<String> getCelebrity(String id, int start, int count) {
-        return douBanApi.getCelebrity(id, "0df993c66c0c636e29ecbb5344252a4a", start, count).compose(RxUtils.rxSchedulerHelper());
+        return douBanApi.getCelebrity(id, apiKey, start, count).compose(RxUtils.rxSchedulerHelper());
     }
 
     @Override

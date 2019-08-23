@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 
 import com.codearms.maoqiqi.base.BaseActivity;
 import com.codearms.maoqiqi.one.R;
@@ -11,21 +12,22 @@ import com.codearms.maoqiqi.one.news.fragment.NewsDetailFragment;
 import com.codearms.maoqiqi.one.utils.StatusBarUtils;
 
 /**
+ * 新闻详情
  * Link: https://github.com/maoqiqi/AndroidUtils
  * Author: fengqi.mao.march@gmail.com
- * Date: 2019-06-27 18:17
+ * Date: 2019-08-17 18:17
  */
 public class NewsDetailActivity extends BaseActivity {
 
     private static final String TAG = "com.codearms.maoqiqi.one.NewsDetailFragment";
 
-    public static void start(Context context, int id, String title) {
+    public static void start(Context context, int id, String title, Bundle options) {
         Bundle bundle = new Bundle();
         bundle.putInt("id", id);
         bundle.putString("title", title);
         Intent intent = new Intent(context, NewsDetailActivity.class);
         intent.putExtras(bundle);
-        context.startActivity(intent);
+        ActivityCompat.startActivity(context, intent, options);
     }
 
     @Override

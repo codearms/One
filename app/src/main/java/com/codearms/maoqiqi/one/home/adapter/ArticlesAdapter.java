@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -142,7 +141,6 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
 
     final class ViewHolder extends BaseViewHolder {
 
-        CardView cardView;
         ImageView ivTop;
         ImageView ivProject;
         TextView tvTitle;
@@ -156,7 +154,6 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cardView = itemView.findViewById(R.id.card_view);
             ivTop = itemView.findViewById(R.id.iv_top);
             ivProject = itemView.findViewById(R.id.iv_project);
             tvTitle = itemView.findViewById(R.id.tv_title);

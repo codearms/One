@@ -22,9 +22,10 @@ import com.codearms.maoqiqi.one.utils.BookUtils;
 import com.codearms.maoqiqi.one.view.SummaryView;
 
 /**
+ * 图书详情
  * Link: https://github.com/maoqiqi/AndroidUtils
  * Author: fengqi.mao.march@gmail.com
- * Date: 2019-06-28 10:41
+ * Date: 2019-08-20 17:48
  */
 public class BookDetailFragment extends BaseFragment<BookDetailContract.Presenter> implements BookDetailContract.View {
 
@@ -42,7 +43,7 @@ public class BookDetailFragment extends BaseFragment<BookDetailContract.Presente
     SummaryView summaryViewAuthor;
     TextView tvBookCatalog;
 
-    private String url;
+    private BookDetailBean bookDetailBean;
 
     /**
      * Use this factory method to create a new instance of this fragment using the provided parameters.
@@ -60,6 +61,7 @@ public class BookDetailFragment extends BaseFragment<BookDetailContract.Presente
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         setHasOptionsMenu(true);
         presenter = new BookDetailPresenter(this);
     }
@@ -90,6 +92,10 @@ public class BookDetailFragment extends BaseFragment<BookDetailContract.Presente
         summaryView = rootView.findViewById(R.id.summary_view);
         summaryViewAuthor = rootView.findViewById(R.id.summary_view_author);
         tvBookCatalog = rootView.findViewById(R.id.tv_book_catalog);
+
+        if (savedInstanceState != null && bookDetailBean != null) {
+            setBookDetail(bookDetailBean);
+        }
     }
 
     @Override
@@ -100,7 +106,8 @@ public class BookDetailFragment extends BaseFragment<BookDetailContract.Presente
 
     @Override
     public void setBookDetail(BookDetailBean bookDetailBean) {
-        url = bookDetailBean.getAlt();
+        loadDataCompleted();
+        this.bookDetailBean = bookDetailBean;
 
         tvBookTitle.setText(bookDetailBean.getTitle());
         tvBookAuthor.setText(getString(R.string.book_author, BookUtils.formatAuthor(bookDetailBean.getAuthor())));
@@ -130,7 +137,9 @@ public class BookDetailFragment extends BaseFragment<BookDetailContract.Presente
             case R.id.menu_share:
                 return true;
             case R.id.menu_more:
-                if (url != null) WebViewActivity.start(context, 2, url);
+                if (bookDetailBean != null && bookDetailBean.getAlt() != null) {
+                    WebViewActivity.start(context, 2, bookDetailBean.getAlt());
+                }
                 break;
         }
         return false;

@@ -8,11 +8,11 @@ public interface BookListContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void getBook(String q, String tag, int start, int count);
+        void getBook(String q, String tag, boolean isRefresh);
     }
 
     interface View extends BaseView<Presenter> {
 
-        void setBook(BookListBean bookListBean);
+        void setBook(BookListBean bookListBean, boolean isRefresh);
     }
 }

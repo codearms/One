@@ -26,9 +26,10 @@ import com.codearms.maoqiqi.one.utils.AppBarStateChangeListener;
 import com.codearms.maoqiqi.utils.ToastUtils;
 
 /**
+ * 新闻详情
  * Link: https://github.com/maoqiqi/AndroidUtils
  * Author: fengqi.mao.march@gmail.com
- * Date: 2019-06-27 18:34
+ * Date: 2019-08-17 18:34
  */
 public class NewsDetailFragment extends BaseFragment<NewsDetailContract.Presenter> implements NewsDetailContract.View {
 

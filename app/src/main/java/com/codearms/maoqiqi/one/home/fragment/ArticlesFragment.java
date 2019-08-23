@@ -167,22 +167,15 @@ public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> i
     }
 
     @Override
-    protected void onVisibleChange(boolean isVisible) {
-        super.onVisibleChange(isVisible);
-        if (!from.equals(FROM_HOME)) {
-            if (isVisible && !isLoadDataCompleted()) {
-                showLoading();
-            } else {
-                hideLoading();
-            }
-        }
-    }
-
-    // refreshLayout.autoRefresh();会调用loadData()方法,所以不能自己再次调用
-    @Override
     protected void loadData() {
         super.loadData();
-        if (from.equals(FROM_HOME)) getData();
+        if (from.equals(FROM_HOME)) {
+            getData();
+        } else {
+            refreshLayout.setEnableAutoLoadMore(true);
+            // 触发自动刷新
+            refreshLayout.autoRefresh();
+        }
     }
 
     @Override
