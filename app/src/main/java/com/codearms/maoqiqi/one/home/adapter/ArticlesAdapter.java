@@ -123,7 +123,6 @@ public class ArticlesAdapter extends BaseQuickAdapter<ArticleBean, ArticlesAdapt
         helper.tvDate.setText(articleBean.getNiceDate());
 
         // 设置事件
-        helper.addOnClickListener(R.id.card_view);
         helper.addOnClickListener(R.id.iv_project);
         helper.addOnClickListener(R.id.iv_collect);
     }

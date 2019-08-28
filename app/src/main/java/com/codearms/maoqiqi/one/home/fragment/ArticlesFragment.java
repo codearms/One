@@ -113,6 +113,15 @@ public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> i
         }
 
         adapter = new ArticlesAdapter(R.layout.item_articles, list, topArticles, from, isClassify);
+        adapter.setOnItemClickListener((baseQuickAdapter, view, position) -> {
+            ArticleBean bean = adapter.getData().get(position);
+            operationPosition = position;
+            if (from.equals(FROM_COLLECT)) {
+                WebViewActivity.start(context, from, bean);
+            } else {
+                WebViewActivity.start(context, 0, from, bean);
+            }
+        });
         adapter.setOnItemChildClickListener((adapter, view, position) -> itemChildClick(view, position));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -128,14 +137,6 @@ public class ArticlesFragment extends ListFragment<ArticlesContract.Presenter> i
     private void itemChildClick(View view, int position) {
         ArticleBean bean = adapter.getData().get(position);
         switch (view.getId()) {
-            case R.id.card_view:
-                operationPosition = position;
-                if (from.equals(FROM_COLLECT)) {
-                    WebViewActivity.start(context, from, bean);
-                } else {
-                    WebViewActivity.start(context, 0, from, bean);
-                }
-                break;
             case R.id.iv_project:
                 PictureActivity.start(context, "", null);
                 break;
