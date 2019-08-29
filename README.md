@@ -25,15 +25,15 @@
 
 ## 依赖库
 
-* Android广告图片轮播控件(https://github.com/youth5201314/banner)
 * Android TabLayout依赖库(https://github.com/H07000223/FlycoTabLayout)
-* 一个Java序列化/反序列化库，用于将Java对象转换为JSON并返回(https://github.com/google/gson)
+* Android广告图片轮播控件(https://github.com/youth5201314/banner)
 * Android图片加载和缓存库(https://github.com/bumptech/glide)
-* 功能强大且灵活的RecyclerAdapter(https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
-* 通过各种触摸手势实现支持缩放的ImageView(https://github.com/chrisbanes/PhotoView)
+* 支持缩放的ImageView(https://github.com/chrisbanes/PhotoView)
 * Android智能下拉刷新框架(https://github.com/scwang90/SmartRefreshLayout)
 * 网络框架(https://github.com/square/okhttp ，https://github.com/square/retrofit)
-* 组合异步和基于事件(https://github.com/ReactiveX/RxJava，https://github.com/ReactiveX/RxAndroid)
+* 组合异步和基于事件(https://github.com/ReactiveX/RxJava ，https://github.com/ReactiveX/RxAndroid)
+* 一个Java序列化/反序列化库，实现将Java对象JSON字符串互转(https://github.com/google/gson)
+* 功能强大且灵活的RecyclerAdapter(https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 
 
 ## 主要技术点
