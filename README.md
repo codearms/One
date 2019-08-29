@@ -1,118 +1,154 @@
 # One
 
+本软件使用 MVP 架构，OkHttp + Retrofit + RxJava + Glide 框架实现，界面遵循Google Material Design。
 
-
-
-# Go语言学习
 
 ## 目录
 
-* [概述](#概述)
-* [搭建开发环境](#搭建开发环境)
-
-## 概述
-
-
-### 什么是程序？
-
-程序：为了让计算机执行某些操作或解决某个问题而编写的一些列有序指令的结合。
-
-### Google创造Golang的原因
-
-* 计算机硬件技术更新频繁，性能提高很快。目前主流的编程语言发展明显落后于硬件，不能合理利用多核多CPU的优势提升软件系统性能。
-* 软件系统复杂度越来越高，维护成本越来越高，目前缺乏一个足够简洁高效的编程语言。（现有的编程语言：1.风格不统一 2.计算能力不够 3.处理大并发不够好）
-* 企业运行维护很多C/C++项目，C/C++程序运行速度虽然很快，但是编译速度却很慢，同时还存在内存泄漏的一些列的困扰需要解决。
-
-### Golang的特点
-
-Golang保证了既能到达静态编译语言的安全和性能，又达到了动态语言开发维护的高效率，使用一个表达式来形容Go语言: Go = C + Python。
-说明Go语言既有C静态语言程序的运行速度，又能达到Python动态语言的快速开发。
-
-* 从C语言中继承了很多理念,包括表达式语法,控制结构,基础数据类型,调用参数传值,指针等 等,也保留了和C语言一样的编译执行方式及弱化的指针。
-* 引入包的概念,用于组织程序结构,Go语言的一个文件都要归属于一个包,而不能单独存在。
-* 垃圾回收机制,内存自动回收,不需开发人员管理。
-* 天然并发 (重要特点)
-  * 从语言层面支持并发,实现简单。
-  * goroutine,轻量级线程,可实现大并发处理,高效利用多核。
-  * 基于 CPS 并发模型(Communicating Sequential Processes)实现。
-* 吸收了管道通信机制,形成Go语言特有的管道channel，通过管道channel, 可以实现不同的goroutine之间的相互通信。
-* 函数可以返回多个值。
-* 新的创新:比如切片slice、延时执行defer。
+* [Download](#Download)
+* [Usage](#Usage)
+* [Screenshot](#Screenshot)
+* [About](#About)
+* [License](#License)
 
 
-## 搭建开发环境
+## 开发环境
 
-### Windows
+- JDK8
+- Android Studio
 
-### Mac
+## 项目搭建
+1. 创建项目
+2. 添加对Java 8 的支持（参考[Android Studio对于Java8特性的支持][1]）
+3. 添加依赖库，依赖库详细说明见下
+4. 插入版权信息（[Android Studio 配置 Copyright 插入版权信息][2]）
 
- Mac配置环境变量的地方
+## 依赖库
+1. [BottomNavigation：底部导航栏](https://github.com/Ashok-Varma/BottomNavigation)
+2. [okhttp3 系列：网络请求]()
+3. [retrofit2 系列：REST安卓客户端请求库]()
+4. [gson：]()
+5. [rxjava：响应式编程框架]()
+6. [rxandroid：]()
+7. [picasso：图片加载]()
+8. []()
 
- 1./etc/profile   （建议不修改这个文件 ）
+## 主要技术点
+1. NavigationView 搭配 DrawerLayout 的具体使用
+2. TabLayout 和 ViewPager 结合的具体使用
+3. SwipeRefreshLayout 结合 RecyclerView下拉刷新
+4. picasso图片框架
+5. CoordinatorLayout、AppBarLayout、CollapsingToolbarLayout、Toolbar、NestedScrollView实现伸缩折叠效果
+6. android 5.0 转场动画
+7. 高仿豆瓣图书、影视详情
 
- 全局（公有）配置，不管是哪个用户，登录时都会读取该文件。
+## 参考项目
+1. [Google官方出品的MVP架构项目，含有多个不同的架构分支。](https://github.com/googlesamples/android-architecture)
+2. [纯净知乎日报：最纯净的知乎日报客户端。运行快，无广告，无社交，省流量。](https://github.com/laucherish/PureZhihuD)
+3. [云阅：一款基于网易云音乐UI，使用Gank.Io及豆瓣api开发的符合Google Material Design的Android客户端。项目采取的是MVVM-DataBinding架构开发，现主要包括：干货区、电影区和书籍区三个子模块。](https://github.com/youlookwhat/CloudReader)
+4. []()
 
+## 博客
+1. [Retrofit — Getting Started and Creating an Android Client](https://futurestud.io/tutorials/retrofit-getting-started-and-android-client)
+2.
 
+## ScreenShot
 
- 2./etc/bashrc    （一般在这个文件中添加系统级环境变量）
+* 导航模块
 
- 全局（公有）配置，bash shell执行时，不管是何种方式，都会读取此文件。
+    <img src="/screenshot/Screenshot_0_01.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_02.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_03.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_04.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_05.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_06.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_07.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_08.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_09.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_10.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_11.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_12.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_13.png" width="200px" />
+    <img src="/screenshot/Screenshot_0_14.png" width="200px" />
 
- 3.~/.bash_profile  （一般在这个文件中添加用户级环境变量）
+* 首页模块
 
- 每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!
-
-
- 想立即生效请运行：
-
- #source /etc/profile
-
- 不报错则成功。
-
- // -------------
-
- 2.2 Mac配置环境变量的地方
- 1）/etc/paths （全局建议修改这个文件 ）
-
- 编辑 paths，将环境变量添加到 paths文件中 ，一行一个路径
-
- Hint：输入环境变量时，不用一个一个地输入，只要拖动文件夹到 Terminal 里就可以了。
-
- 2）/etc/profile （建议不修改这个文件 ）
-
- 全局（公有）配置，不管是哪个用户，登录时都会读取该文件。
-
- 3）/etc/bashrc （一般在这个文件中添加系统级环境变量）
-
- 全局（公有）配置，bash shell执行时，不管是何种方式，都会读取此文件。
-
- 4）~/.bash_profile （一般在这个文件中添加用户级环境变量）
-
- 每个用户都可使用该文件输入专用于自己使用的shell信息,当用户登录时,该文件仅仅执行一次!
-
-  // =----------
-
-  Mac系统的环境变量，加载顺序为：
-  a. /etc/profile
-  b. /etc/paths
-  c. ~/.bash_profile
-  d. ~/.bash_login
-  e. ~/.profile
-  f. ~/.bashrc
-  其中a和b是系统级别的，系统启动就会加载，其余是用户接别的。c,d,e按照从前往后的顺序读取，如果c文件存在，则后面的几个文件就会被忽略不读了，以此类推。
-  ~/.bashrc没有上述规则，它是bash shell打开的时候载入的。这里建议在c中添加环境变量，以下也是以在c中添加环境变量来演示的。
-
-
-这条命令行【/usr/libexec/java_home -V】查看默认的 jdk 下载地址
-
-注意：命令行终端是区分大小写的（-v 是不对的，必须是大写 -V）
-
-
-// -----
-
- - 用户级：每个用户不同，不同用户为自己的应用设置变量路径
- - 系统级：所有用户共享，一般覆盖着操作系统提供的使用路径
+    <img src="/screenshot/Screenshot_1_01.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_02.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_03.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_04.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_05.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_06.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_07.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_08.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_09.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_10.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_11.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_12.png" width="200px" />
+    <img src="/screenshot/Screenshot_1_13.png" width="200px" />
 
 
+* 新闻模块
 
-### Linux
+	<img src="/screenshot/Screenshot_2_01.png" width="200px" />
+    <img src="/screenshot/Screenshot_2_02.png" width="200px" />
+    <img src="/screenshot/Screenshot_2_03.png" width="200px" />
+    <img src="/screenshot/Screenshot_2_04.png" width="200px" />
+
+* 图书模块
+
+	<img src="/screenshot/Screenshot_3_01.png" width="200px" />
+    <img src="/screenshot/Screenshot_3_02.png" width="200px" />
+    <img src="/screenshot/Screenshot_3_03.png" width="200px" />
+    <img src="/screenshot/Screenshot_3_04.png" width="200px" />
+
+* 音乐模块
+
+    <img src="/screenshot/Screenshot_4_01.png" width="200px" />
+    <img src="/screenshot/Screenshot_4_02.png" width="200px" />
+    <img src="/screenshot/Screenshot_4_03.png" width="200px" />
+    <img src="/screenshot/Screenshot_4_04.png" width="200px" />
+    <img src="/screenshot/Screenshot_4_05.png" width="200px" />
+    <img src="/screenshot/Screenshot_4_06.png" width="200px" />
+    <img src="/screenshot/Screenshot_4_07.png" width="200px" />
+
+* 影视模块
+
+	<img src="/screenshot/Screenshot_5_01.png" width="200px" />
+    <img src="/screenshot/Screenshot_5_02.png" width="200px" />
+    <img src="/screenshot/Screenshot_5_03.png" width="200px" />
+    <img src="/screenshot/Screenshot_5_04.png" width="200px" />
+
+
+## About
+
+* **作者**：March
+* **邮箱**：fengqi.mao.march@gmail.com
+* **头条**：https://toutiao.io/u/425956/subjects
+* **简书**：https://www.jianshu.com/u/02f2491c607d
+* **掘金**：https://juejin.im/user/5b484473e51d45199940e2ae
+* **CSDN**：http://blog.csdn.net/u011810138
+* **SegmentFault**：https://segmentfault.com/u/maoqiqi
+* **StackOverFlow**：https://stackoverflow.com/users/8223522
+
+
+## License
+
+```
+   Copyright 2019 maoqiqi
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+```
+
+[1]: http://blog.csdn.net/u011810138/article/details/79026468
+[2]: http://blog.csdn.net/u011810138/article/details/79033110
