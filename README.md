@@ -32,8 +32,8 @@
 * 功能强大且灵活的RecyclerAdapter(https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 * 通过各种触摸手势实现支持缩放的ImageView(https://github.com/chrisbanes/PhotoView)
 * Android智能下拉刷新框架(https://github.com/scwang90/SmartRefreshLayout)
-* 网络框架(https://github.com/square/okhttp，https://github.com/square/retrofit)
-* 使用JVM的可观察序列组合异步和基于事件的程序(https://github.com/ReactiveX/RxJava，https://github.com/ReactiveX/RxAndroid)
+* 网络框架(https://github.com/square/okhttp ，https://github.com/square/retrofit)
+* 组合异步和基于事件(https://github.com/ReactiveX/RxJava，https://github.com/ReactiveX/RxAndroid)
 
 
 ## 主要技术点
