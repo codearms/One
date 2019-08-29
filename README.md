@@ -33,6 +33,52 @@
 7. [picasso：图片加载]()
 8. []()
 
+    implementation 'com.squareup.okio:okio:1.17.2'
+    implementation "com.squareup.okhttp3:okhttp:3.14.2"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+
+* Android广告图片轮播控件[https://github.com/youth5201314/banner]
+* Android TabLayout依赖库[https://github.com/H07000223/FlycoTabLayout]
+* 一个Java序列化/反序列化库，用于将Java对象转换为JSON并返回(https://github.com/google/gson)
+* Android图片加载和缓存库(https://github.com/bumptech/glide)
+* 功能强大且灵活的RecyclerAdapter(https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
+* 通过各种触摸手势实现支持缩放的ImageView(https://github.com/chrisbanes/PhotoView)
+* Android智能下拉刷新框架(https://github.com/scwang90/SmartRefreshLayout)
+
+//
+//        ###### 网络框架 [retrofit](https://github.com/square/retrofit)  [okhttp](https://github.com/square/okhttp)
+//        ###### 打印日志框架 [klog](https://github.com/ZhaoKaiQiang/KLog)
+//        ###### 刷新框架 [SwipeToLoadLayout](https://github.com/Aspsine/SwipeToLoadLayout)
+//        ###### 解析Html [jsoup](https://github.com/jhy/jsoup)
+//        ###### 权限管理库 [AndPermission](https://github.com/yanzhenjie/AndPermission)
+//        ###### 提示框  [material-dialogs](https://github.com/afollestad/material-dialogs)  [Android-SVProgressHUD](https://github.com/saiwu-bigkoo/Android-SVProgressHUD)
+//        ###### RecycleView分割线 [RecyclerView-FlexibleDivider](https://github.com/yqritc/RecyclerView-FlexibleDivider)
+//        ###### ViewPager的标题控件 [smarttablayout](https://github.com/ogaclejapan/SmartTabLayout)
+//        ###### 广告轮播控件 [SwitcherView](https://github.com/maning0303/SwitcherView)
+//        ###### 收藏按钮 [ThumbUp](https://github.com/ldoublem/ThumbUp)
+//        ###### 模糊控件 [Blurry](https://github.com/wasabeef/Blurry)
+//        ###### 网络请求监控 [chuck](https://github.com/jgilfelt/chuck)
+//        ###### 表格控件 [scrollablepanel](https://github.com/Kelin-Hong/ScrollablePanel)
+//        ###### 可以展开的文字 [expandableTextView](https://github.com/Manabu-GT/ExpandableTextView)
+//        ###### 自定义日历控件 [MNCalendar](https://github.com/maning0303/MNCalendar)
+//        ###### 日志监听 [MNCrashMonitor](https://github.com/maning0303/MNCrashMonitor)
+//        ###### 图片缩放 [PhotoView](https://github.com/chrisbanes/PhotoView)
+//        ###### APK升级安装 [MNUpdateAPK](https://github.com/maning0303/MNUpdateAPK)
+//        ###### 夜间模式 [MNChangeSkin](https://github.com/maning0303/MNChangeSkin)
+//        ###### 图片浏览 [MNImageBrowser](https://github.com/maning0303/MNImageBrowser)
+//        ###### 汉字转拼音 [TinyPinyin](https://github.com/promeG/TinyPinyin)
+//        ###### 快速跳跃分组的侧边栏控件 [WaveSideBar](https://github.com/Solartisan/WaveSideBar)
+//        ###### 背景可以移动的View [KenBurnsView](https://github.com/flavioarfaria/KenBurnsView)
+//        ###### 圆形图片 [CircleImageView](https://github.com/hdodenhof/CircleImageView)
+//        ###### 滚轮选择器 [Android-PickerView](https://github.com/Bigkoo/Android-PickerView)
+//        ###### 图片选择器 [PictureSelector](https://github.com/LuckSiege/PictureSelector)
+
 ## 主要技术点
 1. NavigationView 搭配 DrawerLayout 的具体使用
 2. TabLayout 和 ViewPager 结合的具体使用
